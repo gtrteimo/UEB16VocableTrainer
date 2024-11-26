@@ -2,7 +2,7 @@ package net.tfobz.vocabletrainer.main;
 
 import net.tfobz.vocabletrainer.gui.*;
 /**
- * @author gtrteimo
+ * @author gtrteimo && 21chinat
  */
 public class VocableTrainerMain {
 	/**
