@@ -7,7 +7,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class VocableTrainerMenuPane extends JPanel {
+public class VocableTrainerMenuPane extends VocableTrainerPanel {
 	
 	private VocableTrainerFrame vtf;
 	

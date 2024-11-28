@@ -6,12 +6,13 @@ import javax.swing.JPanel;
 
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
-public class VocableTrainerBarPane extends JPanel {
+@SuppressWarnings("serial")
+public class VocableTrainerBarPane extends VocableTrainerPanel {
 	
-	VocableTrainerFrame vtf;
+	VocableTrainerPanel sourcePanel;
 	
-	public VocableTrainerBarPane (VocableTrainerFrame vtf) {
-		this.vtf = vtf;
+	public VocableTrainerBarPane (VocableTrainerPanel sourcePanel) {
+		this.sourcePanel = sourcePanel;
 		setBackground(new Color(255, 0, 0, 255));
 	}
 }
