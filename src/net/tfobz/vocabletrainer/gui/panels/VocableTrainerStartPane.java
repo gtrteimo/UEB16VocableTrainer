@@ -10,7 +10,7 @@ import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
+
 public class VocableTrainerStartPane extends JPanel {
 	
 	private VocableTrainerFrame vtf;
