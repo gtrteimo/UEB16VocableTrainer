@@ -15,7 +15,7 @@ public class VocableTrainerFrame extends JFrame {
 	
 	private Container contentPane;
 	
-	VocableTrainerStartPane start;
+	VocableTrainerHomePane start;
 	VocableTrainerMenuPane menu;
 	
 	public VocableTrainerFrame () {
@@ -37,7 +37,7 @@ public class VocableTrainerFrame extends JFrame {
 	}
 	
 	private void generatePanels () {
-		start = new VocableTrainerStartPane(this);
+		start = new VocableTrainerHomePane(this);
 		menu = new VocableTrainerMenuPane(this);
 
 	}
