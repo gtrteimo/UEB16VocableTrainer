@@ -2,6 +2,8 @@ package net.tfobz.vocabletrainer.gui;
 
 import java.awt.CardLayout;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 
@@ -22,6 +24,8 @@ public class VocableTrainerFrame extends JFrame {
 		this(1200, 900);
 	}
 	public VocableTrainerFrame (int width, int height) {
+		super("Vokabeltrainer");
+		this.setMinimumSize(new Dimension(400, 300));
 		this.width = width;
 		this.height = height;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
