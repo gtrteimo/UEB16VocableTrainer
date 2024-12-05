@@ -13,6 +13,6 @@ public class VocableTrainerBarPane extends VocableTrainerPanel {
 	
 	public VocableTrainerBarPane (VocableTrainerPanel sourcePanel) {
 		this.sourcePanel = sourcePanel;
-		setBackground(new Color(255, 0, 0, 255));
+		setBackground(new Color(50, 50, 75, 255));
 	}
 }
