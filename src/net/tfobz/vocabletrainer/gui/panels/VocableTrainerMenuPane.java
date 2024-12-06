@@ -12,6 +12,7 @@ public class VocableTrainerMenuPane extends VocableTrainerPanel {
 	private VocableTrainerFrame vtf;
 	
 	public VocableTrainerMenuPane (VocableTrainerFrame vtf) {
+		super(VocableTrainerPanel.MENU_PANEL);
 		this.vtf=vtf;
 		setBackground(new Color(225, 225, 225, 255));
 	}
