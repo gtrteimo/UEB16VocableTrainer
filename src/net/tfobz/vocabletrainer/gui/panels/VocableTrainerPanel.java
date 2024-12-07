@@ -5,81 +5,66 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
+
 @SuppressWarnings("serial")
 
 public class VocableTrainerPanel extends JPanel {
 	
-	final static int NORMAL_PANEL = 0, MENU_PANEL = 1;
+	private VocableTrainerFrame vtf;
+	private VocableTrainerPanel vtp;
 	
-	protected VocableTrainerBarPane barPane;
+	protected VocableTrainerBarPanel barPane;
 	protected VocableTrainerPanel panel;
 	
-	public VocableTrainerPanel () {}
-	public VocableTrainerPanel (int createPanelOption) {
+	public VocableTrainerPanel (VocableTrainerFrame vtf) {
 		super();
+		this.vtf = vtf;
 		setBackground(new Color(225, 225, 225, 255));
 		
-		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		setLayout(null);
 		
-		barPane = new VocableTrainerBarPane(this);
-		barPane.setPreferredSize(new Dimension(getWidth(), getHeight() / 12));
-		this.add(barPane);
+		if (barPane == null) {
+			barPane = new VocableTrainerBarPanel(this);
+		}
+		barPane.setBounds(0, 0, getWidth(), getHeight() / 12);
 
 		panel = new VocableTrainerPanel(this);
-		panel.setPreferredSize(new Dimension(getWidth() - 32, getHeight() / 12 * 11 - 16));
-	
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel) {
-		this(sourcePanel, new Color(171, 181, 216));
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel, Color colour) {
-		super();
-		super.setBackground(colour);
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel, int width, int height) {
-		this(sourcePanel, 0, 0, width, height, new Color(171, 181, 216));
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel, int width, int height, Color colour) {
-		this(sourcePanel, 0, 0, width, height, colour);
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel, int x, int y, int width, int height) {
-		this(sourcePanel, x, y, width, height, new Color(171, 181, 216));
-	}
-	public VocableTrainerPanel (VocableTrainerPanel sourcePanel, int x, int y, int width, int height, Color colour) {
-		super();
-		super.setBackground(colour);
-		super.setBounds(x, y, width, height);
-	}
-	public void doLayout() {
-        super.doLayout();
-        
-        int totalHeight = getHeight();
-        
-        int barPaneHeight = totalHeight / 12; 
-        int panelHeight = totalHeight - barPaneHeight;
-        
-        for (Component c: getComponents()) {
-        	if (c instanceof VocableTrainerPanel) {
-        		if (c instanceof VocableTrainerBarPane) {
-        			VocableTrainerBarPane barPane = (VocableTrainerBarPane) c;
-        			
-        	        barPane.setMaximumSize(new Dimension(getWidth(), barPaneHeight));
-        	        barPane.setMinimumSize(new Dimension(getWidth(), barPaneHeight));
-        	        this.barPane = barPane;
-        		} else {
-        			VocableTrainerPanel panel = (VocableTrainerPanel) c;
-        			
-                	panel.setMaximumSize(new Dimension(getWidth()-32, panelHeight-16));
-                	panel.setMinimumSize(new Dimension(getWidth()-32, panelHeight-16));
+		panel.setBounds(8, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
+		panel.setBackground(new Color (171, 181, 216));
+		
+		addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		int x = e.getX();
+        		int y = e.getY();
+
+        		if (x >= 9 && x <= 9 + getHeight() - 18 && y >= 9 && y <= 9 + getHeight() - 18) {
+        			System.out.println("Open Menu Pane");
+//        			vtf.add(vtf.panels[1]);
         		}
         	}
-        }       
-        revalidate();
+    	});
 	}
+	public VocableTrainerPanel (VocableTrainerPanel vtp) {
+		super();
+		this.vtp = vtp;
+	}
+	
+    @Override
+	public void paintComponent(Graphics g) {
+        if (vtf!=null) {
+    		barPane.setSize(getWidth(), getHeight() / 12);
+    		panel.setBounds(16, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
+        }
+        
+        super.paintComponent(g);
+    }
 }
