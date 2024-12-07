@@ -24,7 +24,7 @@ This exercise is part of the Java course offerd by the TFO Max Valier. To be exa
 
     Installing the Code in Eclipse Oxygen:
     
-        - Clone the repository to your GitHub Desktop
+        - Clone the repository
         
         - In Eclipse go to 'File' then click on 'Open Projects from File System...'
         
