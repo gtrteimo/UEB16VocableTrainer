@@ -1,7 +1,7 @@
 # UEB16VocableTrainer
 This exercise is part of the Java course offerd by the TFO Max Valier. To be exact this is the exercise of the 16 Chapter. 
 
-    The assignment was the following:
+## The assignment was the following:
     
       - The application is designed to manage several flashcards. 
       
@@ -18,3 +18,7 @@ This exercise is part of the Java course offerd by the TFO Max Valier. To be exa
       - Create mockups with Balsamiq.
       
       - The data is saved using HsqlDB, the access routines are supplied.
+## Installation
+    Installation in Eclipse Oxygen:
+        - Clone the repository to your GitHub-Desktopapp
+        - In Eclipse go to 'File'
