@@ -3,6 +3,7 @@ package net.tfobz.vocabletrainer.gui;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -11,19 +12,18 @@ import net.tfobz.vocabletrainer.gui.panels.*;
 @SuppressWarnings("serial")
 public class VocableTrainerFrame extends JFrame {
 	
-	private int width;
-	private int height;
-	
 	private Container contentPane;
 	
-	public VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
+	ArrayList<Integer> history = new ArrayList<Integer>();
+	private boolean menu = false;
+	VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
 	
 	public VocableTrainerFrame () {
 		this(1080, 720);
 	}
 	public VocableTrainerFrame (int width, int height) {
-		this.width = width;
-		this.height = height;
+		super();
+		setSize(width, height);
 		setMinimumSize(new Dimension(480, 360));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
@@ -33,23 +33,41 @@ public class VocableTrainerFrame extends JFrame {
 		
 		generatePanels();
 		
-		contentPane.add(panels[5]);	
+		contentPane.add(panels[1]);
+		history.add(1);
 	}
 	
 	private void generatePanels () {
-//		panels[0] = new VocableTrainerHomePanel(this);
-//		panels[1] = new VocableTrainerMenuPanel(this);
-//		panels[2] = new VocableTrainerEditPanel(this);
-//		panels[3] = new VocableTrainerNewPanel(this);
-//		panels[4] = new VocableTrainerNewSetPanel(this);
-		panels[5] = new VocableTrainerInfoPanel(this);
-//		panels[6] = new VocableTrainerStartPanel(this);
-//		panels[7] = new VocableTrainerPanel(this);
-//		panels[8] = new VocableTrainerCreditsPanel(this);
-//		panels[8] = new VocableTrainerSettingsPanel(this);
-
-
-
-
+//		panels[0] = new VocableTrainerMenuPanel(this);
+		panels[1] = new VocableTrainerHomePanel(this);
+		panels[2] = new VocableTrainerEditPanel(this);
+		panels[3] = new VocableTrainerNewPanel(this);
+		panels[4] = new VocableTrainerInfoPanel(this);
+//		panels[5] = new VocableTrainerStartPanel(this);
+		panels[6] = new VocableTrainerCreditsPanel(this);
+		panels[7] = new VocableTrainerSettingsPanel(this);
+	}
+	public void changePanel (int panelIndex) throws Exception {
+		if (panelIndex > 0) {
+			if (menu) {
+				contentPane.remove(panels[1]);
+			}
+			if (history.size() > 0) {
+				if (history.get(history.size()-1) != panelIndex) {
+					contentPane.add(panels[panelIndex]);
+					contentPane.remove(panels[history.get(history.size()-1)]);
+					history.add(panelIndex);
+				}
+			}
+		} else if (panelIndex == 0) {
+			contentPane.add(panels[panelIndex]);
+			menu = true;
+		} else {
+			if (history.size() > 1) {
+				contentPane.add(panels[history.get(history.size()-2)]);
+				contentPane.remove(panels[history.get(history.size()-1)]);
+				history.remove(history.size()-1);
+			}
+		}
 	}
 }

@@ -15,7 +15,7 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
 
     VocableTrainerPanel sourcePanel;
 
-    final static String pfad = "/icons/bars.png";
+    final static String barPath = "/icons/bars.png";
     private static Image barsImage;
 
     private JLabel title;
@@ -31,27 +31,30 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     public VocableTrainerBarPanel(VocableTrainerPanel sourcePanel) {
         super(sourcePanel);
         setLayout(null);
-        setBackground(new Color(50, 50, 75, 255));
+        setBackground(C_spaceCadet);
 
         loadImage();
 
         title = new JLabel("Vocable Trainer");
-        title.setForeground(new Color(225, 225, 225));
+        title.setForeground(C_platinum);
         title.setHorizontalAlignment(SwingConstants.LEFT);
         add(title);
     }
-
-    private void loadImage() {
-        try {
-            InputStream imgStream = getClass().getResourceAsStream(pfad);
-            if (imgStream != null) {
-                barsImage = ImageIO.read(imgStream);
-            } else {
-                System.err.println("Image not found at " + pfad);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    
+    @Override
+    public void loadImage() {
+    	if (barsImage == null) {
+	        try {
+	            InputStream imgStream = getClass().getResourceAsStream(barPath);
+	            if (imgStream != null) {
+	                barsImage = ImageIO.read(imgStream);
+	            } else {
+	                System.err.println("Image not found at " + barPath);
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+    	}
     }
     
     @Override
