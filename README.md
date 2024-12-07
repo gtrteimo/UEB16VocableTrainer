@@ -18,7 +18,22 @@ This exercise is part of the Java course offerd by the TFO Max Valier. To be exa
       - Create mockups with Balsamiq.
       
       - The data is saved using HsqlDB, the access routines are supplied.
+
+      
 ## Installation
-    Installation in Eclipse Oxygen:
-        - Clone the repository to your GitHub-Desktopapp
-        - In Eclipse go to 'File'
+
+    Installing the Code in Eclipse Oxygen:
+    
+        - Clone the repository to your GitHub Desktop
+        
+        - In Eclipse go to 'File' then click on 'Open Projects from File System...'
+        
+        - Click 'Directory...' in the Window that opens up und select the cloned repository and press 'OK'
+        
+        - Then press 'Finish' and you should see the project in your 'Package Explorer'
+        
+        - Before you can start the code you still need to add the 'resources' folder to the 'Build Path'
+        
+        - Just right click the 'resources' folder select 'Build Path' and then press 'Use as Source Folder'
+        
+        - You should now be able to start the programm by going into /src/net.tfobz.vocabletrainer.main/VocableTrainerMain and pressing CRL + F11
