@@ -1634,7 +1634,7 @@ public class VokabeltrainerDB
 		return cal.getTime();
 	}
 
-	protected static String convertToString(Date date) {
+	public static String convertToString(Date date) {
 		String ret = null;
 		if (date == null)
 			ret = "NULL";

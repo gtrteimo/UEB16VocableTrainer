@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import net.tfobz.vocabletrainer.access.*;
 import net.tfobz.vocabletrainer.gui.panels.*;
 
 @SuppressWarnings("serial")
@@ -14,9 +15,11 @@ public class VocableTrainerFrame extends JFrame {
 	
 	private Container contentPane;
 	
-	ArrayList<Integer> history = new ArrayList<Integer>();
 	private boolean menu = false;
-	VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
+
+	private ArrayList<Integer> history = new ArrayList<Integer>();
+	private VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
+//	private VocableTrainerInterface db;
 	
 	public VocableTrainerFrame () {
 		this(1080, 720);
@@ -27,7 +30,9 @@ public class VocableTrainerFrame extends JFrame {
 		setMinimumSize(new Dimension(480, 360));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
-				
+		
+//		db = new VocableTrainerInterface();
+		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());
 		
