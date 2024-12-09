@@ -1,4 +1,4 @@
-package net.tfobz.vocabletrainer.model;
+package net.tfobz.vocabletrainer.db;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

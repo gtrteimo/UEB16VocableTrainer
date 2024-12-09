@@ -42,7 +42,7 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     }
     
     @Override
-    public void loadImage() {
+    protected void loadImage() {
     	if (barsImage == null) {
 	        try {
 	            InputStream imgStream = getClass().getResourceAsStream(barPath);

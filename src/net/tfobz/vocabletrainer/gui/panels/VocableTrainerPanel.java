@@ -64,7 +64,7 @@ public class VocableTrainerPanel extends JPanel {
 		this.vtp = vtp;
 	}
 	
-	public void loadImage() {
+	protected void loadImage() {
     	if (backImage == null) {
 	        try {
 	            InputStream imgStream = getClass().getResourceAsStream(backPath);
