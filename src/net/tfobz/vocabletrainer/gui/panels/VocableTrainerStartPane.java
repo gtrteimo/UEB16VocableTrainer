@@ -85,11 +85,13 @@ public class VocableTrainerStartPane extends VocableTrainerPanel {
         checkboxPanel5.add(spinnerPanel5);
         add(checkboxPanel5);
 
+        JPanel buttonPanel = new JPanel();
         JButton button = new JButton("Start");
-        button.setAlignmentX(Component.LEFT_ALIGNMENT);
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.add(button);
         button.setPreferredSize(new Dimension(0, 50));
         button.setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
-        add(button);
+        add(buttonPanel);
 		
 		barPane = new VocableTrainerBarPane(this);
 		panel = new VocableTrainerPanel(this);
