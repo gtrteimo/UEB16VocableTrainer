@@ -20,6 +20,7 @@ public class VocableTrainerFrame extends JFrame {
 	VocableTrainerStartPane start;
 	VocableTrainerMenuPane menu;
 	VocableTrainerPanel credits;
+	VocableTrainerPanel settings;
 
 	
 	public VocableTrainerFrame () {
@@ -27,7 +28,7 @@ public class VocableTrainerFrame extends JFrame {
 	}
 	public VocableTrainerFrame (int width, int height) {
 		super("Vokabeltrainer");
-		this.setMinimumSize(new Dimension(400, 300));
+		this.setMinimumSize(new Dimension(600, 400));
 		this.width = width;
 		this.height = height;
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -39,12 +40,13 @@ public class VocableTrainerFrame extends JFrame {
 		
 		generatePanels();
 		
-		contentPane.add(credits);	
+		contentPane.add(settings);	
 	}
 	
 	private void generatePanels () {
 		start = new VocableTrainerStartPane(this);
 		menu = new VocableTrainerMenuPane(this);
 		credits = new VocableTrainerCreditsPane(this);
+		settings = new VocableTrainerSettingsPane(this);
 	}
 }
