@@ -19,7 +19,8 @@ public class VocableTrainerInterface {
 	
 	
 	public static ArrayList<Karte> getCards (Lernkartei set) {return null;}
-	public static Karte getCard (int index, Lernkartei set) {return null;}
+
+  public static Karte getCard (int index, Lernkartei set) {return null;}
 	
 	public static void addCard (Karte card, Lernkartei set) {}
 }
