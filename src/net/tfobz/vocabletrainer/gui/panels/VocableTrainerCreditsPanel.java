@@ -5,13 +5,13 @@ import java.awt.Graphics;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 @SuppressWarnings("serial")
-public class VocableTrainerInfoPanel extends VocableTrainerPanel {
+public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		
-	public VocableTrainerInfoPanel (VocableTrainerFrame vtf) {
+	public VocableTrainerCreditsPanel (VocableTrainerFrame vtf) {
 		super(vtf);
 		
-		barPane.setTitle("Info");
-				
+		barPane.setTitle("Credits");
+		
 		this.add(barPane);
 		this.add(panel);
 	}
