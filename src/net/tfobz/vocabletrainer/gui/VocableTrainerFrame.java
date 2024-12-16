@@ -48,7 +48,7 @@ public class VocableTrainerFrame extends JFrame {
 		panels[2] = new VocableTrainerEditPanel(this);
 		panels[3] = new VocableTrainerNewPanel(this);
 		panels[4] = new VocableTrainerInfoPanel(this);
-//		panels[5] = new VocableTrainerStartPanel(this);
+		panels[5] = new VocableTrainerStartPanel(this);
 		panels[6] = new VocableTrainerCreditsPanel(this);
 		panels[7] = new VocableTrainerSettingsPanel(this);
 	}

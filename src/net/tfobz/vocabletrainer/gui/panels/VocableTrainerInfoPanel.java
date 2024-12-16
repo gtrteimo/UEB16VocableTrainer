@@ -11,7 +11,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 		super(vtf);
 		
 		barPane.setTitle("Info");
-		
+				
 		this.add(barPane);
 		this.add(panel);
 	}

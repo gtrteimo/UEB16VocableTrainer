@@ -57,7 +57,6 @@ public class VocableTrainerEditPanel extends VocableTrainerPanel {
 	            InputStream imgStream = getClass().getResourceAsStream(setPath);
 	            if (imgStream != null) {
 	            	setImage = ImageIO.read(imgStream);
-	            	System.out.println("help");
 	            } else {
 	                System.err.println("Image not found at " + setPath);
 	            }
