@@ -3,10 +3,13 @@ package net.tfobz.vocabletrainer.gui.panels;
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettingsData;
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettingsData.TimeUnit;
 import net.tfobz.vocabletrainer.gui.*;
+import net.tfobz.vokabeltrainer.model.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -14,6 +17,9 @@ import javax.swing.event.ChangeListener;
 
 @SuppressWarnings("serial")
 public class VocableTrainerStartPanel extends VocableTrainerPanel {
+	
+	private List<Lernkartei> sets;
+	private List<Fach> boxes;
 	
 	private JCheckBox[] options = new JCheckBox[5];
 	private JSpinner[] optionSpinners = new JSpinner[3];
@@ -66,14 +72,38 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionSpinners[1].setValue(5);
 		optionSpinners[2].setValue(10);
 		
-		for (int i = 0; i < optionComboBoxes.length; i++) {
-			optionComboBoxes[i] = new JComboBox<String>();
+		sets = VokabeltrainerDB.getLernkarteien();
+		if (sets != null) {
+			List<String> stringsSets = sets.stream()
+	                .map(Lernkartei::toString) // Extract the string using the getter
+	                .collect(Collectors.toList());
+			
+			optionComboBoxes[0] = new JComboBox<String>(stringsSets.toArray(new String[0]));
+		} else {
+			optionComboBoxes[0] = new JComboBox<String>();
+		}
+		
+		boxes = VokabeltrainerDB.getFaecher(optionComboBoxes[0].getSelectedIndex());
+		if (boxes != null) {
+			List<String> stringsBox = boxes.stream()
+					.map(Fach::getBeschreibung)
+	                .collect(Collectors.toList());	
+			optionComboBoxes[1] = new JComboBox<String>(stringsBox.toArray(new String[0]));
+		} else {
+			optionComboBoxes[1] = new JComboBox<String>();
+		}
+                
+		
+
+		
+		for (int i = 0; i < optionComboBoxes.length; i++) {			
 			optionComboBoxesTime[i] = new JComboBox<TimeUnit>(TimeUnit.values());
 			optionComboBoxes[i].setForeground(C_nigth);
 			optionComboBoxes[i].setBackground(C_platinum);
 			optionComboBoxesTime[i].setForeground(C_nigth);
 			optionComboBoxesTime[i].setBackground(C_platinum);
 		}
+		options[1].setEnabled(false);
 		
 		optionComboBoxesTime[0].setEnabled(true);
 		optionComboBoxesTime[1].setEnabled(false);
@@ -140,6 +170,9 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	
 	private void startRun() {
 		VocableTrainerRunSettingsData settings = new VocableTrainerRunSettingsData();
+		settings.set = (Lernkartei) optionComboBoxesTime[0].getSelectedItem();
+		settings.boxes = (Fach) optionComboBoxesTime[1].getSelectedItem();
+		
 		settings.timePerCardState = options[0].isSelected();
 		settings.timeForCardsState = options[1].isSelected();
 		settings.caseSensitiveState = options[2].isSelected();
@@ -153,12 +186,20 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		settings.timeUnit1 = (TimeUnit)optionComboBoxesTime[0].getSelectedItem();
 		settings.timeUnit2 = (TimeUnit)optionComboBoxesTime[1].getSelectedItem();
 		
-		//TODO call run
+		
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		System.out.println(panel.getHeight()/50.0);
+		
+		optionComboBoxes[0].setBounds((int)(panel.getWidth()/(32/3.0)), panel.getHeight()/40, (int)(panel.getWidth()/(1000/607.0)), panel.getHeight()/12);
+		optionComboBoxes[0].setFont(new Font ("Arial", Font.BOLD, optionComboBoxes[0].getHeight()/2 + 5));
+		
+		optionComboBoxes[1].setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/40, panel.getWidth()/5, 50);
+
 		for (int i = 0; i < options.length; i++) {
 			options[i].setBounds((int)(panel.getWidth()/(32/3.0)), (int)(panel.getHeight()/(64/3.0)*(i*(5/2.0)+3)), panel.getHeight()/2, panel.getHeight()/16);
 			options[i].setFont(new Font ("Arial", Font.PLAIN, options[i].getHeight()/2 + 5));

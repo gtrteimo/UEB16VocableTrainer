@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import net.tfobz.vocabletrainer.access.*;
 import net.tfobz.vocabletrainer.gui.panels.*;
 
 @SuppressWarnings("serial")

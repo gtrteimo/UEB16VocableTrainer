@@ -9,9 +9,8 @@ import java.util.concurrent.SynchronousQueue;
 
 import javax.imageio.ImageIO;
 
-import net.tfobz.vocabletrainer.access.*;
-import net.tfobz.vocabletrainer.db.*;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 @SuppressWarnings("serial")
 public class VocableTrainerEditPanel extends VocableTrainerPanel {
@@ -29,7 +28,7 @@ public class VocableTrainerEditPanel extends VocableTrainerPanel {
 		
 		barPane.setTitle("Edit");
 		
-		sets = VocableTrainerInterface.getSets();
+//		sets = VocableTrainerInterface.getSets();
 		
 		loadImage();
 		
