@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 
 import net.tfobz.vocabletrainer.gui.panels.*;
+import net.tfobz.vokabeltrainer.model.Fach;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 @SuppressWarnings("serial")
 public class VocableTrainerFrame extends JFrame {
@@ -21,6 +23,7 @@ public class VocableTrainerFrame extends JFrame {
 	VocableTrainerMenuPane menu;
 	VocableTrainerPanel credits;
 	VocableTrainerPanel settings;
+	VocableTrainerPanel run;
 
 	
 	public VocableTrainerFrame () {
@@ -40,7 +43,7 @@ public class VocableTrainerFrame extends JFrame {
 		
 		generatePanels();
 		
-		contentPane.add(settings);	
+		contentPane.add(run);	
 	}
 	
 	private void generatePanels () {
@@ -48,5 +51,6 @@ public class VocableTrainerFrame extends JFrame {
 		menu = new VocableTrainerMenuPane(this);
 		credits = new VocableTrainerCreditsPane(this);
 		settings = new VocableTrainerSettingsPane(this);
+		run = new VocableTrainerRunPanel(this, new VocableTrainerRunSettings(new Fach(), new Lernkartei()));
 	}
 }

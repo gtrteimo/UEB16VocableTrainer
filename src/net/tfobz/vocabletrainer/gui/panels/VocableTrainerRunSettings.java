@@ -2,8 +2,9 @@ package net.tfobz.vocabletrainer.gui.panels;
 
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
-public class VocableTrainerRunSettingsData {
+public class VocableTrainerRunSettings {
 	
 	public static enum TimeUnit {
 	    Seconds, Minutes, Hours;
@@ -27,7 +28,7 @@ public class VocableTrainerRunSettingsData {
 	 * @param lernkartei
 	 * @throws NullPointerException
 	 */
-	public VocableTrainerRunSettingsData(Fach fach, Lernkartei lernkartei) {
+	public VocableTrainerRunSettings(Fach fach, Lernkartei lernkartei) {
 		if(fach==null||lernkartei==null) {
 			throw new NullPointerException("Invalid Fach or Lernkartei");
 		}
@@ -73,7 +74,7 @@ public class VocableTrainerRunSettingsData {
 	}
 	
 	public void setCardLimit(int cardLimit) {
-		if(cardLimit < 1) {
+		if(cardLimit < 1 || cardLimit > VokabeltrainerDB.getKarten(fach.getNummer()).size()) {
 			throw new IllegalArgumentException("Card Limit can't be 0 or smaller");
 		}
 		cardLimitState = true;
@@ -83,4 +84,37 @@ public class VocableTrainerRunSettingsData {
 	public void setParcticeRun(boolean practiceRun) {
 		this.practiceRun = practiceRun;
 	}
+	
+	public int getCardTimeLimit() {
+		return cardTimeLimit;
+	}
+
+	public int getTotalTimeLimit() {
+		return totalTimeLimit;
+	}
+
+	public int getCardLimit() {
+		return cardLimit;
+	}
+
+	public boolean isCardTimeLimit() {
+		return cardTimeLimitState;
+	}
+
+	public boolean isTotalTimeLimit() {
+		return totalTimeLimitState;
+	}
+
+	public boolean isCardLimit() {
+		return cardLimitState;
+	}
+
+	public Fach getFach() {
+		return fach;
+	}
+
+	public Lernkartei getLernkartei() {
+		return lernkartei;
+	}
+	
 }
