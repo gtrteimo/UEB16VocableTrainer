@@ -51,6 +51,6 @@ public class VocableTrainerFrame extends JFrame {
 		menu = new VocableTrainerMenuPane(this);
 		credits = new VocableTrainerCreditsPane(this);
 		settings = new VocableTrainerSettingsPane(this);
-		run = new VocableTrainerRunPanel(this, new VocableTrainerRunSettings(new Fach(), new Lernkartei()));
+		run = new VocableTrainerRunPanel(new VocableTrainerRunSettings());
 	}
 }

@@ -36,6 +36,22 @@ public class VocableTrainerRunSettings {
 		this.lernkartei = lernkartei;
 	}
 	
+	
+	/**
+	 * Testing only
+	 */
+	public VocableTrainerRunSettings() {
+		fach = new Fach(1, "Hello World Test", 0, null);
+		lernkartei = new Lernkartei();
+		totalTimeLimitState = true;
+		totalTimeLimit = 15;
+		cardTimeLimitState = true;
+		cardTimeLimit = 10;
+		cardLimitState = true;
+		cardLimit = 10;
+		practiceRun = true;
+	}
+	
 	public void setCardTimeLimit(int cardTimeLimit, TimeUnit unit) {
 		if(cardTimeLimit < 1) {
 			throw new IllegalArgumentException("Time Limit can't be 0 or smaller");
