@@ -71,7 +71,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	public void checkCard() {
 		times[cardNum] = clock2.getTime();
-		
+		//TODO
 	}
 	
 	private class ClockLabel extends JLabel {
