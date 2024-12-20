@@ -20,6 +20,7 @@ public class VocableTrainerRunSettings {
 	protected boolean cardLimitState = false;
 	protected int cardLimit;
 	protected boolean practiceRun = false;
+	protected boolean caseSensitiv = false;
 
 	public VocableTrainerRunSettings(Fach fach, Lernkartei lernkartei) {
 		if(fach==null||lernkartei==null) {
@@ -44,6 +45,14 @@ public class VocableTrainerRunSettings {
 		practiceRun = true;
 	}
 	
+	public boolean isCaseSensitiv() {
+		return caseSensitiv;
+	}
+
+	public void setCaseSensitiv(boolean caseSensitiv) {
+		this.caseSensitiv = caseSensitiv;
+	}
+
 	public void setCardTimeLimit(int cardTimeLimit, TimeUnit unit) {
 		if(cardTimeLimit < 1) {
 			throw new IllegalArgumentException("Time Limit can't be 0 or smaller");

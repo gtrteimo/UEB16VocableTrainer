@@ -15,8 +15,9 @@ import javax.swing.*;
 public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	
-	private VocableTrainerRunSettings settings;
+	//private VocableTrainerRunSettings settings;
 	private int[] times;
+	private int result;
 	private int cardNum;
 	private ArrayList<Karte> cards;
 	private Karte currentCard;
@@ -25,12 +26,18 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
 		super(vtf);
-		this.settings = settings;
+		//this.settings = settings;
 		
 		setBackground(new Color(225, 225, 225, 255));
 		
-		
 		setLayout(null);
+
+        times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[VokabeltrainerDB.getKarten(settings.getBox().getNummer()).size()];
+        cardNum = 0;
+        
+        cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
+        
+        
 
 		clock1 = new ClockLabel("Total Time: ", settings.isTotalTimeLimit()?settings.getTotalTimeLimit():0, ()->endRun());
         clock1.setBounds(10, 10, 200, 30);
@@ -40,11 +47,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         clock2.setBounds(10, 40, 200, 30);
         clock2.setFont(new Font("Arial", Font.PLAIN, 30));
         this.add(clock2);
-        
-        times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[VokabeltrainerDB.getKarten(settings.getBox().getNummer()).size()];
-        cardNum = 0;
-        
-        cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
         
         clock1.start();
         clock2.start();
@@ -58,7 +60,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
-		times[cardNum] = clock2.getTime();
 		if(cards.isEmpty()) {
 			endRun();
 		}else {
@@ -66,6 +67,11 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        cards.remove(currentCard);
 	        clock2.start();
 		}
+	}
+	
+	public void checkCard() {
+		times[cardNum] = clock2.getTime();
+		
 	}
 	
 	private class ClockLabel extends JLabel {
