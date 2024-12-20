@@ -190,9 +190,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		
 		settings.setParcticeRun(options[4].isSelected());
 		
-		Thread t = new Thread(new StartThread());
+		Thread t = new Thread(new StartThread(settings));
 		
-		vtf.changePanel(-1);
+		try {
+			vtf.changePanel(-3);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		try {
 			t.join();
@@ -276,13 +280,15 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	private class StartThread implements Runnable {
 
-		public StartThread() {
-			
+		private VocableTrainerRunSettings settings;
+		
+		public StartThread(VocableTrainerRunSettings settings) {
+			this.settings = settings;
 		}
 		
 		@Override
 		public void run() {
-			new 
+			VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
 		}
 		
 	}
