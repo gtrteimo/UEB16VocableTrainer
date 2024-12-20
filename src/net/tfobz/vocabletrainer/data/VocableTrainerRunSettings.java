@@ -20,14 +20,7 @@ public class VocableTrainerRunSettings {
 	protected boolean cardLimitState = false;
 	protected int cardLimit;
 	protected boolean practiceRun = false;
-	
-	/**
-	 * 
-	 * 
-	 * @param fach
-	 * @param lernkartei
-	 * @throws NullPointerException
-	 */
+
 	public VocableTrainerRunSettings(Fach fach, Lernkartei lernkartei) {
 		if(fach==null||lernkartei==null) {
 			throw new NullPointerException("Invalid Fach or Lernkartei");
@@ -35,7 +28,6 @@ public class VocableTrainerRunSettings {
 		this.box = fach;
 		this.set = lernkartei;
 	}
-	
 	
 	/**
 	 * Testing only

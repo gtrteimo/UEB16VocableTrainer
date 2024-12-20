@@ -56,6 +56,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
+		
 		if(cards.isEmpty()) {
 			endRun();
 		}else {
