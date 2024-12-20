@@ -3,3 +3,5 @@ exports/TFO.lnk
 .project
 .classpath
 /bin/
+lernkarteien.properties
+*.script

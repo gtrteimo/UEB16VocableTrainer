@@ -64,7 +64,7 @@ public class VokabeltrainerDB
 	protected static final String DROP_KARTEN = "DROP TABLE karten IF EXISTS;";
 
 	protected static final String INSERT_LERNKARTEI1 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
-			+ "  VALUES('Vokabeltrainer Deutsch Englisch','Deutsch','Englisch',true,false);";
+			+ "  VALUES('Deutsch Englisch','Deutsch','Englisch',true,false);";
 	protected static final String INSERT_LERNKARTEI2 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
 			+ "  VALUES('Vokabeltrainer Deutsch Italienisch','Deutsch','Italienisch',false,true);";
 	protected static final String INSERT_LERNKARTEI3 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "

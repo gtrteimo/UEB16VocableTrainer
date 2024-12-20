@@ -28,7 +28,7 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		B_start = new JButton ("Start");
 		B_new = new JButton ("New");
 		B_info = new JButton ("Info");
-		B_edit = new JButton ("Edit");
+		B_edit = new JButton ("Exit");
 		
 		B_start.setBackground(C_slateGray);
 		B_new.setBackground(C_slateGray);
@@ -53,7 +53,7 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		B_start.addActionListener(new ButtonListener(5));
 		B_new.addActionListener(new ButtonListener(3));
 		B_info.addActionListener(new ButtonListener(4));
-		B_edit.addActionListener(new ButtonListener(2));
+		B_edit.addActionListener(new ButtonListener(-1));
 		
 		panel.add(B_start);
 		panel.add(B_new);
@@ -97,10 +97,14 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			try {
-				vtf.changePanel(panelIndex);
-			} catch (Exception e1) {
-				System.err.println("Failed to change to Panel: "+panelIndex);
+			if (panelIndex == -1) {
+				vtf.close();
+			} else {
+				try {
+					vtf.changePanel(panelIndex);
+				} catch (Exception e1) {
+					System.err.println("Failed to change to Panel: "+panelIndex);
+				}
 			}
 		}
 	}

@@ -33,12 +33,26 @@ public class VocableTrainerPanel extends JPanel {
 	protected VocableTrainerFrame vtf;
 	protected VocableTrainerPanel vtp;
 	
+	protected boolean state = false;
+			
 	final static String backPath = "/icons/back.png";
     private static Image backImage;
 	
 	protected VocableTrainerBarPanel barPane;
 	protected VocableTrainerPanel panel;
 	
+	public VocableTrainerPanel (VocableTrainerFrame vtf, boolean state) {
+		super();
+		this.vtf = vtf;
+		this.state = state;
+		
+		if (barPane == null) {
+			barPane = new VocableTrainerBarPanel(this);
+		}
+		int height = vtf.getHeight()-vtf.getInsets().top-vtf.getInsets().bottom;
+		barPane.addMouseListener(new ImageClick(9, 9, height/12-18, height/12-18, -2));
+
+	}
 	public VocableTrainerPanel (VocableTrainerFrame vtf) {
 		super();
 		this.vtf = vtf;
@@ -63,6 +77,11 @@ public class VocableTrainerPanel extends JPanel {
 		super();
 		this.vtp = vtp;
 	}
+	public VocableTrainerPanel (VocableTrainerPanel vtp, boolean state) {
+		super();
+		this.vtp = vtp;
+		this.state = state;
+	}
 	
 	protected void loadImage() {
     	if (backImage == null) {
@@ -82,13 +101,20 @@ public class VocableTrainerPanel extends JPanel {
     @Override
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (vtf!=null) {
-    		barPane.setSize(getWidth(), getHeight() / 12);
-    		panel.setBounds(16, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
-        } else if (vtp!=null) {
-	        if (backImage != null) {
-				g.drawImage(backImage, 16, 16, getHeight()/16, getHeight()/16, null);
-			}
+        if (state) {
+        	if (vtf!=null) {
+	    		barPane.setSize(getWidth(), getHeight() / 12);
+	    		panel.setBounds(0, getHeight()/12, getWidth(), getHeight() - getHeight() / 12);
+	        }
+        } else {
+	        if (vtf!=null) {
+	    		barPane.setSize(getWidth(), getHeight() / 12);
+	    		panel.setBounds(16, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
+	        } else if (vtp!=null) {
+		        if (backImage != null) {
+					g.drawImage(backImage, 16, 16, getHeight()/16, getHeight()/16, null);
+				}
+	        }
         }
     }
     private class ImageClick implements MouseListener {

@@ -1,4 +1,4 @@
-package net.tfobz.vocabletrainer.main;
+package net.tfobz.vocabletrainer.main;	
 
 import net.tfobz.vocabletrainer.gui.*;
 /**
