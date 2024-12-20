@@ -14,40 +14,43 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
-	private VocableTrainerRunSettings settings;
 	
+	private VocableTrainerRunSettings settings;
+	private int[] times;
+	private int cardNum;
 	private ArrayList<Karte> cards;
-	private Karte current;
+	private Karte currentCard;
 	private ClockLabel clock1;
 	private ClockLabel clock2;
 	
-	private int[] times;
-	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
-		super();
-		this.vtf = vtf;
+		super(vtf);
 		this.settings = settings;
-				
-		panel.setLayout(null);
+		
+		setBackground(new Color(225, 225, 225, 255));
+		
+		
+		setLayout(null);
 
 		clock1 = new ClockLabel("Total Time: ", settings.isTotalTimeLimit()?settings.getTotalTimeLimit():0, ()->endRun());
         clock1.setBounds(10, 10, 200, 30);
         clock1.setFont(new Font("Arial", Font.PLAIN, 30));
-        panel.add(clock1);
+        this.add(clock1);
         clock2 = new ClockLabel("Card Time: ", settings.isCardTimeLimit()?settings.getCardTimeLimit():0,()->nextCard());
         clock2.setBounds(10, 40, 200, 30);
         clock2.setFont(new Font("Arial", Font.PLAIN, 30));
-        panel.add(clock2);
+        this.add(clock2);
         
         times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[VokabeltrainerDB.getKarten(settings.getBox().getNummer()).size()];
+        cardNum = 0;
         
         cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
         
         clock1.start();
         clock2.start();
-		
-		current = cards.get((int)(Math.random()*cards.size()));
-        cards.remove(current);
+        
+		currentCard = cards.get((int)(Math.random()*cards.size()));
+        cards.remove(currentCard);
 	}
 	
 	public void endRun() {
@@ -55,12 +58,12 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
-		
+		times[cardNum] = clock2.getTime();
 		if(cards.isEmpty()) {
 			endRun();
 		}else {
-			current = cards.get((int)(Math.random()*cards.size()));
-	        cards.remove(current);
+			currentCard = cards.get((int)(Math.random()*cards.size()));
+	        cards.remove(currentCard);
 	        clock2.start();
 		}
 	}
@@ -73,11 +76,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		private int limit = 0;
 		private boolean limited = false;
 		ScheduledExecutorService executor=null;
-		
-		public ClockLabel(String fixtext) {
-			super(fixtext);
-			pos = fixtext.length();
-		}
 		
 		public ClockLabel(String fixtext, int limit, Runnable action) {
 			super(fixtext);
