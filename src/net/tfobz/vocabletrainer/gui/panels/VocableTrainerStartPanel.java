@@ -170,8 +170,12 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	
 	private void startRun() {
 		VocableTrainerRunSettingsData settings = new VocableTrainerRunSettingsData();
+		try {
 		settings.set = (Lernkartei) optionComboBoxesTime[0].getSelectedItem();
 		settings.boxes = (Fach) optionComboBoxesTime[1].getSelectedItem();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
+		}
 		
 		settings.timePerCardState = options[0].isSelected();
 		settings.timeForCardsState = options[1].isSelected();
@@ -192,14 +196,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
-		System.out.println(panel.getHeight()/50.0);
-		
+				
 		optionComboBoxes[0].setBounds((int)(panel.getWidth()/(32/3.0)), panel.getHeight()/40, (int)(panel.getWidth()/(1000/607.0)), panel.getHeight()/12);
 		optionComboBoxes[0].setFont(new Font ("Arial", Font.BOLD, optionComboBoxes[0].getHeight()/2 + 5));
 		
-		optionComboBoxes[1].setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/40, panel.getWidth()/5, 50);
-
+		optionComboBoxes[1].setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/40, panel.getWidth()/5, panel.getHeight()/12);
+		optionComboBoxes[1].setFont(new Font ("Arial", Font.BOLD, optionComboBoxes[1].getHeight()/2 + 5));
+		
 		for (int i = 0; i < options.length; i++) {
 			options[i].setBounds((int)(panel.getWidth()/(32/3.0)), (int)(panel.getHeight()/(64/3.0)*(i*(5/2.0)+3)), panel.getHeight()/2, panel.getHeight()/16);
 			options[i].setFont(new Font ("Arial", Font.PLAIN, options[i].getHeight()/2 + 5));
@@ -209,9 +212,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionSpinners[1].setBounds((int)(panel.getWidth()/(12/6.0)), (int)(panel.getHeight()/(64/3.0)*(1*(5/2.0)+3)), panel.getWidth()/5, panel.getHeight()/16);
 		optionSpinners[2].setBounds((int)(panel.getWidth()/(12/9.0)), (int)(panel.getHeight()/(64/3.0)*(3*(5/2.0)+3)), panel.getWidth()/5, panel.getHeight()/16);
 		
-		optionSpinners[0].setFont(new Font ("Arial", Font.PLAIN, optionSpinners[0].getHeight()/2));
-		optionSpinners[1].setFont(new Font ("Arial", Font.PLAIN, optionSpinners[1].getHeight()/2));
-		optionSpinners[2].setFont(new Font ("Arial", Font.PLAIN, optionSpinners[2].getHeight()/2));
+		for (int i = 0; i < optionSpinners.length; i++) {
+			JComponent editor = optionSpinners[i].getEditor();
+			if (editor instanceof JSpinner.DefaultEditor) {
+				JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
+				defaultEditor.getTextField().setFont(new Font ("Arial", Font.PLAIN, optionSpinners[i].getHeight()/2));
+			}
+		}
 		
 		optionComboBoxesTime[0].setBounds((int)(panel.getWidth()/(12/9.0)), (int)(panel.getHeight()/(64/3.0)*(0*(5/2.0)+3)), panel.getWidth()/5, panel.getHeight()/16);
 		optionComboBoxesTime[1].setBounds((int)(panel.getWidth()/(12/9.0)), (int)(panel.getHeight()/(64/3.0)*(1*(5/2.0)+3)), panel.getWidth()/5, panel.getHeight()/16);
@@ -238,17 +245,20 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	    public void keyReleased(KeyEvent e) {
 	        JTextField textField = (JTextField) e.getSource();
 	        String text = textField.getText();
-
-	        try {
-	            int intValue = Integer.parseInt(text);
-
-	            if (intValue < 1) {
-	                intValue = Math.abs(intValue);
-	                textField.setText(String.valueOf(intValue));
-	            }
-	        } catch (NumberFormatException ex) {
-	            String sanitized = text.replaceAll("[^0-9]", "");
-	            textField.setText(sanitized);
+	        if (text.trim().replaceAll("\n", "").isEmpty()) {
+                textField.setText(String.valueOf(0));
+	        } else {
+		        try {
+		            int intValue = Integer.parseInt(text);
+	
+		            if (intValue < 1) {
+		                intValue = Math.abs(intValue);
+		                textField.setText(String.valueOf(intValue));
+		            }
+		        } catch (NumberFormatException ex) {
+		            String sanitized = text.replaceAll("[^0-9]", "");
+		            textField.setText(sanitized);
+		        }
 	        }
 	    }
 

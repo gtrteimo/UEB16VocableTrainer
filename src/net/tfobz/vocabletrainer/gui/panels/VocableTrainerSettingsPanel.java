@@ -3,6 +3,7 @@ package net.tfobz.vocabletrainer.gui.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -36,11 +37,11 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		 		
 		panel.setLayout(null);
         
-        language = new JLabel("Language");
+        language = new JLabel("   Language");
         language.setEnabled(false);
         language.setForeground(C_nigth);
         
-        theme = new JLabel("Theme");
+        theme = new JLabel("   Theme");
         theme.setEnabled(false);
         theme.setForeground(C_nigth);
         
@@ -52,11 +53,13 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.setEnabled(false);
         themeBox.addItem("Acqua");
         
-        simplifiedBox = new JCheckBox("Simplified View");
+        simplifiedBox = new JCheckBox(" Simplified View");
+        simplifiedBox.setBackground(C_powderBlue);
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
         
-        allwoPremiumBox = new JCheckBox("Allow purchase of Premium");
+        allwoPremiumBox = new JCheckBox(" Allow purchase of Premium");
+        allwoPremiumBox.setBackground(C_powderBlue);
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
         
@@ -79,13 +82,26 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         
         int h = panel.getHeight();
         int w = panel.getWidth();
+                
+        language.setBounds(w/29, h/17, w/3, h/8);
+        language.setFont(new Font ("Arial", Font.PLAIN, language.getHeight()/2 +5));
         
-        language.setBounds(25, 25, w/5, h/7);
-//        theme.setBounds(10, 10+height/7, width/2-10, height/7-10);
-//        languageBox.setBounds(10+width/2, 10, width/2-10, height/7-10);
-//        themeBox.setBounds(10+width/2, 10+height/7, width/2-10, height/7-10);
-//        simplifiedBox.setBounds(10, 10+2*height/7, width, height/7-10);
-//        allwoPremiumBox.setBounds(10, 10+3*height/7, width, height/7-10);
-//        button.setBounds(10, 10+4*height/7, width, height/7*2-10);
+        languageBox.setBounds(w-w/2-16, h/17, w/2, h/8);
+        languageBox.setFont(new Font ("Arial", Font.PLAIN, languageBox.getHeight()/2 +5));
+        
+        theme.setBounds(w/29, h/17*4, w/4, h/8);
+        theme.setFont(new Font ("Arial", Font.PLAIN, theme.getHeight()/2 +5));
+        
+        themeBox.setBounds(w-w/2-16, h/17*4, w/2, h/8);
+        themeBox.setFont(new Font ("Arial", Font.PLAIN, themeBox.getHeight()/2 +5));
+        
+        simplifiedBox.setBounds(w/29, h/17*7, w/2,  h/8);
+        simplifiedBox.setFont(new Font ("Arial", Font.PLAIN, simplifiedBox.getHeight()/2 + 5));
+        
+        allwoPremiumBox.setBounds(w/29, h/17*10, w-20,  h/8);
+        allwoPremiumBox.setFont(new Font ("Arial", Font.PLAIN, allwoPremiumBox.getHeight()/2 + 5));
+        
+        button.setBounds(16, panel.getHeight()/4*3, panel.getWidth()-32, panel.getHeight()/4-16);
+        button.setFont(new Font ("Arial", Font.BOLD, button.getHeight()/2-10));
     }
 }
