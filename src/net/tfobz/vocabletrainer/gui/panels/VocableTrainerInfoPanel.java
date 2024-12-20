@@ -52,7 +52,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 		panel.add(topic);
 		panel.add(comboBox);
 		
-		table = new JTable(new DefaultTableModel(new Object[]{"Column 1", "Column 2", "Column 3", "Column 4", "Column 5"}, 0));
+//		table = new JTable(new DefaultTableModel(new Object[]{"Column 1", "Column 2", "Column 3", "Column 4", "Column 5"}, comboBox.getSelectedItem().));
 		
 		scrollPane = new JScrollPane(table);
 		

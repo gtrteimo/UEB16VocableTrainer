@@ -69,6 +69,8 @@ public class VocableTrainerFrame extends JFrame {
 			}
 		} else if (panelIndex == -2) {
 			contentPane.remove(panels[0]);
+		} else if (panelIndex == -3) {
+			contentPane.remove(panels[history.get(history.size()-1)]);
 		}
 	}
 	

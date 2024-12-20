@@ -1,7 +1,7 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
-import net.tfobz.vocabletrainer.data.VocableTrainerRunSettingsData;
-import net.tfobz.vocabletrainer.data.VocableTrainerRunSettingsData.TimeUnit;
+import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings;
+import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings.TimeUnit;
 import net.tfobz.vocabletrainer.gui.*;
 import net.tfobz.vokabeltrainer.model.*;
 
@@ -43,7 +43,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		options[2] = new JCheckBox("Case sensitive");
 		options[2].setSelected(true);
 		options[3] = new JCheckBox("Amount of cards");
-		options[3].setSelected(true);
+		options[3].setSelected(false);
 		options[4] = new JCheckBox("Practice Run");
 		options[4].setSelected(false);
 
@@ -65,7 +65,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		}
 		optionSpinners[0].setEnabled(true);
 		optionSpinners[1].setEnabled(false);
-		optionSpinners[2].setEnabled(true);
+		optionSpinners[2].setEnabled(false);
 
 		
 		optionSpinners[0].setValue(30);
@@ -169,28 +169,34 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	
 	private void startRun() {
-		VocableTrainerRunSettingsData settings = new VocableTrainerRunSettingsData();
+		VocableTrainerRunSettings settings;
 		try {
-		settings.set = (Lernkartei) optionComboBoxesTime[0].getSelectedItem();
-		settings.boxes = (Fach) optionComboBoxesTime[1].getSelectedItem();
+			 settings = new VocableTrainerRunSettings((Fach) optionComboBoxesTime[1].getSelectedItem(), (Lernkartei) optionComboBoxesTime[0].getSelectedItem());
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
+//			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
+			//Debug and Testing
+			settings = new VocableTrainerRunSettings();
 		}
 		
-		settings.timePerCardState = options[0].isSelected();
-		settings.timeForCardsState = options[1].isSelected();
-		settings.caseSensitiveState = options[2].isSelected();
-		settings.cardLimitState = options[3].isSelected();
-		settings.practiceRunState = options[4].isSelected();
+		if (options[0].isSelected()) {
+			settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
+		} else if (options[1].isSelected()) {
+			settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
+		}
 		
-		settings.timePerCard = ((Integer)(optionSpinners[0].getValue())).intValue();
-		settings.timeForCards = ((Integer)(optionSpinners[1].getValue())).intValue();
-		settings.amountOfCards = ((Integer)(optionSpinners[2].getValue())).intValue();
+		if (options[3].isSelected()) {
+			settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
+		}
 		
-		settings.timeUnit1 = (TimeUnit)optionComboBoxesTime[0].getSelectedItem();
-		settings.timeUnit2 = (TimeUnit)optionComboBoxesTime[1].getSelectedItem();
+		settings.setParcticeRun(options[4].isSelected());
 		
+		Thread t = new Thread(new StartThread());
 		
+		vtf.changePanel(-1);
+		
+		try {
+			t.join();
+		} catch (InterruptedException e) {}
 	}
 	
 	@Override
@@ -267,5 +273,17 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {}
+	}
+	private class StartThread implements Runnable {
+
+		public StartThread() {
+			
+		}
+		
+		@Override
+		public void run() {
+			new 
+		}
+		
 	}
 }
