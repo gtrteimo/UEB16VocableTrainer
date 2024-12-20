@@ -102,8 +102,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			optionComboBoxes[i].setBackground(C_platinum);
 			optionComboBoxesTime[i].setForeground(C_nigth);
 			optionComboBoxesTime[i].setBackground(C_platinum);
-		}
-		options[1].setEnabled(false);
+		}		
 		
 		optionComboBoxesTime[0].setEnabled(true);
 		optionComboBoxesTime[1].setEnabled(false);
@@ -119,22 +118,18 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		
 		options[0].addActionListener(e -> {
 				if (options[0].isSelected()) {
-					options[1].setEnabled(false);
 					optionSpinners[0].setEnabled(true);
 					optionComboBoxesTime[0].setEnabled(true);
 				} else {
-					options[1].setEnabled(true);
 					optionSpinners[0].setEnabled(false);
 					optionComboBoxesTime[0].setEnabled(false);
 				}
 		});
 		options[1].addActionListener(e -> {
 			if (options[1].isSelected()) {
-				options[0].setEnabled(false);
 				optionSpinners[1].setEnabled(true);
 				optionComboBoxesTime[1].setEnabled(true);
 			} else {
-				options[0].setEnabled(true);
 				optionSpinners[1].setEnabled(false);
 				optionComboBoxesTime[1].setEnabled(false);
 			}

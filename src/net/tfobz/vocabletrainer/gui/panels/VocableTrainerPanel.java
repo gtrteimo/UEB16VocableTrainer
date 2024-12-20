@@ -41,6 +41,8 @@ public class VocableTrainerPanel extends JPanel {
 	protected VocableTrainerBarPanel barPane;
 	protected VocableTrainerPanel panel;
 	
+	public VocableTrainerPanel() {}
+	
 	public VocableTrainerPanel (VocableTrainerFrame vtf, boolean state) {
 		super();
 		this.vtf = vtf;

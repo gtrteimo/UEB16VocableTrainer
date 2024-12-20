@@ -14,31 +14,30 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
-	
 	private VocableTrainerRunSettings settings;
-	private int[] times;
+	
 	private ArrayList<Karte> cards;
 	private Karte current;
 	private ClockLabel clock1;
 	private ClockLabel clock2;
 	
+	private int[] times;
+	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
-		super(vtf);
+		super();
+		this.vtf = vtf;
 		this.settings = settings;
-		
-		setBackground(new Color(225, 225, 225, 255));
-		
-		
-		setLayout(null);
+				
+		panel.setLayout(null);
 
 		clock1 = new ClockLabel("Total Time: ", settings.isTotalTimeLimit()?settings.getTotalTimeLimit():0, ()->endRun());
         clock1.setBounds(10, 10, 200, 30);
         clock1.setFont(new Font("Arial", Font.PLAIN, 30));
-        this.add(clock1);
+        panel.add(clock1);
         clock2 = new ClockLabel("Card Time: ", settings.isCardTimeLimit()?settings.getCardTimeLimit():0,()->nextCard());
         clock2.setBounds(10, 40, 200, 30);
         clock2.setFont(new Font("Arial", Font.PLAIN, 30));
-        this.add(clock2);
+        panel.add(clock2);
         
         times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[VokabeltrainerDB.getKarten(settings.getBox().getNummer()).size()];
         
