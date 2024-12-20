@@ -175,7 +175,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		
 		if (options[0].isSelected()) {
 			settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
-		} else if (options[1].isSelected()) {
+		} 
+		if (options[1].isSelected()) {
 			settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
 		}
 		
