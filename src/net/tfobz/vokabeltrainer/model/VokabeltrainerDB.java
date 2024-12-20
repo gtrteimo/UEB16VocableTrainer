@@ -82,7 +82,7 @@ public class VokabeltrainerDB
 		// Erstellen der Tabellen falls nicht vorhanden
 		erstellenTabellen();
 		// Hinzuf�gen von Testdaten
-//		hinzufuegenTestdaten();
+		hinzufuegenTestdaten();
 	}
 
 	/**

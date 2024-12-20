@@ -197,10 +197,10 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 				
-		optionComboBoxes[0].setBounds((int)(panel.getWidth()/(32/3.0)), panel.getHeight()/40, (int)(panel.getWidth()/(1000/607.0)), panel.getHeight()/12);
+		optionComboBoxes[0].setBounds((int)(panel.getWidth()/(32/3.0)), panel.getHeight()/50, (int)(panel.getWidth()/(1000/607.0)), panel.getHeight()/12);
 		optionComboBoxes[0].setFont(new Font ("Arial", Font.BOLD, optionComboBoxes[0].getHeight()/2 + 5));
 		
-		optionComboBoxes[1].setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/40, panel.getWidth()/5, panel.getHeight()/12);
+		optionComboBoxes[1].setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/50, panel.getWidth()/5, panel.getHeight()/12);
 		optionComboBoxes[1].setFont(new Font ("Arial", Font.BOLD, optionComboBoxes[1].getHeight()/2 + 5));
 		
 		for (int i = 0; i < options.length; i++) {
