@@ -66,9 +66,9 @@ public class VokabeltrainerDB
 	protected static final String INSERT_LERNKARTEI1 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
 			+ "  VALUES('Deutsch Englisch','Deutsch','Englisch',true,false);";
 	protected static final String INSERT_LERNKARTEI2 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
-			+ "  VALUES('Vokabeltrainer Deutsch Italienisch','Deutsch','Italienisch',false,true);";
+			+ "  VALUES('Deutsch Italienisch','Deutsch','Italienisch',false,true);";
 	protected static final String INSERT_LERNKARTEI3 = "INSERT INTO lernkarteien(lbeschreibung, lworteinsbeschreibung, lwortzweibeschreibung, lrichtung, lgrosskleinschreibung) "
-			+ "  VALUES('Vokabeltrainer Deutsch Franzï¿½sisch','Deutsch','Franzï¿½sisch',false,true);";
+			+ "  VALUES('Deutsch Französisch','Deutsch','Französisch',false,true);";
 	protected static final String INSERT_FACH11 = "INSERT INTO faecher(fbeschreibung, ferinnerung, fgelerntam, lnummer) "
 			+ "  VALUES('Fach 1',0,'" + getActualDate() + "', 1);";
 	protected static final String INSERT_FACH21 = "INSERT INTO faecher(fbeschreibung, ferinnerung, fgelerntam, lnummer) "
@@ -1642,4 +1642,43 @@ public class VokabeltrainerDB
 			ret = new SimpleDateFormat("yyyy-MM-dd").format(date);
 		return ret;
 	}
+	
+	
+	//ATTENTION ADDED THIS MYSELF --> NOT FROM THE TEMPLATE --> DOSEN'T WORK
+	public static List<Karte> getCardsForSet(int setId) {
+	    List<Karte> cards = new ArrayList<>();
+	    String sql = "SELECT k.knummer, k.kworteins, k.kwortzwei, l.lrichtung, l.lgrosskleinschreibung "
+	               + "FROM karten k "
+	               + "JOIN faecher f ON k.fnummer = f.fnummer "
+	               + "JOIN lernkarteien l ON f.lnummer = l.lnummer "
+	               + "WHERE l.lnummer = ?";
+
+	    try (Connection con = getConnection()) {
+	        try (java.sql.PreparedStatement stmt = con.prepareStatement(sql)) {
+	            stmt.setInt(1, setId);
+
+	            try (ResultSet rs = stmt.executeQuery()) {
+	                while (rs.next()) {
+	                    Karte karte = new Karte(
+	                        rs.getInt("knummer"),
+	                        rs.getString("kworteins"),
+	                        rs.getString("kwortzwei"),
+	                        rs.getBoolean("lrichtung"),
+	                        rs.getBoolean("lgrosskleinschreibung")
+	                    );
+	                    cards.add(karte);
+	                }
+	                if (cards.isEmpty()) {
+	                    System.out.println("No cards found for set ID: " + setId);
+	                }
+	            }
+	        }
+	    } catch (SQLException e) {
+	        System.err.println("SQL Exception occurred:");
+	        e.printStackTrace();
+	    }
+	    return cards;
+	}
+
+
 }
