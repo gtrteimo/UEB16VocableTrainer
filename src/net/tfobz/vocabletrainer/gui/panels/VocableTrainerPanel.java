@@ -24,11 +24,11 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 public class VocableTrainerPanel extends JPanel {
 	
-	final static Color C_nigth = new Color(11, 9, 10); 
-	final static Color C_spaceCadet = new Color(50, 50, 75); 
-	final static Color C_slateGray = new Color(111, 116, 146); 
-	final static Color C_powderBlue = new Color(171, 181, 216); 
-	final static Color C_platinum = new Color(225, 225, 225);
+	public final static Color C_nigth = new Color(11, 9, 10); 
+	public final static Color C_spaceCadet = new Color(50, 50, 75); 
+	public final static Color C_slateGray = new Color(111, 116, 146); 
+	public final static Color C_powderBlue = new Color(171, 181, 216); 
+	public final static Color C_platinum = new Color(225, 225, 225);
 	
 	protected VocableTrainerFrame vtf;
 	protected VocableTrainerPanel vtp;

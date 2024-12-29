@@ -48,7 +48,7 @@ public class VocableTrainerFrame extends JFrame {
 		panels[6] = new VocableTrainerCreditsPanel(this);
 		panels[7] = new VocableTrainerSettingsPanel(this);
 	}
-	public void changePanel (int panelIndex) throws Exception {
+	public void changePanel (int panelIndex) throws RuntimeException {
 		if (panelIndex > 0) {
 			if (history.size() > 0) {
 				if (history.get(history.size()-1) != panelIndex) {

@@ -25,8 +25,8 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		labelcreators = new JLabel("Creators:");
 		labelcreators.setForeground(C_nigth);
 		creators = new ArrayList<JLabel>();
-		creators.add(createLabel(new JLabel("21chinat")));
-		creators.add(createLabel(new JLabel("gtrteimo")));
+		creators.add(createLabel(new JLabel("Nathan C. (21chinat)")));
+		creators.add(createLabel(new JLabel("Gerhard T. R. (gtrteimo)")));
 		
 		labelhelpers = new JLabel("Special thanks to our slaves:");
 		helpers = new ArrayList<JLabel>();
