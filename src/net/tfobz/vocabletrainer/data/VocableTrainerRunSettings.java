@@ -7,7 +7,7 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 public class VocableTrainerRunSettings {
 	
 	public static enum TimeUnit {
-	    Seconds, Minutes, Hours, Days;
+	    Seconds, Minutes, Hours;
 	} 
 	
 	protected Fach box;
@@ -68,9 +68,9 @@ public class VocableTrainerRunSettings {
 		case Hours:
 			this.cardTimeLimit = cardTimeLimit*3600;
 			break;
-		case Days:
-			this.totalTimeLimit = totalTimeLimit*3600*24;
-			break;
+//		case Days:
+//			this.totalTimeLimit = totalTimeLimit*3600*24;
+//			break;
 		}
 		
 	}
@@ -90,9 +90,9 @@ public class VocableTrainerRunSettings {
 		case Hours:
 			this.totalTimeLimit = totalTimeLimit*3600;
 			break;
-		case Days:
-			this.totalTimeLimit = totalTimeLimit*3600*24;
-			break;
+//		case Days:
+//			this.totalTimeLimit = totalTimeLimit*3600*24;
+//			break;
 		}
 	}
 	
