@@ -68,9 +68,9 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		save.setBorderPainted(false);
 		save.setMnemonic('S');
 		
-		update();
+		retrive();
 		
-		comboBox.addActionListener(e -> updateLabels());
+		comboBox.addActionListener(e -> retriveLabels());
 		
 		newSet.addActionListener(e -> newSet());
 		save.addActionListener(e -> newCard());
@@ -95,32 +95,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		this.add(panel);
 	}
 	
-	private void update () {
-		sets = VokabeltrainerDB.getLernkarteien();
-	    comboBox.removeAllItems();
-	    if (sets != null) {
-		    for (Lernkartei set : sets) {
-		        comboBox.addItem(set);
-		    }
-		    updateLabels();
-	    } else {
-            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
-	    }
-	}
 	
-	private void updateLabels () {
-		Lernkartei temp = (Lernkartei)comboBox.getSelectedItem();
-		if (temp != null) {
-			label1.setText(temp.getWortEinsBeschreibung());
-			label2.setText(temp.getWortZweiBeschreibung());
-			
-			label1.setEnabled(true);
-			label2.setEnabled(true);
-			text1.setEnabled(true);
-			text2.setEnabled(true);
-			save.setEnabled(true);
-		}
-	}
 	
 	private void newSet () {
 		NewSetDialog nameDialog = new NewSetDialog (vtf);
@@ -142,7 +117,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         	}
         }
         nameDialog.closeDialog();
-        update();
+        retrive();
 	}
 	
 	private void newCard () {
@@ -169,6 +144,35 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 			new InfoDialog(vtf, "Info", "Select or create a Set").setVisible(true);;
 		}
 	}
+	
+	@Override
+	public void retrive () {
+		sets = VokabeltrainerDB.getLernkarteien();
+	    comboBox.removeAllItems();
+	    if (sets != null) {
+		    for (Lernkartei set : sets) {
+		        comboBox.addItem(set);
+		    }
+		    retriveLabels();
+	    } else {
+            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+	
+	protected void retriveLabels () {
+		Lernkartei temp = (Lernkartei)comboBox.getSelectedItem();
+		if (temp != null) {
+			label1.setText(temp.getWortEinsBeschreibung());
+			label2.setText(temp.getWortZweiBeschreibung());
+			
+			label1.setEnabled(true);
+			label2.setEnabled(true);
+			text1.setEnabled(true);
+			text2.setEnabled(true);
+			save.setEnabled(true);
+		}
+	}
+	
 	
     @Override
 	public void paintComponent(Graphics g) {
