@@ -152,13 +152,21 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         clock2.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
         
         originalWord.setBounds(10, 70, panel.getWidth(), 20);
-        originalWord.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        originalWord.setFont(new Font("Arial", Font.PLAIN, originalWord.getHeight()/2));
         
         answer.setBounds(10, 100, panel.getWidth(), 20);
-        answer.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        answer.setFont(new Font("Arial", Font.PLAIN, answer.getHeight()/2));
         
         input.setBounds(10, 130, panel.getWidth(), 20);
-        input.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        input.setFont(new Font("Arial", Font.PLAIN, input.getHeight()/2));
         
+        stop.setBounds(10, 160, 100, 30);
+        stop.setFont(new Font("Arial", Font.PLAIN, stop.getHeight()/2));
+        
+        skip.setBounds(110, 160, 100, 30);
+        skip.setFont(new Font("Arial", Font.PLAIN, skip.getHeight()/2));
+        
+        next.setBounds(210, 160, 100, 30);
+        next.setFont(new Font("Arial", Font.PLAIN, next.getHeight()/2));
     }
 }
