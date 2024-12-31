@@ -1644,7 +1644,7 @@ public class VokabeltrainerDB
 	}
 	
 	
-	//ATTENTION ADDED THIS MYSELF --> NOT FROM THE TEMPLATE --> DOSEN'T WORK
+	//ATTENTION ADDED THIS MYSELF --> NOT FROM THE TEMPLATE
 	public static List<Karte> getKartenFromLernkartei(int nummerLernkartei) {
 	    List<Karte> ret = new ArrayList<>();
 	    Connection con = null;
@@ -1680,5 +1680,30 @@ public class VokabeltrainerDB
 	    return ret;
 	}
 
-
+	public static int aendereDatumKarte(int nummerKarte, Date neuesDatum) {
+	    int ret = -1;
+	    Connection con = null;
+	    Statement stmt = null;
+	    try {
+	        con = getConnection();
+	        stmt = con.createStatement();
+	        String sql = 
+	            "UPDATE karten " +
+	            "SET fgeändertam = '" + VokabeltrainerDB.convertToString(neuesDatum) + "' " +
+	            "WHERE knummer = " + nummerKarte + ";";
+	        if (stmt.executeUpdate(sql) == 1) {
+	            ret = 0;
+	            con.commit();
+	        } else {
+	            ret = -1; // Karte existiert nicht
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        ret = -1;
+	    } finally {
+	        try { stmt.close(); } catch (Exception e) { ; }
+	        try { con.close(); } catch (Exception e) { ; }
+	    }
+	    return ret;
+	}
 }
