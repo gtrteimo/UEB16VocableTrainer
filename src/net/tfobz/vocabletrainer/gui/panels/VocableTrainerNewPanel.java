@@ -120,31 +120,64 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         retrive();
 	}
 	
-	private void newCard () {
-		Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
-		
-		if (s != null) {
-			if (!text1.getText().trim().replace("\n", "").isEmpty() && !text2.getText().trim().replace("\n", "").isEmpty()) {
-				Karte c = new Karte(-1, text1.getText(), text2.getText(),
-						VokabeltrainerDB.getLernkartei(s.getNummer()).getRichtung(),
-						VokabeltrainerDB.getLernkartei(s.getNummer()).getGrossKleinschreibung());
-				
-				VokabeltrainerDB.hinzufuegenKarte(s.getNummer(), c);
-				
-				text1.setText("");
-				text2.setText("");
-				
-				vtf.changePanel(-1);
-			} else {
-				System.out.println("Here");
-				new InfoDialog(vtf, "Info", "\"" + s.getWortEinsBeschreibung() + "\" or \"" + s.getWortZweiBeschreibung() + "\" can't be empty!").setVisible(true);
-			}
-		} else {
-			System.out.println("Help");
-			new InfoDialog(vtf, "Info", "Select or create a Set").setVisible(true);;
-		}
-	}
 	
+	private void newCard() {
+	    Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+
+	    if (s != null) {
+	        String input1 = text1.getText().trim();
+	        String input2 = text2.getText().trim();
+
+	        if (!input1.isEmpty() && !input2.isEmpty()) {
+	            // Check for existing Fächer in the selected Lernkartei
+	            List<Fach> faecher = VokabeltrainerDB.getFaecher(s.getNummer());
+
+	            if (faecher == null) {
+	                new InfoDialog(vtf, "Error", "The selected set does not exist.").setVisible(true);
+	                return;
+	            }
+
+	            if (faecher.isEmpty()) {
+	                // Create a new Fach if none exist
+	                Fach newFach = new Fach();
+	                newFach.setBeschreibung("First Fach");
+	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
+	                if (result != 0) {
+	                    new InfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);
+	                    return;
+	                }
+	                faecher = VokabeltrainerDB.getFaecher(s.getNummer());
+	            }
+
+	            // Add the new card to the first Fach
+	            Fach firstFach = faecher.get(0);
+	            Karte c = new Karte(-1, input1, input2, s.getRichtung(), s.getGrossKleinschreibung());
+	            c.setFnummer(firstFach.getNummer());
+
+	            int result = VokabeltrainerDB.hinzufuegenKarte(s.getNummer(), c);
+
+	            switch (result) {
+	                case 0:
+	                    // Success: Reset the input fields and update the UI
+	                    text1.setText("");
+	                    text2.setText("");
+	                    vtf.changePanel(-1);
+	                    break;
+	                case -5:
+	                    new InfoDialog(vtf, "Error", "A card with the same content already exists in this set.").setVisible(true);
+	                    break;
+	                default:
+	                    new InfoDialog(vtf, "Error", "An error occurred while adding the card.").setVisible(true);
+	                    break;
+	            }
+	        } else {
+	            new InfoDialog(vtf, "Error", "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
+	        }
+	    } else {
+	        new InfoDialog(vtf, "Error", "Please select or create a set first.").setVisible(true);
+	    }
+	}
+
 	@Override
 	public void retrive () {
 		sets = VokabeltrainerDB.getLernkarteien();

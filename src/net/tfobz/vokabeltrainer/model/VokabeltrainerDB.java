@@ -76,14 +76,14 @@ public class VokabeltrainerDB
 	protected static final String INSERT_KARTE111 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
 			+ "  VALUES('Haus','house',1);";
 
-	static {
-		// L�scht Tabellen
-		loeschenTabellen();
-		// Erstellen der Tabellen falls nicht vorhanden
-		erstellenTabellen();
-		// Hinzuf�gen von Testdaten
-		hinzufuegenTestdaten();
-	}
+//	static {
+//		// L�scht Tabellen
+//		loeschenTabellen();
+//		// Erstellen der Tabellen falls nicht vorhanden
+//		erstellenTabellen();
+//		// Hinzuf�gen von Testdaten
+//		hinzufuegenTestdaten();
+//	}
 
 	/**
 	 * Die Methode zeigt, wie die Klasse VokabeltrainerDB verwendet werden kann, um auf die

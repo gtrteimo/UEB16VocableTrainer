@@ -49,6 +49,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         comboBox.setForeground(C_nigth);
         comboBox.setBackground(C_platinum);
 
+        comboBox.addActionListener(e -> retriveTabel());
+        
         panel.add(topic);
         panel.add(comboBox);
         
@@ -111,6 +113,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     	
     	Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
     	
+    	if (l == null) {
+    		return;
+    	}
     	model = new DefaultTableModel(new Object[]{l.getWortEinsBeschreibung(), l.getWortEinsBeschreibung(), "Date modified", "Card due on", "Box"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

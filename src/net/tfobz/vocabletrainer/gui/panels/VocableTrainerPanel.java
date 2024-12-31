@@ -123,6 +123,8 @@ public class VocableTrainerPanel extends JPanel {
 		        if (backImage != null) {
 					g.drawImage(backImage, 16, 16, getHeight()/16, getHeight()/16, null);
 				}
+	        } else {
+	        	
 	        }
         }
     }
