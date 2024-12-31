@@ -103,7 +103,7 @@ public class VocableTrainerPanel extends JPanel {
     	}
     }
 	
-	protected void retrive () {
+	public void retrive () {
 		System.out.println("Hello World");
 	}
 	

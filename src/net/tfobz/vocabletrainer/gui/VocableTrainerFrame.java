@@ -52,6 +52,7 @@ public class VocableTrainerFrame extends JFrame {
 		if (panelIndex > 0) {
 			if (history.size() > 0) {
 				if (history.get(history.size()-1) != panelIndex) {
+					panels[panelIndex].retrive();
 					contentPane.add(panels[panelIndex]);
 					contentPane.remove(panels[history.get(history.size()-1)]);
 					history.add(panelIndex);
@@ -63,6 +64,7 @@ public class VocableTrainerFrame extends JFrame {
 			contentPane.add(panels[history.get(history.size()-1)]);
 		} else if (panelIndex == -1) {
 			if (history.size() > 1) {
+				panels[history.get(history.size()-2)].retrive();
 				contentPane.add(panels[history.get(history.size()-2)]);
 				contentPane.remove(panels[history.get(history.size()-1)]);
 				history.remove(history.size()-1);

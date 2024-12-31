@@ -90,6 +90,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		setComboBox.setBackground(C_platinum);
 		setComboBox.setBorder(null);
 		
+		setComboBox.addActionListener(e -> retriveBoxes());
+		
 		boxes = VokabeltrainerDB.getFaecher(setComboBox.getSelectedIndex());
 		if (boxes != null) {
 			boxComboBoxes = new JComboBox<Fach>(boxes.toArray(new Fach[0]));
@@ -203,6 +205,47 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		try {
 			t.join();
 		} catch (InterruptedException e) {}
+	}
+	
+	@Override
+	public void retrive() {
+		sets = VokabeltrainerDB.getLernkarteien();
+		setComboBox.removeAllItems();
+	    if (sets != null) {
+		    for (Lernkartei set : sets) {
+		    	setComboBox.addItem(set);
+		    }
+		    retriveBoxes();
+	    } else {
+            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+	    }
+	}
+	
+	protected void retriveBoxes() {
+		Lernkartei l = (Lernkartei) setComboBox.getSelectedItem();
+		if (l!=null) {
+			boxes = VokabeltrainerDB.getFaecher(l.getNummer());
+			boxComboBoxes.removeAllItems();
+		    if (boxes != null) {
+			    for (Fach box : boxes) {
+			    	System.out.println(box.getBeschreibung());
+			    	boxComboBoxes.addItem(box);
+			    }
+		    } else {
+	            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+		    }
+		}
+		
+		boxComboBoxes.setRenderer(new DefaultListCellRenderer() {
+		    @Override
+		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+		        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+		        if (value instanceof Fach) {
+		            label.setText(((Fach) value).getBeschreibung());
+		        }
+		        return label;
+		    }
+		});
 	}
 	
 	@Override

@@ -29,6 +29,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     private JScrollPane scrollPane;
     private JTable table;
 
+    DefaultTableModel model;
+    DefaultTableCellRenderer dynamicRenderer;
+    
     public VocableTrainerInfoPanel(VocableTrainerFrame vtf) {
         super(vtf);
 
@@ -48,9 +51,67 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 
         panel.add(topic);
         panel.add(comboBox);
+        
+        dynamicRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                c.setFont(new Font("Arial", Font.PLAIN, (scrollPane.getHeight() / 16) / 2 + 2)); // Dynamically calculated font
+                setHorizontalAlignment(SwingConstants.CENTER);
+                setVerticalAlignment(SwingConstants.CENTER);
+                return c;
+            }
+        };
+        
+        this.add(barPane);
+        this.add(panel);
+    }
 
-        // Table Model
-        DefaultTableModel model = new DefaultTableModel(new Object[]{"Word 1", "Word 2", "Date modified", "Card due on", "Box"}, 0) {
+    private void fillTable(DefaultTableModel model) {
+
+    	Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
+    	
+    	if (l != null && l.getNummer() != -1) {
+    	    List<Karte> cards = VokabeltrainerDB.getKartenFromLernkartei(l.getNummer());
+    	 for (int i = 0; i < model.getRowCount(); i++) {
+    		 model.removeRow(i);
+    	 }
+    	 for (Karte card: cards) {
+    		 model.addRow(new Object[]{
+                   card.getWortEins(),
+                   card.getWortZwei(),
+                   new Date(),  
+                   new Date(), 
+                   card.getFnummer() 
+               });
+    	 }
+    	}
+    }
+    @Override
+    public void retrive () {
+    	sets = VokabeltrainerDB.getLernkarteien();
+	    comboBox.removeAllItems();
+	    if (sets != null) {
+		    for (Lernkartei set : sets) {
+		        comboBox.addItem(set);
+		    }
+	    } else {
+            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+	    }
+	    
+	    retriveTabel();
+	    
+    }
+    
+    protected void retriveTabel () {
+    	    	
+    	if (scrollPane != null) {
+    		panel.remove(scrollPane);
+    	}
+    	
+    	Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
+    	
+    	model = new DefaultTableModel(new Object[]{l.getWortEinsBeschreibung(), l.getWortEinsBeschreibung(), "Date modified", "Card due on", "Box"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return column < 2;
@@ -69,71 +130,33 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 }
             }
         };
-
-        fillTable(model);
-        
-
-        table = new JTable(model);
-        table.getTableHeader().setReorderingAllowed(false); // Disable column reordering
-
-        // Renderer for Date columns
-        table.setDefaultRenderer(Date.class, (table, value, isSelected, hasFocus, row, column) -> {
-            JLabel label = new JLabel(new SimpleDateFormat(" dd.MM.yyyy  HH:mm:ss ").format((Date) value));
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setVerticalAlignment(SwingConstants.CENTER);
-            return label;
-        });
-
-        // Ensure Positive Integer column has centered data
-        table.getColumnModel().getColumn(4).setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
-            JLabel label = new JLabel(value.toString());
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            label.setVerticalAlignment(SwingConstants.CENTER);
-            return label;
-        });
-
-        // Set dynamic font renderer once
-        DefaultTableCellRenderer dynamicRenderer = new DefaultTableCellRenderer() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                c.setFont(new Font("Arial", Font.PLAIN, (scrollPane.getHeight() / 16) / 2 + 2)); // Dynamically calculated font
-                setHorizontalAlignment(SwingConstants.CENTER);
-                setVerticalAlignment(SwingConstants.CENTER);
-                return c;
-            }
-        };
-
-        // Apply dynamic renderer to all columns
-        for (int col = 0; col < table.getColumnCount(); col++) {
-            table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
-        }
-
-        scrollPane = new JScrollPane(table);
-
-        panel.add(scrollPane);
-
-        this.add(barPane);
-        this.add(panel);
-    }
-
-    private void fillTable(DefaultTableModel model) {
-
-    	Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
     	
-    	if (l != null && l.getNummer() != -1) {
-    	    List<Karte> cards = VokabeltrainerDB.getKartenFromLernkartei(l.getNummer());
-    	 for (Karte card: cards) {
-    		 model.addRow(new Object[]{
-                   card.getWortEins(),
-                   card.getWortZwei(),
-                   new Date(),  
-                   new Date(), 
-                   card.getFnummer() 
-               });
-    	 }
-    	}
-    }
+		fillTable(model);
+		
+		table = new JTable(model);
+	        table.getTableHeader().setReorderingAllowed(false);
+	
+	        table.setDefaultRenderer(Date.class, (table, value, isSelected, hasFocus, row, column) -> {
+	            JLabel label = new JLabel(new SimpleDateFormat(" dd.MM.yyyy  HH:mm:ss ").format((Date) value));
+	            label.setHorizontalAlignment(SwingConstants.CENTER);
+	            label.setVerticalAlignment(SwingConstants.CENTER);
+	            return label;
+	        });
+	
+	        table.getColumnModel().getColumn(4).setCellRenderer((table, value, isSelected, hasFocus, row, column) -> {
+	            JLabel label = new JLabel(value.toString());
+	            label.setHorizontalAlignment(SwingConstants.CENTER);
+	            label.setVerticalAlignment(SwingConstants.CENTER);
+	            return label;
+	        });
+
+	        for (int col = 0; col < table.getColumnCount(); col++) {
+	            table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
+	        }
+	        
+	        scrollPane = new JScrollPane(table);
+	        panel.add(scrollPane);
+	}
     
     @Override
     public void paintComponent(Graphics g) {
