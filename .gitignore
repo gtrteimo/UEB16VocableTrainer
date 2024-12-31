@@ -5,3 +5,4 @@ exports/TFO.lnk
 /bin/
 lernkarteien.properties
 *.script
+/.settings
