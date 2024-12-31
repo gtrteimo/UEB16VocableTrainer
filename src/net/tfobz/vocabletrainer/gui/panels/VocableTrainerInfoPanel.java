@@ -118,31 +118,21 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     }
 
     private void fillTable(DefaultTableModel model) {
-//        // Get selected Lernkartei from comboBox
-//        String selectedSet = (String) comboBox.getSelectedItem();
-//        if (selectedSet != null && !sets.isEmpty()) {
-//            // Find the corresponding Lernkartei object
-//            Lernkartei set = sets.stream()
-//                .filter(lernkartei -> lernkartei.toString().equals(selectedSet))
-//                .findFirst()
-//                .orElse(null);
-//
-//            if (set != null) {
-//                // Fetch cards related to the selected Lernkartei
-//                List<Karte> cards = VokabeltrainerDB.getCardsForSet(set.getNummer());
-//                model.setRowCount(0); // Clear existing table rows
 
-                for (int i = 0; i < 20; i++) {
-                    model.addRow(new Object[]{
-                        "Word A: " + (i+1),
-                        "Word A: " + (i+1),
-                        new Date(),  // Assuming modified date is fetched or generated
-                        new Date(),  // Assuming due date is fetched or generated
-                        ""+(i+1)  // Assuming 'Box' refers to the card's ID or some box property
-                    });
-                }
-//            }
-//        }
+    	Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
+    	
+    	if (l != null && l.getNummer() != -1) {
+    	    List<Karte> cards = VokabeltrainerDB.getKartenFromLernkartei(l.getNummer());
+    	 for (Karte card: cards) {
+    		 model.addRow(new Object[]{
+                   card.getWortEins(),
+                   card.getWortZwei(),
+                   new Date(),  
+                   new Date(), 
+                   card.getFnummer() 
+               });
+    	 }
+    	}
     }
     
     @Override

@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -74,6 +76,7 @@ public class VocableTrainerPanel extends JPanel {
 		panel.setBounds(8, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
 		panel.setBackground(C_powderBlue);
 		panel.addMouseListener(new ImageClick(16, 16, (height-32)/16, (height-32)/16, -1));
+		
 	}
 	public VocableTrainerPanel (VocableTrainerPanel vtp) {
 		super();
@@ -99,6 +102,10 @@ public class VocableTrainerPanel extends JPanel {
 	        }
     	}
     }
+	
+	protected void retrive () {
+		System.out.println("Hello World");
+	}
 	
     @Override
 	public void paintComponent(Graphics g) {

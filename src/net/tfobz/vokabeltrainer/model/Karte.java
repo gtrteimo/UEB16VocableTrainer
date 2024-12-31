@@ -8,13 +8,14 @@ import java.util.Hashtable;
  * die beiden Wörter eingegeben worden sein
  * @author Michael
  */
-public class Karte 
-{
+public class Karte {
   protected int nummer = -1;
   protected String wortEins = null;
   protected String wortZwei = null;
   protected boolean richtung = true;
   protected boolean grossKleinschreibung = false;
+  
+  protected int fnummer = -1;
 
   protected Hashtable<String, String> fehler = null;
   
@@ -22,11 +23,20 @@ public class Karte
   }
 
   public Karte(int nummer, String wortEins, String wortZwei, boolean richtung, boolean grossKleinschreibung) {
+	  	this.nummer = nummer;
+	  	this.setWortEins(wortEins);
+	  	this.setWortZwei(wortZwei);
+	  	this.richtung = richtung;
+	  	this.grossKleinschreibung = grossKleinschreibung;
+  }
+  
+  public Karte(int nummer, String wortEins, String wortZwei, boolean richtung, boolean grossKleinschreibung,  int fnummer) {
   	this.nummer = nummer;
   	this.setWortEins(wortEins);
   	this.setWortZwei(wortZwei);
   	this.richtung = richtung;
   	this.grossKleinschreibung = grossKleinschreibung;
+  	this.fnummer = fnummer;
   }
   
   /**
@@ -121,5 +131,8 @@ public class Karte
 	}
 	public boolean getGrossKleinschreibung() {
 		return grossKleinschreibung;
+	}
+	public int getFnummer() {
+	        return fnummer;
 	}
 }

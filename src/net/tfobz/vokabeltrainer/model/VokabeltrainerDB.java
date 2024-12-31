@@ -1645,39 +1645,39 @@ public class VokabeltrainerDB
 	
 	
 	//ATTENTION ADDED THIS MYSELF --> NOT FROM THE TEMPLATE --> DOSEN'T WORK
-	public static List<Karte> getCardsForSet(int setId) {
-	    List<Karte> cards = new ArrayList<>();
-	    String sql = "SELECT k.knummer, k.kworteins, k.kwortzwei, l.lrichtung, l.lgrosskleinschreibung "
-	               + "FROM karten k "
-	               + "JOIN faecher f ON k.fnummer = f.fnummer "
-	               + "JOIN lernkarteien l ON f.lnummer = l.lnummer "
-	               + "WHERE l.lnummer = ?";
-
-	    try (Connection con = getConnection()) {
-	        try (java.sql.PreparedStatement stmt = con.prepareStatement(sql)) {
-	            stmt.setInt(1, setId);
-
-	            try (ResultSet rs = stmt.executeQuery()) {
-	                while (rs.next()) {
-	                    Karte karte = new Karte(
-	                        rs.getInt("knummer"),
-	                        rs.getString("kworteins"),
-	                        rs.getString("kwortzwei"),
-	                        rs.getBoolean("lrichtung"),
-	                        rs.getBoolean("lgrosskleinschreibung")
-	                    );
-	                    cards.add(karte);
-	                }
-	                if (cards.isEmpty()) {
-	                    System.out.println("No cards found for set ID: " + setId);
-	                }
-	            }
+	public static List<Karte> getKartenFromLernkartei(int nummerLernkartei) {
+	    List<Karte> ret = new ArrayList<>();
+	    Connection con = null;
+	    Statement stmt = null;
+	    ResultSet rs = null;
+	    try {
+	        con = getConnection();
+	        stmt = con.createStatement();
+	        String sql = "SELECT k.knummer, k.kworteins, k.kwortzwei, l.lrichtung, l.lgrosskleinschreibung, f.fnummer " +
+	                     "FROM karten k " +
+	                     "JOIN faecher f ON k.fnummer = f.fnummer " +
+	                     "JOIN lernkarteien l ON f.lnummer = l.lnummer " +
+	                     "WHERE l.lnummer = " + nummerLernkartei + ";";
+	        rs = stmt.executeQuery(sql);
+	        while (rs.next()) {
+	            int nummer = rs.getInt("knummer");
+	            String wortEins = rs.getString("kworteins");
+	            String wortZwei = rs.getString("kwortzwei");
+	            boolean richtung = rs.getBoolean("lrichtung");
+	            boolean grossKleinschreibung = rs.getBoolean("lgrosskleinschreibung");
+	            int fnummer = rs.getInt("fnummer");
+	            Karte k = new Karte(nummer, wortEins, wortZwei, richtung, grossKleinschreibung, fnummer);
+	            ret.add(k);
 	        }
 	    } catch (SQLException e) {
-	        System.err.println("SQL Exception occurred:");
 	        e.printStackTrace();
+	        ret = null;
+	    } finally {
+	        try { rs.close(); } catch (Exception e) { }
+	        try { stmt.close(); } catch (Exception e) { }
+	        try { con.close(); } catch (Exception e) { }
 	    }
-	    return cards;
+	    return ret;
 	}
 
 
