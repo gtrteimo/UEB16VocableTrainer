@@ -126,6 +126,12 @@ public class VocableTrainerPanel extends JPanel {
 	        }
         }
     }
+    
+    public void paintComponentRun (Graphics g) {
+		panel.setSize(getWidth()-32, getHeight()-32);
+		super.paintComponent(g);
+	}
+    
     private class ImageClick implements MouseListener {
 
     	private int x, y, width, height, panelIndex;

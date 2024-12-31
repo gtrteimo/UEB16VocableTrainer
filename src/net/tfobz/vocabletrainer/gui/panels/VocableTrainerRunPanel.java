@@ -49,9 +49,12 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		setBackground(C_platinum);
 		setLayout(null);
 		
+		
 		panel = new VocableTrainerPanel(this);
 		panel.setLocation(16, 16);
 		panel.setBackground(C_powderBlue);
+		
+		panel.setLayout(null);
 		
         cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
         times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[cards.size()];
@@ -130,10 +133,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void paintComponent (Graphics g) {
-		super.paintComponent(g);
+	public void paintComponent (Graphics g) {		
 		
-		panel.setSize(getWidth()-32, getHeight()-32);
+		super.paintComponentRun(g);
 		
 		clock1.setBounds(10, 10, 200, 30);
         clock1.setFont(new Font("Arial", Font.PLAIN, clock1.getHeight()/2));
@@ -150,6 +152,5 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         input.setBounds(10, 130, panel.getWidth(), 20);
         input.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
         
-        
-	}
+    }
 }

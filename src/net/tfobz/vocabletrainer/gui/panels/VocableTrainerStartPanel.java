@@ -194,17 +194,15 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		
 		settings.setParcticeRun(options[4].isSelected());
 		
-		Thread t = new Thread(new StartThread(settings));
 		
 		try {
 			vtf.changePanel(-3);
+			VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
+			vtf.add(run);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-		try {
-			t.join();
-		} catch (InterruptedException e) {}
 	}
 	
 	@Override
@@ -228,7 +226,6 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			boxComboBoxes.removeAllItems();
 		    if (boxes != null) {
 			    for (Fach box : boxes) {
-			    	System.out.println(box.getBeschreibung());
 			    	boxComboBoxes.addItem(box);
 			    }
 		    } else {
@@ -284,6 +281,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		start.setBounds(16, panel.getHeight()/4*3, panel.getWidth()-32, panel.getHeight()/4-16);
 		start.setFont(new Font ("Arial", Font.BOLD, start.getHeight()/2));
 	}
+	
 	private class SpinnerListener implements KeyListener, ChangeListener {
 		
 		 @Override
@@ -333,7 +331,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		
 		@Override
 		public void run() {
-			VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
+			
+			
 		}
 		
 	}
