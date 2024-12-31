@@ -50,7 +50,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		setLayout(null);
 		
 		
-		panel = new VocableTrainerPanel(this);
+		panel = new VocableTrainerPanel();
 		panel.setLocation(16, 16);
 		panel.setBackground(C_powderBlue);
 		
@@ -58,23 +58,22 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		
         cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
         times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[cards.size()];
-        cardNum = 0;
+        cardNum = -1;
 
-		currentCard = cards.get((int)(Math.random()*cards.size()));
-        cards.remove(currentCard);
-        
-		clock1 = new JLabel("Total Time: 0");
+        clock1 = new JLabel("Total Time: 0");
         clock2 = new JLabel("Card Time:  0");
-        originalWord = new JLabel("Original Word");
+        originalWord = new JLabel();
         answer = new JLabel();
         input = new JTextField();
-        
+        stop = new JButton();
+        skip = new JButton();
+        next = new JButton();
         
         timer1 = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time1++;
-				clock1.setText("Card Time:  "+time1);
+				clock1.setText("Total Time: "+time1);
 				if(settings.isTotalTimeLimit()&&time1>=settings.getTotalTimeLimit()) {
 					checkCard();
 					endRun();
@@ -85,7 +84,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time2++;
-				clock2.setText("Total Time: "+time2);
+				clock2.setText("Card Time: "+time2);
 				if(settings.isCardTimeLimit()&&time2>=settings.getCardTimeLimit()) {
 					checkCard();
 					nextCard();
@@ -93,11 +92,18 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			}
 		});
         
+        nextCard();
+        timer1.start();
+        timer2.start();
+        
         panel.add(clock1);
         panel.add(clock2);
         panel.add(originalWord);
         panel.add(answer);
         panel.add(input);
+        panel.add(stop);
+        panel.add(skip);
+        panel.add(next);
         add(panel);
 	}
 	
@@ -111,8 +117,10 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		if(cards.isEmpty()) {
 			endRun();
 		}else {
+			cardNum++;
 			currentCard = cards.get((int)(Math.random()*cards.size()));
 	        cards.remove(currentCard);
+	        originalWord.setText(currentCard.getWortEins());
 		}
 	}
 	
