@@ -65,6 +65,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         originalWord = new JLabel();
         answer = new JLabel();
         input = new JTextField();
+        stop = new JButton();
+        skip = new JButton();
+        next = new JButton();
         
         timer1 = new Timer(1000, new ActionListener() {
 			@Override
@@ -98,6 +101,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         panel.add(originalWord);
         panel.add(answer);
         panel.add(input);
+        panel.add(stop);
+        panel.add(skip);
+        panel.add(next);
         add(panel);
 	}
 	
