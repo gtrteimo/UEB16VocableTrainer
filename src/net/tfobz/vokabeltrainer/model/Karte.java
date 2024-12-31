@@ -135,4 +135,9 @@ public class Karte {
 	public int getFnummer() {
 	        return fnummer;
 	}
+
+	public void setFnummer(int nummer2) {
+		this.fnummer = fnummer;
+	}
+	
 }

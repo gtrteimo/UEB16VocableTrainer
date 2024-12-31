@@ -109,6 +109,7 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 					vtf.changePanel(panelIndex);
 				} catch (Exception e1) {
 					System.err.println("Failed to change to Panel: "+panelIndex);
+					e1.printStackTrace();
 				}
 			}
 		}
