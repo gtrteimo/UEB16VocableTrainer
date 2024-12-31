@@ -97,7 +97,7 @@ public class VocableTrainerRunSettings {
 	}
 	
 	public void setCardLimit(int cardLimit) {
-		if(cardLimit < 1 || cardLimit > VokabeltrainerDB.getKarten(box.getNummer()).size()) {
+		if(cardLimit < 1) {
 			throw new IllegalArgumentException("Card Limit can't be 0 or smaller");
 		}
 		cardLimitState = true;

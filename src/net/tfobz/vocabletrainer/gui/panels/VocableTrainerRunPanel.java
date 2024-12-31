@@ -4,6 +4,8 @@ import net.tfobz.vocabletrainer.data.*;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vokabeltrainer.model.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -16,20 +18,22 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	private VocableTrainerRunSettings settings;
 	
-	
 	private int[] times;
-	private int result;
+	private int[] results;
 	private int cardNum;
 	private ArrayList<Karte> cards;
 	private Karte currentCard;
 	
 	
-	private ClockLabel clock1;
-	private ClockLabel clock2;
+	private JLabel clock1;
+	private JLabel clock2;
+	private Timer timer1;
+	private Timer timer2;
+	private int time1;
+	private int time2;
 	
 	private JLabel originalWord;
 	private JLabel answer;
-
 	private JTextField input;
 	
 	private JButton stop;
@@ -48,29 +52,56 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		panel = new VocableTrainerPanel(this);
 		panel.setLocation(16, 16);
 		panel.setBackground(C_powderBlue);
-
-        times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[VokabeltrainerDB.getKarten(settings.getBox().getNummer()).size()];
-        cardNum = 0;
-        
+		
         cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
-        
-		clock1 = new ClockLabel("Total Time: ", settings.isTotalTimeLimit()?settings.getTotalTimeLimit():0, ()->endRun());
-        clock2 = new ClockLabel("Card Time: ", settings.isCardTimeLimit()?settings.getCardTimeLimit():0,()->nextCard());
-        
-        clock1.start();
-        clock2.start();
-        
+        times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[cards.size()];
+        cardNum = 0;
+
 		currentCard = cards.get((int)(Math.random()*cards.size()));
         cards.remove(currentCard);
         
+		clock1 = new JLabel("Total Time: 0");
+        clock2 = new JLabel("Card Time:  0");
+        originalWord = new JLabel("Original Word");
+        answer = new JLabel();
+        input = new JTextField();
+        
+        
+        timer1 = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				time1++;
+				clock1.setText("Card Time:  "+time1);
+				if(settings.isTotalTimeLimit()&&time1>=settings.getTotalTimeLimit()) {
+					checkCard();
+					endRun();
+				}
+			}
+		});
+        timer2 = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				time2++;
+				clock2.setText("Total Time: "+time2);
+				if(settings.isCardTimeLimit()&&time2>=settings.getCardTimeLimit()) {
+					checkCard();
+					nextCard();
+				}
+			}
+		});
+        
         panel.add(clock1);
         panel.add(clock2);
-        
+        panel.add(originalWord);
+        panel.add(answer);
+        panel.add(input);
         add(panel);
 	}
 	
 	public void endRun() {
+		timer1.stop();
 		System.out.println("Hello World");
+		//TODO stats screen and update erinnerung
 	}
 	
 	public void nextCard() {
@@ -79,13 +110,23 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		}else {
 			currentCard = cards.get((int)(Math.random()*cards.size()));
 	        cards.remove(currentCard);
-	        clock2.start();
 		}
 	}
 	
 	public void checkCard() {
-		times[cardNum] = clock2.getTime();
-		//TODO
+		timer2.stop();
+		times[cardNum]=time2;
+		if(!input.getText().isEmpty()) {
+			boolean correct;
+			if(settings.isCaseSensitiv()) {
+				correct = input.getText().equals(currentCard.getWortZwei());
+			} else {
+				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
+			}
+			results[cardNum]= correct?1:-1;
+			input.setBackground(correct?Color.GREEN:Color.RED);
+		    answer.setText("<html>Correct answer <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
+		}
 	}
 	
 	@Override
@@ -99,47 +140,16 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         
         clock2.setBounds(10, 40, 200, 30);
         clock2.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
-	}
-	
-	private class ClockLabel extends JLabel {
-		
-		private final int pos;
-		private Runnable action;
-		private int time;
-		private int limit = 0;
-		private boolean limited = false;
-		ScheduledExecutorService executor=null;
-		
-		public ClockLabel(String fixtext, int limit, Runnable action) {
-			super(fixtext);
-			pos = fixtext.length();
-			this.limited = limit>0;
-			this.limit = limit;
-			this.action = action;
-		}
-		
-		public void stop() {
-			executor.shutdown();
-			executor = null;
-		}
-		
-		public int getTime() {
-			return time;
-		}
-		
-		public void start() {
-			time=0;
-			if(executor==null) {
-				executor = Executors.newSingleThreadScheduledExecutor();
-				executor.scheduleAtFixedRate(()-> {
-						time++;
-						setText(getText().substring(0, pos)+time);
-						if(limited&&time>=limit) {
-							action.run();
-						}
-					}, 0, 1, TimeUnit.SECONDS);
-			}
-		}
-		
+        
+        originalWord.setBounds(10, 70, panel.getWidth(), 20);
+        originalWord.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        
+        answer.setBounds(10, 100, panel.getWidth(), 20);
+        answer.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        
+        input.setBounds(10, 130, panel.getWidth(), 20);
+        input.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+        
+        
 	}
 }
