@@ -173,35 +173,37 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	
 	private void startRun() {
 		//TODO this is not working properly! i marked the test constructor for the data structure as deprecated because i noticed you were using it (don`t do that). i think the setters works so idk where the problem is except that the total time limit is somehow set
-		VocableTrainerRunSettings settings;
+		//Answer: just comment out the shit -> as written "//Debug and Testing" so not for release
+		VocableTrainerRunSettings settings = null;
 		try {
 			 settings = new VocableTrainerRunSettings((Fach) optionComboBoxesTime[1].getSelectedItem(), (Lernkartei) optionComboBoxesTime[0].getSelectedItem());
 		} catch (Exception e) {
-//			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
 			//Debug and Testing
-			settings = new VocableTrainerRunSettings();
+//			settings = new VocableTrainerRunSettings();
 		}
-		
-		if (options[0].isSelected()) {
-			settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
-		} 
-		if (options[1].isSelected()) {
-			settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
-		}
-		
-		if (options[3].isSelected()) {
-			settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
-		}
-		
-		settings.setParcticeRun(options[4].isSelected());
-		
-		
-		try {
-			vtf.changePanel(-3);
-			VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
-			vtf.add(run);
-		} catch (Exception e1) {
-			e1.printStackTrace();
+		if (settings != null) {
+			if (options[0].isSelected()) {
+				settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
+			} 
+			if (options[1].isSelected()) {
+				settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
+			}
+			
+			if (options[3].isSelected()) {
+				settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
+			}
+			
+			settings.setParcticeRun(options[4].isSelected());
+			
+			
+			try {
+				vtf.changePanel(-3);
+				VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
+				vtf.add(run);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 	}
