@@ -176,8 +176,9 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		//Answer: just comment out the shit -> as written "//Debug and Testing" so not for release
 		VocableTrainerRunSettings settings = null;
 		try {
-			 settings = new VocableTrainerRunSettings((Fach) optionComboBoxesTime[1].getSelectedItem(), (Lernkartei) optionComboBoxesTime[0].getSelectedItem());
+			 settings = new VocableTrainerRunSettings((Fach) boxComboBoxes.getSelectedItem(), (Lernkartei) setComboBox.getSelectedItem());
 		} catch (Exception e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
 			//Debug and Testing
 //			settings = new VocableTrainerRunSettings();
