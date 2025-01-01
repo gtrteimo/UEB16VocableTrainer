@@ -80,7 +80,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				// TODO back to start menu
 				
 			}
 		});
