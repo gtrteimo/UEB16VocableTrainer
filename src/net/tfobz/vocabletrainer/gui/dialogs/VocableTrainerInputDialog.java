@@ -19,21 +19,26 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
 	protected JButton confirmButton;
 	protected JButton cancelButton;
 	
-	public VocableTrainerInputDialog (JFrame parent, String title, String text) {
+	public VocableTrainerInputDialog (JFrame parent, String title, String text, String defaultText) {
 		super(parent, title);
+		
+		setSize(getWidth()/3, getHeight()/3);
+		setLocation((parent.getWidth() - 6)/2 - (parent.getWidth()/3 - 6)/2, (parent.getHeight() - 6)/2 - (parent.getHeight()/3 - 6)/2 );
+        componentPanel.setBounds(0, 0, (parent.getWidth()/3 - 6), (parent.getHeight()/3 - 40));
 		
 		int w = componentPanel.getWidth();
         int h = componentPanel.getHeight();
 		
 		label = new JLabel();
 		label.setText(text);
-		label.setBounds(16,(int)(h *(1/3.0)) , w - 32, h / 6 );
+		label.setBounds(16, 16 , w - 32, h / 6 );
 		label.setFont(new Font ("Arial", Font.PLAIN, label.getHeight()/2));
 		label.setForeground(VocableTrainerPanel.C_nigth);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		input = new JTextField();
-		input.setBounds(16, (int)(h * (2/3.0)), w - 32, h / 6 );
+		input.setText(defaultText);
+		input.setBounds(16, (int)(h * (1/3.0)), w - 32, h / 6 );
 		input.setFont(new Font ("Arial", Font.PLAIN, input.getHeight()/2));
 		input.setForeground(VocableTrainerPanel.C_nigth);
 		input.setBackground(VocableTrainerPanel.C_platinum);
@@ -59,6 +64,13 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> closeDialog());
+        
+        componentPanel.add(label);
+        componentPanel.add(input);
+        componentPanel.add(confirmButton);
+        componentPanel.add(cancelButton);
+        
+        add(componentPanel);
 	}
 	
 	public String getInput() {

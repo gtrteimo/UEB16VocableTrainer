@@ -103,9 +103,7 @@ public class VocableTrainerPanel extends JPanel {
     	}
     }
 	
-	public void retrive () {
-		System.out.println("Hello World");
-	}
+	public void retrive () {}
 	
     @Override
 	public void paintComponent(Graphics g) {

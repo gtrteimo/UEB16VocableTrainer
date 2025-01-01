@@ -55,6 +55,8 @@ public class VocableTrainerYesNoDialog extends VocableTrainerInfoDialog {
         });
 		
 		componentPanel.add(label);
+		componentPanel.add(cancelButton);
+		componentPanel.add(confirmButton);
 		
 		add(componentPanel);
 	}
