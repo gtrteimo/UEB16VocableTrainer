@@ -172,6 +172,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	
 	private void startRun() {
+		//TODO this is not working properly! i marked the test constructor for the data structure as deprecated because i noticed you were using it (don`t do that). i think the setters works so idk where the problem is except that the total time limit is somehow set
 		VocableTrainerRunSettings settings;
 		try {
 			 settings = new VocableTrainerRunSettings((Fach) optionComboBoxesTime[1].getSelectedItem(), (Lernkartei) optionComboBoxesTime[0].getSelectedItem());
@@ -215,6 +216,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		    }
 		    retriveBoxes();
 	    } else {
+	    	//TODO how about if the program was used for the first time. change this message
             JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
@@ -229,6 +231,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			    	boxComboBoxes.addItem(box);
 			    }
 		    } else {
+		    	//TODO how about if it was just created and is still empty. change this message
 	            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
 		    }
 		}
