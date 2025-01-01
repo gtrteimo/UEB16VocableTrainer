@@ -32,6 +32,7 @@ public class VocableTrainerRunSettings {
 	
 	/**
 	 * Testing only
+	 * @deprecated
 	 */
 	public VocableTrainerRunSettings() {
 		box = new Fach(1, "Hello World Test", 0, null);
