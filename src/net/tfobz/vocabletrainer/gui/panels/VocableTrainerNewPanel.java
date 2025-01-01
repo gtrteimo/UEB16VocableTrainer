@@ -4,8 +4,8 @@ import java.awt.*;
 import java.util.List;
 import javax.swing.*;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
-import net.tfobz.vocabletrainer.gui.dialogs.InfoDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.NewSetDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerNewSetDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 @SuppressWarnings("serial")
@@ -98,7 +98,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	
 	
 	private void newSet () {
-		NewSetDialog nameDialog = new NewSetDialog (vtf);
+		VocableTrainerNewSetDialog nameDialog = new VocableTrainerNewSetDialog (vtf);
 		nameDialog.setVisible(true);
 		
         Lernkartei input = nameDialog.getInput();
@@ -112,7 +112,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
                 JOptionPane.showMessageDialog(this, "There was an Error while writing the Set to the Database!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-        	if (NewSetDialog.sqlInjection(input)) {
+        	if (VocableTrainerNewSetDialog.sqlInjection(input)) {
         		System.err.println("HELP, SQL Injection");
         	}
         }
@@ -133,7 +133,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            List<Fach> faecher = VokabeltrainerDB.getFaecher(s.getNummer());
 
 	            if (faecher == null) {
-	                new InfoDialog(vtf, "Error", "The selected set does not exist.").setVisible(true);
+	                new VocableTrainerInfoDialog(vtf, "Error", "The selected set does not exist.").setVisible(true);
 	                return;
 	            }
 
@@ -143,7 +143,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                newFach.setBeschreibung("First Fach");
 	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
 	                if (result != 0) {
-	                    new InfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);
 	                    return;
 	                }
 	                faecher = VokabeltrainerDB.getFaecher(s.getNummer());
@@ -164,17 +164,17 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                    vtf.changePanel(-1);
 	                    break;
 	                case -5:
-	                    new InfoDialog(vtf, "Error", "A card with the same content already exists in this set.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, "Error", "A card with the same content already exists in this set.").setVisible(true);
 	                    break;
 	                default:
-	                    new InfoDialog(vtf, "Error", "An error occurred while adding the card.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, "Error", "An error occurred while adding the card.").setVisible(true);
 	                    break;
 	            }
 	        } else {
-	            new InfoDialog(vtf, "Error", "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
+	            new VocableTrainerInfoDialog(vtf, "Error", "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
 	        }
 	    } else {
-	        new InfoDialog(vtf, "Error", "Please select or create a set first.").setVisible(true);
+	        new VocableTrainerInfoDialog(vtf, "Error", "Please select or create a set first.").setVisible(true);
 	    }
 	}
 

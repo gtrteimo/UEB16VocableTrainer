@@ -7,13 +7,13 @@ import javax.swing.*;
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 @SuppressWarnings("serial")
-public class InfoDialog extends JDialog {
+public class VocableTrainerInfoDialog extends JDialog {
 	
 	protected JPanel componentPanel;
 	
 	private JLabel label;
 	
-	public InfoDialog(JFrame parent, String title, String text) {
+	public VocableTrainerInfoDialog(JFrame parent, String title, String text) {
 		this(parent, title);
 		
 		setSize(getWidth()/3, getHeight()/3);
@@ -30,7 +30,7 @@ public class InfoDialog extends JDialog {
 		
 		add(componentPanel);
 	}
-	public InfoDialog(JFrame parent, String title) {
+	public VocableTrainerInfoDialog(JFrame parent, String title) {
 	    super(parent, title, true);
 	    
 	    setResizable(false);

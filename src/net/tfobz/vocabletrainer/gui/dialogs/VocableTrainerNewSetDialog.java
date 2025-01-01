@@ -16,17 +16,17 @@ import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 
 @SuppressWarnings("serial")
-public class NewSetDialog extends InfoDialog {	
-	private JLabel text;
-    private JTextField inputField;
-    private JLabel dLabel1;
-    private JLabel dLabel2;
-    private JTextField dInputField1;
-    private JTextField dInputField2;
-    private JButton confirmButton;
-    private JButton cancelButton;
+public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {	
+	protected JLabel text;
+	protected JTextField inputField;
+	protected JLabel dLabel1;
+	protected JLabel dLabel2;
+	protected JTextField dInputField1;
+	protected JTextField dInputField2;
+	protected JButton confirmButton;
+	protected JButton cancelButton;
 
-    public NewSetDialog(JFrame parent) {
+    public VocableTrainerNewSetDialog(JFrame parent) {
         super(parent, "New Set");
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
