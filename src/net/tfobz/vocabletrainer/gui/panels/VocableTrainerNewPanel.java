@@ -3,9 +3,13 @@ package net.tfobz.vocabletrainer.gui.panels;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerNewSetDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 @SuppressWarnings("serial")
@@ -14,7 +18,11 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	List<Lernkartei> sets;
 	
 	private JButton newSet;
+	private JButton impo;
+	private JButton expo;
     private JComboBox<Lernkartei> comboBox;
+    private JButton renameButton;
+    private JButton deleteButton;
 	private JButton save;
 	private JLabel label1, label2;
 	private JTextField text1, text2;
@@ -34,11 +42,65 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		newSet.setHorizontalAlignment(SwingConstants.LEFT);
 		newSet.setMnemonic('N');
 		
+		impo = new JButton("Import");
+		impo.setForeground(C_nigth);
+		impo.setBackground(C_powderBlue);
+		impo.setBorderPainted(false);
+		impo.setFocusPainted(false);
+		impo.setHorizontalAlignment(SwingConstants.CENTER);
+		impo.setMnemonic('I');
+		
+		expo = new JButton("Export");
+		expo.setForeground(C_nigth);
+		expo.setBackground(C_powderBlue);
+		expo.setBorderPainted(false);
+		expo.setFocusPainted(false);
+		expo.setHorizontalAlignment(SwingConstants.CENTER);
+		expo.setMnemonic('E');
+		
 		comboBox = new JComboBox<>();
 		comboBox.setForeground(C_nigth);
 		comboBox.setBackground(C_platinum);
 		comboBox.setBorder(null);
 		
+		renameButton = new JButton("Rename");
+        renameButton.setFocusPainted(false);
+        renameButton.setBorderPainted(false);
+        renameButton.setForeground(C_platinum);
+        renameButton.setBackground(C_slateGray);
+        renameButton.setMnemonic('R');
+        deleteButton = new JButton("Delete");
+        deleteButton.setFocusPainted(false);
+        deleteButton.setBorderPainted(false);
+        deleteButton.setForeground(C_platinum);
+        deleteButton.setBackground(C_slateGray);
+        deleteButton.setMnemonic('D');
+        renameButton.addActionListener(e -> {
+            Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+            if (s != null) {
+                VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, "Rename set","Enter new name for the set:", s.getBeschreibung());
+                d.setVisible(true);
+                if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
+                    s.setBeschreibung(d.getInput());
+                    VokabeltrainerDB.aendernLernkartei(s);
+                    retrive();
+                }
+                d.closeDialog();
+            }
+        });
+        deleteButton.addActionListener(e -> {
+	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+	        if (s != null) {
+	            VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
+	            d.setVisible(true);
+	            if (d.getAnswer()) {
+	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
+	                retrive();
+	                repaint();
+	            }
+	            d.closeDialog();
+	        }
+        });
 		
 		label1 = new JLabel("Hello");
 		label1.setForeground(C_nigth);
@@ -73,6 +135,10 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		comboBox.addActionListener(e -> retriveLabels());
 		
 		newSet.addActionListener(e -> newSet());
+		
+		impo.addActionListener(e -> imporT());
+		expo.addActionListener(e -> export());
+		
 		save.addActionListener(e -> newCard());
 		
 		if ((Lernkartei)comboBox.getSelectedItem() == null) {
@@ -84,7 +150,11 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		}
 		
 		panel.add(newSet);
+		panel.add(impo);
+		panel.add(expo);
 		panel.add(comboBox);
+		panel.add(renameButton);
+		panel.add(deleteButton);
 		panel.add(label1);
 		panel.add(label2);
 		panel.add(text1);
@@ -120,6 +190,13 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         retrive();
 	}
 	
+	private void imporT () {
+		
+	}
+	
+	private void export () {
+		
+	}
 	
 	private void newCard() {
 	    Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
@@ -214,11 +291,23 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         int h = panel.getHeight();
         
         
-		newSet.setBounds(w/16+32, h / 500 + 8, w / 3 , h / 16 + 16);
+		newSet.setBounds(w/16+32, h / 500 + 8, w / 5 , h / 16 + 16);
 		newSet.setFont(new Font ("Arial", Font.BOLD, (int)(newSet.getHeight()/1.5)+1));
 		
-		comboBox.setBounds(16, h / 8 + 16, w - 32, h / 8);
+		impo.setBounds(w - 32 - 2*w / 5, h / 500 + 8, w / 5 , h / 16 + 16);
+		impo.setFont(new Font ("Arial", Font.BOLD, (int)(impo.getHeight()/1.5)+1));
+		
+		expo.setBounds(w - 16 - w / 5, h / 500 + 8, w / 5 , h / 16 + 16);
+		expo.setFont(new Font ("Arial", Font.BOLD, (int)(expo.getHeight()/1.5)+1));
+		
+		comboBox.setBounds(16, h / 8 + 16, w*7/10, h / 8);
 	    comboBox.setFont(new Font("Arial", Font.PLAIN, comboBox.getHeight() / 2 + 1));
+	    	    
+        renameButton.setBounds(w*7/10 + 48, h / 8 + 16, w - w*7/10 - 64, h / 16 - 2);
+        renameButton.setFont(new Font("Arial", Font.PLAIN, renameButton.getHeight() / 2 + 1));
+        
+        deleteButton.setBounds(w*7/10 + 48, h / 8 + 16 + h / 16 + 2, w - w*7/10 - 64, h / 16 - 2);
+        deleteButton.setFont(new Font("Arial", Font.PLAIN, deleteButton.getHeight() / 2 + 1));
 	    
 	    label1.setBounds(16, (int)(h/8.0*3) + 16, w/2 -32, h / 8);
 	    label1.setFont(new Font("Arial", Font.PLAIN, label1.getHeight() / 2 + 1));

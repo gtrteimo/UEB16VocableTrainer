@@ -75,15 +75,33 @@ public class VokabeltrainerDB
 			+ "  VALUES('Fach 1',1,'" + getActualDate() + "', 2);";
 	protected static final String INSERT_KARTE111 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
 			+ "  VALUES('Haus','house',1);";
+	protected static final String INSERT_KARTE112 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Dach','roof',1);";
+	protected static final String INSERT_KARTE113 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Fenster','window',1);";
+	protected static final String INSERT_KARTE114 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Tür','door',1);";
+	protected static final String INSERT_KARTE115 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Hund','dog',1);";
+	protected static final String INSERT_KARTE116 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Katze','cat',1);";
+	protected static final String INSERT_KARTE117 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Fisch','fish',1);";
+	protected static final String INSERT_KARTE118 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Vogel','bird',1);";
+	protected static final String INSERT_KARTE121 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Haus','casa',2);";
+	protected static final String INSERT_KARTE122 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
+			+ "  VALUES('Hund','cane',2);";
 
-//	static {
-//		// Lï¿½scht Tabellen
-//		loeschenTabellen();
-//		// Erstellen der Tabellen falls nicht vorhanden
-//		erstellenTabellen();
-//		// Hinzufï¿½gen von Testdaten
-//		hinzufuegenTestdaten();
-//	}
+	static {
+		// Lï¿½scht Tabellen
+		loeschenTabellen();
+		// Erstellen der Tabellen falls nicht vorhanden
+		erstellenTabellen();
+		// Hinzufï¿½gen von Testdaten
+		hinzufuegenTestdaten();
+	}
 
 	/**
 	 * Die Methode zeigt, wie die Klasse VokabeltrainerDB verwendet werden kann, um auf die
@@ -164,6 +182,15 @@ public class VokabeltrainerDB
 			stmt.executeUpdate(INSERT_FACH11);
 			stmt.executeUpdate(INSERT_FACH21);
 			stmt.executeUpdate(INSERT_KARTE111);
+			stmt.executeUpdate(INSERT_KARTE112);
+			stmt.executeUpdate(INSERT_KARTE113);
+			stmt.executeUpdate(INSERT_KARTE114);
+			stmt.executeUpdate(INSERT_KARTE115);
+			stmt.executeUpdate(INSERT_KARTE116);
+			stmt.executeUpdate(INSERT_KARTE117);
+			stmt.executeUpdate(INSERT_KARTE118);
+			stmt.executeUpdate(INSERT_KARTE121);
+			stmt.executeUpdate(INSERT_KARTE122);
 			con.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import javax.swing.table.TableColumn;
 
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -32,68 +33,114 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     DefaultTableModel model;
     DefaultTableCellRenderer dynamicRenderer;
 
-	public VocableTrainerInfoPanel(VocableTrainerFrame vtf) {
-	    super(vtf);
-	    barPane.setTitle("Info");
-	    panel.setLayout(null);
-	    topic = new JLabel("Topic:");
-	    topic.setForeground(C_nigth);
-	    sets = VokabeltrainerDB.getLernkarteien();
-	    comboBox = new JComboBox<>(sets.toArray(new Lernkartei[0]));
-	    comboBox.setForeground(C_nigth);
-	    comboBox.setBackground(C_platinum);
-	    comboBox.addActionListener(e -> retriveTabel());
-	    renameButton = new JButton("Rename");
-	    renameButton.setFocusPainted(false);
-	    renameButton.setBorderPainted(false);
-	    renameButton.setForeground(C_platinum);
-	    renameButton.setBackground(C_slateGray);
-	    deleteButton = new JButton("Delete");
-	    deleteButton.setFocusPainted(false);
-	    deleteButton.setBorderPainted(false);
-	    deleteButton.setForeground(C_platinum);
-	    deleteButton.setBackground(C_slateGray);
-	    renameButton.addActionListener(e -> {
-	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
-	        if (s != null) {
-	            String n = JOptionPane.showInputDialog(null, "Enter new name for the set:", s.getBeschreibung());
-	            if (n != null && !n.trim().isEmpty()) {
-	                s.setBeschreibung(n);
-	                VokabeltrainerDB.aendernLernkartei(s);
-	                retrive();
-	            }
-	        }
-	    });
-	    deleteButton.addActionListener(e -> {
-	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
-	        if (s != null) {
-	        	VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
-//	            int c = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this set?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-//	            if (c == JOptionPane.YES_OPTION) {
-	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
-	                retrive();
-//	            }
-	        }
-	    });
-	    panel.add(topic);
-	    panel.add(comboBox);
-	    panel.add(renameButton);
-	    panel.add(deleteButton);
-	    dynamicRenderer = new DefaultTableCellRenderer() {
-	        @Override
-	        public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean hf, int r, int c) {
-	            Component comp = super.getTableCellRendererComponent(t, v, sel, hf, r, c);
-	            comp.setFont(new Font("Arial", Font.PLAIN, (scrollPane == null ? 30 : (scrollPane.getHeight() / 16) / 2 + 2)));
-	            comp.setBackground(C_platinum);
-	            setHorizontalAlignment(SwingConstants.CENTER);
-	            setVerticalAlignment(SwingConstants.CENTER);
-	            return comp;
-	        }
-	    };
-	    this.add(barPane);
-	    this.add(panel);
-	}
-
+    public VocableTrainerInfoPanel(VocableTrainerFrame vtf) {
+        super(vtf);
+        barPane.setTitle("Info");
+        panel.setLayout(null);
+        topic = new JLabel("Topic:");
+        topic.setForeground(C_nigth);
+        sets = VokabeltrainerDB.getLernkarteien();
+        comboBox = new JComboBox<>(sets.toArray(new Lernkartei[0]));
+        comboBox.setForeground(C_nigth);
+        comboBox.setBackground(C_platinum);
+        comboBox.addActionListener(e -> retriveTabel());
+        renameButton = new JButton("Rename");
+        renameButton.setFocusPainted(false);
+        renameButton.setBorderPainted(false);
+        renameButton.setForeground(C_platinum);
+        renameButton.setBackground(C_slateGray);
+        renameButton.setMnemonic('R');
+        deleteButton = new JButton("Delete");
+        deleteButton.setFocusPainted(false);
+        deleteButton.setBorderPainted(false);
+        deleteButton.setForeground(C_platinum);
+        deleteButton.setBackground(C_slateGray);
+        deleteButton.setMnemonic('D');
+        renameButton.addActionListener(e -> {
+            boolean cardSelected = false;
+            int selectedRow = -1;
+            for (int i = 0; i < table.getRowCount(); i++) {
+                Boolean val = (Boolean) table.getValueAt(i, 0);
+                if (val != null && val) {
+                    cardSelected = true;
+                    selectedRow = i;
+                    break;
+                }
+            }
+            if (cardSelected) {
+                table.changeSelection(selectedRow, 1, false, false);
+                table.editCellAt(selectedRow, 1);
+                Component editorComp = table.getEditorComponent();
+                if (editorComp instanceof JTextField) {
+                    ((JTextField) editorComp).selectAll();
+                    editorComp.requestFocusInWindow();
+                }
+            } else {
+                Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+                if (s != null) {
+                    VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, "Rename set","Enter new name for the set:", s.getBeschreibung());
+                    d.setVisible(true);
+                    if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
+                        s.setBeschreibung(d.getInput());
+                        VokabeltrainerDB.aendernLernkartei(s);
+                        retrive();
+                    }
+                    d.closeDialog();
+                }
+            }
+        });
+        deleteButton.addActionListener(e -> {
+        	 boolean cardSelected = false;
+        	    for (int i = 0; i < table.getRowCount(); i++) {
+        	        Boolean val = (Boolean) table.getValueAt(i, 0);
+        	        if (val != null && val) {
+        	            cardSelected = true;
+        	            break;
+        	        }
+        	    }
+        	    if (cardSelected) {
+        	        for (int i = table.getRowCount() - 1; i >= 0; i--) {
+        	            Boolean val = (Boolean) table.getValueAt(i, 0);
+        	            if (val != null && val) {
+        	                Integer fnummer = (Integer) table.getValueAt(i, 5);
+        	                VokabeltrainerDB.loeschenKarte(fnummer);
+        	                ((DefaultTableModel) table.getModel()).removeRow(i);
+        	            }
+        	        }
+        	        repaint();
+        	    } else {
+        	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+        	        if (s != null) {
+        	            VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
+        	            d.setVisible(true);
+        	            if (d.getAnswer()) {
+        	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
+        	                retrive();
+        	                repaint();
+        	            }
+        	            d.closeDialog();
+        	        }
+        	    }
+        });
+        panel.add(topic);
+        panel.add(comboBox);
+        panel.add(renameButton);
+        panel.add(deleteButton);
+        dynamicRenderer = new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean hf, int r, int c) {
+                Component comp = super.getTableCellRendererComponent(t, v, sel, hf, r, c);
+                comp.setFont(new Font("Arial", Font.PLAIN, (scrollPane == null ? 30 : (scrollPane.getHeight() / 16) / 2 + 2)));
+                comp.setBackground(C_platinum);
+                setHorizontalAlignment(SwingConstants.CENTER);
+                setVerticalAlignment(SwingConstants.CENTER);
+                return comp;
+            }
+        };
+        this.add(barPane);
+        this.add(panel);
+    }
+    
     private void fillTable(DefaultTableModel model) {
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l != null && l.getNummer() != -1) {
@@ -148,6 +195,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         };
         fillTable(model);
         table = new JTable(model);
+        table.setBorder(null);
         table.getTableHeader().setReorderingAllowed(false);
         JCheckBox editorBox = new JCheckBox();
         editorBox.setBackground(C_slateGray);
@@ -187,6 +235,17 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         for (int col = 1; col < table.getColumnCount(); col++) {
             table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
         }
+        DefaultCellEditor textEditor = new DefaultCellEditor(new JTextField()) {
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                JTextField field = (JTextField) super.getTableCellEditorComponent(table, value, isSelected, row, column);
+                SwingUtilities.invokeLater(field::selectAll);
+                return field;
+            }
+        };
+        textEditor.setClickCountToStart(1);
+        table.getColumnModel().getColumn(1).setCellEditor(textEditor);
+        table.getColumnModel().getColumn(2).setCellEditor(textEditor);
         scrollPane = new JScrollPane(table);
         panel.add(scrollPane);
         table.getModel().addTableModelListener(e -> {
@@ -202,25 +261,41 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 h.setSelected(all);
                 if (all || none) table.getTableHeader().repaint();
             }
+            if (e.getColumn() == 1 || e.getColumn() == 2) {
+                int row = e.getFirstRow();
+                Integer fnummer = (Integer) table.getValueAt(row, 5);
+                Karte card = VokabeltrainerDB.getKarte(fnummer);
+                if (card != null) {
+                    card.setWortEins((String) table.getValueAt(row, 1));
+                    card.setWortZwei((String) table.getValueAt(row, 2));
+                    VokabeltrainerDB.aendernKarte(card);
+                }
+            }
         });
     }
+
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        topic.setBounds(panel.getWidth() / 12, panel.getHeight() / 50, panel.getWidth() / 4, panel.getHeight() / 12);
+        
+        int w = panel.getWidth();
+        int h = panel.getHeight();
+        
+        topic.setBounds(w / 12, h / 50, w / 4, h / 12);
         topic.setFont(new Font("Arial", Font.BOLD, topic.getHeight() / 2 + 1));
-        comboBox.setBounds((int)(panel.getWidth() / (24 / 5.0)), panel.getHeight() / 50, (int)(panel.getWidth() / (48 / 31.0)), panel.getHeight() / 12);
+        
+        comboBox.setBounds((int)(w / (24 / 5.0)), h / 50, (int)(w / (48 / 31.0)), h / 12);
         comboBox.setFont(new Font("Arial", Font.PLAIN, comboBox.getHeight() / 2 + 1));
-        renameButton.setBounds((int)(panel.getWidth() - 8 - (panel.getWidth() / (4 / 3.0) / 6)), panel.getHeight() / 50,
-            (int)(panel.getWidth() / (4 / 3.0) / 6), panel.getHeight() / 24 - 1);
+        renameButton.setBounds((int)(w - 8 - (w / (4 / 3.0) / 6)), h / 50,
+            (int)(w / (4 / 3.0) / 6), h / 24 - 1);
         renameButton.setFont(new Font("Arial", Font.PLAIN, renameButton.getHeight() / 2 + 1));
-        deleteButton.setBounds((int)(panel.getWidth() - 8 - (panel.getWidth() / (4 / 3.0) / 6)), 
-            panel.getHeight() / 50 + panel.getHeight() / 24 + 2,
-            (int)(panel.getWidth() / (4 / 3.0) / 6), panel.getHeight() / 24 - 1);
+        deleteButton.setBounds((int)(w - 8 - (w / (4 / 3.0) / 6)), 
+            h / 50 + h / 24 + 2,
+            (int)(w / (4 / 3.0) / 6), h / 24 - 1);
         deleteButton.setFont(new Font("Arial", Font.PLAIN, deleteButton.getHeight() / 2 + 1));
         if (scrollPane != null) {
-        	scrollPane.setBounds(16, panel.getHeight() / 8, panel.getWidth() - 32, panel.getHeight() - 16 - panel.getHeight() / 8);
+        	scrollPane.setBounds(16, h / 8, w - 32, h - 16 - h / 8);
         	int rowHeight = scrollPane.getHeight() / 16;
             table.setRowHeight(rowHeight);
 
