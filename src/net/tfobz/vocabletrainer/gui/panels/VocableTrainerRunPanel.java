@@ -7,10 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -27,8 +23,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	private JLabel clock1;
 	private JLabel clock2;
-	private Timer timer1;
-	private Timer timer2;
+	private Timer timer;
 	private int time1;
 	private int time2;
 	
@@ -77,16 +72,15 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         input.setHorizontalAlignment(SwingConstants.CENTER);
         
         stop.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(timer.isRunning())
+					timer.stop();
 				// TODO back to start menu
-				
 			}
 		});
         
         skip.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				input.setText("");
@@ -96,10 +90,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		});
         
         next.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(timer2.isRunning()) {
+				if(timer.isRunning()) {
 					checkCard();
 				} else {
 					nextCard();
@@ -108,7 +101,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			}
 		});
         
-        timer1 = new Timer(1000, new ActionListener() {
+        timer = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time1++;
@@ -117,11 +110,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 					checkCard();
 					endRun();
 				}
-			}
-		});
-        timer2 = new Timer(1000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
 				time2++;
 				clock2.setText("Card Time: "+time2);
 				if(settings.isCardTimeLimit()&&time2>=settings.getCardTimeLimit()) {
@@ -131,8 +119,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		});
         
         nextCard();
-        timer1.start();
-        timer2.start();
+        timer.start();
         
         panel.add(clock1);
         panel.add(clock2);
@@ -146,7 +133,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void endRun() {
-		timer1.stop();
+		if(timer.isRunning())
+			timer.stop();
 		System.out.println("Hello World");
 		//TODO stats screen and update erinnerung
 	}
@@ -165,12 +153,12 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			input.setText("");
 			answer.setText("");
 	        time2=0;
-	        timer2.start();
+	        timer.start();
 		}
 	}
 	
 	public void checkCard() {
-		timer2.stop();
+		timer.stop();
 		times[cardNum]=time2;
 		if(!input.getText().isEmpty()) {
 			boolean correct;
