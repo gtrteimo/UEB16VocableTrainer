@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerIO;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
@@ -136,8 +137,8 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		newSet.addActionListener(e -> newSet());
 		
-		impo.addActionListener(e -> imporT());
-		expo.addActionListener(e -> export());
+		impo.addActionListener(e -> VocableTrainerIO.Import(vtf, (Lernkartei)comboBox.getSelectedItem()));
+		expo.addActionListener(e -> VocableTrainerIO.Export());
 		
 		save.addActionListener(e -> newCard());
 		
@@ -188,14 +189,6 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         }
         nameDialog.closeDialog();
         retrive();
-	}
-	
-	private void imporT () {
-		
-	}
-	
-	private void export () {
-		
 	}
 	
 	private void newCard() {

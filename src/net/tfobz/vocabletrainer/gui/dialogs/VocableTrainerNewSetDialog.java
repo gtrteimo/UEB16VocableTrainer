@@ -54,7 +54,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         inputField.setForeground(VocableTrainerPanel.C_nigth);
         inputField.setBorder(null);
         
-        inputField.setText("', '', '', true, false); DROP SCHEMA PUBLIC CASCADE; --");
+        inputField.setText("Example Name");
+        //"', '', '', true, false); DROP SCHEMA PUBLIC CASCADE; --"
 //SQL injection potential: 
         
         dLabel1 = new JLabel("Description word 1");         	
@@ -83,7 +84,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dLabel1.setLabelFor(dInputField1);
 
         
-        dInputField1.setText("Word 1");
+        dInputField1.setText("Example language 1");
         
         dInputField2 = new JTextField();
         dInputField2.setBounds(w/2 + 16, 16 + h/2, w/2 - 32, h/8);
@@ -94,7 +95,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dInputField2.setHorizontalAlignment(SwingConstants.RIGHT);
         dLabel2.setLabelFor(dInputField2);
 
-        dInputField2.setText("Word 2");
+        dInputField2.setText("Example language 2");
         
         confirmButton = new JButton("Confirm");
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );

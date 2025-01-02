@@ -3,6 +3,7 @@ package net.tfobz.vocabletrainer.gui.panels;
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings;
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings.TimeUnit;
 import net.tfobz.vocabletrainer.gui.*;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 import java.awt.*;
@@ -178,8 +179,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		try {
 			 settings = new VocableTrainerRunSettings((Fach) boxComboBoxes.getSelectedItem(), (Lernkartei) setComboBox.getSelectedItem());
 		} catch (Exception e) {
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
+			new VocableTrainerInfoDialog(vtf, "Error", "Please selecet a Set and Box").setVisible(true);;
+//			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
 			//Debug and Testing
 //			settings = new VocableTrainerRunSettings();
 		}
@@ -220,6 +221,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		    retriveBoxes();
 	    } else {
 	    	//TODO how about if the program was used for the first time. change this message
+	    	//No
             JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
@@ -235,6 +237,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			    }
 		    } else {
 		    	//TODO how about if it was just created and is still empty. change this message
+		    	//No
 	            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
 		    }
 		}

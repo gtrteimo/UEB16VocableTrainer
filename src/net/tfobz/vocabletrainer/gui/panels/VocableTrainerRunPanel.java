@@ -63,12 +63,35 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 
         clock1 = new JLabel("Total Time: 0");
         clock2 = new JLabel("Card Time:  0");
+        
         originalWord = new JLabel();
+        originalWord.setForeground(C_nigth);
         answer = new JLabel();
+        answer.setForeground(C_nigth);
+        
         input = new JTextField();
+        input.setForeground(C_nigth);
+        input.setBackground(C_platinum);
+        input.setBorder(null);
+        
         stop = new JButton("Stop");
+        stop.setForeground(C_nigth);
+        stop.setBackground(C_platinum);
+        stop.setFocusPainted(false);
+        stop.setBorderPainted(false);
+        stop.setMnemonic('S');
         skip = new JButton("Skip");
+        skip.setForeground(C_nigth);
+        skip.setBackground(C_platinum);
+        skip.setFocusPainted(false);
+        skip.setBorderPainted(false);
+        skip.setMnemonic('K');
         next = new JButton("Check");
+        next.setForeground(C_nigth);
+        next.setBackground(C_platinum);
+        next.setFocusPainted(false);
+        next.setBorderPainted(false);
+        next.setMnemonic('C');
         
         originalWord.setVerticalAlignment(SwingConstants.TOP);
         originalWord.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,8 +103,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO back to start menu
-				
+				vtf.changePanel(1);
+				vtf.remove(VocableTrainerRunPanel.this);
 			}
 		});
         
@@ -161,6 +184,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        originalWord.setText(currentCard.getWortEins());
 	        skip.setVisible(true);
 			next.setText("Check");
+			next.setMnemonic('C');
 			input.setBackground(Color.WHITE);//TODO correct Color
 			input.setText("");
 			answer.setText("");
@@ -185,6 +209,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
 		next.setText("Next");
+		next.setMnemonic('X');
 	}
 	
 	@Override

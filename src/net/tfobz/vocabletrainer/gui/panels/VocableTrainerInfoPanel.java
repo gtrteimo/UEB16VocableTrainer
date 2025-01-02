@@ -102,8 +102,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         	        for (int i = table.getRowCount() - 1; i >= 0; i--) {
         	            Boolean val = (Boolean) table.getValueAt(i, 0);
         	            if (val != null && val) {
-        	                Integer fnummer = (Integer) table.getValueAt(i, 5);
-        	                VokabeltrainerDB.loeschenKarte(fnummer);
+        	                Integer knummer = (Integer) table.getValueAt(i, 6);
+        	                VokabeltrainerDB.loeschenKarte(knummer);
         	                ((DefaultTableModel) table.getModel()).removeRow(i);
         	            }
         	        }
@@ -155,7 +155,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     card.getWortZwei(),
                     new Date(),
                     new Date(),
-                    card.getFnummer()
+                    card.getFnummer(),
+                    card.getNummer()
                 });
             }
         }
@@ -177,7 +178,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         if (scrollPane != null) panel.remove(scrollPane);
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l == null) return;
-        model = new DefaultTableModel(new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box"}, 0) {
+        model = new DefaultTableModel(new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box", "knummer"}, 0) {
             @Override
             public boolean isCellEditable(int r, int c) {
                 return c <= 2;
@@ -188,7 +189,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     case 0: return Boolean.class;
                     case 3:
                     case 4: return Date.class;
-                    case 5: return Integer.class;
+                    case 5:
+                    case 6: return Integer.class;
                     default: return String.class;
                 }
             }
@@ -201,15 +203,22 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         editorBox.setBackground(C_slateGray);
         editorBox.setFocusPainted(false);
         editorBox.setBorderPainted(false);
+        editorBox.setOpaque(true);
         editorBox.setForeground(C_nigth);
         table.setDefaultEditor(Boolean.class, new DefaultCellEditor(editorBox));
         table.setDefaultRenderer(Boolean.class, (t, v, sel, hf, r, c) -> {
             JCheckBox cb = new JCheckBox();
             cb.setSelected(v != null && (Boolean) v);
-            cb.setBackground(C_platinum);
             cb.setFocusPainted(false);
             cb.setBorderPainted(false);
-            cb.setForeground(C_nigth);
+            cb.setOpaque(true);
+            if (sel) {
+                cb.setBackground(t.getSelectionBackground());
+                cb.setForeground(t.getSelectionForeground());
+            } else {
+                cb.setBackground(C_platinum);
+                cb.setForeground(C_nigth);
+            }
             cb.setHorizontalAlignment(SwingConstants.CENTER);
             cb.setVerticalAlignment(SwingConstants.CENTER);
             cb.setFont(new Font("Arial", Font.PLAIN, (scrollPane == null ? 30 : (scrollPane.getHeight() / 16) / 2 + 2)));
@@ -232,7 +241,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             lab.setOpaque(true);
             return lab;
         });
-        for (int col = 1; col < table.getColumnCount(); col++) {
+        for (int col = 1; col < table.getColumnCount() - 1; col++) {
             table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
         }
         DefaultCellEditor textEditor = new DefaultCellEditor(new JTextField()) {
@@ -263,8 +272,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             }
             if (e.getColumn() == 1 || e.getColumn() == 2) {
                 int row = e.getFirstRow();
-                Integer fnummer = (Integer) table.getValueAt(row, 5);
-                Karte card = VokabeltrainerDB.getKarte(fnummer);
+                Integer knummer = (Integer) table.getValueAt(row, 6);
+                Karte card = VokabeltrainerDB.getKarte(knummer);
                 if (card != null) {
                     card.setWortEins((String) table.getValueAt(row, 1));
                     card.setWortZwei((String) table.getValueAt(row, 2));
@@ -272,6 +281,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 }
             }
         });
+        table.getColumnModel().getColumn(6).setMinWidth(0);
+        table.getColumnModel().getColumn(6).setMaxWidth(0);
+        table.getColumnModel().getColumn(6).setWidth(0);
     }
 
 
