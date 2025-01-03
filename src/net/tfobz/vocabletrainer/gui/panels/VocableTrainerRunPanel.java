@@ -169,7 +169,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
-		if(cardNum>=times.length) {
+		if(cardNum>=times.length-1) {
 			endRun();
 		}else {
 			cardNum++;
@@ -189,7 +189,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	public void checkCard() {
 		timer.stop();
-		times[cardNum-1]=time2;
+		times[cardNum]=time2;
 		if(!input.getText().isEmpty()) {
 			boolean correct;
 			if(settings.isCaseSensitiv()) {
