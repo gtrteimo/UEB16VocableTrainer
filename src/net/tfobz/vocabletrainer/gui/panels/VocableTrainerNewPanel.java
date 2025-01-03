@@ -36,24 +36,24 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		barPane.setTitle("New");
 		
 		newSet = new JButton("New Set");
-		newSet.setForeground(C_nigth);
-		newSet.setBackground(C_powderBlue);
+		newSet.setForeground(C_platinum);
+		newSet.setBackground(C_slateGray);
 		newSet.setBorderPainted(false);
 		newSet.setFocusPainted(false);
-		newSet.setHorizontalAlignment(SwingConstants.LEFT);
+		newSet.setHorizontalAlignment(SwingConstants.CENTER);
 		newSet.setMnemonic('N');
 		
 		impo = new JButton("Import");
-		impo.setForeground(C_nigth);
-		impo.setBackground(C_powderBlue);
+		impo.setForeground(C_platinum);
+		impo.setBackground(C_slateGray);
 		impo.setBorderPainted(false);
 		impo.setFocusPainted(false);
 		impo.setHorizontalAlignment(SwingConstants.CENTER);
 		impo.setMnemonic('I');
 		
 		expo = new JButton("Export");
-		expo.setForeground(C_nigth);
-		expo.setBackground(C_powderBlue);
+		expo.setForeground(C_platinum);
+		expo.setBackground(C_slateGray);
 		expo.setBorderPainted(false);
 		expo.setFocusPainted(false);
 		expo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -105,28 +105,28 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		label1 = new JLabel("Hello");
 		label1.setForeground(C_nigth);
-		label1.setHorizontalAlignment(SwingConstants.LEFT);
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		
 		label2 = new JLabel("World!");
 		label2.setForeground(C_nigth);
-		label2.setHorizontalAlignment(SwingConstants.RIGHT);
+		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text1 = new JTextField();
 		text1.setForeground(C_nigth);
 		text1.setBackground(C_platinum);
 		text1.setBorder(null);
-		text1.setHorizontalAlignment(SwingConstants.LEFT);
+		text1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text2 = new JTextField();
 		text2.setForeground(C_nigth);
 		text2.setBackground(C_platinum);
 		text2.setBorder(null);
-		text2.setHorizontalAlignment(SwingConstants.RIGHT);
+		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		save = new JButton("Save");
-		save.setForeground(C_nigth);
-		save.setBackground(C_platinum);
+		save.setForeground(C_platinum);
+		save.setBackground(C_slateGray);
 		save.setFocusPainted(false);
 		save.setBorderPainted(false);
 		save.setMnemonic('S');

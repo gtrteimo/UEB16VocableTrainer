@@ -117,8 +117,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionComboBoxesTime[1].setSelectedItem(TimeUnit.Minutes);
 		
 		start = new JButton("Start");
-		start.setForeground(C_nigth);
-		start.setBackground(C_platinum);
+		start.setForeground(C_platinum);
+		start.setBackground(C_slateGray);
 		start.setFocusPainted(false);
 		start.setBorderPainted(false);
 		start.setMnemonic('S');
