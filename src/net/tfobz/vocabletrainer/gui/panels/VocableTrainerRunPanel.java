@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -34,6 +36,10 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	private JButton stop;
 	private JButton skip;
 	private JButton next;
+	
+	private boolean running=true;
+	private ArrayList<JLabel> stat;
+	private ArrayList<JLabel> value;
 
 	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
@@ -110,7 +116,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			public void actionPerformed(ActionEvent e) {
 				input.setText("");
 				checkCard();
-				nextCard();
 			}
 		});
         
@@ -160,12 +165,12 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	public void endRun() {
 		if(timer.isRunning())
 			timer.stop();
-		System.out.println("Hello World");
-		//TODO stats screen and update erinnerung
+		loadStats();
+		//TODO update erinnerung
 	}
 	
 	public void nextCard() {
-		if(cards.isEmpty()) {
+		if(cardNum<times.length) {
 			endRun();
 		}else {
 			cardNum++;
@@ -202,6 +207,59 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		next.setMnemonic('X');
 	}
 	
+	public void loadStats() {
+		running = false;
+		panel.removeAll();
+		stat = new ArrayList<JLabel>();
+		value = new ArrayList<JLabel>();
+		
+		int minTime=0, maxTime=0;
+		double avgTime=0;
+		int correctCards=0, wrongCards=0, skippedCards=0;
+		
+		for (int i = 0; i < times.length; i++) {
+			minTime = times[i]<minTime?times[i]:minTime;
+			maxTime = times[i]>maxTime?times[i]:maxTime;
+			avgTime += times[i];
+			correctCards += results[i]==1?1:0;
+			wrongCards = results[i]==-1?1:0;
+			skippedCards = results[i]==0?1:0;
+		}
+		avgTime = avgTime/times.length;
+		
+		stat.add(new JLabel("Total Time: "));
+		value.add(new JLabel(Integer.toString(time1)));
+		
+		stat.add(new JLabel("Total Cards: "));
+		value.add(new JLabel(Integer.toString(results.length)));
+		
+		stat.add(new JLabel("Avg Card Time: "));
+		value.add(new JLabel(Double.toString(avgTime)));
+		
+		stat.add(new JLabel("Max Card Time: "));
+		value.add(new JLabel(Integer.toString(maxTime)));
+
+		stat.add(new JLabel("Min Card Time: "));
+		value.add(new JLabel(Integer.toString(minTime)));
+
+		stat.add(new JLabel("Skipped Cards: "));
+		value.add(new JLabel(Integer.toString(skippedCards)));
+
+		stat.add(new JLabel("Correct Answers: "));
+		value.add(new JLabel(Integer.toString(correctCards)));
+
+		stat.add(new JLabel("Wrong Answers: "));
+		value.add(new JLabel(Integer.toString(wrongCards)));
+
+		for (JLabel label : stat) {
+			panel.add(label);
+		}
+		for (JLabel label : value) {
+			panel.add(label);
+		}
+		//TODO a button to exit the stats and go back to the rest of the program
+	}
+	
 	@Override
 	public void paintComponent (Graphics g) {		
 		
@@ -209,29 +267,37 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		
 		int width = panel.getWidth();
 		int height = panel.getHeight();
-		
-		clock1.setBounds(10, 10, width-20, height/9-10);
-        clock1.setFont(new Font("Arial", Font.PLAIN, clock1.getHeight()/2));
-        
-        clock2.setBounds(10, 10+height/9, width-20, height/9-10);
-        clock2.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
-        
-        originalWord.setBounds(10, 10+height/9*2, width-20, height/9*2-10);
-        originalWord.setFont(new Font("Arial", Font.PLAIN, originalWord.getHeight()/4));
-        
-        answer.setBounds(10, 10+height/9*4, width-20, height/9-10);
-        answer.setFont(new Font("Arial", Font.PLAIN, answer.getHeight()/2));
-        
-        input.setBounds(10, 10+height/9*5, width-20, height/9*2-10);
-        input.setFont(new Font("Arial", Font.PLAIN, input.getHeight()/4));
-        
-        stop.setBounds(10, 10+height/9*7, (width-40)/3, height/9*2-20);
-        stop.setFont(new Font("Arial", Font.PLAIN, stop.getHeight()/2));
-        
-        skip.setBounds(20+(width-40)/3, 10+height/9*7, (width-40)/3, height/9*2-20);
-        skip.setFont(new Font("Arial", Font.PLAIN, skip.getHeight()/2));
-        
-        next.setBounds(30+(width-40)/3*2, 10+height/9*7, (width-40)/3, height/9*2-20);
-        next.setFont(new Font("Arial", Font.PLAIN, next.getHeight()/2));
+		if(running) {
+			clock1.setBounds(10, 10, width-20, height/9-10);
+	        clock1.setFont(new Font("Arial", Font.PLAIN, clock1.getHeight()/2));
+	        
+	        clock2.setBounds(10, 10+height/9, width-20, height/9-10);
+	        clock2.setFont(new Font("Arial", Font.PLAIN, clock2.getHeight()/2));
+	        
+	        originalWord.setBounds(10, 10+height/9*2, width-20, height/9*2-10);
+	        originalWord.setFont(new Font("Arial", Font.PLAIN, originalWord.getHeight()/4));
+	        
+	        answer.setBounds(10, 10+height/9*4, width-20, height/9-10);
+	        answer.setFont(new Font("Arial", Font.PLAIN, answer.getHeight()/2));
+	        
+	        input.setBounds(10, 10+height/9*5, width-20, height/9*2-10);
+	        input.setFont(new Font("Arial", Font.PLAIN, input.getHeight()/4));
+	        
+	        stop.setBounds(10, 10+height/9*7, (width-40)/3, height/9*2-20);
+	        stop.setFont(new Font("Arial", Font.PLAIN, stop.getHeight()/2));
+	        
+	        skip.setBounds(20+(width-40)/3, 10+height/9*7, (width-40)/3, height/9*2-20);
+	        skip.setFont(new Font("Arial", Font.PLAIN, skip.getHeight()/2));
+	        
+	        next.setBounds(30+(width-40)/3*2, 10+height/9*7, (width-40)/3, height/9*2-20);
+	        next.setFont(new Font("Arial", Font.PLAIN, next.getHeight()/2));
+		}else {
+			for (int i = 0; i < stat.size(); i++) {
+				stat.get(i).setBounds(10, 10+i*((height-20)/stat.size()), (width-30)/2, (height-20)/stat.size()-10);
+			}
+			for (int i = 0; i < value.size(); i++) {
+				value.get(i).setBounds(width/2+5, 10+i*((height-20)/value.size()), (width-30)/2, (height-20)/value.size()-10);
+			}
+		}
     }
 }
