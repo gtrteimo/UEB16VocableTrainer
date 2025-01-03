@@ -7,13 +7,48 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 public class VocableTrainerIO {
-	public static void Export () {
-		
+	public static void Export(JFrame parent, Lernkartei l) {
+	    if (l == null) {
+	        new VocableTrainerInfoDialog(parent, "Error", "Please select a set first!").setVisible(true);
+	        return;
+	    }
+
+	    JFileChooser exportFileChooser = new JFileChooser();
+	    exportFileChooser.setFileFilter(new FileNameExtensionFilter("Text Files", "txt"));
+	    exportFileChooser.setAcceptAllFileFilterUsed(false);
+	    exportFileChooser.setSelectedFile(new File("export.txt")); // Default file name
+	    	    
+	    VocableTrainer2OptionDialog o = new VocableTrainer2OptionDialog(parent, "Export Option", "Do you want to include the box?", "Yes", "No");
+	    o.setVisible(true);
+	    
+	    if (exportFileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
+	        String path = exportFileChooser.getSelectedFile().getAbsolutePath();
+	        if (!path.endsWith(".txt")) {
+	            path += ".txt"; // Ensure file has .txt extension
+	        }
+	        
+	        int result = VokabeltrainerDB.exportierenKarten(l.getNummer(), path, o.getAnswer()); // Set 'true' for exporting with categories
+	        switch (result) {
+	            case 0:
+	                new VocableTrainerInfoDialog(parent, "Info", "Data was successfully exported!").setVisible(true);
+	                break;
+	            case -1:
+	                new VocableTrainerInfoDialog(parent, "Error", "An export error occurred!").setVisible(true);
+	                break;
+	            case -3:
+	                new VocableTrainerInfoDialog(parent, "Error", "The flashcard set with the number " + l.getNummer() + " does not exist.").setVisible(true);
+	                break;
+	            default:
+	                new VocableTrainerInfoDialog(parent, "Error", "An unknown error occurred during export!").setVisible(true);
+	        }
+	    }
+	    o.closeDialog();
 	}
 	public static void Import(JFrame parent, Lernkartei l) {
 	    if (l == null) {

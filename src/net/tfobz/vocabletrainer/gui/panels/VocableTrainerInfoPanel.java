@@ -10,7 +10,7 @@ import javax.swing.table.TableColumn;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
 import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -56,7 +56,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         renameButton.setBorderPainted(false);
         renameButton.setForeground(C_platinum);
         renameButton.setBackground(C_slateGray);
-        renameButton.setMnemonic('R');
+        renameButton.setMnemonic('e');
         deleteButton = new JButton("Delete");
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
@@ -145,8 +145,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             } else {
                 Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
                 if (s != null) {
-                    VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf,
-                        "Confirm Delete","Are you sure you want to delete this set?");
+                    VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete","Are you sure you want to delete this set?", "Yes", "No");
                     d.setVisible(true);
                     if (d.getAnswer()) {
                         VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -306,7 +305,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                             break;
                         }
                     }
-                    renameButton.setText(atLeastOneSelected ? "Change" : "Rename");
+                    renameButton.setText(atLeastOneSelected ? "Save" : "Rename");
                     table.getTableHeader().repaint();
                 }
                 if (e.getColumn() == 1 || e.getColumn() == 2) {

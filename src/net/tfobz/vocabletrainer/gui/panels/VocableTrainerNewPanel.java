@@ -10,7 +10,7 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerNewSetDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 @SuppressWarnings("serial")
@@ -92,7 +92,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         deleteButton.addActionListener(e -> {
 	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
 	        if (s != null) {
-	            VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
+	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?", "Yes", "No");
 	            d.setVisible(true);
 	            if (d.getAnswer()) {
 	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -138,7 +138,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		newSet.addActionListener(e -> newSet());
 		
 		impo.addActionListener(e -> VocableTrainerIO.Import(vtf, (Lernkartei)comboBox.getSelectedItem()));
-		expo.addActionListener(e -> VocableTrainerIO.Export());
+		expo.addActionListener(e -> VocableTrainerIO.Export(vtf, (Lernkartei)comboBox.getSelectedItem()));
 		
 		save.addActionListener(e -> newCard());
 		
