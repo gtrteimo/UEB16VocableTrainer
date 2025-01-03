@@ -39,7 +39,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	private boolean running=true;
 	private ArrayList<JLabel> stat;
 	private ArrayList<JLabel> value;
-
+	private JButton end;
 	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
 		super();
@@ -57,7 +57,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		panel.setLayout(null);
 		
         cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
-        times = settings.isCardLimit()?new int[settings.getCardLimit()]: new int[cards.size()];
+        times = settings.isCardLimit()?new int[settings.getCardLimit()<cards.size()?settings.getCardLimit():cards.size()]: new int[cards.size()];
         results = new int[times.length];
         cardNum = -1;
 
@@ -169,10 +169,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
-		if(cardNum>=times.length-1) {
-			endRun();
-		}else {
-			cardNum++;
+		cardNum++;
+		if(cardNum<times.length){
 			currentCard = cards.get((int)(Math.random()*cards.size()));
 	        cards.remove(currentCard);
 	        originalWord.setText(currentCard.getWortEins());
@@ -184,7 +182,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			answer.setText("");
 	        time2=0;
 	        timer.start();
-		}
+		} else {
+			endRun();
+		} 
 	}
 	
 	public void checkCard() {
@@ -229,13 +229,22 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		panel.removeAll();
 		stat = new ArrayList<JLabel>();
 		value = new ArrayList<JLabel>();
+		end = new JButton("End");
+		end.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				vtf.changePanel(1);
+				vtf.remove(VocableTrainerRunPanel.this);
+			}
+		});
 		
-		int minTime=0, maxTime=0;
+		int minTime=Integer.MAX_VALUE, maxTime=0, minTimeNoSkip=Integer.MAX_VALUE;
 		double avgTime=0;
 		int correctCards=0, wrongCards=0, skippedCards=0;
 		
 		for (int i = 0; i < times.length; i++) {
 			minTime = times[i]<minTime?times[i]:minTime;
+			minTimeNoSkip = times[i]<minTime&&results[i]!=0?times[i]:minTime;
 			maxTime = times[i]>maxTime?times[i]:maxTime;
 			avgTime += times[i];
 			correctCards += results[i]==1?1:0;
@@ -258,6 +267,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 
 		stat.add(new JLabel("Min Card Time: "));
 		value.add(new JLabel(Integer.toString(minTime)));
+		
+		stat.add(new JLabel("Min Card Time (without skips): "));
+		value.add(new JLabel(skippedCards!=0?Integer.toString(minTimeNoSkip):"NaN"));
 
 		stat.add(new JLabel("Skipped Cards: "));
 		value.add(new JLabel(Integer.toString(skippedCards)));
@@ -274,6 +286,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		for (JLabel label : value) {
 			panel.add(label);
 		}
+		panel.add(end);
 		//TODO a button to exit the stats and go back to the rest of the program
 		repaint();
 	}
@@ -310,6 +323,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        next.setBounds(30+(width-40)/3*2, 10+height/9*7, (width-40)/3, height/9*2-20);
 	        next.setFont(new Font("Arial", Font.PLAIN, next.getHeight()/2));
 		}else {
+			end.setBounds(10, height-height/10*2, width-20, height/10*2-10);
+			end.setFont(new Font("Arial", Font.PLAIN, end.getHeight()/2));
+			height -= height/10*2;
 			for (int i = 0; i < stat.size(); i++) {
 				stat.get(i).setBounds(10, 10+i*((height-20)/stat.size()), (width-30)/2, (height-20)/stat.size()-10);
 			}
