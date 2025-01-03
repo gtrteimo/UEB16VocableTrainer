@@ -197,8 +197,26 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			} else {
 				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
 			}
-			results[cardNum]= correct?1:-1;
-			input.setBackground(correct?Color.GREEN:Color.RED);
+			if (correct) {
+				
+				results[cardNum] = 1;
+				input.setBackground(Color.GREEN);
+				
+				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
+					Fach fach = new Fach();
+					fach.setBeschreibung("TODO(maybee)");
+					
+					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
+					
+					VokabeltrainerDB.setKarteRichtig(currentCard);
+				}
+			} else {
+				
+				results[cardNum] = -1;
+				input.setBackground(Color.RED);
+				
+				VokabeltrainerDB.setKarteFalsch(currentCard);
+			}
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
