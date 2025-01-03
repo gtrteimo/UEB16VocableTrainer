@@ -94,14 +94,14 @@ public class VokabeltrainerDB
 	protected static final String INSERT_KARTE122 = "INSERT INTO karten(kworteins, kwortzwei, fnummer) "
 			+ "  VALUES('Hund','cane',2);";
 
-	static {
-		// L�scht Tabellen
-		loeschenTabellen();
-		// Erstellen der Tabellen falls nicht vorhanden
-		erstellenTabellen();
-		// Hinzuf�gen von Testdaten
-		hinzufuegenTestdaten();
-	}
+//	static {
+//		// L�scht Tabellen
+//		loeschenTabellen();
+//		// Erstellen der Tabellen falls nicht vorhanden
+//		erstellenTabellen();
+//		// Hinzuf�gen von Testdaten
+//		hinzufuegenTestdaten();
+//	}
 
 	/**
 	 * Die Methode zeigt, wie die Klasse VokabeltrainerDB verwendet werden kann, um auf die
@@ -129,7 +129,7 @@ public class VokabeltrainerDB
 	/**
 	 * ACHTUNG: In die Einstellungen-Tabelle wird ein Datensatz hineingeschrieben
 	 */
-	protected static void erstellenTabellen() {
+	public static void erstellenTabellen() {
 		Connection con = null;
 		Statement stmt = null;
 		try {
@@ -200,7 +200,7 @@ public class VokabeltrainerDB
 		}
 	}
 
-	protected static Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		Connection ret = null;
 		try {
 			// Registrieren des JDBC-Treibers f�r HSQLDB
