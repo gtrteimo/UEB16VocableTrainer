@@ -7,7 +7,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.*;
 
@@ -170,7 +169,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void nextCard() {
-		if(cardNum<times.length) {
+		if(cardNum>=times.length) {
 			endRun();
 		}else {
 			cardNum++;
@@ -180,7 +179,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        skip.setVisible(true);
 			next.setText("Check");
 			next.setMnemonic('C');
-			input.setBackground(Color.WHITE);//TODO correct Color
+			input.setBackground(C_platinum);
 			input.setText("");
 			answer.setText("");
 	        time2=0;
@@ -190,7 +189,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
 	public void checkCard() {
 		timer.stop();
-		times[cardNum]=time2;
+		times[cardNum-1]=time2;
 		if(!input.getText().isEmpty()) {
 			boolean correct;
 			if(settings.isCaseSensitiv()) {
