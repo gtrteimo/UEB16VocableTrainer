@@ -298,8 +298,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		        JSpinner spinner = (JSpinner) e.getSource();
 		        int value = (int) spinner.getValue();
 
-		        if (value < 0) {
-		            spinner.setValue(0);
+		        if (value <= 0) {
+		            spinner.setValue(1);
 		        }
 		    }
 		
@@ -308,7 +308,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	        JTextField textField = (JTextField) e.getSource();
 	        String text = textField.getText();
 	        if (text.trim().replaceAll("\n", "").isEmpty()) {
-                textField.setText(String.valueOf(0));
+                textField.setText(String.valueOf(1));
 	        } else {
 		        try {
 		            int intValue = Integer.parseInt(text);

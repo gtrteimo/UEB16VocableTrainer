@@ -27,6 +27,9 @@ import java.util.Properties;
  */
 public class VokabeltrainerDB
 {
+	
+	public static int fachNum = 1;
+	
 	protected static final String DB_NAME = "lernkarteien";
 
 	protected static final String CREATE_EINSTELLUNGEN = "CREATE TABLE einstellungen( "
@@ -108,7 +111,7 @@ public class VokabeltrainerDB
 	 * Datenbank zuzugreifen
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void mainn(String[] args) {
 		// Gibt alle Lernkarteien aus
 		List<Lernkartei> lernkarteien = VokabeltrainerDB.getLernkarteien();
 		for (Lernkartei lernkartei: lernkarteien)
@@ -272,7 +275,7 @@ public class VokabeltrainerDB
 	 *         eine leere ArrayList falls keine Lernkarteien zu finden sind
 	 */
 	public static List<Lernkartei> getLernkarteien() {
-		ArrayList<Lernkartei> ret = new ArrayList();
+		ArrayList<Lernkartei> ret = new ArrayList<>();
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -325,7 +328,7 @@ public class VokabeltrainerDB
 					"  WHERE lnummer = " + nummerLernkartei + ";";
 			rs = stmt.executeQuery(sql);
 			if (rs.next()) {
-				ret = new ArrayList();
+				ret = new ArrayList<>();
 				sql = "SELECT fnummer, fbeschreibung, ferinnerung, fgelerntam, lnummer "
 						+ "  FROM faecher "
 						+ "  WHERE lnummer = "
@@ -651,9 +654,10 @@ public class VokabeltrainerDB
 				stmt = con.createStatement();
 				String sqlBeschreibung = null;
 				if (fach.getBeschreibung() == null || fach.getBeschreibung().length() == 0) {
-					sqlBeschreibung = "'Fach " + (int)(getFaecher(nummerLernkartei).size() + 1) + "'";
+					sqlBeschreibung = "'" + (int)(getFaecher(nummerLernkartei).size() + 1) + "'";
 				} else
-					sqlBeschreibung = "'" + fach.getBeschreibung() + "'";
+					sqlBeschreibung = "'" + (int)(getFaecher(nummerLernkartei).size() + 1) + "'";
+				System.out.println(sqlBeschreibung);
 				String sqlGelerntAm = null;
 				if (fach.getGelerntAm() == null)
 					sqlGelerntAm = "NOW()";
@@ -1137,7 +1141,7 @@ public class VokabeltrainerDB
 	 * eine leere ArrayList falls keine Lernkarteien zu finden sind
 	 */
 	public static List<Lernkartei> getLernkarteienErinnerung() {
-		ArrayList<Lernkartei> ret = new ArrayList();
+		ArrayList<Lernkartei> ret = new ArrayList<>();
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -1187,7 +1191,7 @@ public class VokabeltrainerDB
 	public static List<Fach> getFaecherErinnerung(int nummerLernkartei) {
 		ArrayList<Fach> ret = null;
 		if (getLernkartei(nummerLernkartei) != null) {
-			ret = new ArrayList();
+			ret = new ArrayList<>();
 			Connection con = null;
 			Statement stmt = null;
 			ResultSet rs = null;
@@ -1245,7 +1249,7 @@ public class VokabeltrainerDB
 						"    k.fnummer = " + nummerFach + ";";
 				stmt = con.createStatement();
 				rs = stmt.executeQuery(sql);
-				ret = new ArrayList();
+				ret = new ArrayList<>();
 				while (rs.next()) {
 					int nummer = rs.getInt("knummer");
 					String wortEins = rs.getString("kworteins");
@@ -1295,161 +1299,124 @@ public class VokabeltrainerDB
 	 * -3 falls Lernkartei nicht vorhanden ist
 	 */
 	public static int importierenKarten(int nummerLernkartei, String pfad) {
-		int ret = -1;
-		Lernkartei l = getLernkartei(nummerLernkartei);
-		if (l == null) 
-			ret = -3;
-		else
-			if (pfad != null && pfad.length() > 0) {
-				BufferedReader reader = null;
-				Connection con = null;
-				Statement stmt = null;
-				ResultSet rs = null;
-				try {
-					con = getConnection();
-					stmt = con.createStatement();
-					reader = new BufferedReader(new FileReader(pfad));
-				
-					boolean geloescht = false;
-					Hashtable<Integer, Fach> faecher = new Hashtable();
-					int anzahlSpalten = -1;
-					int fachNummer = -1;
-					Fach fach = null;
-					while (true) {
-						String zeile = reader.readLine();
-						if (zeile == null)
-							// Dateiende erkannt
-							break;
-						else {
-							String[] inhalte = zeile.split(";");
-							String wortEins = inhalte[0].trim();
-							String wortZwei = inhalte[1].trim();
-							if (inhalte.length == 3) {
-								fachNummer = -1;
-								fach = null;
-							}
-							if (anzahlSpalten != -1 && anzahlSpalten != inhalte.length) {
-								ret = -1;
-								break;
-							}
-							if (inhalte.length == 3)
-								fachNummer = Integer.valueOf(inhalte[2].trim());
-							if (wortEins == null || wortEins.length() == 0 ||
-									wortZwei == null || wortZwei.length() == 0) {
-								ret = -1;
-								break;
-							}
-							if (!geloescht) {
-								geloescht = true;
-								anzahlSpalten = inhalte.length;
-								String sql =
-										"DELETE FROM faecher " +
-										"  WHERE lnummer = " + nummerLernkartei + ";";
-								stmt.executeUpdate(sql);
-								if (anzahlSpalten == 2) {
-									sql =
-											"INSERT INTO faecher(lnummer) " +
-													"  VALUES(" + nummerLernkartei + ");";
-									stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-									rs = stmt.getGeneratedKeys();
-									rs.next();
-									fach = new Fach();
-									fach.nummer = rs.getInt(1);
-								}
-							}
-							if (anzahlSpalten == 3) {
-								fach = faecher.get(fachNummer);
-								if (fach == null) {
-									fach = new Fach();
-									String sql =
-											"INSERT INTO faecher(lnummer) " +
-													"  VALUES (" + nummerLernkartei + ");";
-									if (stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS) == 0) {
-										ret = -1;
-										break;
-									} else {
-										rs = stmt.getGeneratedKeys();
-										rs.next();
-										fach.nummer = rs.getInt(1);
-										faecher.put(fachNummer, fach);
-									}
-								}
-							}
-							Karte k = new Karte();
-							k.setWortEins(wortEins);
-							k.setWortZwei(wortZwei);
-							String sql = null;
-							if (l.grossKleinschreibung)
-								sql =
-										"SELECT COUNT(*) " +
-										"  FROM karten" +
-										"  WHERE fnummer IN " + 
-										"    (SELECT fnummer " + 
-										"      FROM faecher" +
-										"      WHERE lnummer = " + nummerLernkartei + ") " + 
-										"    AND kworteins = '" + k.getWortEins() + "' AND " +
-										"    kwortzwei = '" + k.getWortZwei() + "';";
-							else
-								sql =
-										"SELECT COUNT(*) " +
-										"  FROM karten " +
-										"  WHERE fnummer IN " + 
-										"    (SELECT fnummer " + 
-										"      FROM faecher" +
-										"      WHERE lnummer = " + nummerLernkartei + ") " + 
-										"    AND LOWER(kworteins) = '" + k.getWortEins().toLowerCase() + "' AND " +
-										"    LOWER(kwortzwei) = '" + k.getWortZwei().toLowerCase() + "';";
-//							if (l.grossKleinschreibung)
-//								sql =
-//										"SELECT COUNT(*) " +
-//										"  FROM karten " +
-//										"  WHERE kworteins = '" + k.getWortEins() + "' AND " +
-//										"    kwortzwei = '" + k.getWortZwei() + "' AND " +
-//										"    fnummer = " + fach.getNummer() + ";";
-//							else
-//								sql =
-//										"SELECT COUNT(*) " +
-//										"  FROM karten " +
-//										"  WHERE LOWER(kworteins) = '" + k.getWortEins().toLowerCase() + "' AND " +
-//										"    LOWER(kwortzwei) = '" + k.getWortZwei().toLowerCase() + "' AND " +
-//										"    fnummer = " + fach.getNummer() + ";";
-							rs = stmt.executeQuery(sql);
-							if (rs.next() && rs.getInt(1) == 0) {
-								sql =
-										"INSERT INTO karten(kworteins, kwortzwei, fnummer) " +
-										"  VALUES('" + k.getWortEins() + "', '" + k.getWortZwei() + "', " +
-										fach.getNummer() + ");";
-								if (stmt.executeUpdate(sql) == 0) {
-									ret = -1;
-									break;
-								}
-								ret = 0;
-							}
-						}
-					}
-					if (ret == 0)
-						con.commit();
-					else
-						con.rollback();
-				} catch (SQLException e) {
-					e.printStackTrace();
-					try { con.rollback(); } catch (Exception e1) { ; }
-					ret = -1;
-				} catch (FileNotFoundException e) {
-					try { con.rollback(); } catch (Exception e1) { ; }
-						ret = -2;
-				} catch (Exception e) {
-					try { con.rollback(); } catch (Exception e1) { ; }
-					ret = -1;
-				} finally {
-					try { reader.close(); } catch (Exception e) { ; }
-					try { rs.close(); } catch (Exception e) { ; }
-					try { stmt.close(); } catch (Exception e) { ; }
-					try { con.close(); } catch (Exception e) { ; }
-				}
-			}
-		return ret;
+	    int ret = -1;
+	    Lernkartei l = getLernkartei(nummerLernkartei);
+	    if (l == null) {
+	        System.out.println("Error: Lernkartei not found for nummerLernkartei: " + nummerLernkartei);
+	        return -3; // Lernkartei not found
+	    }
+
+	    if (pfad != null && pfad.length() > 0) {
+	        BufferedReader reader = null;
+	        Connection con = null;
+	        Statement stmt = null;
+	        ResultSet rs = null;
+	        try {
+	            con = getConnection();
+	            stmt = con.createStatement();
+	            reader = new BufferedReader(new FileReader(pfad));
+
+	            boolean geloescht = false;
+	            Hashtable<Integer, Fach> faecher = new Hashtable<>();
+	            int fachNummer = -1;
+	            Fach fach = null;
+
+	            while (true) {
+	                String zeile = reader.readLine();
+	                if (zeile == null) break; // End of file
+
+	                System.out.println("Processing line: " + zeile);
+	                String[] inhalte = zeile.split(";");
+	                if (inhalte.length < 2) {
+	                    System.out.println("Error: Invalid line format, skipping.");
+	                    continue; // Skip invalid lines
+	                }
+
+	                String wortEins = inhalte[0].trim();
+	                String wortZwei = inhalte[1].trim();
+	                if (wortEins.isEmpty() || wortZwei.isEmpty()) {
+	                    System.out.println("Error: Missing word content, skipping line.");
+	                    continue; // Skip empty lines
+	                }
+
+	                if (inhalte.length == 3) {
+	                    fachNummer = Integer.parseInt(inhalte[2].trim());
+	                }
+
+	                if (!geloescht) {
+	                    geloescht = true;
+	                    System.out.println("Deleting existing F‰cher for Lernkartei: " + nummerLernkartei);
+	                    loeschenAlleFaecher(nummerLernkartei);
+	                }
+
+	                if (inhalte.length == 3) {
+	                    fach = faecher.get(fachNummer);
+	                    if (fach == null) {
+	                        System.out.println("Creating new Fach for FachNummer: " + fachNummer);
+	                        String sql = "INSERT INTO faecher(lnummer, fbeschreibung) VALUES(" +
+	                                     nummerLernkartei + ", '" + (fachNummer + 1) + "');";
+	                        stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+	                        rs = stmt.getGeneratedKeys();
+	                        if (rs.next()) {
+	                            int newFachNummer = rs.getInt(1);
+	                            fach = new Fach(newFachNummer, "" + (fachNummer + 1), 1, null);
+	                            faecher.put(fachNummer, fach);
+	                            System.out.println("Fach created with fnummer: " + newFachNummer + ", fbeschreibung: " + fach.getBeschreibung());
+	                        }
+	                    }
+	                } else {
+	                    if (fach == null) {
+	                        // Create default Fach
+	                        System.out.println("Creating default Fach.");
+	                        String sql = "INSERT INTO faecher(lnummer, fbeschreibung) VALUES(" +
+	                                     nummerLernkartei + ", '1');";
+	                        stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+	                        rs = stmt.getGeneratedKeys();
+	                        if (rs.next()) {
+	                            int newFachNummer = rs.getInt(1);
+	                            fach = new Fach(newFachNummer, "1", 1, null);
+	                            System.out.println("Default Fach created with fnummer: " + newFachNummer + ", fbeschreibung: " + fach.getBeschreibung());
+	                        }
+	                    }
+	                }
+
+	                Karte k = new Karte();
+	                k.setWortEins(wortEins);
+	                k.setWortZwei(wortZwei);
+
+	                System.out.println("Inserting Karte: " + wortEins + ", " + wortZwei + " into Fach fnummer: " + fach.getNummer());
+	                String sql = "INSERT INTO karten(kworteins, kwortzwei, fnummer) VALUES('" +
+	                             wortEins + "', '" + wortZwei + "', " + fach.getNummer() + ");";
+	                stmt.executeUpdate(sql);
+	            }
+
+	            con.commit();
+	            ret = 0; // Success
+	        } catch (SQLException e) {
+	            System.out.println("SQL Exception during import:");
+	            e.printStackTrace();
+	            try { con.rollback(); } catch (Exception ex) { }
+	            ret = -1;
+	        } catch (FileNotFoundException e) {
+	            System.out.println("File not found:");
+	            e.printStackTrace();
+	            ret = -2;
+	        } catch (Exception e) {
+	            System.out.println("General exception:");
+	            e.printStackTrace();
+	            try { con.rollback(); } catch (Exception ex) { }
+	            ret = -1;
+	        } finally {
+	            try { reader.close(); } catch (Exception e) { System.out.println("Error closing reader: " + e); }
+	            try { rs.close(); } catch (Exception e) { System.out.println("Error closing ResultSet: " + e); }
+	            try { stmt.close(); } catch (Exception e) { System.out.println("Error closing Statement: " + e); }
+	            try { con.close(); } catch (Exception e) { System.out.println("Error closing Connection: " + e); }
+	        }
+	    }
+	    return ret;
 	}
+
+
 	
 	/**
 	 * Exportiert alle Karten der ÔøΩbergebenen Lernkartei in eine Textdatei mit oder ohne FÔøΩcher.
@@ -1694,6 +1661,7 @@ public class VokabeltrainerDB
 	            boolean grossKleinschreibung = rs.getBoolean("lgrosskleinschreibung");
 	            int fnummer = rs.getInt("fnummer");
 	            Karte k = new Karte(nummer, wortEins, wortZwei, richtung, grossKleinschreibung, fnummer);
+	            System.out.println(fnummer);
 	            ret.add(k);
 	        }
 	    } catch (SQLException e) {
@@ -1706,4 +1674,60 @@ public class VokabeltrainerDB
 	    }
 	    return ret;
 	}
+	public static List<Karte> getKartenUndBoxenVonLernkartei(int nummerLernkartei) {
+	    List<Karte> ret = new ArrayList<>();
+	    Connection con = null;
+	    Statement stmt = null;
+	    ResultSet rs = null;
+	    try {
+	        con = getConnection();
+	        stmt = con.createStatement();
+	        
+	        // Debug: Log the generated SQL query
+	        String sql = 
+	          "SELECT k.knummer, k.kworteins, k.kwortzwei, f.fbeschreibung, f.fnummer, l.lrichtung, l.lgrosskleinschreibung " +
+	          "FROM karten k " +
+	          "JOIN faecher f ON k.fnummer = f.fnummer " +
+	          "JOIN lernkarteien l ON f.lnummer = l.lnummer " +
+	          "WHERE l.lnummer = " + nummerLernkartei + ";";
+	        System.out.println("Executing SQL Query: " + sql);
+
+	        rs = stmt.executeQuery(sql);
+	        while (rs.next()) {
+	            int nummer = rs.getInt("knummer");
+	            String wortEins = rs.getString("kworteins");
+	            String wortZwei = rs.getString("kwortzwei");
+	            String fachBeschreibung = rs.getString("fbeschreibung");
+	            int fnummer = rs.getInt("fnummer");
+	            boolean richtung = rs.getBoolean("lrichtung");
+	            boolean grossKleinschreibung = rs.getBoolean("lgrosskleinschreibung");
+
+	            // Debug: Log the fetched values
+	            System.out.println("Fetched Record:");
+	            System.out.println("  Karte Nummer: " + nummer);
+	            System.out.println("  Wort Eins: " + wortEins);
+	            System.out.println("  Wort Zwei: " + wortZwei);
+	            System.out.println("  Fach Beschreibung: " + (fachBeschreibung != null ? fachBeschreibung : "NULL"));
+	            System.out.println("  Fach Nummer (fnummer): " + fnummer);
+	            System.out.println("  Richtung: " + richtung);
+	            System.out.println("  Groﬂ-/Kleinschreibung: " + grossKleinschreibung);
+
+	            System.out.println("Test Beschreibung Fach: " + getFach(fnummer).getBeschreibung());
+	            
+	            // Add the Karte to the list
+	            ret.add(new Karte(nummer, wortEins, wortZwei, fachBeschreibung, richtung, grossKleinschreibung));
+	        }
+	    } catch (SQLException e) {
+	        // Debug: Log exception details
+	        System.out.println("SQLException encountered:");
+	        e.printStackTrace();
+	        ret = null;
+	    } finally {
+	        try { if (rs != null) rs.close(); } catch (Exception e) { System.out.println("Error closing ResultSet: " + e); }
+	        try { if (stmt != null) stmt.close(); } catch (Exception e) { System.out.println("Error closing Statement: " + e); }
+	        try { if (con != null) con.close(); } catch (Exception e) { System.out.println("Error closing Connection: " + e); }
+	    }
+	    return ret;
+	}
+
 }

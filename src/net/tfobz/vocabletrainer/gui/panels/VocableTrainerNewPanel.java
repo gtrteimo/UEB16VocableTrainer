@@ -210,7 +210,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            if (faecher.isEmpty()) {
 	                // Create a new Fach if none exist
 	                Fach newFach = new Fach();
-	                newFach.setBeschreibung("First Fach");
+	                newFach.setBeschreibung("1");
 	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
 	                if (result != 0) {
 	                    new VocableTrainerInfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);

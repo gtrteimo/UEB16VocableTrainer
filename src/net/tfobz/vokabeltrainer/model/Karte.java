@@ -15,6 +15,7 @@ public class Karte {
   protected boolean richtung = true;
   protected boolean grossKleinschreibung = false;
   
+  protected String fachBeschreibung;
   protected int fnummer = -1;
 
   protected Hashtable<String, String> fehler = null;
@@ -38,6 +39,19 @@ public class Karte {
   	this.grossKleinschreibung = grossKleinschreibung;
   	this.fnummer = fnummer;
   }
+  
+  public Karte(int nummer, String wortEins, String wortZwei, String fachBeschreibung, boolean richtung, boolean grossKleinschreibung) {
+	    this.nummer = nummer;
+	    setWortEins(wortEins);
+	    setWortZwei(wortZwei);
+	    this.richtung = richtung;
+	    this.grossKleinschreibung = grossKleinschreibung;
+	    this.fachBeschreibung = fachBeschreibung;
+	}
+
+	public String getFachBeschreibung() {
+	    return fachBeschreibung;
+	}
   
   /**
    * Kontrolliert ob wortEins und wortZwei eingegeben wurden
