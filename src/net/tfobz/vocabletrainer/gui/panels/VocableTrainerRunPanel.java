@@ -221,8 +221,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			maxTime = times[i]>maxTime?times[i]:maxTime;
 			avgTime += times[i];
 			correctCards += results[i]==1?1:0;
-			wrongCards = results[i]==-1?1:0;
-			skippedCards = results[i]==0?1:0;
+			wrongCards += results[i]==-1?1:0;
+			skippedCards += results[i]==0?1:0;
 		}
 		avgTime = avgTime/times.length;
 		
@@ -257,6 +257,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			panel.add(label);
 		}
 		//TODO a button to exit the stats and go back to the rest of the program
+		repaint();
 	}
 	
 	@Override
