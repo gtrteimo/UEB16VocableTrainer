@@ -4,6 +4,7 @@ import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 
@@ -42,17 +43,29 @@ public class VocableTrainerFrame extends JFrame {
 	private void generatePanels () {
 		panels[0] = new VocableTrainerMenuPanel(this);
 		panels[1] = new VocableTrainerHomePanel(this);
-		panels[3] = new VocableTrainerNewPanel(this);
-		panels[4] = new VocableTrainerInfoPanel(this);
-		panels[5] = new VocableTrainerStartPanel(this);
-		panels[6] = new VocableTrainerCreditsPanel(this);
-		panels[7] = new VocableTrainerSettingsPanel(this);
+		panels[2] = new VocableTrainerNewPanel(this);
+		panels[3] = new VocableTrainerInfoPanel(this);
+		panels[4] = new VocableTrainerStartPanel(this);
+		panels[5] = new VocableTrainerCreditsPanel(this);
+		panels[6] = new VocableTrainerSettingsPanel(this);
+		
+		VocableTrainerPanel.ex[0] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[10] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[20] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[30] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[40] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[50] = Executors.newSingleThreadExecutor();
+		VocableTrainerPanel.ex[60] = Executors.newSingleThreadExecutor();
+
+
 	}
 	public void changePanel (int panelIndex) throws RuntimeException {
+		System.err.println("CURRENT THREAD: " + Thread.currentThread());
 		if (panelIndex > 0) {
 			if (history.size() > 0) {
 				if (history.get(history.size()-1) != panelIndex) {
-					panels[panelIndex].retrive();
+					VocableTrainerPanel.ex[panelIndex*10].submit(() -> panels[panelIndex].retrive());
+//					panels[panelIndex].retrive();
 					contentPane.add(panels[panelIndex]);
 					contentPane.remove(panels[history.get(history.size()-1)]);
 					history.add(panelIndex);
@@ -64,7 +77,8 @@ public class VocableTrainerFrame extends JFrame {
 			contentPane.add(panels[history.get(history.size()-1)]);
 		} else if (panelIndex == -1) {
 			if (history.size() > 1) {
-				panels[history.get(history.size()-2)].retrive();
+				VocableTrainerPanel.ex[history.get(history.size()-2)*10].submit(() -> panels[history.get(history.size()-2)].retrive());
+//				panels[history.get(history.size()-2)].retrive();
 				contentPane.add(panels[history.get(history.size()-2)]);
 				contentPane.remove(panels[history.get(history.size()-1)]);
 				history.remove(history.size()-1);

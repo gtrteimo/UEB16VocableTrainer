@@ -55,9 +55,9 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		B_info.setMnemonic('I');
 		B_exit.setMnemonic('E');
 		
-		B_start.addActionListener(new ButtonListener(5));
-		B_new.addActionListener(new ButtonListener(3));
-		B_info.addActionListener(new ButtonListener(4));
+		B_start.addActionListener(new ButtonListener(4));
+		B_new.addActionListener(new ButtonListener(2));
+		B_info.addActionListener(new ButtonListener(3));
 		B_exit.addActionListener(new ButtonListener(-1));
 		
 		panel.add(B_start);

@@ -2,6 +2,8 @@ package net.tfobz.vocabletrainer.gui.panels;
 
 import java.awt.*;
 import java.util.List;
+import java.util.concurrent.Executors;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -82,9 +84,12 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
                 VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, "Rename set","Enter new name for the set:", s.getBeschreibung());
                 d.setVisible(true);
                 if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
-                    s.setBeschreibung(d.getInput());
-                    VokabeltrainerDB.aendernLernkartei(s);
-                    retrive();
+	           		s.setBeschreibung(d.getInput());
+	            	ex[11] = Executors.newSingleThreadExecutor();
+	            	ex[11].submit(() -> {
+	                     VokabeltrainerDB.aendernLernkartei(s);
+	                     retrive();
+	            	});
                 }
                 d.closeDialog();
             }
@@ -95,9 +100,12 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?", "Yes", "No");
 	            d.setVisible(true);
 	            if (d.getAnswer()) {
-	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
-	                retrive();
-	                repaint();
+	            	ex[12] = Executors.newSingleThreadExecutor();
+	                ex[12].submit(() -> {
+	                	VokabeltrainerDB.loeschenLernkartei(s.getNummer());
+	                	retrive();
+	                	repaint();
+	                });
 	            }
 	            d.closeDialog();
 	        }
@@ -130,9 +138,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		save.setFocusPainted(false);
 		save.setBorderPainted(false);
 		save.setMnemonic('S');
-		
-		retrive();
-		
+				
 		comboBox.addActionListener(e -> retriveLabels());
 		
 		newSet.addActionListener(e -> newSet());
@@ -175,13 +181,16 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         Lernkartei input = nameDialog.getInput();
         if (input != null && input.getBeschreibung() != null &&!input.getBeschreibung().isEmpty() && !input.getWortEinsBeschreibung().isEmpty() && !input.getWortZweiBeschreibung().isEmpty() &&!nameDialog.sqlInjection(input)) {
             Lernkartei newSet = input;
-            int result = VokabeltrainerDB.hinzufuegenLernkartei(newSet);
-            if (result == 0) {
-                sets.add(newSet);
-                comboBox.addItem(newSet);
-            } else {
-                JOptionPane.showMessageDialog(this, "There was an Error while writing the Set to the Database!", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            ex[13] = Executors.newSingleThreadExecutor();
+            ex[13].submit(() -> {
+            	int result = VokabeltrainerDB.hinzufuegenLernkartei(newSet);
+            	if (result == 0) {
+                    sets.add(newSet);
+                    comboBox.addItem(newSet);
+                } else {
+                	new VocableTrainerInfoDialog(vtf, "Error", "There was an Error while writing the Set to the Database!");
+                }
+            });
         } else {
         	if (VocableTrainerNewSetDialog.sqlInjection(input)) {
         		System.err.println("HELP, SQL Injection");

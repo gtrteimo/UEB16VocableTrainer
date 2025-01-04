@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ExecutorService;
 
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
@@ -31,6 +32,8 @@ public class VocableTrainerPanel extends JPanel {
 	public static Color C_slateGray = new Color(111, 116, 146); 
 	public static Color C_powderBlue = new Color(171, 181, 216); 
 	public static Color C_platinum = new Color(225, 225, 225);
+	
+	public static ExecutorService ex[] = new ExecutorService[80];
 	
 	protected VocableTrainerFrame vtf;
 	protected VocableTrainerPanel vtp;

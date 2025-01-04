@@ -1,33 +1,57 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-
-import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
-import net.tfobz.vokabeltrainer.model.Fach;
-import net.tfobz.vokabeltrainer.model.Karte;
-import net.tfobz.vokabeltrainer.model.Lernkartei;
-import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
+import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
+import net.tfobz.vokabeltrainer.model.Karte;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 @SuppressWarnings("serial")
 public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 	
+	private final ItemListener a = (e -> {
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+            System.out.println("Selected item: " + e.getItem());
+            retriveTabel((Lernkartei) e.getItem());
+        }
+    });
+	
+	
+
     private List<Lernkartei> sets;
     private JLabel topic;
     private JComboBox<Lernkartei> comboBox;
@@ -50,7 +74,6 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         comboBox = new JComboBox<>(sets.toArray(new Lernkartei[0]));
         comboBox.setForeground(C_nigth);
         comboBox.setBackground(C_platinum);
-        comboBox.addActionListener(e -> retriveTabel());
         renameButton = new JButton("Rename");
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
@@ -175,8 +198,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         this.add(panel);
     }
    
-    private void fillTable(DefaultTableModel model) {
-        Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
+    private DefaultTableModel fillTable(DefaultTableModel model, Lernkartei l) {
+
         if (l != null && l.getNummer() != -1) {
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
@@ -196,29 +219,34 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 //                System.out.println(card.getFnummer());
             }
         }
+        return model;
     }
     @Override
     public void retrive() {
+		System.err.println("RETRIVE THREAD: " + Thread.currentThread());
+		comboBox.removeItemListener(a);
         sets = VokabeltrainerDB.getLernkarteien();
         comboBox.removeAllItems();
         if (sets != null) {
             for (Lernkartei set : sets) comboBox.addItem(set);
         } else {
-            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+            new VocableTrainerInfoDialog(vtf, "Error", "The DatabaseTabels have disapperared!").setVisible(true);;
         }
-        retriveTabel();
+        comboBox.addItemListener(a);
+        retriveTabel((Lernkartei) comboBox.getSelectedItem());
+        System.err.println("REPAINT");
+        repaint();
     }
 
-    protected void retriveTabel() {
-        if (scrollPane != null) panel.remove(scrollPane);
-        Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
+    protected void retriveTabel(Lernkartei l) {
+		System.err.println("RETRIVE TABLE THREAD: " + Thread.currentThread());
         if (l == null) return;
         model = new DefaultTableModel(
             new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box", "knummer"}, 0
         ) {
             @Override
             public boolean isCellEditable(int r, int c) {
-                return c== 0 || c == 1 || c == 2;
+                return c == 0 || c == 1 || c == 2;
             }
             @Override
             public Class<?> getColumnClass(int i) {
@@ -232,8 +260,10 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 }
             }
         };
-        fillTable(model);
-        table = new JTable(model);
+        ex[11] = Executors.newSingleThreadExecutor();
+        Future<DefaultTableModel> future = ex[11].submit(() -> fillTable(model, l));
+                
+        table = new JTable();
         table.setBorder(null);
         table.getTableHeader().setReorderingAllowed(false);
         JCheckBox editorBox = new JCheckBox();
@@ -269,6 +299,29 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             lab.setOpaque(true);
             return lab;
         });
+
+        DefaultCellEditor textEditor = new DefaultCellEditor(new JTextField()) {
+            @Override
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                JTextField field = (JTextField) super.getTableCellEditorComponent(table, value, isSelected, row, column);
+                SwingUtilities.invokeLater(field::selectAll);
+                return field;
+            }
+        };
+        
+        while (!future.isDone()) {
+        	try {
+        		System.out.println("Hello World");
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {}
+        }
+        
+        try {
+			table.setModel(future.get());
+		} catch (InterruptedException | ExecutionException e1) {
+			e1.printStackTrace();
+		}
+        
         table.getColumnModel().getColumn(0).setHeaderRenderer(new CheckBoxHeader(table, 0));
         table.getColumnModel().getColumn(5).setCellRenderer((t, v, sel, hf, r, c) -> {
             JLabel lab = new JLabel(String.valueOf(v));
@@ -281,14 +334,6 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         for (int col = 1; col < table.getColumnCount() - 1; col++) {
             table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
         }
-        DefaultCellEditor textEditor = new DefaultCellEditor(new JTextField()) {
-            @Override
-            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-                JTextField field = (JTextField) super.getTableCellEditorComponent(table, value, isSelected, row, column);
-                SwingUtilities.invokeLater(field::selectAll);
-                return field;
-            }
-        };
         textEditor.setClickCountToStart(1);
         table.getColumnModel().getColumn(1).setCellEditor(textEditor);
         table.getColumnModel().getColumn(2).setCellEditor(textEditor);
@@ -316,10 +361,11 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 }
             }
         });
-
+                
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
         table.getColumnModel().getColumn(6).setWidth(0);
+        
     }
 
 

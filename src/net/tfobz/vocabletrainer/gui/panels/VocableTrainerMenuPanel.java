@@ -47,11 +47,11 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		}
 		
 		options[0].addActionListener(new PanelsChanger(1));
-		options[1].addActionListener(new PanelsChanger(5));
-		options[2].addActionListener(new PanelsChanger(4));
-		options[3].addActionListener(new PanelsChanger(3));
-		options[4].addActionListener(new PanelsChanger(6));
-		options[5].addActionListener(new PanelsChanger(7));
+		options[1].addActionListener(new PanelsChanger(4));
+		options[2].addActionListener(new PanelsChanger(3));
+		options[3].addActionListener(new PanelsChanger(2));
+		options[4].addActionListener(new PanelsChanger(5));
+		options[5].addActionListener(new PanelsChanger(6));
 		options[6].addActionListener(new PanelsChanger(-1));
 
 		add(barPane);
