@@ -284,7 +284,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         int h = panel.getHeight();
         
         
-		newSet.setBounds(w/16+32, h / 500 + 8, w / 5 , h / 16 + 16);
+		newSet.setBounds(w/16+32, h / 500 + 8, w / 6 + 45 , h / 16 + 16);
 		newSet.setFont(new Font ("Arial", Font.BOLD, (int)(newSet.getHeight()/1.5)+1));
 		
 		impo.setBounds(w - 32 - 2*w / 5, h / 500 + 8, w / 5 , h / 16 + 16);

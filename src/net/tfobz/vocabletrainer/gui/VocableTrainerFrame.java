@@ -24,7 +24,7 @@ public class VocableTrainerFrame extends JFrame {
 	public VocableTrainerFrame (int width, int height) {
 		super();
 		setSize(width, height);
-		setMinimumSize(new Dimension(480, 360));
+		setMinimumSize(new Dimension(720, 480));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
 		
