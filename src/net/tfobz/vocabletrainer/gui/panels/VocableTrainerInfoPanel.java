@@ -1,6 +1,7 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -9,7 +10,8 @@ import javax.swing.table.TableColumn;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
+import net.tfobz.vokabeltrainer.model.Fach;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
 import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
@@ -17,12 +19,15 @@ import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public class VocableTrainerInfoPanel extends VocableTrainerPanel {
-
+	
     private List<Lernkartei> sets;
     private JLabel topic;
     private JComboBox<Lernkartei> comboBox;
@@ -32,6 +37,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     private JButton deleteButton;
     DefaultTableModel model;
     DefaultTableCellRenderer dynamicRenderer;
+    
+    private Map<Integer, String[]> changedRows = new HashMap<>();
 
     public VocableTrainerInfoPanel(VocableTrainerFrame vtf) {
         super(vtf);
@@ -49,7 +56,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         renameButton.setBorderPainted(false);
         renameButton.setForeground(C_platinum);
         renameButton.setBackground(C_slateGray);
-        renameButton.setMnemonic('R');
+        renameButton.setMnemonic('e');
         deleteButton = new JButton("Delete");
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
@@ -58,69 +65,96 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         deleteButton.setMnemonic('D');
         renameButton.addActionListener(e -> {
             boolean cardSelected = false;
-            int selectedRow = -1;
             for (int i = 0; i < table.getRowCount(); i++) {
                 Boolean val = (Boolean) table.getValueAt(i, 0);
                 if (val != null && val) {
                     cardSelected = true;
-                    selectedRow = i;
                     break;
                 }
             }
             if (cardSelected) {
-                table.changeSelection(selectedRow, 1, false, false);
-                table.editCellAt(selectedRow, 1);
-                Component editorComp = table.getEditorComponent();
-                if (editorComp instanceof JTextField) {
-                    ((JTextField) editorComp).selectAll();
-                    editorComp.requestFocusInWindow();
-                }
-            } else {
-                Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
-                if (s != null) {
-                    VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, "Rename set","Enter new name for the set:", s.getBeschreibung());
-                    d.setVisible(true);
-                    if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
-                        s.setBeschreibung(d.getInput());
-                        VokabeltrainerDB.aendernLernkartei(s);
-                        retrive();
+                for (Map.Entry<Integer, String[]> entry : changedRows.entrySet()) {
+                    if (Boolean.TRUE.equals(table.getValueAt(entry.getKey(), 0))) {
+                        Integer knummer = (Integer) table.getValueAt(entry.getKey(), 6);
+                        Karte card = VokabeltrainerDB.getKarte(knummer);
+                        if (card != null) {
+                            String[] words = entry.getValue();
+                            card.setWortEins(words[0]);
+                            card.setWortZwei(words[1]);
+                            VokabeltrainerDB.aendernKarte(card);
+                        }
                     }
-                    d.closeDialog();
+                }
+                changedRows.clear();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    table.setValueAt(false, i, 0);
+                }
+                renameButton.setText("Rename");
+            } else {
+                int selectedRow = -1;
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    Boolean val = (Boolean) table.getValueAt(i, 0);
+                    if (val != null && val) {
+                        selectedRow = i;
+                        break;
+                    }
+                }
+                if (selectedRow != -1) {
+                    table.changeSelection(selectedRow, 1, false, false);
+                    table.editCellAt(selectedRow, 1);
+                    Component editorComp = table.getEditorComponent();
+                    if (editorComp instanceof JTextField) {
+                        ((JTextField) editorComp).selectAll();
+                        editorComp.requestFocusInWindow();
+                    }
+                } else {
+                    Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+                    if (s != null) {
+                        VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf,
+                            "Rename set","Enter new name for the set:", s.getBeschreibung());
+                        d.setVisible(true);
+                        if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
+                            s.setBeschreibung(d.getInput());
+                            VokabeltrainerDB.aendernLernkartei(s);
+                            retrive();
+                        }
+                        d.closeDialog();
+                    }
                 }
             }
         });
         deleteButton.addActionListener(e -> {
-        	 boolean cardSelected = false;
-        	    for (int i = 0; i < table.getRowCount(); i++) {
-        	        Boolean val = (Boolean) table.getValueAt(i, 0);
-        	        if (val != null && val) {
-        	            cardSelected = true;
-        	            break;
-        	        }
-        	    }
-        	    if (cardSelected) {
-        	        for (int i = table.getRowCount() - 1; i >= 0; i--) {
-        	            Boolean val = (Boolean) table.getValueAt(i, 0);
-        	            if (val != null && val) {
-        	                Integer knummer = (Integer) table.getValueAt(i, 6);
-        	                VokabeltrainerDB.loeschenKarte(knummer);
-        	                ((DefaultTableModel) table.getModel()).removeRow(i);
-        	            }
-        	        }
-        	        repaint();
-        	    } else {
-        	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
-        	        if (s != null) {
-        	            VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
-        	            d.setVisible(true);
-        	            if (d.getAnswer()) {
-        	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
-        	                retrive();
-        	                repaint();
-        	            }
-        	            d.closeDialog();
-        	        }
-        	    }
+            boolean cardSelected = false;
+            for (int i = 0; i < table.getRowCount(); i++) {
+                Boolean val = (Boolean) table.getValueAt(i, 0);
+                if (val != null && val) {
+                    cardSelected = true;
+                    break;
+                }
+            }
+            if (cardSelected) {
+                for (int i = table.getRowCount() - 1; i >= 0; i--) {
+                    Boolean val = (Boolean) table.getValueAt(i, 0);
+                    if (val != null && val) {
+                        Integer knummer = (Integer) table.getValueAt(i, 6);
+                        VokabeltrainerDB.loeschenKarte(knummer);
+                        ((DefaultTableModel) table.getModel()).removeRow(i);
+                    }
+                }
+                repaint();
+            } else {
+                Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
+                if (s != null) {
+                    VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete","Are you sure you want to delete this set?", "Yes", "No");
+                    d.setVisible(true);
+                    if (d.getAnswer()) {
+                        VokabeltrainerDB.loeschenLernkartei(s.getNummer());
+                        retrive();
+                        repaint();
+                    }
+                    d.closeDialog();
+                }
+            }
         });
         panel.add(topic);
         panel.add(comboBox);
@@ -140,14 +174,14 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         this.add(barPane);
         this.add(panel);
     }
-    
+   
     private void fillTable(DefaultTableModel model) {
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l != null && l.getNummer() != -1) {
-            List<Karte> cards = VokabeltrainerDB.getKartenFromLernkartei(l.getNummer());
             for (int i = model.getRowCount() - 1; i >= 0; i--) {
                 model.removeRow(i);
             }
+            List<Karte> cards = VokabeltrainerDB.getKartenUndBoxenVonLernkartei(l.getNummer());
             for (Karte card : cards) {
                 model.addRow(new Object[]{
                     false,
@@ -155,13 +189,14 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     card.getWortZwei(),
                     new Date(),
                     new Date(),
-                    card.getFnummer(),
+                    card.getFachBeschreibung(),
+//                    card.getFnummer(),
                     card.getNummer()
                 });
+//                System.out.println(card.getFnummer());
             }
         }
     }
-
     @Override
     public void retrive() {
         sets = VokabeltrainerDB.getLernkarteien();
@@ -178,10 +213,12 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         if (scrollPane != null) panel.remove(scrollPane);
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l == null) return;
-        model = new DefaultTableModel(new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box", "knummer"}, 0) {
+        model = new DefaultTableModel(
+            new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box", "knummer"}, 0
+        ) {
             @Override
             public boolean isCellEditable(int r, int c) {
-                return c <= 2;
+                return c== 0 || c == 1 || c == 2;
             }
             @Override
             public Class<?> getColumnClass(int i) {
@@ -257,30 +294,29 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         table.getColumnModel().getColumn(2).setCellEditor(textEditor);
         scrollPane = new JScrollPane(table);
         panel.add(scrollPane);
+
         table.getModel().addTableModelListener(e -> {
-            if (e.getColumn() == 0) {
-                boolean all = true;
-                boolean none = true;
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    Boolean val = (Boolean) table.getValueAt(i, 0);
-                    if (val == null || !val) all = false;
-                    if (val != null && val) none = false;
+            if (e.getType() == TableModelEvent.UPDATE) {
+                if (e.getColumn() == 0) {
+                    boolean atLeastOneSelected = false;
+                    for (int i = 0; i < table.getRowCount(); i++) {
+                        if (Boolean.TRUE.equals(table.getValueAt(i, 0))) {
+                            atLeastOneSelected = true;
+                            break;
+                        }
+                    }
+                    renameButton.setText(atLeastOneSelected ? "Save" : "Rename");
+                    table.getTableHeader().repaint();
                 }
-                CheckBoxHeader h = (CheckBoxHeader) table.getTableHeader().getColumnModel().getColumn(0).getHeaderRenderer();
-                h.setSelected(all);
-                if (all || none) table.getTableHeader().repaint();
-            }
-            if (e.getColumn() == 1 || e.getColumn() == 2) {
-                int row = e.getFirstRow();
-                Integer knummer = (Integer) table.getValueAt(row, 6);
-                Karte card = VokabeltrainerDB.getKarte(knummer);
-                if (card != null) {
-                    card.setWortEins((String) table.getValueAt(row, 1));
-                    card.setWortZwei((String) table.getValueAt(row, 2));
-                    VokabeltrainerDB.aendernKarte(card);
+                if (e.getColumn() == 1 || e.getColumn() == 2) {
+                    int row = e.getFirstRow();
+                    String w1 = (String) table.getValueAt(row, 1);
+                    String w2 = (String) table.getValueAt(row, 2);
+                    changedRows.put(row, new String[]{w1, w2});
                 }
             }
         });
+
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
         table.getColumnModel().getColumn(6).setWidth(0);

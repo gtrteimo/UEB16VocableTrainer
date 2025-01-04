@@ -1,3 +1,4 @@
+
 package net.tfobz.vocabletrainer.gui.panels;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings;
@@ -117,8 +118,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionComboBoxesTime[1].setSelectedItem(TimeUnit.Minutes);
 		
 		start = new JButton("Start");
-		start.setForeground(C_nigth);
-		start.setBackground(C_platinum);
+		start.setForeground(C_platinum);
+		start.setBackground(C_slateGray);
 		start.setFocusPainted(false);
 		start.setBorderPainted(false);
 		start.setMnemonic('S');
@@ -173,39 +174,49 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	
 	private void startRun() {
+
 		//TODO this is not working properly! i marked the test constructor for the data structure as deprecated because i noticed you were using it (don`t do that). i think the setters works so idk where the problem is except that the total time limit is somehow set
 		//Answer: just comment out the shit -> as written "//Debug and Testing" so not for release
 		VocableTrainerRunSettings settings = null;
 		try {
 			 settings = new VocableTrainerRunSettings((Fach) boxComboBoxes.getSelectedItem(), (Lernkartei) setComboBox.getSelectedItem());
 		} catch (Exception e) {
-			new VocableTrainerInfoDialog(vtf, "Error", "Please selecet a Set and Box").setVisible(true);;
+			new VocableTrainerInfoDialog(vtf, "Error", "Please selecet a Set and Box").setVisible(true);
 //			JOptionPane.showMessageDialog(this, "Please selecet a Set and Box", "Error", JOptionPane.ERROR_MESSAGE);
 			//Debug and Testing
 //			settings = new VocableTrainerRunSettings();
+			return;
 		}
-		if (settings != null) {
-			if (options[0].isSelected()) {
-				settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
-			} 
-			if (options[1].isSelected()) {
-				settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
+		
+		List<Karte> k = VokabeltrainerDB.getKarten(((Fach) boxComboBoxes.getSelectedItem()).getNummer());
+		if (k != null && k.size() > 0 && (options[3].isSelected()?k.size() >= ((Integer)(optionSpinners[2].getValue())).intValue():true)) {
+			if (settings != null) {
+				if (options[0].isSelected()) {
+					settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
+				} 
+				if (options[1].isSelected()) {
+					settings.setCardTimeLimit(((Integer)(optionSpinners[1].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[1].getSelectedItem());
+				}
+				
+				if (options[3].isSelected()) {
+					settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
+				}
+				
+				settings.setParcticeRun(options[4].isSelected());
+				
+				
+				try {
+					vtf.changePanel(-3);
+					VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
+					vtf.add(run);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
-			
-			if (options[3].isSelected()) {
-				settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
-			}
-			
-			settings.setParcticeRun(options[4].isSelected());
-			
-			
-			try {
-				vtf.changePanel(-3);
-				VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
-				vtf.add(run);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+		} else if (options[3].isSelected()) {
+			new VocableTrainerInfoDialog(vtf, "Error", "You are trying to start with "+((Integer)(optionSpinners[2].getValue())).intValue() + "crads while there are only "+k.size()+ " Cards in the Box").setVisible(true);;
+		} else {
+			new VocableTrainerInfoDialog(vtf, "Error", "The Box you are trying to start has 0 Cards in it. Either add some Cards or chose another Box").setVisible(true);;
 		}
 		
 	}
@@ -298,8 +309,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		        JSpinner spinner = (JSpinner) e.getSource();
 		        int value = (int) spinner.getValue();
 
-		        if (value < 0) {
-		            spinner.setValue(0);
+		        if (value <= 0) {
+		            spinner.setValue(1);
 		        }
 		    }
 		
@@ -308,7 +319,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	        JTextField textField = (JTextField) e.getSource();
 	        String text = textField.getText();
 	        if (text.trim().replaceAll("\n", "").isEmpty()) {
-                textField.setText(String.valueOf(0));
+                textField.setText(String.valueOf(1));
 	        } else {
 		        try {
 		            int intValue = Integer.parseInt(text);

@@ -9,7 +9,7 @@ import javax.swing.SwingConstants;
 
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
-public class VocableTrainerYesNoDialog extends VocableTrainerInfoDialog {
+public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
 
 	protected boolean answer;
 	
@@ -17,7 +17,7 @@ public class VocableTrainerYesNoDialog extends VocableTrainerInfoDialog {
 	protected JButton confirmButton;
 	protected JButton cancelButton;
 	
-	public VocableTrainerYesNoDialog(JFrame parent, String title, String text) {
+	public VocableTrainer2OptionDialog(JFrame parent, String title, String text, String option1, String option2) {
 		super(parent, title);
 		
 		setSize(getWidth()/3, getHeight()/3);
@@ -30,11 +30,11 @@ public class VocableTrainerYesNoDialog extends VocableTrainerInfoDialog {
 		label.setForeground(VocableTrainerPanel.C_nigth);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		confirmButton = new JButton("Yes");
+		confirmButton = new JButton(option1);
         confirmButton.setBounds(componentPanel.getWidth()/2 + 16, componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth()/2 - 32, componentPanel.getHeight() / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
-        confirmButton.setForeground(VocableTrainerPanel.C_nigth);
-        confirmButton.setBackground(VocableTrainerPanel.C_platinum);
+        confirmButton.setForeground(VocableTrainerPanel.C_platinum);
+        confirmButton.setBackground(VocableTrainerPanel.C_slateGray);
         confirmButton.setFocusPainted(false);
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
@@ -42,11 +42,11 @@ public class VocableTrainerYesNoDialog extends VocableTrainerInfoDialog {
         	answer = true;
         });
 
-        cancelButton = new JButton("No");
+        cancelButton = new JButton(option2);
         cancelButton.setBounds(16 , componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth()/2 - 32, componentPanel.getHeight() / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
-        cancelButton.setForeground(VocableTrainerPanel.C_nigth);
-        cancelButton.setBackground(VocableTrainerPanel.C_platinum);
+        cancelButton.setForeground(VocableTrainerPanel.C_platinum);
+        cancelButton.setBackground(VocableTrainerPanel.C_slateGray);
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> {

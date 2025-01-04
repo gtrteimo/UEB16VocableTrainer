@@ -75,20 +75,20 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         input.setBorder(null);
         
         stop = new JButton("Stop");
-        stop.setForeground(C_nigth);
-        stop.setBackground(C_platinum);
+        stop.setForeground(C_platinum);
+        stop.setBackground(C_slateGray);
         stop.setFocusPainted(false);
         stop.setBorderPainted(false);
         stop.setMnemonic('S');
         skip = new JButton("Skip");
-        skip.setForeground(C_nigth);
-        skip.setBackground(C_platinum);
+        skip.setForeground(C_platinum);
+        skip.setBackground(C_slateGray);
         skip.setFocusPainted(false);
         skip.setBorderPainted(false);
         skip.setMnemonic('K');
         next = new JButton("Check");
-        next.setForeground(C_nigth);
-        next.setBackground(C_platinum);
+        next.setForeground(C_platinum);
+        next.setBackground(C_slateGray);
         next.setFocusPainted(false);
         next.setBorderPainted(false);
         next.setMnemonic('C');
@@ -176,7 +176,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        originalWord.setText(currentCard.getWortEins());
 	        skip.setVisible(true);
 			next.setText("Check");
-			next.setMnemonic('C');
+			next.setMnemonic('e');
 			input.setBackground(C_platinum);
 			input.setText("");
 			answer.setText("");
@@ -197,13 +197,30 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			} else {
 				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
 			}
-			results[cardNum]= correct?1:-1;
-			input.setBackground(correct?Color.GREEN:Color.RED);
+			if (correct) {
+				
+				results[cardNum] = 1;
+				input.setBackground(Color.GREEN);
+				
+				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
+					Fach fach = new Fach();
+					fach.setBeschreibung("TODO(maybee)");
+					
+					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
+					
+					VokabeltrainerDB.setKarteRichtig(currentCard);
+				}
+			} else {
+				
+				results[cardNum] = -1;
+				input.setBackground(Color.RED);
+				
+				VokabeltrainerDB.setKarteFalsch(currentCard);
+			}
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
 		next.setText("Next");
-		next.setMnemonic('X');
 	}
 	
 	public void loadStats() {
@@ -212,6 +229,11 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		stat = new ArrayList<JLabel>();
 		value = new ArrayList<JLabel>();
 		end = new JButton("End");
+		end.setForeground(C_platinum);
+		end.setBackground(C_slateGray);
+		end.setFocusPainted(false);
+		end.setBorderPainted(false);
+		end.setMnemonic('n');
 		end.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

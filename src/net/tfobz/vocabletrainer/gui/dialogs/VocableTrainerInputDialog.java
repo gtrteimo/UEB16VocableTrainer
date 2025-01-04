@@ -48,8 +48,8 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
 		confirmButton = new JButton("Confirm");
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
-        confirmButton.setForeground(VocableTrainerPanel.C_nigth);
-        confirmButton.setBackground(VocableTrainerPanel.C_platinum);
+        confirmButton.setForeground(VocableTrainerPanel.C_platinum);
+        confirmButton.setBackground(VocableTrainerPanel.C_slateGray);
         confirmButton.setFocusPainted(false);
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
@@ -59,8 +59,8 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
         cancelButton = new JButton("Cancel");
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
-        cancelButton.setForeground(VocableTrainerPanel.C_nigth);
-        cancelButton.setBackground(VocableTrainerPanel.C_platinum);
+        cancelButton.setForeground(VocableTrainerPanel.C_platinum);
+        cancelButton.setBackground(VocableTrainerPanel.C_slateGray);
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> closeDialog());

@@ -26,11 +26,11 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 public class VocableTrainerPanel extends JPanel {
 	
-	public final static Color C_nigth = new Color(11, 9, 10); 
-	public final static Color C_spaceCadet = new Color(50, 50, 75); 
-	public final static Color C_slateGray = new Color(111, 116, 146); 
-	public final static Color C_powderBlue = new Color(171, 181, 216); 
-	public final static Color C_platinum = new Color(225, 225, 225);
+	public static Color C_nigth = new Color(11, 9, 10); 
+	public static Color C_spaceCadet = new Color(50, 50, 75); 
+	public static Color C_slateGray = new Color(111, 116, 146); 
+	public static Color C_powderBlue = new Color(171, 181, 216); 
+	public static Color C_platinum = new Color(225, 225, 225);
 	
 	protected VocableTrainerFrame vtf;
 	protected VocableTrainerPanel vtp;
@@ -86,6 +86,18 @@ public class VocableTrainerPanel extends JPanel {
 		super();
 		this.vtp = vtp;
 		this.state = state;
+	}
+	
+	public static void changeColor(int options) {
+		switch (options) {
+		case -1:
+			C_nigth = new Color(255 - C_nigth.getRed(), 255 - C_nigth.getGreen(), 255 - C_nigth.getBlue());
+			C_platinum = new Color(255 - C_platinum.getRed(), 255 - C_platinum.getGreen(), 255 - C_platinum.getBlue());
+			C_powderBlue = new Color(255 - C_powderBlue.getRed(), 255 - C_powderBlue.getGreen(), 255 - C_powderBlue.getBlue());
+			C_slateGray = new Color(255 - C_slateGray.getRed(), 255 - C_slateGray.getGreen(), 255 - C_slateGray.getBlue());
+			C_spaceCadet = new Color(255 - C_spaceCadet.getRed(), 255 - C_spaceCadet.getGreen(), 255 - C_spaceCadet.getBlue());
+			break;
+		}
 	}
 	
 	protected void loadImage() {

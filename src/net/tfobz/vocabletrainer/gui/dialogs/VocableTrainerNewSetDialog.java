@@ -58,21 +58,22 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         //"', '', '', true, false); DROP SCHEMA PUBLIC CASCADE; --"
 //SQL injection potential: 
         
-        dLabel1 = new JLabel("Description word 1");         	
+        dLabel1 = new JLabel("Description 1");         	
         dLabel1.setBounds(16, 16 + h/3, w/2 - 32, h/8);
         dLabel1.setFont(new Font ("Arial", Font.PLAIN, dLabel1.getHeight()/2 + 1));
         dLabel1.setBackground(VocableTrainerPanel.C_platinum);
         dLabel1.setForeground(VocableTrainerPanel.C_nigth);
         dLabel1.setBorder(null);
         dLabel1.setDisplayedMnemonic('1');
+        dLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         
-        dLabel2 = new JLabel("Description word 2");         	
+        dLabel2 = new JLabel("Description 2");         	
         dLabel2.setBounds(w/2 + 16, 16 + h/3, w/2 - 32, h/8);
         dLabel2.setFont(new Font ("Arial", Font.PLAIN, dLabel2.getHeight()/2 + 1));
         dLabel2.setBackground(VocableTrainerPanel.C_platinum);
         dLabel2.setForeground(VocableTrainerPanel.C_nigth);
         dLabel2.setBorder(null);
-        dLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
+        dLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel2.setDisplayedMnemonic('2');
         
         dInputField1 = new JTextField();
@@ -81,10 +82,11 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dInputField1.setBackground(VocableTrainerPanel.C_platinum);
         dInputField1.setForeground(VocableTrainerPanel.C_nigth);
         dInputField1.setBorder(null);
+        dInputField1.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel1.setLabelFor(dInputField1);
 
         
-        dInputField1.setText("Example language 1");
+        dInputField1.setText("Deutsch");
         
         dInputField2 = new JTextField();
         dInputField2.setBounds(w/2 + 16, 16 + h/2, w/2 - 32, h/8);
@@ -92,16 +94,16 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dInputField2.setBackground(VocableTrainerPanel.C_platinum);
         dInputField2.setForeground(VocableTrainerPanel.C_nigth);
         dInputField2.setBorder(null);
-        dInputField2.setHorizontalAlignment(SwingConstants.RIGHT);
+        dInputField2.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel2.setLabelFor(dInputField2);
 
-        dInputField2.setText("Example language 2");
+        dInputField2.setText("English");
         
         confirmButton = new JButton("Confirm");
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
-        confirmButton.setForeground(VocableTrainerPanel.C_nigth);
-        confirmButton.setBackground(VocableTrainerPanel.C_platinum);
+        confirmButton.setForeground(VocableTrainerPanel.C_platinum);
+        confirmButton.setBackground(VocableTrainerPanel.C_slateGray);
         confirmButton.setFocusPainted(false);
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> check());
@@ -109,8 +111,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         cancelButton = new JButton("Cancel");
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
-        cancelButton.setForeground(VocableTrainerPanel.C_nigth);
-        cancelButton.setBackground(VocableTrainerPanel.C_platinum);
+        cancelButton.setForeground(VocableTrainerPanel.C_platinum);
+        cancelButton.setBackground(VocableTrainerPanel.C_slateGray);
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> closeDialog());

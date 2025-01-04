@@ -123,6 +123,9 @@ public class Fach
 			calHeute.set(Calendar.MINUTE, 0);
 			calHeute.set(Calendar.SECOND, 0);
 			calHeute.set(Calendar.MILLISECOND, 0);
+			if (gelerntAm == null) {
+				return false;
+			}
 			Calendar calGelerntAm = Calendar.getInstance();
 			calGelerntAm.setTime(gelerntAm);
 			calGelerntAm.set(Calendar.HOUR, 0);

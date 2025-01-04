@@ -10,7 +10,7 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerNewSetDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerYesNoDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 @SuppressWarnings("serial")
@@ -36,24 +36,24 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		barPane.setTitle("New");
 		
 		newSet = new JButton("New Set");
-		newSet.setForeground(C_nigth);
-		newSet.setBackground(C_powderBlue);
+		newSet.setForeground(C_platinum);
+		newSet.setBackground(C_slateGray);
 		newSet.setBorderPainted(false);
 		newSet.setFocusPainted(false);
-		newSet.setHorizontalAlignment(SwingConstants.LEFT);
+		newSet.setHorizontalAlignment(SwingConstants.CENTER);
 		newSet.setMnemonic('N');
 		
 		impo = new JButton("Import");
-		impo.setForeground(C_nigth);
-		impo.setBackground(C_powderBlue);
+		impo.setForeground(C_platinum);
+		impo.setBackground(C_slateGray);
 		impo.setBorderPainted(false);
 		impo.setFocusPainted(false);
 		impo.setHorizontalAlignment(SwingConstants.CENTER);
 		impo.setMnemonic('I');
 		
 		expo = new JButton("Export");
-		expo.setForeground(C_nigth);
-		expo.setBackground(C_powderBlue);
+		expo.setForeground(C_platinum);
+		expo.setBackground(C_slateGray);
 		expo.setBorderPainted(false);
 		expo.setFocusPainted(false);
 		expo.setHorizontalAlignment(SwingConstants.CENTER);
@@ -92,7 +92,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         deleteButton.addActionListener(e -> {
 	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
 	        if (s != null) {
-	            VocableTrainerYesNoDialog d = new VocableTrainerYesNoDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?");
+	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?", "Yes", "No");
 	            d.setVisible(true);
 	            if (d.getAnswer()) {
 	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -105,28 +105,28 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		label1 = new JLabel("Hello");
 		label1.setForeground(C_nigth);
-		label1.setHorizontalAlignment(SwingConstants.LEFT);
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		
 		label2 = new JLabel("World!");
 		label2.setForeground(C_nigth);
-		label2.setHorizontalAlignment(SwingConstants.RIGHT);
+		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text1 = new JTextField();
 		text1.setForeground(C_nigth);
 		text1.setBackground(C_platinum);
 		text1.setBorder(null);
-		text1.setHorizontalAlignment(SwingConstants.LEFT);
+		text1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text2 = new JTextField();
 		text2.setForeground(C_nigth);
 		text2.setBackground(C_platinum);
 		text2.setBorder(null);
-		text2.setHorizontalAlignment(SwingConstants.RIGHT);
+		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		save = new JButton("Save");
-		save.setForeground(C_nigth);
-		save.setBackground(C_platinum);
+		save.setForeground(C_platinum);
+		save.setBackground(C_slateGray);
 		save.setFocusPainted(false);
 		save.setBorderPainted(false);
 		save.setMnemonic('S');
@@ -138,7 +138,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		newSet.addActionListener(e -> newSet());
 		
 		impo.addActionListener(e -> VocableTrainerIO.Import(vtf, (Lernkartei)comboBox.getSelectedItem()));
-		expo.addActionListener(e -> VocableTrainerIO.Export());
+		expo.addActionListener(e -> VocableTrainerIO.Export(vtf, (Lernkartei)comboBox.getSelectedItem()));
 		
 		save.addActionListener(e -> newCard());
 		
@@ -210,7 +210,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            if (faecher.isEmpty()) {
 	                // Create a new Fach if none exist
 	                Fach newFach = new Fach();
-	                newFach.setBeschreibung("First Fach");
+	                newFach.setBeschreibung("1");
 	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
 	                if (result != 0) {
 	                    new VocableTrainerInfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);
@@ -284,7 +284,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         int h = panel.getHeight();
         
         
-		newSet.setBounds(w/16+32, h / 500 + 8, w / 5 , h / 16 + 16);
+		newSet.setBounds(w/16+32, h / 500 + 8, w / 6 + 45 , h / 16 + 16);
 		newSet.setFont(new Font ("Arial", Font.BOLD, (int)(newSet.getHeight()/1.5)+1));
 		
 		impo.setBounds(w - 32 - 2*w / 5, h / 500 + 8, w / 5 , h / 16 + 16);
