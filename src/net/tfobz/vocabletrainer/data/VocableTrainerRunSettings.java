@@ -109,6 +109,10 @@ public class VocableTrainerRunSettings {
 		this.practiceRun = practiceRun;
 	}
 	
+	public boolean isParcticeRun() {
+		return practiceRun;
+	}
+	
 	public int getCardTimeLimit() {
 		return cardTimeLimit;
 	}

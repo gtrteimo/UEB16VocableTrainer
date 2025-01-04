@@ -198,24 +198,25 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
 			}
 			if (correct) {
-				
 				results[cardNum] = 1;
 				input.setBackground(Color.GREEN);
-				
-				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
-					Fach fach = new Fach();
-					fach.setBeschreibung("TODO(maybee)");
-					
-					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
-					
-					VokabeltrainerDB.setKarteRichtig(currentCard);
-				}
 			} else {
-				
 				results[cardNum] = -1;
 				input.setBackground(Color.RED);
-				
-				VokabeltrainerDB.setKarteFalsch(currentCard);
+			}
+			if(settings.isParcticeRun()) {
+				if(correct) {
+					if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
+						Fach fach = new Fach();
+						fach.setBeschreibung("TODO(maybee)");//TODO Decent name
+						
+						VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
+						
+						VokabeltrainerDB.setKarteRichtig(currentCard);
+					}
+				}else {
+					VokabeltrainerDB.setKarteFalsch(currentCard);
+				}
 			}
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
