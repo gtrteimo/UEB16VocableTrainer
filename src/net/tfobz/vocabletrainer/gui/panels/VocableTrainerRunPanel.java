@@ -4,10 +4,8 @@ import net.tfobz.vocabletrainer.data.*;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vokabeltrainer.model.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -99,6 +97,19 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         answer.setHorizontalAlignment(SwingConstants.CENTER);
         input.setHorizontalAlignment(SwingConstants.CENTER);
         
+        input.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (timer.isRunning()) {
+                        checkCard();
+                    } else {
+                        nextCard();
+                    }
+                }
+			}
+		});
+        
         stop.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -113,8 +124,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         skip.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				input.setText("");
-				checkCard();
+				skipCard();
 			}
 		});
         
@@ -130,18 +140,18 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			}
 		});
         
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(10, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time1++;
-				clock1.setText("Total Time: "+time1);
-				if(settings.isTotalTimeLimit()&&time1>=settings.getTotalTimeLimit()) {
+				clock1.setText("Total Time: "+String.format("%.2f", time1/100.0));
+				if(settings.isTotalTimeLimit()&&time1/100>=settings.getTotalTimeLimit()) {
 					checkCard();
 					endRun();
 				}
 				time2++;
-				clock2.setText("Card Time: "+time2);
-				if(settings.isCardTimeLimit()&&time2>=settings.getCardTimeLimit()) {
+				clock2.setText("Card Time: "+String.format("%.2f", time2/100.0));
+				if(settings.isCardTimeLimit()&&time2/100>=settings.getCardTimeLimit()) {
 					checkCard();
 				}
 			}
@@ -181,6 +191,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			input.setText("");
 			answer.setText("");
 	        time2=0;
+	        clock2.setText("Card Time:  0");
 	        timer.start();
 		} else {
 			endRun();
@@ -190,37 +201,42 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	public void checkCard() {
 		timer.stop();
 		times[cardNum]=time2;
-		if(!input.getText().isEmpty()) {
-			boolean correct;
-			if(settings.isCaseSensitiv()) {
-				correct = input.getText().equals(currentCard.getWortZwei());
-			} else {
-				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
-			}
-			if (correct) {
-				
-				results[cardNum] = 1;
-				input.setBackground(Color.GREEN);
-				
+		boolean correct;
+		if(settings.isCaseSensitiv()) {
+			correct = input.getText().equals(currentCard.getWortZwei());
+		} else {
+			correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
+		}
+		if (correct) {
+			results[cardNum] = 1;
+			input.setBackground(Color.GREEN);
+		} else {
+			results[cardNum] = -1;
+			input.setBackground(Color.RED);
+		}
+		if(settings.isParcticeRun()) {
+			if(correct) {
 				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
 					Fach fach = new Fach();
-					fach.setBeschreibung("TODO(maybee)");
+					fach.setBeschreibung("TODO(maybee)");//TODO Decent name
 					
 					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
 					
 					VokabeltrainerDB.setKarteRichtig(currentCard);
 				}
-			} else {
-				
-				results[cardNum] = -1;
-				input.setBackground(Color.RED);
-				
+			}else {
 				VokabeltrainerDB.setKarteFalsch(currentCard);
 			}
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
 		next.setText("Next");
+	}
+	
+	public void skipCard() {
+		timer.stop();
+		times[cardNum]=time2;
+		nextCard();
 	}
 	
 	public void loadStats() {
@@ -242,47 +258,52 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			}
 		});
 		
-		int minTime=Integer.MAX_VALUE, maxTime=0, minTimeNoSkip=Integer.MAX_VALUE;
+		int minTime=Integer.MAX_VALUE, maxTime=0;
 		double avgTime=0;
-		int correctCards=0, wrongCards=0, skippedCards=0;
+		int correctCards=0, wrongCards=0, skippedCards=0, maxCardStreak=0, cardStreak=0;
 		
 		for (int i = 0; i < times.length; i++) {
-			minTime = times[i]<minTime?times[i]:minTime;
-			minTimeNoSkip = times[i]<minTime&&results[i]!=0?times[i]:minTime;
+			minTime = times[i]<minTime&&results[i]==1?times[i]:minTime;
 			maxTime = times[i]>maxTime?times[i]:maxTime;
 			avgTime += times[i];
 			correctCards += results[i]==1?1:0;
 			wrongCards += results[i]==-1?1:0;
 			skippedCards += results[i]==0?1:0;
+			
+			cardStreak = results[i]==1?cardStreak+1:0;
+			maxCardStreak = cardStreak>maxCardStreak?cardStreak:maxCardStreak;
 		}
 		avgTime = avgTime/times.length;
 		
 		stat.add(new JLabel("Total Time: "));
-		value.add(new JLabel(Integer.toString(time1)));
+		value.add(new JLabel(String.format("%.2f", time1/100.0)+" seconds"));
+		
+		stat.add(new JLabel("Max Card Time: "));
+		value.add(new JLabel(String.format("%.2f", maxTime/100.0)+" seconds"));
+
+		stat.add(new JLabel("Min Card Time: "));
+		value.add(new JLabel(correctCards!=0?String.format("%.2f", minTime/100.0)+" seconds":"No correct answer"));
+
+		stat.add(new JLabel("Avg Card Time: "));
+		value.add(new JLabel(String.format("%.2f", avgTime/100)+" seconds"));
 		
 		stat.add(new JLabel("Total Cards: "));
 		value.add(new JLabel(Integer.toString(results.length)));
-		
-		stat.add(new JLabel("Avg Card Time: "));
-		value.add(new JLabel(Double.toString(avgTime)));
-		
-		stat.add(new JLabel("Max Card Time: "));
-		value.add(new JLabel(Integer.toString(maxTime)));
-
-		stat.add(new JLabel("Min Card Time: "));
-		value.add(new JLabel(Integer.toString(minTime)));
-		
-		stat.add(new JLabel("Min Card Time (without skips): "));
-		value.add(new JLabel(skippedCards!=0?Integer.toString(minTimeNoSkip):"NaN"));
 
 		stat.add(new JLabel("Skipped Cards: "));
 		value.add(new JLabel(Integer.toString(skippedCards)));
 
+		stat.add(new JLabel("Wrong Answers: "));
+		value.add(new JLabel(Integer.toString(wrongCards)));
+		
 		stat.add(new JLabel("Correct Answers: "));
 		value.add(new JLabel(Integer.toString(correctCards)));
 
-		stat.add(new JLabel("Wrong Answers: "));
-		value.add(new JLabel(Integer.toString(wrongCards)));
+		stat.add(new JLabel("Max Streak: "));
+		value.add(new JLabel(Integer.toString(maxCardStreak)));
+		
+		stat.add(new JLabel("Accuracy: "));
+		value.add(new JLabel(Integer.toString(100*correctCards/results.length)+"%"));
 
 		for (JLabel label : stat) {
 			panel.add(label);
@@ -291,7 +312,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			panel.add(label);
 		}
 		panel.add(end);
-		//TODO a button to exit the stats and go back to the rest of the program
 		repaint();
 	}
 	
