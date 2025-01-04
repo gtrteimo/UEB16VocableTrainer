@@ -222,7 +222,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		
 		int minTime=Integer.MAX_VALUE, maxTime=0, minTimeNoSkip=Integer.MAX_VALUE;
 		double avgTime=0;
-		int correctCards=0, wrongCards=0, skippedCards=0;
+		int correctCards=0, wrongCards=0, skippedCards=0, maxCardStreak=0, cardStreak=0;
 		
 		for (int i = 0; i < times.length; i++) {
 			minTime = times[i]<minTime?times[i]:minTime;
@@ -232,14 +232,14 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			correctCards += results[i]==1?1:0;
 			wrongCards += results[i]==-1?1:0;
 			skippedCards += results[i]==0?1:0;
+			
+			cardStreak = results[i]==1?cardStreak+1:0;
+			maxCardStreak = cardStreak>maxCardStreak?cardStreak:maxCardStreak;
 		}
 		avgTime = avgTime/times.length;
 		
 		stat.add(new JLabel("Total Time: "));
 		value.add(new JLabel(Integer.toString(time1)));
-		
-		stat.add(new JLabel("Total Cards: "));
-		value.add(new JLabel(Integer.toString(results.length)));
 		
 		stat.add(new JLabel("Avg Card Time: "));
 		value.add(new JLabel(Double.toString(avgTime)));
@@ -252,15 +252,21 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		
 		stat.add(new JLabel("Min Card Time (without skips): "));
 		value.add(new JLabel(skippedCards!=0?Integer.toString(minTimeNoSkip):"NaN"));
+		
+		stat.add(new JLabel("Total Cards: "));
+		value.add(new JLabel(Integer.toString(results.length)));
 
 		stat.add(new JLabel("Skipped Cards: "));
 		value.add(new JLabel(Integer.toString(skippedCards)));
 
+		stat.add(new JLabel("Wrong Answers: "));
+		value.add(new JLabel(Integer.toString(wrongCards)));
+		
 		stat.add(new JLabel("Correct Answers: "));
 		value.add(new JLabel(Integer.toString(correctCards)));
 
-		stat.add(new JLabel("Wrong Answers: "));
-		value.add(new JLabel(Integer.toString(wrongCards)));
+		stat.add(new JLabel("Max Streak: "));
+		value.add(new JLabel(Integer.toString(maxCardStreak)));
 
 		for (JLabel label : stat) {
 			panel.add(label);
