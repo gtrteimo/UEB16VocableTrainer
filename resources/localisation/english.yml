@@ -1,9 +1,16 @@
-en:
-  title: "Vocable Trainer"
+English:
+  title: 
+    title: "Vocable Trainer"
+  time:
+    seconds: "Seconds"
+    minutes: "Minutes"
+    hours: "Hours"
   dialogs:
     info:
       close: "Close"
     two_option:
+      confirm_delete: "Confirm Delete"
+      confirm_delete_question: "Are you sure you want to delete this set?"
       yes: "Yes"
       no: "No"
     new_set:
@@ -19,16 +26,21 @@ en:
       confirm: "Confirm"
       cancel: "Cancel"
     errors:
-      select_set_and_box: "Please select a Set and Box"
+      error: "Error"
+      select_set: "Please select or create a Set"
+      select_box: "Please select or create a Box"
       no_cards_in_box: "The Box you are trying to start has 0 Cards in it. Either add some Cards or choose another Box"
       too_many_cards: "You are trying to start with {requested_cards} cards while there are only {available_cards} Cards in the Box"
       set_dropped: "Looks like the Sets Database was dropped"
+      box_creation_fail: "An error occurred while adding the box"
+      card_creation_fail: "An error occurred while adding the card"
+      dupilcate_card: "A card with the same content already exists in this set"
   settings:
     language: "Language"
     theme: "Theme"
     simplified_view: "Simplified View"
     allow_premium: "Allow purchase of Premium"
-    buy_premium: "Buy Premium to unlock Settings"
+    suggest_feature: "Suggest new Feature"
   menu:
     home: "Home"
     start: "Start"
@@ -45,6 +57,15 @@ en:
     new: "New"
     info: "Info"
     exit: "Exit"
+  start:
+    box: "Box"
+    box_all: "All Boxes"
+    box_due: "Due Boxes"
+    time_per_card: "Time per Card"
+    total_time: "Total Time"
+    case_sensitive: "Case sensitive"
+    amount_of_cards: "Amount of cards"
+    practise_run: "Practice Run"
   buttons:
     start: "Start"
     new_set: "New Set"

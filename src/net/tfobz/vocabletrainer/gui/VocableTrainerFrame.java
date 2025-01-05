@@ -32,7 +32,7 @@ public class VocableTrainerFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
 				
-		VocableTrainerLocalization.loadLocalization(VocableTrainerLocalization.localisation.English);
+		VocableTrainerLocalization.loadLocalization(VocableTrainerLocalization.localisation.Italiano);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());

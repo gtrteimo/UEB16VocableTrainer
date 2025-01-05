@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization.localisation;
+import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings.TimeUnit;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 
@@ -27,7 +30,7 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	
 	private JLabel language;
-	private JComboBox<String> languageBox;
+	private JComboBox<localisation> languageBox;
 	private JLabel theme;
 	private JComboBox<String> themeBox;
 	private JCheckBox simplifiedBox;
@@ -39,18 +42,15 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		 		
 		panel.setLayout(null);
         
-        language = new JLabel("   Language");
-        language.setEnabled(false);
+        language = new JLabel("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
         language.setForeground(C_nigth);
         
-        theme = new JLabel("   Theme");
+        theme = new JLabel("   " + VocableTrainerLocalization.SETTINGS_THEME);
         theme.setForeground(C_nigth);
         
-        languageBox = new JComboBox<String>();
-        languageBox.setEnabled(false);
+        languageBox = new JComboBox<VocableTrainerLocalization.localisation>(VocableTrainerLocalization.localisation.values());
         languageBox.setForeground(C_nigth);
         languageBox.setBackground(C_platinum);
-        languageBox.addItem("English");
         
         themeBox = new JComboBox<String>();
         themeBox.setForeground(C_nigth);
@@ -60,20 +60,20 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.addItem("Dark Blue");
         themeBox.addItem("Custom");
         
-        simplifiedBox = new JCheckBox(" Simplified View");
+        simplifiedBox = new JCheckBox(VocableTrainerLocalization.SETTINGS_SIMPLIFIED_VIEW);
         simplifiedBox.setBackground(C_powderBlue);
         simplifiedBox.setForeground(C_nigth);
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
         
-        allwoPremiumBox = new JCheckBox(" idk");
+        allwoPremiumBox = new JCheckBox(VocableTrainerLocalization.SETTINGS_ALLOW_PREMIUM);
         allwoPremiumBox.setBackground(C_powderBlue);
         allwoPremiumBox.setForeground(C_nigth);
 
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
         
-        button = new JButton("Suggest new Feature");
+        button = new JButton(VocableTrainerLocalization.SETTINGS_SUGGEST_FEATURE);
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setBackground(C_slateGray);

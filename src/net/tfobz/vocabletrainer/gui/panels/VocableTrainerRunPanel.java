@@ -61,7 +61,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			cards = new ArrayList<Karte>();
 			List<Fach> faecher = VokabeltrainerDB.getFaecherErinnerung(settings.getSet().getNummer());
 			for (Fach fach: faecher) {
-				System.out.println("Hallo");
 				if (fach != null) {
 					cards.addAll(
 							VokabeltrainerDB.getKarten(fach.getNummer()));

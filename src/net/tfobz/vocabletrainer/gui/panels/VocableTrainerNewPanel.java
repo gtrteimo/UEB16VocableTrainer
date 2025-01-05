@@ -93,7 +93,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         deleteButton.addActionListener(e -> {
 	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
 	        if (s != null) {
-	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete", "Are you sure you want to delete this set?", "Yes", "No");
+	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, VocableTrainerLocalization.CONFIRM_DELETE, VocableTrainerLocalization.CONFIRM_DELETE_QUESTION, VocableTrainerLocalization.TWO_OPTION_YES, VocableTrainerLocalization.TWO_OPTION_NO);
 	            d.setVisible(true);
 	            if (d.getAnswer()) {
 	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -104,12 +104,12 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	        }
         });
 		
-		label1 = new JLabel("Hello");
+		label1 = new JLabel();
 		label1.setForeground(C_nigth);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		
-		label2 = new JLabel("World!");
+		label2 = new JLabel();
 		label2.setForeground(C_nigth);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -125,7 +125,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		text2.setBorder(null);
 		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		save = new JButton("Save");
+		save = new JButton(VocableTrainerLocalization.BUTTON_SAVE);
 		save.setForeground(C_platinum);
 		save.setBackground(C_slateGray);
 		save.setFocusPainted(false);
@@ -204,7 +204,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            List<Fach> faecher = VokabeltrainerDB.getFaecher(s.getNummer());
 
 	            if (faecher == null) {
-	                new VocableTrainerInfoDialog(vtf, "Error", "The selected set does not exist.").setVisible(true);
+	                new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
 	                return;
 	            }
 
@@ -214,7 +214,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                newFach.setBeschreibung("1");
 	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
 	                if (result != 0) {
-	                    new VocableTrainerInfoDialog(vtf, "Error", "Failed to create a new category.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_BOX_CREATION_FAIL).setVisible(true);
 	                    return;
 	                }
 	                faecher = VokabeltrainerDB.getFaecher(s.getNummer());
@@ -235,17 +235,17 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                    vtf.changePanel(-1);
 	                    break;
 	                case -5:
-	                    new VocableTrainerInfoDialog(vtf, "Error", "A card with the same content already exists in this set.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DUPLICATE_CARD).setVisible(true);
 	                    break;
 	                default:
-	                    new VocableTrainerInfoDialog(vtf, "Error", "An error occurred while adding the card.").setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_CARD_CREATION_FAIL).setVisible(true);
 	                    break;
 	            }
 	        } else {
-	            new VocableTrainerInfoDialog(vtf, "Error", "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
+	            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
 	        }
 	    } else {
-	        new VocableTrainerInfoDialog(vtf, "Error", "Please select or create a set first.").setVisible(true);
+	        new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SELECT_SET).setVisible(true);
 	    }
 	}
 
@@ -259,7 +259,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		    }
 		    retriveLabels();
 	    } else {
-            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
 	    }
 	}
 	
