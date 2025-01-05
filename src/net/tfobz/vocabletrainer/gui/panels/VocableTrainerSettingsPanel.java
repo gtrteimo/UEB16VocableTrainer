@@ -1,20 +1,14 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -24,6 +18,7 @@ import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization.localisation;
 import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings.TimeUnit;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerColorChooser;
 
 
 @SuppressWarnings("serial")
@@ -56,7 +51,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.setForeground(C_nigth);
         themeBox.setBackground(C_platinum);
         themeBox.addItem("Acqua");
-        themeBox.addItem("Monochrom");
+        themeBox.addItem("Monochrom light");
         themeBox.addItem("Dark Blue");
         themeBox.addItem("Custom");
         
@@ -87,13 +82,14 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 					changeColour(new Color(50, 50, 75), new Color(171, 181, 216), new Color(225, 225, 225), new Color(11, 9, 10), new Color(111, 116, 146));
 					break;
 				case 1:
-					changeColour(new Color(25, 25, 25), Color.BLACK, Color.BLACK, Color.BLACK, new Color(75, 75, 75));
+					changeColour(new Color(25, 25, 25), Color.WHITE, Color.WHITE, Color.BLACK, new Color(75, 75, 75));
 					break;
 				case 2:
 					changeColour(new Color(0, 136, 255), new Color(0, 12, 33), new Color(255, 255, 255), new Color(255, 255, 255), new Color(0, 136, 255));
 					break;
 				default:
-					//TODO
+					JFrame colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
+					colorChooser.setVisible(true);
 					break;
 				}
 			}
