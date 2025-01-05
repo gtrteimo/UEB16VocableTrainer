@@ -1,13 +1,13 @@
 package net.tfobz.vocabletrainer.gui;
 
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.panels.*;
 
 @SuppressWarnings("serial")
@@ -31,8 +31,8 @@ public class VocableTrainerFrame extends JFrame {
 		setMinimumSize(new Dimension(720, 480));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
-		
-//		VocableTrainerPanel.changeColourStatic(Color.darkGray, Color.gray, Color.white, Color.black, Color.black);
+				
+		VocableTrainerLocalization.loadLocalization(VocableTrainerLocalization.localisation.English);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());

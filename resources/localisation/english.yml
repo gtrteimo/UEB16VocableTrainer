@@ -1,0 +1,75 @@
+en:
+  dialogs:
+    info:
+      close: "Close"
+    two_option:
+      yes: "Yes"
+      no: "No"
+    new_set:
+      title: "New Set"
+      enter_set_name: "Enter set name:"
+      description_1: "Description 1"
+      description_2: "Description 2"
+      confirm: "Confirm"
+      cancel: "Cancel"
+    input:
+      confirm: "Confirm"
+      cancel: "Cancel"
+    errors:
+      select_set_and_box: "Please select a Set and Box"
+      no_cards_in_box: "The Box you are trying to start has 0 Cards in it. Either add some Cards or choose another Box"
+      too_many_cards: "You are trying to start with {requested_cards} cards while there are only {available_cards} Cards in the Box"
+      set_dropped: "Looks like the Sets Database was dropped"
+  settings:
+    language: "Language"
+    theme: "Theme"
+    simplified_view: "Simplified View"
+    allow_premium: "Allow purchase of Premium"
+    buy_premium: "Buy Premium to unlock Settings"
+  menu:
+    home: "Home"
+    start: "Start"
+    info: "Info"
+    new: "New"
+    credits: "Credits"
+    settings: "Settings"
+    exit: "Exit"
+  credits:
+    creators: "Creators:"
+    helpers: "Special thanks to our helpers:"
+  home:
+    start: "Start"
+    new: "New"
+    info: "Info"
+    exit: "Exit"
+  buttons:
+    start: "Start"
+    new_set: "New Set"
+    import: "Import"
+    export: "Export"
+    rename: "Rename"
+    delete: "Delete"
+    save: "Save"
+    stop: "Stop"
+    skip: "Skip"
+    next: "Next"
+    check: "Check"
+    end: "End"
+  labels:
+    language: "Language"
+    theme: "Theme"
+    simplified_view: "Simplified View"
+    allow_premium: "Allow purchase of Premium"
+  statistics:
+    total_time: "Total Time"
+    max_card_time: "Max Card Time"
+    min_card_time: "Min Card Time"
+    avg_card_time: "Avg Card Time"
+    total_cards: "Total Cards"
+    skipped_cards: "Skipped Cards"
+    wrong_answers: "Wrong Answers"
+    correct_answers: "Correct Answers"
+    max_streak: "Max Streak"
+    accuracy: "Accuracy"
+  placeholders:
+    input_word: "Enter the correct equivalent word"
