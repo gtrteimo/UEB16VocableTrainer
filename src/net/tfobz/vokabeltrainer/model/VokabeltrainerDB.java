@@ -1470,7 +1470,6 @@ public class VokabeltrainerDB
   				try { con.close(); } catch (Exception e) { ; }
   			}
   		}
-  	
 	 	return ret;
 	}
 	
@@ -1683,9 +1682,9 @@ public class VokabeltrainerDB
 	        con = getConnection();
 	        stmt = con.createStatement();
 	        
-	        // Debug: Log the generated SQL query
+	        
 	        String sql = 
-	          "SELECT k.knummer, k.kworteins, k.kwortzwei, f.fbeschreibung, f.fnummer, l.lrichtung, l.lgrosskleinschreibung " +
+	          "SELECT k.knummer, k.kworteins, k.kwortzwei, f.fbeschreibung, f.ferinnerung, f.fgelerntam, f.fnummer, l.lrichtung, l.lgrosskleinschreibung " +
 	          "FROM karten k " +
 	          "JOIN faecher f ON k.fnummer = f.fnummer " +
 	          "JOIN lernkarteien l ON f.lnummer = l.lnummer " +
@@ -1698,6 +1697,8 @@ public class VokabeltrainerDB
 	            String wortEins = rs.getString("kworteins");
 	            String wortZwei = rs.getString("kwortzwei");
 	            String fachBeschreibung = rs.getString("fbeschreibung");
+	            int erinnerungsDatum = rs.getInt("ferinnerung");
+	            Date gelerntAm = rs.getDate("fgelerntam");
 	            int fnummer = rs.getInt("fnummer");
 	            boolean richtung = rs.getBoolean("lrichtung");
 	            boolean grossKleinschreibung = rs.getBoolean("lgrosskleinschreibung");
@@ -1708,6 +1709,8 @@ public class VokabeltrainerDB
 	            System.out.println("  Wort Eins: " + wortEins);
 	            System.out.println("  Wort Zwei: " + wortZwei);
 	            System.out.println("  Fach Beschreibung: " + (fachBeschreibung != null ? fachBeschreibung : "NULL"));
+	            System.out.println("  Fach Erinnerung: " + erinnerungsDatum);
+	            System.out.println("  Fach gelernt Datum: " + (gelerntAm != null ? gelerntAm : "NULL"));
 	            System.out.println("  Fach Nummer (fnummer): " + fnummer);
 	            System.out.println("  Richtung: " + richtung);
 	            System.out.println("  Groﬂ-/Kleinschreibung: " + grossKleinschreibung);
@@ -1715,7 +1718,7 @@ public class VokabeltrainerDB
 	            System.out.println("Test Beschreibung Fach: " + getFach(fnummer).getBeschreibung());
 	            
 	            // Add the Karte to the list
-	            ret.add(new Karte(nummer, wortEins, wortZwei, fachBeschreibung, richtung, grossKleinschreibung));
+	            ret.add(new Karte(nummer, wortEins, wortZwei, fachBeschreibung, gelerntAm, fnummer, richtung, grossKleinschreibung));
 	        }
 	    } catch (SQLException e) {
 	        // Debug: Log exception details

@@ -183,12 +183,14 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             }
             List<Karte> cards = VokabeltrainerDB.getKartenUndBoxenVonLernkartei(l.getNummer());
             for (Karte card : cards) {
+            	System.out.println(card.getGerlerntAm());
                 model.addRow(new Object[]{
                     false,
                     card.getWortEins(),
                     card.getWortZwei(),
                     new Date(),
-                    new Date(),
+                    (card.getGerlerntAm() != null ? card.getGerlerntAm() : "-"),
+//                    new Date(),
                     card.getFachBeschreibung(),
 //                    card.getFnummer(),
                     card.getNummer()
@@ -317,6 +319,10 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             }
         });
 
+        table.getColumnModel().getColumn(3).setMinWidth(0);
+        table.getColumnModel().getColumn(3).setMaxWidth(0);
+        table.getColumnModel().getColumn(3).setWidth(0);
+        
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
         table.getColumnModel().getColumn(6).setWidth(0);

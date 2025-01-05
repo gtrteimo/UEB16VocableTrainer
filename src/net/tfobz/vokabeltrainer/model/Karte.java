@@ -1,5 +1,6 @@
 package net.tfobz.vokabeltrainer.model;
 
+import java.util.Date;
 import java.util.Hashtable;
 
 /**
@@ -16,6 +17,7 @@ public class Karte {
   protected boolean grossKleinschreibung = false;
   
   protected String fachBeschreibung;
+  protected Date gerlerntAm;
   protected int fnummer = -1;
 
   protected Hashtable<String, String> fehler = null;
@@ -40,7 +42,22 @@ public class Karte {
   	this.fnummer = fnummer;
   }
   
-  public Karte(int nummer, String wortEins, String wortZwei, String fachBeschreibung, boolean richtung, boolean grossKleinschreibung) {
+  public Karte(int nummer, String wortEins, String wortZwei, String fachBeschreibung, Date gelerntAm, int fnummer, boolean richtung, boolean grossKleinschreibung) {
+	  	this.nummer = nummer;
+	  	this.setWortEins(wortEins);
+	  	this.setWortZwei(wortZwei);
+	  	this.fachBeschreibung = fachBeschreibung;
+	  	this.gerlerntAm = gelerntAm;
+	  	this.fnummer = fnummer;
+	  	this.richtung = richtung;
+	  	this.grossKleinschreibung = grossKleinschreibung;
+	  }
+  
+  public Date getGerlerntAm() {
+	return gerlerntAm;
+}
+
+public Karte(int nummer, String wortEins, String wortZwei, String fachBeschreibung, boolean richtung, boolean grossKleinschreibung) {
 	    this.nummer = nummer;
 	    setWortEins(wortEins);
 	    setWortZwei(wortZwei);
@@ -48,6 +65,7 @@ public class Karte {
 	    this.grossKleinschreibung = grossKleinschreibung;
 	    this.fachBeschreibung = fachBeschreibung;
 	}
+  
 
 	public String getFachBeschreibung() {
 	    return fachBeschreibung;
