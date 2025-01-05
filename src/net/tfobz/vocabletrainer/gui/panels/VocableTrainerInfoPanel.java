@@ -216,7 +216,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l == null) return;
         model = new DefaultTableModel(
-            new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Card due on", "Box", "knummer"}, 0
+            new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Last asked", "Box", "knummer"}, 0
         ) {
             @Override
             public boolean isCellEditable(int r, int c) {

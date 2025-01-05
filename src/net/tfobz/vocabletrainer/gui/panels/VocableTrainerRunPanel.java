@@ -123,6 +123,18 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         answer.setHorizontalAlignment(SwingConstants.CENTER);
         input.setHorizontalAlignment(SwingConstants.CENTER);
         
+        input.setText("Enter the correct equivalent word");
+        input.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				input.selectAll();				
+			}
+		});
+        
         input.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -200,6 +212,17 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	public void endRun() {
 		if(timer.isRunning())
 			timer.stop();
+		if (settings.getBox().getNummer() == -11) {
+			for (Fach f : VokabeltrainerDB.getFaecherErinnerung(settings.getSet().getNummer())) {
+				f.setGelerntAm(new Date());
+			}
+		} else if (settings.getBox().getNummer() == -22) {
+			for (Fach f : VokabeltrainerDB.getFaecher(settings.getSet().getNummer())) {
+				f.setGelerntAm(new Date());
+			}
+		} else {
+			settings.getBox().setGelerntAm(new Date());
+		}
 		loadStats();
 		//TODO update erinnerung
 	}
@@ -214,7 +237,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			next.setText("Check");
 			next.setMnemonic('e');
 			input.setBackground(C_platinum);
-			input.setText("");
+			input.setText("Enter the correct equivalent word");
+			input.selectAll();
 			answer.setText("");
 	        time2=0;
 	        clock2.setText("Card Time:  0");
@@ -240,11 +264,12 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			results[cardNum] = -1;
 			input.setBackground(Color.RED);
 		}
-		if(settings.isParcticeRun()) {
+		if(!settings.isParcticeRun()) {
 			if(correct) {
 				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
 					Fach fach = new Fach();
 					fach.setBeschreibung("TODO(maybee)");//TODO Decent name
+														 //Doesn't matter wont get diplayed or as far as i know even displayed. 
 					
 					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
 					
