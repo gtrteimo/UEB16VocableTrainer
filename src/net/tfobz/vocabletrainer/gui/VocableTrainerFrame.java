@@ -32,7 +32,7 @@ public class VocableTrainerFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
 		
-		VocableTrainerPanel.changeColourStatic(Color.darkGray, Color.gray, Color.white, Color.black, Color.black);
+//		VocableTrainerPanel.changeColourStatic(Color.darkGray, Color.gray, Color.white, Color.black, Color.black);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());

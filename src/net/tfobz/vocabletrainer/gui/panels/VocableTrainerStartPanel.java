@@ -197,7 +197,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		}
 		
 		List<Karte> k = VokabeltrainerDB.getKarten(((Fach) boxComboBoxes.getSelectedItem()).getNummer());
-		if (k != null && k.size() > 0 && (options[3].isSelected()?k.size() >= ((Integer)(optionSpinners[2].getValue())).intValue():true)) {
+		System.out.println(settings.getBox().getNummer());
+		if (settings.getBox().getNummer() == -11 || settings.getBox().getNummer() == -22 || (k != null && k.size() > 0 && (options[3].isSelected()?k.size() >= ((Integer)(optionSpinners[2].getValue())).intValue():true))) {
 			if (settings != null) {
 				if (options[0].isSelected()) {
 					settings.setCardTimeLimit(((Integer)(optionSpinners[0].getValue())).intValue(), (TimeUnit)optionComboBoxesTime[0].getSelectedItem());
@@ -214,9 +215,15 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 				
 				
 				try {
-					vtf.changePanel(-3);
 					VocableTrainerRunPanel run = new VocableTrainerRunPanel(vtf, settings);
+					vtf.changePanel(-3);
 					vtf.add(run);
+				} catch (IllegalArgumentException e0) {
+					if (options[3].isSelected()) {
+						new VocableTrainerInfoDialog(vtf, "Error", "You are trying to start with "+((Integer)(optionSpinners[2].getValue())).intValue() + "crads while there are only "+k.size()+ " Cards in the Box").setVisible(true);;
+					} else {
+						new VocableTrainerInfoDialog(vtf, "Error", "The Box you are trying to start has 0 Cards in it. Either add some Cards or chose another Box").setVisible(true);;
+					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -226,7 +233,6 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		} else {
 			new VocableTrainerInfoDialog(vtf, "Error", "The Box you are trying to start has 0 Cards in it. Either add some Cards or chose another Box").setVisible(true);;
 		}
-		
 	}
 	
 	@Override
@@ -246,32 +252,42 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	
 	protected void retriveBoxes() {
-		Lernkartei l = (Lernkartei) setComboBox.getSelectedItem();
-		if (l!=null) {
-			boxes = VokabeltrainerDB.getFaecher(l.getNummer());
-			boxComboBoxes.removeAllItems();
-		    if (boxes != null) {
-			    for (Fach box : boxes) {
-			    	boxComboBoxes.addItem(box);
-			    }
-		    } else {
-		    	//TODO how about if it was just created and is still empty. change this message
-		    	//No
-	            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
-		    }
-		}
-		
-		boxComboBoxes.setRenderer(new DefaultListCellRenderer() {
-		    @Override
-		    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-		        if (value instanceof Fach) {
-		            label.setText(((Fach) value).getBeschreibung());
-		        }
-		        return label;
-		    }
-		});
+	    Lernkartei l = (Lernkartei) setComboBox.getSelectedItem();
+	    if (l != null) {
+	        boxes = VokabeltrainerDB.getFaecher(l.getNummer());
+	        boxComboBoxes.removeAllItems();
+	        
+	        boxComboBoxes.addItem(new Fach(-22, "All Boxes"));  
+	        boxComboBoxes.addItem(new Fach(-11, "Due Boxes")); 
+
+	        if (boxes != null) {
+	            for (Fach box : boxes) {
+	                boxComboBoxes.addItem(box);
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was dropped", "Statement", JOptionPane.ERROR_MESSAGE);
+	        }
+	    }
+
+	    boxComboBoxes.setRenderer(new DefaultListCellRenderer() {
+	        @Override
+	        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+	            JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+	            if (value instanceof Fach) {
+	                Fach fach = (Fach) value;
+	                if (fach.getNummer() == -11) {
+	                    label.setText("Due Boxes");
+	                } else if (fach.getNummer() == -22) {
+	                    label.setText("All Boxes");
+	                } else {
+	                    label.setText(fach.getBeschreibung() + ". Box");
+	                }
+	            }
+	            return label;
+	        }
+	    });
 	}
+
 	
 	@Override
 	public void setColours() {

@@ -25,7 +25,11 @@ public class Fach
 
   protected Hashtable<String, String> fehler = null;
   
-  public Fach() {
+  public Fach() {}
+  
+  public Fach(int nummer, String beschreibung) {
+	  this.nummer = nummer;
+	  this.beschreibung = beschreibung;
   }
   
   public Fach(int nummer, String beschreibung, int erinnerungsIntervall, Date gelerntAm) {

@@ -6,6 +6,8 @@ import net.tfobz.vokabeltrainer.model.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -39,7 +41,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	private ArrayList<JLabel> value;
 	private JButton end;
 	
-	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) {
+	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) throws IllegalArgumentException{
 		super();
 		this.vtf = vtf;
 		this.settings = settings;
@@ -54,7 +56,31 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		
 		panel.setLayout(null);
 		
-        cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
+		if (settings.getBox().getNummer() == -11) {
+			cards = new ArrayList<Karte>();
+			List<Fach> faecher = VokabeltrainerDB.getFaecherErinnerung(settings.getSet().getNummer());
+			for (Fach fach: faecher) {
+				System.out.println("Hallo");
+				if (fach != null) {
+					cards.addAll(
+							VokabeltrainerDB.getKarten(fach.getNummer()));
+				}
+			}
+			if (cards.size() <= 0) {
+				vtf.changePanel(5);
+				vtf.remove(VocableTrainerRunPanel.this);
+				throw new IllegalArgumentException("");
+			}
+		} else if (settings.getBox().getNummer() == -22) {
+			cards = (ArrayList<Karte>) VokabeltrainerDB.getKartenUndBoxenVonLernkartei(settings.getSet().getNummer());
+			if (cards.size() <= 0) {
+				vtf.changePanel(5);
+				vtf.remove(VocableTrainerRunPanel.this);
+				throw new IllegalArgumentException("");
+			}
+		} else {
+			cards = VokabeltrainerDB.getKarten(settings.getBox().getNummer());
+		}
         times = settings.isCardLimit()?new int[settings.getCardLimit()<cards.size()?settings.getCardLimit():cards.size()]: new int[cards.size()];
         results = new int[times.length];
         cardNum = -1;
