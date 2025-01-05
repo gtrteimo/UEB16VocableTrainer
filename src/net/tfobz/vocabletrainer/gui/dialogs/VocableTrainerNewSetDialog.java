@@ -28,7 +28,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
 	protected JButton cancelButton;
 
     public VocableTrainerNewSetDialog(JFrame parent) {
-        super(parent, "New Set");
+        super(parent, VocableTrainerLocalization.NEW_SET_TITLE);
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -109,7 +109,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> check());
 
-        cancelButton = new JButton(VocableTrainerLocalization.BUTTON_CONFIRM);
+        cancelButton = new JButton(VocableTrainerLocalization.BUTTON_CANCEL);
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
         cancelButton.setForeground(VocableTrainerPanel.C_platinum);

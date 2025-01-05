@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 @SuppressWarnings("serial")
@@ -20,15 +21,15 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		super(vtf);
 		panel.setLayout(null);
 		
-		barPane.setTitle("Credits");
+		barPane.setTitle(VocableTrainerLocalization.MENU_CREDITS);
 		
-		labelcreators = new JLabel("Creators:");
+		labelcreators = new JLabel(VocableTrainerLocalization.CREDITS_CREATORS);
 		labelcreators.setForeground(C_nigth);
 		creators = new ArrayList<JLabel>();
 		creators.add(createLabel(new JLabel("Nathan C. (21chinat)")));
 		creators.add(createLabel(new JLabel("Gerhard T. R. (gtrteimo)")));
 		
-		labelhelpers = new JLabel("Special thanks to our slaves:");
+		labelhelpers = new JLabel(VocableTrainerLocalization.CREDITS_HELPERS);
 		labelhelpers.setForeground(C_nigth);
 		helpers = new ArrayList<JLabel>();
 		helpers.add(createLabel(new JLabel("Nick L.")));

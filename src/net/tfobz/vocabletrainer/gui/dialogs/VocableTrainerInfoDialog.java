@@ -5,6 +5,7 @@ import java.awt.FontMetrics;
 
 import javax.swing.*;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 @SuppressWarnings("serial")
@@ -13,7 +14,6 @@ public class VocableTrainerInfoDialog extends JDialog {
 	protected JPanel componentPanel;
 	
 	private JLabel label;
-	
 	public VocableTrainerInfoDialog(JFrame parent, String title, String text) {
 		this(parent, title);
 		
@@ -67,7 +67,7 @@ public class VocableTrainerInfoDialog extends JDialog {
 			font = new Font("Arial", Font.PLAIN, font.getSize() - 1);
 		}
 		
-		JButton close = new JButton("Close");
+		JButton close = new JButton(VocableTrainerLocalization.BUTTON_CLOSE);
 		close.setBounds( 16, componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth() - 32, componentPanel.getHeight() / 6 );
 		close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2));
 		close.setForeground(VocableTrainerPanel.C_platinum);

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
@@ -45,7 +46,7 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
 		input.setBorder(null);
 		input.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		confirmButton = new JButton("Confirm");
+		confirmButton = new JButton(VocableTrainerLocalization.BUTTON_CONFIRM);
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
         confirmButton.setForeground(VocableTrainerPanel.C_platinum);
@@ -56,7 +57,7 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
         	setVisible(false);
         });
 
-        cancelButton = new JButton("Cancel");
+        cancelButton = new JButton(VocableTrainerLocalization.BUTTON_CANCEL);
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
         cancelButton.setForeground(VocableTrainerPanel.C_platinum);

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.*;
 
 @SuppressWarnings("serial")
@@ -29,13 +30,13 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		
 		panel.setLayout(null);
 		
-		options[0] = new JButton("Home");
-		options[1] = new JButton("Start");
-		options[2] = new JButton("Info");
-		options[3] = new JButton("New");
-		options[4] = new JButton("Credits");
-		options[5] = new JButton("Settings");
-		options[6] = new JButton("Exit");
+		options[0] = new JButton(VocableTrainerLocalization.MENU_HOME);
+		options[1] = new JButton(VocableTrainerLocalization.MENU_START);
+		options[2] = new JButton(VocableTrainerLocalization.MENU_INFO);
+		options[3] = new JButton(VocableTrainerLocalization.MENU_NEW);
+		options[4] = new JButton(VocableTrainerLocalization.MENU_CREDITS);
+		options[5] = new JButton(VocableTrainerLocalization.MENU_SETTINGS);
+		options[6] = new JButton(VocableTrainerLocalization.MENU_EXIT);
 
 		for (int i = 0; i < options.length; i++) {
 			options[i].setForeground(C_platinum);

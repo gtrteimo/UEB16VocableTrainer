@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerIO;
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
@@ -33,9 +34,9 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		panel.setLayout(null);
 		
-		barPane.setTitle("New");
+		barPane.setTitle(VocableTrainerLocalization.MENU_NEW);
 		
-		newSet = new JButton("New Set");
+		newSet = new JButton(VocableTrainerLocalization.NEW_SET_TITLE);
 		newSet.setForeground(C_platinum);
 		newSet.setBackground(C_slateGray);
 		newSet.setBorderPainted(false);
@@ -43,7 +44,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		newSet.setHorizontalAlignment(SwingConstants.CENTER);
 		newSet.setMnemonic('N');
 		
-		impo = new JButton("Import");
+		impo = new JButton(VocableTrainerLocalization.BUTTON_IMPORT);
 		impo.setForeground(C_platinum);
 		impo.setBackground(C_slateGray);
 		impo.setBorderPainted(false);
@@ -51,7 +52,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		impo.setHorizontalAlignment(SwingConstants.CENTER);
 		impo.setMnemonic('I');
 		
-		expo = new JButton("Export");
+		expo = new JButton(VocableTrainerLocalization.BUTTON_EXPORT);
 		expo.setForeground(C_platinum);
 		expo.setBackground(C_slateGray);
 		expo.setBorderPainted(false);
@@ -64,13 +65,13 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		comboBox.setBackground(C_platinum);
 		comboBox.setBorder(null);
 		
-		renameButton = new JButton("Rename");
+		renameButton = new JButton(VocableTrainerLocalization.BUTTON_RENAME);
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
         renameButton.setForeground(C_platinum);
         renameButton.setBackground(C_slateGray);
         renameButton.setMnemonic('R');
-        deleteButton = new JButton("Delete");
+        deleteButton = new JButton(VocableTrainerLocalization.BUTTON_DELETE);
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
         deleteButton.setForeground(C_platinum);
@@ -79,7 +80,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         renameButton.addActionListener(e -> {
             Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
             if (s != null) {
-                VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, "Rename set","Enter new name for the set:", s.getBeschreibung());
+                VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, VocableTrainerLocalization.RENAME_SET,VocableTrainerLocalization.RENAME_SET_QUESTION, s.getBeschreibung());
                 d.setVisible(true);
                 if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
                     s.setBeschreibung(d.getInput());

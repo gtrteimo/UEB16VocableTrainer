@@ -2,6 +2,8 @@ package net.tfobz.vocabletrainer.gui.panels;
 
 import javax.swing.*;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,9 +24,9 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
 
     public void setTitle(String text) {
         if (text.trim() != null && !text.trim().equals("")) {
-            title.setText("Vocable Trainer - " + text);
+            title.setText(VocableTrainerLocalization.TITLE + " - " + text);
         } else {
-            title.setText("Vocable Trainer");
+            title.setText(VocableTrainerLocalization.TITLE);
         }
     }
 
@@ -35,7 +37,7 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
 
         loadImage();
 
-        title = new JLabel("Vocable Trainer");
+        title = new JLabel(VocableTrainerLocalization.TITLE);
         title.setForeground(C_platinum);
         title.setHorizontalAlignment(SwingConstants.LEFT);
         add(title);

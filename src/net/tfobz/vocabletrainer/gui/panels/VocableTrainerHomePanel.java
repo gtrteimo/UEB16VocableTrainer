@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 @SuppressWarnings("serial")
@@ -21,14 +22,14 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		
 		panel.loadImage();
 		
-		barPane.setTitle("Home");
+		barPane.setTitle(VocableTrainerLocalization.MENU_HOME);
 		
 		panel.setLayout(null);
 		
-		B_start = new JButton ("Start");
-		B_new = new JButton ("New");
-		B_info = new JButton ("Info");
-		B_exit = new JButton ("Exit");
+		B_start = new JButton (VocableTrainerLocalization.HOME_START);
+		B_new = new JButton (VocableTrainerLocalization.HOME_NEW);
+		B_info = new JButton (VocableTrainerLocalization.HOME_INFO);
+		B_exit = new JButton (VocableTrainerLocalization.HOME_EXIT);
 		
 		B_start.setBackground(C_slateGray);
 		B_new.setBackground(C_slateGray);

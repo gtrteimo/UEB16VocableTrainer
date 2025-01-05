@@ -1,4 +1,5 @@
 en:
+  title: "Vocable Trainer"
   dialogs:
     info:
       close: "Close"
@@ -13,6 +14,8 @@ en:
       confirm: "Confirm"
       cancel: "Cancel"
     input:
+      rename_title: "Rename Set"
+      rename_description: "Enter new name for the set:"
       confirm: "Confirm"
       cancel: "Cancel"
     errors:
@@ -36,7 +39,7 @@ en:
     exit: "Exit"
   credits:
     creators: "Creators:"
-    helpers: "Special thanks to our helpers:"
+    helpers: "Special thanks to our slaves:"
   home:
     start: "Start"
     new: "New"
@@ -54,6 +57,7 @@ en:
     skip: "Skip"
     next: "Next"
     check: "Check"
+    close: "Close"
     end: "End"
   labels:
     language: "Language"
