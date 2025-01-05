@@ -89,6 +89,7 @@ public class VocableTrainerPanel extends JPanel {
 	}
 	
 	public void setColours() {
+		setBackground(C_platinum);
 		barPane.setColours();
 		panel.setBackground(C_powderBlue);
 	}
@@ -110,7 +111,10 @@ public class VocableTrainerPanel extends JPanel {
 		C_slateGray = buttonBackgroundColour;
 		
 		for (VocableTrainerPanel panel : vtf.getPanels()) {
-			panel.setColours();
+			if (panel != null) {
+				System.out.println(panel);
+				panel.setColours();
+			}
 		}
 	}
 	

@@ -324,6 +324,9 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			optionComboBoxesTime[i].setBackground(C_platinum);
 		}		
 		
+		start.setForeground(C_platinum);
+		start.setBackground(C_slateGray);
+		
 	}
 	
 	@Override

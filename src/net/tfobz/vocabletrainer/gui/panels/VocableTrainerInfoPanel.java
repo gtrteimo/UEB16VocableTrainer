@@ -249,6 +249,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             JCheckBox cb = new JCheckBox();
             cb.setSelected(v != null && (Boolean) v);
             cb.setFocusPainted(false);
+            cb.setBackground(C_platinum);
+            cb.setForeground(C_nigth);
             cb.setBorderPainted(false);
             cb.setOpaque(true);
             if (sel) {
@@ -294,7 +296,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         textEditor.setClickCountToStart(1);
         table.getColumnModel().getColumn(1).setCellEditor(textEditor);
         table.getColumnModel().getColumn(2).setCellEditor(textEditor);
+        table.setBackground(C_platinum);
         scrollPane = new JScrollPane(table);
+    	scrollPane.getViewport().setBackground(C_platinum);
         panel.add(scrollPane);
 
         table.getModel().addTableModelListener(e -> {
