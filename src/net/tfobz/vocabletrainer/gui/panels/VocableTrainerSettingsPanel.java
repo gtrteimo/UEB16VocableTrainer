@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -42,7 +44,6 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         language.setForeground(C_nigth);
         
         theme = new JLabel("   Theme");
-        theme.setEnabled(false);
         theme.setForeground(C_nigth);
         
         languageBox = new JComboBox<String>();
@@ -52,10 +53,12 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         languageBox.addItem("English");
         
         themeBox = new JComboBox<String>();
-        themeBox.setEnabled(false);
         themeBox.setForeground(C_nigth);
         themeBox.setBackground(C_platinum);
         themeBox.addItem("Acqua");
+        themeBox.addItem("Monochrom");
+        themeBox.addItem("Dark Blue");
+        themeBox.addItem("Custom");
         
         simplifiedBox = new JCheckBox(" Simplified View");
         simplifiedBox.setBackground(C_powderBlue);
@@ -63,19 +66,38 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
         
-        allwoPremiumBox = new JCheckBox(" Allow purchase of Premium");
+        allwoPremiumBox = new JCheckBox(" idk");
         allwoPremiumBox.setBackground(C_powderBlue);
         allwoPremiumBox.setForeground(C_nigth);
 
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
         
-        button = new JButton("Buy Premium to unlock Settings");
-        button.setEnabled(false);
+        button = new JButton("Suggest new Feature");
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setBackground(C_slateGray);
         button.setForeground(C_platinum);
+        
+        themeBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switch (themeBox.getSelectedIndex()) {
+				case 0:
+					changeColour(new Color(50, 50, 75), new Color(171, 181, 216), new Color(225, 225, 225), new Color(11, 9, 10), new Color(111, 116, 146));
+					break;
+				case 1:
+					changeColour(Color.DARK_GRAY, Color.WHITE, Color.WHITE, Color.BLACK, Color.LIGHT_GRAY);
+					break;
+				case 2:
+					changeColour(new Color(0, 136, 255), new Color(0, 12, 33), new Color(255, 255, 255), new Color(0, 0, 0), new Color(0, 136, 255));
+					break;
+				default:
+					//TODO
+					break;
+				}
+			}
+		});
 		
         panel.add(language);
         panel.add(theme);
