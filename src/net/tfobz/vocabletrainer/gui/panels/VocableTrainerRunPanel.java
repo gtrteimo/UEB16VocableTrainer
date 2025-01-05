@@ -124,7 +124,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         answer.setHorizontalAlignment(SwingConstants.CENTER);
         input.setHorizontalAlignment(SwingConstants.CENTER);
         
-        input.setText("Enter the correct equivalent word");
+        answer.setText("Your answer");
+        input.setText("");
         input.addFocusListener(new FocusListener() {
 			
 			@Override
@@ -237,9 +238,9 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			next.setText("Check");
 			next.setMnemonic('e');
 			input.setBackground(C_platinum);
-			input.setText("Enter the correct equivalent word");
+			input.setText("");
 			input.selectAll();
-			answer.setText("");
+			answer.setText("Your answer");
 	        time2=0;
 	        clock2.setText("Card Time:  0");
 	        timer.start();
@@ -265,19 +266,20 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			input.setBackground(Color.RED);
 		}
 		if(!settings.isParcticeRun()) {
-			if(correct) {
-				if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
-					Fach fach = new Fach();
-					fach.setBeschreibung("TODO(maybee)");//TODO Decent name
-														 //Doesn't matter wont get diplayed or as far as i know even displayed. 
-					
-					VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
-					
-					VokabeltrainerDB.setKarteRichtig(currentCard);
+			new Thread(()->{
+				if(correct) {
+					if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
+						Fach fach = new Fach();
+						fach.setBeschreibung("TODO");
+						
+						VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
+						
+						VokabeltrainerDB.setKarteRichtig(currentCard);
+					}
+				}else {
+					VokabeltrainerDB.setKarteFalsch(currentCard);
 				}
-			}else {
-				VokabeltrainerDB.setKarteFalsch(currentCard);
-			}
+			}).start();
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
