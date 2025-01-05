@@ -57,6 +57,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.setBackground(C_platinum);
         themeBox.addItem("Acqua");
         themeBox.addItem("Monochrom");
+        themeBox.addItem("Dark Blue");
         themeBox.addItem("Custom");
         
         simplifiedBox = new JCheckBox(" Simplified View");
@@ -87,6 +88,9 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 					break;
 				case 1:
 					changeColour(Color.DARK_GRAY, Color.WHITE, Color.WHITE, Color.BLACK, Color.LIGHT_GRAY);
+					break;
+				case 2:
+					changeColour(new Color(0, 136, 255), new Color(0, 12, 33), new Color(255, 255, 255), new Color(0, 0, 0), new Color(0, 136, 255));
 					break;
 				default:
 					//TODO
