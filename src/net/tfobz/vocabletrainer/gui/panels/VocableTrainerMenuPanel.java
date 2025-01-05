@@ -60,6 +60,17 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
+	public void setColours() {
+		super.setColours();
+		panel.setBackground(C_slateGray);
+		
+		for (int i = 0; i < options.length; i++) {
+			options[i].setForeground(C_platinum);
+			options[i].setBackground(C_slateGray);
+		}
+	}
+	
+	@Override
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         

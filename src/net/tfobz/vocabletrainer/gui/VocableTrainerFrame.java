@@ -1,6 +1,7 @@
 package net.tfobz.vocabletrainer.gui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -16,7 +17,10 @@ public class VocableTrainerFrame extends JFrame {
 	
 	private ArrayList<Integer> history = new ArrayList<Integer>();
 	private VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
-//	private VocableTrainerInterface db;
+	
+	public VocableTrainerPanel[] getPanels() {
+		return panels;
+	}
 	
 	public VocableTrainerFrame () {
 		this(1080, 720);
@@ -28,7 +32,7 @@ public class VocableTrainerFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
 		
-//		VocableTrainerPanel.changeColor(-1);
+		VocableTrainerPanel.changeColourStatic(Color.darkGray, Color.gray, Color.white, Color.black, Color.black);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -75,7 +79,6 @@ public class VocableTrainerFrame extends JFrame {
 			contentPane.remove(panels[history.get(history.size()-1)]);
 		}
 	}
-	
 	public void close () {
 		setVisible(false);
 		dispose();

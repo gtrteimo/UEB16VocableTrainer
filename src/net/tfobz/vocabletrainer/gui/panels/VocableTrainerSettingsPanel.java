@@ -47,24 +47,35 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         
         languageBox = new JComboBox<String>();
         languageBox.setEnabled(false);
+        languageBox.setForeground(C_nigth);
+        languageBox.setBackground(C_platinum);
         languageBox.addItem("English");
         
         themeBox = new JComboBox<String>();
         themeBox.setEnabled(false);
+        themeBox.setForeground(C_nigth);
+        themeBox.setBackground(C_platinum);
         themeBox.addItem("Acqua");
         
         simplifiedBox = new JCheckBox(" Simplified View");
         simplifiedBox.setBackground(C_powderBlue);
+        simplifiedBox.setForeground(C_nigth);
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
         
         allwoPremiumBox = new JCheckBox(" Allow purchase of Premium");
         allwoPremiumBox.setBackground(C_powderBlue);
+        allwoPremiumBox.setForeground(C_nigth);
+
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
         
         button = new JButton("Buy Premium to unlock Settings");
         button.setEnabled(false);
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+        button.setBackground(C_slateGray);
+        button.setForeground(C_platinum);
 		
         panel.add(language);
         panel.add(theme);
@@ -77,6 +88,31 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		add(barPane);
 		add(panel);
 	}
+	
+	@Override
+	public void setColours() {
+		super.setColours();
+		
+        language.setForeground(C_nigth);
+        
+        theme.setForeground(C_nigth);
+        
+        languageBox.setForeground(C_nigth);
+        languageBox.setBackground(C_platinum);
+        
+        themeBox.setForeground(C_nigth);
+        themeBox.setBackground(C_platinum);
+        
+        simplifiedBox.setBackground(C_powderBlue);
+        simplifiedBox.setForeground(C_nigth);
+        
+        allwoPremiumBox.setBackground(C_powderBlue);
+        allwoPremiumBox.setForeground(C_nigth);
+        
+        button.setBackground(C_slateGray);
+        button.setForeground(C_platinum);
+	}
+	
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         

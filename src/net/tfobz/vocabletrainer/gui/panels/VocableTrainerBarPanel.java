@@ -42,6 +42,12 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     }
     
     @Override
+    public void setColours() {
+    	setBackground(C_spaceCadet);
+    	title.setForeground(C_platinum);
+	}
+    
+    @Override
     protected void loadImage() {
     	if (barsImage == null) {
 	        try {

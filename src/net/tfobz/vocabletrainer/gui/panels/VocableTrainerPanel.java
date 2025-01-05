@@ -88,17 +88,43 @@ public class VocableTrainerPanel extends JPanel {
 		this.state = state;
 	}
 	
-	public static void changeColor(int options) {
-		switch (options) {
-		case -1:
-			C_nigth = new Color(255 - C_nigth.getRed(), 255 - C_nigth.getGreen(), 255 - C_nigth.getBlue());
-			C_platinum = new Color(255 - C_platinum.getRed(), 255 - C_platinum.getGreen(), 255 - C_platinum.getBlue());
-			C_powderBlue = new Color(255 - C_powderBlue.getRed(), 255 - C_powderBlue.getGreen(), 255 - C_powderBlue.getBlue());
-			C_slateGray = new Color(255 - C_slateGray.getRed(), 255 - C_slateGray.getGreen(), 255 - C_slateGray.getBlue());
-			C_spaceCadet = new Color(255 - C_spaceCadet.getRed(), 255 - C_spaceCadet.getGreen(), 255 - C_spaceCadet.getBlue());
-			break;
+	public void setColours() {
+		barPane.setColours();
+		panel.setBackground(C_powderBlue);
+	}
+	
+	public static void changeColourStatic (Color menuBarColour, Color mainBackgroundColour, Color textColour1, Color textColour2, Color buttonBackgroundColour) {
+		C_spaceCadet = menuBarColour;
+		C_powderBlue = mainBackgroundColour;
+		C_platinum = textColour1;
+		C_nigth = textColour2;
+		C_slateGray = buttonBackgroundColour;
+		
+	}
+	
+	public void changeColour (Color menuBarColour, Color mainBackgroundColour, Color textColour1, Color textColour2, Color buttonBackgroundColour) {
+		C_spaceCadet = menuBarColour;
+		C_powderBlue = mainBackgroundColour;
+		C_platinum = textColour1;
+		C_nigth = textColour2;
+		C_slateGray = buttonBackgroundColour;
+		
+		for (VocableTrainerPanel panel : vtf.getPanels()) {
+			panel.setColours();
 		}
 	}
+	
+//	public static void changeColour(int options) {
+//		switch (options) {
+//		case -1:
+//			C_nigth = new Color(255 - C_nigth.getRed(), 255 - C_nigth.getGreen(), 255 - C_nigth.getBlue());
+//			C_platinum = new Color(255 - C_platinum.getRed(), 255 - C_platinum.getGreen(), 255 - C_platinum.getBlue());
+//			C_powderBlue = new Color(255 - C_powderBlue.getRed(), 255 - C_powderBlue.getGreen(), 255 - C_powderBlue.getBlue());
+//			C_slateGray = new Color(255 - C_slateGray.getRed(), 255 - C_slateGray.getGreen(), 255 - C_slateGray.getBlue());
+//			C_spaceCadet = new Color(255 - C_spaceCadet.getRed(), 255 - C_spaceCadet.getGreen(), 255 - C_spaceCadet.getBlue());
+//			break;
+//		}
+//	}
 	
 	protected void loadImage() {
     	if (backImage == null) {

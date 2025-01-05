@@ -328,7 +328,22 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         table.getColumnModel().getColumn(6).setWidth(0);
     }
 
+    @Override
+	public void setColours() {
+		super.setColours();
+		
+        topic.setForeground(C_nigth);
+        
+        comboBox.setForeground(C_nigth);
+        comboBox.setBackground(C_platinum);
 
+        renameButton.setForeground(C_platinum);
+        renameButton.setBackground(C_slateGray);
+        
+        deleteButton.setForeground(C_platinum);
+        deleteButton.setBackground(C_slateGray);
+	}
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

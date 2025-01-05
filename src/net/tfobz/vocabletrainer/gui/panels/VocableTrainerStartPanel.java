@@ -58,6 +58,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		for (int i = 0; i < options.length; i++) { 
 			options[i].setForeground(C_nigth);
 			options[i].setBackground(C_powderBlue);
+			options[i].setBorderPainted(false);
+			options[i].setFocusPainted(false);
 		}
 		SpinnerListener spinnerListener = new SpinnerListener();
 		for (int i = 0; i < optionSpinners.length; i++) {
@@ -70,7 +72,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			if (editor instanceof JSpinner.DefaultEditor) {
 				JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
 				defaultEditor.getTextField().addKeyListener(spinnerListener);
+				defaultEditor.getTextField().setBackground(C_platinum);
+				defaultEditor.getTextField().setForeground(C_nigth);
 			}
+			for (Component component : optionSpinners[i].getComponents()) {
+                component.setBackground(C_platinum); 
+                component.setForeground(C_nigth);
+            }
 		}
 		optionSpinners[0].setEnabled(true);
 		optionSpinners[1].setEnabled(false);
@@ -263,6 +271,43 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		        return label;
 		    }
 		});
+	}
+	
+	@Override
+	public void setColours() {
+		super.setColours();
+		
+		for (int i = 0; i < options.length; i++) { 
+			options[i].setForeground(C_nigth);
+			options[i].setBackground(C_powderBlue);
+		}
+		
+		for (int i = 0; i < optionSpinners.length; i++) {
+			optionSpinners[i].setForeground(C_nigth);
+			optionSpinners[i].setBackground(C_powderBlue);
+			JComponent editor = optionSpinners[i].getEditor();
+			if (editor instanceof JSpinner.DefaultEditor) {
+				JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
+				defaultEditor.getTextField().setBackground(C_platinum);
+				defaultEditor.getTextField().setForeground(C_nigth);
+			}
+			for (Component component : optionSpinners[i].getComponents()) {
+                component.setBackground(C_platinum); 
+                component.setForeground(C_nigth);
+            }
+		}
+		
+		setComboBox.setForeground(C_nigth);
+		setComboBox.setBackground(C_platinum);
+		
+		boxComboBoxes.setForeground(C_nigth);
+		boxComboBoxes.setBackground(C_platinum);
+		
+		for (int i = 0; i < optionComboBoxesTime.length; i++) {			
+			optionComboBoxesTime[i].setForeground(C_nigth);
+			optionComboBoxesTime[i].setBackground(C_platinum);
+		}		
+		
 	}
 	
 	@Override

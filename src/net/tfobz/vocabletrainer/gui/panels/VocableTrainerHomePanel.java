@@ -71,6 +71,20 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 	}
 	
 	@Override
+	public void setColours() {
+		super.setColours();
+		B_start.setBackground(C_slateGray);
+		B_new.setBackground(C_slateGray);
+		B_info.setBackground(C_slateGray);
+		B_exit.setBackground(C_slateGray);
+		
+		B_start.setForeground(C_platinum);
+		B_new.setForeground(C_platinum);
+		B_info.setForeground(C_platinum);
+		B_exit.setForeground(C_platinum);
+	}
+	
+	@Override
 	public void paintComponent(Graphics g) {        
         super.paintComponent(g);
         

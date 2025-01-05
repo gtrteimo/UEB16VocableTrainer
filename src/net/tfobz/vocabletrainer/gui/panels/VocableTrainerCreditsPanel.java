@@ -29,6 +29,7 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		creators.add(createLabel(new JLabel("Gerhard T. R. (gtrteimo)")));
 		
 		labelhelpers = new JLabel("Special thanks to our slaves:");
+		labelhelpers.setForeground(C_nigth);
 		helpers = new ArrayList<JLabel>();
 		helpers.add(createLabel(new JLabel("Nick L.")));
 		helpers.add(createLabel(new JLabel("Manuel P.")));
@@ -52,6 +53,22 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		label.setForeground(C_nigth);
 		label.setBackground(C_powderBlue);
 		return label;
+	}
+	
+	@Override
+	public void setColours() {
+		super.setColours();
+		labelcreators.setForeground(C_nigth);
+		labelhelpers.setForeground(C_nigth);
+		
+		for (int i = 0; i < creators.size(); i++) {
+			creators.get(i).setForeground(C_nigth);
+			creators.get(i).setBackground(C_powderBlue);
+		}
+		for (int i = 0; i < helpers.size(); i++) {
+			helpers.get(i).setForeground(C_nigth);
+			helpers.get(i).setBackground(C_powderBlue);
+		}
 	}
 	
     @Override

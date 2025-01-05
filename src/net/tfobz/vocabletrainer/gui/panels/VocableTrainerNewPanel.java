@@ -276,6 +276,41 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		}
 	}
 	
+	@Override
+	public void setColours() {
+		super.setColours();
+		
+		newSet.setForeground(C_platinum);
+		newSet.setBackground(C_slateGray);
+		
+		impo.setForeground(C_platinum);
+		impo.setBackground(C_slateGray);
+		
+		expo.setForeground(C_platinum);
+		expo.setBackground(C_slateGray);
+		
+		comboBox.setForeground(C_nigth);
+		comboBox.setBackground(C_platinum);
+		
+        renameButton.setForeground(C_platinum);
+        renameButton.setBackground(C_slateGray);
+        
+        deleteButton.setForeground(C_platinum);
+        deleteButton.setBackground(C_slateGray);
+        
+		label1.setForeground(C_nigth);
+		
+		label2.setForeground(C_nigth);
+		
+		text1.setForeground(C_nigth);
+		text1.setBackground(C_platinum);
+		
+		text2.setForeground(C_nigth);
+		text2.setBackground(C_platinum);
+		
+		save.setForeground(C_platinum);
+		save.setBackground(C_slateGray);
+	}
 	
     @Override
 	public void paintComponent(Graphics g) {
