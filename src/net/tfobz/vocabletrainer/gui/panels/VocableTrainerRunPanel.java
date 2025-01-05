@@ -6,6 +6,7 @@ import net.tfobz.vokabeltrainer.model.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.*;
@@ -224,7 +225,6 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			settings.getBox().setGelerntAm(new Date());
 		}
 		loadStats();
-		//TODO update erinnerung
 	}
 	
 	public void nextCard() {
