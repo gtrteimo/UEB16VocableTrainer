@@ -3,7 +3,6 @@ package net.tfobz.vocabletrainer.gui.panels;
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerIO;
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;

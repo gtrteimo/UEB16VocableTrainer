@@ -1,16 +1,16 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
-import javax.swing.*;
-
-import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
-
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.imageio.ImageIO;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 
 @SuppressWarnings("serial")
 public class VocableTrainerBarPanel extends VocableTrainerPanel {

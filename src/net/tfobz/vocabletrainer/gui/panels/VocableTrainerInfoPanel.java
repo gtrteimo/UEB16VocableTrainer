@@ -1,29 +1,39 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
-import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-
-import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
-import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
-import net.tfobz.vokabeltrainer.model.Fach;
-import net.tfobz.vokabeltrainer.model.Karte;
-import net.tfobz.vokabeltrainer.model.Lernkartei;
-import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
-
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+
+import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
+import net.tfobz.vokabeltrainer.model.Karte;
+import net.tfobz.vokabeltrainer.model.Lernkartei;
+import net.tfobz.vokabeltrainer.model.VokabeltrainerDB;
 
 @SuppressWarnings("serial")
 public class VocableTrainerInfoPanel extends VocableTrainerPanel {

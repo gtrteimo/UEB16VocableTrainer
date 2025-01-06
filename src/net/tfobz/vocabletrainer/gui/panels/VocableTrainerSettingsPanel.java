@@ -6,12 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,13 +14,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization.localisation;
-import net.tfobz.vocabletrainer.data.VocableTrainerRunSettings.TimeUnit;
 import net.tfobz.vocabletrainer.data.VocableTrainerSettingsIO;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerColorChooser;
