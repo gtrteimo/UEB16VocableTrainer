@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -46,6 +47,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	private JCheckBox simplifiedBox;
 	private JCheckBox allwoPremiumBox;
 	private JButton button;
+	private JFrame colorChooser;
 	
 	public VocableTrainerSettingsPanel (VocableTrainerFrame vtf) {
 		super(vtf);
@@ -108,6 +110,11 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VocableTrainerColorChooser colorChooser;
+				if(colorChooser!=null) {
+					colorChooser.setVisible(false);
+					colorChooser.dispose();
+					colorChooser = null;
+				}
 				switch (themeBox.getSelectedIndex()) {
 				case 0:
 					changeColour(colours[0][0], colours[0][1], colours[0][2], colours[0][3], colours[0][4]);
@@ -127,6 +134,18 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors());
 					break;
 				}
+			}
+		});
+        
+        button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					java.awt.Desktop.getDesktop().browse(new URL("https://github.com/gtrteimo/UEB16VocableTrainer").toURI());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
