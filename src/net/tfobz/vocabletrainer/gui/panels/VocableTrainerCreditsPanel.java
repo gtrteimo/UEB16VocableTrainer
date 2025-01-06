@@ -72,6 +72,16 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		}
 	}
 	
+	@Override
+	public void setLocalisation() {
+		super.setLocalisation();
+		
+		barPane.setTitle(VocableTrainerLocalization.MENU_CREDITS);
+		
+		labelcreators.setText(VocableTrainerLocalization.CREDITS_CREATORS);
+		labelhelpers.setText(VocableTrainerLocalization.CREDITS_HELPERS);
+	}
+	
     @Override
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);

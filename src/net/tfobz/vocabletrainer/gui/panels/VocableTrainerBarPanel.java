@@ -50,6 +50,11 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
 	}
     
     @Override
+	public void setLocalisation() {
+    	title.setText(VocableTrainerLocalization.TITLE);
+	}
+    
+    @Override
     protected void loadImage() {
     	if (barsImage == null) {
 	        try {

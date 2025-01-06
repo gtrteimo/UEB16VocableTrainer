@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
+import net.tfobz.vocabletrainer.data.VocableTrainerSettingsIO;
 import net.tfobz.vocabletrainer.gui.panels.*;
 
 @SuppressWarnings("serial")
@@ -31,8 +32,10 @@ public class VocableTrainerFrame extends JFrame {
 		setMinimumSize(new Dimension(720, 480));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setBounds(25, 25, width, height);
-				
-		VocableTrainerLocalization.loadLocalization(VocableTrainerLocalization.localisation.Italiano);
+		
+		VocableTrainerSettingsIO.loadSettings();
+		VocableTrainerLocalization.loadLocalization(VocableTrainerSettingsIO.localisation);
+		VocableTrainerPanel.changeColourStatic(VocableTrainerSettingsIO.colours[0], VocableTrainerSettingsIO.colours[1], VocableTrainerSettingsIO.colours[2], VocableTrainerSettingsIO.colours[3], VocableTrainerSettingsIO.colours[4]);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());
@@ -44,13 +47,13 @@ public class VocableTrainerFrame extends JFrame {
 	}
 	
 	private void generatePanels () {
+		panels[7] = new VocableTrainerSettingsPanel(this);
 		panels[0] = new VocableTrainerMenuPanel(this);
 		panels[1] = new VocableTrainerHomePanel(this);
 		panels[3] = new VocableTrainerNewPanel(this);
 		panels[4] = new VocableTrainerInfoPanel(this);
 		panels[5] = new VocableTrainerStartPanel(this);
 		panels[6] = new VocableTrainerCreditsPanel(this);
-		panels[7] = new VocableTrainerSettingsPanel(this);
 	}
 	public void changePanel (int panelIndex) throws RuntimeException {
 		if (panelIndex > 0) {

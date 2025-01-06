@@ -64,7 +64,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		comboBox.setForeground(C_nigth);
 		comboBox.setBackground(C_platinum);
 		comboBox.setBorder(null);
-		
+	
 		renameButton = new JButton(VocableTrainerLocalization.BUTTON_RENAME);
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
@@ -311,6 +311,16 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		save.setForeground(C_platinum);
 		save.setBackground(C_slateGray);
+	}
+	
+	@Override
+	public void setLocalisation() {
+		barPane.setTitle(VocableTrainerLocalization.MENU_NEW);
+		newSet.setText(VocableTrainerLocalization.NEW_SET_TITLE);
+		impo.setText(VocableTrainerLocalization.BUTTON_IMPORT);
+		expo.setText(VocableTrainerLocalization.BUTTON_EXPORT);
+		renameButton.setText(VocableTrainerLocalization.BUTTON_RENAME);
+        deleteButton.setText(VocableTrainerLocalization.BUTTON_DELETE);
 	}
 	
     @Override

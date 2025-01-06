@@ -17,6 +17,11 @@ public class VocableTrainerColorChooser extends JFrame {
 	private JButton[] buttons;
 	private Color[] colors;
 	private JButton apply;
+	
+	public Color[] getColors() {
+		return colors;
+	}
+
 	private JButton close;
 	private VocableTrainerPanel panel;
 

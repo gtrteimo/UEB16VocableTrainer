@@ -86,6 +86,18 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 	}
 	
 	@Override
+	public void setLocalisation() {
+		super.setLocalisation();
+		
+		barPane.setTitle(VocableTrainerLocalization.MENU_HOME);
+		
+		B_start = new JButton (VocableTrainerLocalization.HOME_START);
+		B_new = new JButton (VocableTrainerLocalization.HOME_NEW);
+		B_info = new JButton (VocableTrainerLocalization.HOME_INFO);
+		B_exit = new JButton (VocableTrainerLocalization.HOME_EXIT);
+	}
+	
+	@Override
 	public void paintComponent(Graphics g) {        
         super.paintComponent(g);
         

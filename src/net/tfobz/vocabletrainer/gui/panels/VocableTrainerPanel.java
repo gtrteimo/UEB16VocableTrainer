@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 @SuppressWarnings("serial")
@@ -93,6 +94,9 @@ public class VocableTrainerPanel extends JPanel {
 		barPane.setColours();
 		panel.setBackground(C_powderBlue);
 	}
+	public void setLocalisation() {
+		barPane.setLocalisation();
+	}
 	
 	public static void changeColourStatic (Color menuBarColour, Color mainBackgroundColour, Color textColour1, Color textColour2, Color buttonBackgroundColour) {
 		C_spaceCadet = menuBarColour;
@@ -112,8 +116,21 @@ public class VocableTrainerPanel extends JPanel {
 		
 		for (VocableTrainerPanel panel : vtf.getPanels()) {
 			if (panel != null) {
-				System.out.println(panel);
 				panel.setColours();
+			}
+		}
+	}
+	
+	public static void changeLocalisationStatic (VocableTrainerLocalization.localisation l) {
+		VocableTrainerLocalization.loadLocalization(l);
+	}
+	
+	public void changeLocalisation (VocableTrainerLocalization.localisation l) {
+		VocableTrainerLocalization.loadLocalization(l);
+		
+		for (VocableTrainerPanel panel : vtf.getPanels()) {
+			if (panel != null) {
+				panel.setLocalisation();
 			}
 		}
 	}

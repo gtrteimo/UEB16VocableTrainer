@@ -39,7 +39,6 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		barPane.setTitle(VocableTrainerLocalization.MENU_START);
 		
 		panel.setLayout(null);
-				
 		options[0] = new JCheckBox(VocableTrainerLocalization.START_TIME_PER_CARD);
 		options[0].setMnemonic('T');
 		options[0].setSelected(true);
@@ -360,6 +359,21 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		start.setForeground(C_platinum);
 		start.setBackground(C_slateGray);
 		
+	}
+	
+	@Override
+	public void setLocalisation() {
+		super.setLocalisation();
+		
+		barPane.setTitle(VocableTrainerLocalization.MENU_START);
+		
+		options[0].setText(VocableTrainerLocalization.START_TIME_PER_CARD);
+		options[1].setText(VocableTrainerLocalization.START_TOTAL_TIME);
+		options[2].setText(VocableTrainerLocalization.START_CASE_SENSITIVE);
+		options[3].setText(VocableTrainerLocalization.START_AMOUNT_OF_CARDS);
+		options[4].setText(VocableTrainerLocalization.START_PRACTISE_RUN);
+		
+		start.setText(VocableTrainerLocalization.BUTTON_START);
 	}
 	
 	@Override

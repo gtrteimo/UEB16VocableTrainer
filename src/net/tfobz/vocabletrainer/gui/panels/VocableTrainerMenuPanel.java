@@ -72,6 +72,17 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
+	public void setLocalisation() {
+		options[0] = new JButton(VocableTrainerLocalization.MENU_HOME);
+		options[1] = new JButton(VocableTrainerLocalization.MENU_START);
+		options[2] = new JButton(VocableTrainerLocalization.MENU_INFO);
+		options[3] = new JButton(VocableTrainerLocalization.MENU_NEW);
+		options[4] = new JButton(VocableTrainerLocalization.MENU_CREDITS);
+		options[5] = new JButton(VocableTrainerLocalization.MENU_SETTINGS);
+		options[6] = new JButton(VocableTrainerLocalization.MENU_EXIT);
+	}
+	
+	@Override
 	public void paintComponent(Graphics g) {
         super.paintComponent(g);
         

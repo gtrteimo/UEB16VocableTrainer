@@ -349,6 +349,11 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 	}
     
     @Override
+	public void setLocalisation() {
+		
+	}
+    
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
