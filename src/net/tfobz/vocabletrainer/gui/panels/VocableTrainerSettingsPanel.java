@@ -130,7 +130,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 				default:
 					colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
 					colorChooser.setVisible(true);
-					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors());
+//					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors()); //TODO
 					break;
 				}
 			}
