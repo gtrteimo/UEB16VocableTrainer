@@ -63,7 +63,7 @@ Italiano:
     box_due: "Box in Scadenza"
     time_per_card: "Tempo per Carta"
     total_time: "Tempo Totale"
-    case_sensitive: "Sensibile alla maiuscola/minuscola"
+    case_sensitive: "capitalizzazione"
     amount_of_cards: "Numero di carte"
     practise_run: "Sessione di Pratica"
   buttons:

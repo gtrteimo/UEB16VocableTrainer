@@ -115,8 +115,6 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         button.setBackground(C_slateGray);
         button.setForeground(C_platinum);
         
-        button.addActionListener(e -> openWebpage("https://github.com/gtrteimo/UEB16VocableTrainer"));
-        
         languageBox.addActionListener(e -> {
         	super.changeLocalisation((localisation) languageBox.getSelectedItem());
         	VocableTrainerSettingsIO.saveSettings((localisation) languageBox.getSelectedItem());
@@ -151,18 +149,20 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 				}
 			}
 		});
+
+        button.addActionListener(e -> openWebpage("https://github.com/gtrteimo/UEB16VocableTrainer"));
         
-        button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ae) {
-				try {
-					java.awt.Desktop.getDesktop().browse(new URL("https://github.com/gtrteimo/UEB16VocableTrainer").toURI());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
+//        button.addActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent ae) {
+//				try {
+//					java.awt.Desktop.getDesktop().browse(new URL("https://github.com/gtrteimo/UEB16VocableTrainer").toURI());
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//				
+//			}
+//		});
 		
         simplifiedBox.addActionListener(e -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected()));
         allwoPremiumBox.addActionListener(e -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected()));
