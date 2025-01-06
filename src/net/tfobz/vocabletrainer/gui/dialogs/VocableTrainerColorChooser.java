@@ -1,13 +1,16 @@
 package net.tfobz.vocabletrainer.gui.dialogs;
 
 import java.awt.Color;
-import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Insets;
+import java.awt.Graphics;
+
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 @SuppressWarnings("serial")
@@ -18,15 +21,15 @@ public class VocableTrainerColorChooser extends JFrame {
 	private Color[] colors;
 	private JButton apply;
 	private JButton close;
-	private VocableTrainerPanel panel;
+	private VocableTrainerPanel reference;
 
-	public VocableTrainerColorChooser(VocableTrainerPanel panel) {
+	public VocableTrainerColorChooser(VocableTrainerPanel reference) {
 		super("Theme customiser");
-		setBounds(100,100,panel.getWidth()/2,panel.getHeight()/2);
+		setBounds(100,100,reference.getWidth()/2,reference.getHeight()/2);
 	    setResizable(true);
-        this.setBackground(VocableTrainerPanel.C_powderBlue);
+        this.setMinimumSize(new Dimension(600, 300));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.panel = panel;
+		this.reference = reference;
 		
 		labels = new JLabel[5];
 		buttons = new JButton[5];
@@ -37,9 +40,15 @@ public class VocableTrainerColorChooser extends JFrame {
 		labels[2] = new JLabel("Text Colour 1");
 		labels[3] = new JLabel("Text Colour 2");
 		labels[4] = new JLabel("Button Background Colour");
+		colors[0] = VocableTrainerPanel.C_spaceCadet;
+		colors[1] = VocableTrainerPanel.C_powderBlue;
+		colors[2] = VocableTrainerPanel.C_platinum;
+		colors[3] = VocableTrainerPanel.C_nigth;
+		colors[4] = VocableTrainerPanel.C_slateGray;
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i] = new JButton();
+		    buttons[i].setBackground(colors[i]);
 		    int index = i;
 		    buttons[i].addActionListener(e -> {
 		        Color chosenColor = JColorChooser.showDialog(null, "Choose a Color", buttons[index].getBackground());
@@ -51,7 +60,7 @@ public class VocableTrainerColorChooser extends JFrame {
 		}
 		apply = new JButton("Apply");
 		apply.addActionListener(e->{
-			VocableTrainerColorChooser.this.panel.changeColour(colors[0], colors[1], colors[2], colors[3], colors[4]);
+			VocableTrainerColorChooser.this.reference.changeColour(colors[0], colors[1], colors[2], colors[3], colors[4]);
 			});
 		close = new JButton("Close");
 		close.addActionListener(e->{
@@ -59,33 +68,36 @@ public class VocableTrainerColorChooser extends JFrame {
 				dispose();
 			});
 		
-		Insets insets = getInsets();
-		int width = getWidth()-insets.left-insets.right-20;
-		int height = getHeight()-insets.top-insets.bottom-10;
+		JPanel panel = new JPanel() {
+			public void paintComponent(Graphics g) {
+		        super.paintComponent(g);
+		        
+		        int height = this.getHeight();
+		        int width = this.getWidth();
+		        
+		        apply.setBounds(10, getHeight()-height/6, width/2-15, height/6-10);
+				apply.setFont(new Font ("Arial", Font.PLAIN, apply.getHeight()/2));
+				close.setBounds(10+width/2, getHeight()-height/6, width/2-15, height/6-10);
+				close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2));
+				
+				for (int i = 0; i < 5; i++) {
+					labels[i].setBounds(10, 10+height/6*i, width/2-15, height/6-10);
+					labels[i].setFont(new Font ("Arial", Font.PLAIN, labels[i].getHeight()/2));
+					buttons[i].setBounds(10+width/2, 10+height/6*i, width/2-15, height/6-10);
+					buttons[i].setFont(new Font ("Arial", Font.PLAIN, buttons[i].getHeight()/2));
+				}
+		    }
+		};
 		
-		apply.setBounds(insets.left+10, getHeight()-insets.bottom-height/6, width/2-5, height/6-10);
-		apply.setFont(new Font ("Arial", Font.PLAIN, apply.getHeight()/2 +5));
-		close.setBounds(insets.left+width/2+20, getHeight()-insets.bottom-height/6, width/2-5, height/6-10);
-		close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2 +5));
-		
-		for (int i = 0; i < 5; i++) {
-			labels[i].setBounds(insets.left+20, insets.top+10+height/6*i, width/2-5, height/6-10);
-			labels[i].setFont(new Font ("Arial", Font.PLAIN, labels[i].getHeight()/2 +5));
-			buttons[i].setBounds(insets.left+width/2+20, insets.top+10+height/6*i, width/2-5, height/6-10);
-			buttons[i].setFont(new Font ("Arial", Font.PLAIN, buttons[i].getHeight()/2 +5));
-		}
-		
-		Container contentPane = this.getContentPane();
-		contentPane.setLayout(null);
-		contentPane.add(apply);
-		contentPane.add(close);
+		panel.add(apply);
+		panel.add(close);
 		for (JLabel label : labels) {
-			contentPane.add(label);
+			panel.add(label);
 		}
 		for (JButton button : buttons) {
-			contentPane.add(button);
+			panel.add(button);
 		}
+		this.getContentPane().add(panel);
 	}
-	
 	
 }

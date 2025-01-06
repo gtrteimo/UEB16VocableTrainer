@@ -11,7 +11,7 @@ Italiano:
     two_option:
       confirm_delete: "Conferma Eliminazione"
       confirm_delete_question: "Sei sicuro di voler eliminare questo set?"
-      yes: "Sì"
+      yes: "Si"
       no: "No"
     new_set:
       title: "Nuovo Set"
@@ -32,15 +32,15 @@ Italiano:
       no_cards_in_box: "La Box che stai cercando di avviare contiene 0 Carte. Aggiungi alcune Carte o scegli un'altra Box"
       too_many_cards: "Stai cercando di iniziare con {requested_cards} carte mentre ci sono solo {available_cards} Carte nella Box"
       set_dropped: "Sembra che il database dei Set sia stato eliminato"
-      box_creation_fail: "Si è verificato un errore durante l'aggiunta della box"
-      card_creation_fail: "Si è verificato un errore durante l'aggiunta della carta"
-      dupilcate_card: "Una carta con lo stesso contenuto esiste già in questo set"
+      box_creation_fail: "Si e' verificato un errore durante l'aggiunta della box"
+      card_creation_fail: "Si e' verificato un errore durante l'aggiunta della carta"
+      dupilcate_card: "Una carta con lo stesso contenuto esiste gia' in questo set"
   settings:
     language: "Lingua"
     theme: "Tema"
     simplified_view: "Vista Semplificata"
     allow_premium: "Permetti l'acquisto del Premium"
-    suggest_feature: "Suggerisci una nuova funzionalità"
+    suggest_feature: "Suggerisci nuove funzionalita'"
   menu:
     home: "Home"
     start: "Inizia"

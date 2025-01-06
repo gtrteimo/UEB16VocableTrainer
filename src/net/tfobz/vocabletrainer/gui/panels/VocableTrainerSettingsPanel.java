@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -31,6 +33,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	private JCheckBox simplifiedBox;
 	private JCheckBox allwoPremiumBox;
 	private JButton button;
+	private JFrame colorChooser;
 	
 	public VocableTrainerSettingsPanel (VocableTrainerFrame vtf) {
 		super(vtf);
@@ -77,21 +80,38 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(colorChooser!=null) {
+					colorChooser.setVisible(false);
+					colorChooser.dispose();
+					colorChooser = null;
+				}
 				switch (themeBox.getSelectedIndex()) {
 				case 0:
 					changeColour(new Color(50, 50, 75), new Color(171, 181, 216), new Color(225, 225, 225), new Color(11, 9, 10), new Color(111, 116, 146));
 					break;
 				case 1:
-					changeColour(new Color(25, 25, 25), Color.WHITE, Color.WHITE, Color.BLACK, new Color(75, 75, 75));
+					changeColour(new Color(25, 25, 25), Color.WHITE, Color.BLACK, Color.BLACK, new Color(75, 75, 75));
 					break;
 				case 2:
-					changeColour(new Color(0, 136, 255), new Color(0, 12, 33), new Color(255, 255, 255), new Color(255, 255, 255), new Color(0, 136, 255));
+					changeColour(new Color(0, 136, 255), new Color(0, 12, 33), new Color(0,0,0), new Color(255, 255, 255), new Color(0, 136, 255));
 					break;
 				default:
-					JFrame colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
+					colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
 					colorChooser.setVisible(true);
 					break;
 				}
+			}
+		});
+        
+        button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				try {
+					java.awt.Desktop.getDesktop().browse(new URL("https://github.com/gtrteimo/UEB16VocableTrainer").toURI());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		});
 		
