@@ -38,7 +38,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	private JCheckBox simplifiedBox;
 	private JCheckBox allwoPremiumBox;
 	private JButton button;
-	private JFrame colorChooser;
+	private VocableTrainerColorChooser colorChooser;
 	
 	public VocableTrainerSettingsPanel (VocableTrainerFrame vtf) {
 		super(vtf);
@@ -135,7 +135,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 				default:
 					colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
 					colorChooser.setVisible(true);
-//					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors()); //TODO
+					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors()); //TODO
 					break;
 				}
 			}
