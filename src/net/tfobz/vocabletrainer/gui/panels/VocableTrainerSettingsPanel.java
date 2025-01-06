@@ -65,6 +65,22 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 
         allwoPremiumBox = new JCheckBox();
 		
+        languageBox.setSelectedItem(VocableTrainerSettingsIO.localisation);
+        simplifiedBox.setSelected(VocableTrainerSettingsIO.simplified);
+        allwoPremiumBox.setSelected(VocableTrainerSettingsIO.premium);
+        
+        Color[] t = VocableTrainerSettingsIO.colours;
+        
+        if (t[0].equals(colours[0][0]) && t[1].equals(colours[0][1]) && t[2].equals(colours[0][2]) && t[3].equals(colours[0][3]) && t[4].equals(colours[0][4])) {
+        	themeBox.setSelectedIndex(0);
+        } else if (t[0].equals(colours[1][0]) && t[1].equals(colours[1][1]) && t[2].equals(colours[1][2]) && t[3].equals(colours[1][3]) && t[4].equals(colours[1][4])) {
+        	themeBox.setSelectedIndex(1);
+        } else if (t[0].equals(colours[2][0]) && t[1].equals(colours[2][1]) && t[2].equals(colours[2][2]) && t[3].equals(colours[2][3]) && t[4].equals(colours[2][4])) {
+        	themeBox.setSelectedIndex(2);
+        } else {
+        	themeBox.setSelectedItem("Custom");
+        }
+        
 		barPane.setTitle(VocableTrainerLocalization.MENU_SETTINGS);
 		
         language = new JLabel("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
