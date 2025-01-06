@@ -90,7 +90,7 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
         int h = panel.getHeight();
         
         for (int i = 0; i < options.length; i++) {
-			options[i].setBounds(w/64, h/7*i+10, w/16*14/5, h/16);
+			options[i].setBounds(w/64, h/7*i+10, w/4, h/16);
 			options[i].setFont(new Font ("Arial", Font.BOLD, options[i].getHeight()/2 + 10));
 			options[i].setHorizontalAlignment(SwingConstants.LEFT);
         }
