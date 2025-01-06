@@ -98,7 +98,7 @@ public class VocableTrainerPanel extends JPanel {
 		barPane.setLocalisation();
 	}
 	
-	public static void changeColourStatic (Color newMenuBarColor, Color newMainBackgroundColor, Color newTextColor1, Color newTextColor2, Color newButtonBackgroundColor) {
+	public static void changeColorStatic (Color newMenuBarColor, Color newMainBackgroundColor, Color newTextColor1, Color newTextColor2, Color newButtonBackgroundColor) {
 		menuBarColor = newMenuBarColor;
 		mainBackgroundColor = newMainBackgroundColor;
 		textColor1 = newTextColor1;

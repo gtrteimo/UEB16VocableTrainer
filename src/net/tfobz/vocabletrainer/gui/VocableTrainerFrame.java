@@ -35,7 +35,7 @@ public class VocableTrainerFrame extends JFrame {
 		
 		VocableTrainerSettingsIO.loadSettings();
 		VocableTrainerLocalization.loadLocalization(VocableTrainerSettingsIO.localisation);
-		VocableTrainerPanel.changeColourStatic(VocableTrainerSettingsIO.colours[0], VocableTrainerSettingsIO.colours[1], VocableTrainerSettingsIO.colours[2], VocableTrainerSettingsIO.colours[3], VocableTrainerSettingsIO.colours[4]);
+		VocableTrainerPanel.changeColorStatic(VocableTrainerSettingsIO.colours[0], VocableTrainerSettingsIO.colours[1], VocableTrainerSettingsIO.colours[2], VocableTrainerSettingsIO.colours[3], VocableTrainerSettingsIO.colours[4]);
 		
 		contentPane = getContentPane();
 		contentPane.setLayout(new CardLayout());
