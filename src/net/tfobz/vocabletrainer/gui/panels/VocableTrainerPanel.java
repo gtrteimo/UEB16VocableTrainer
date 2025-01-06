@@ -27,11 +27,11 @@ import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 
 public class VocableTrainerPanel extends JPanel {
 	
-	public static Color C_nigth = new Color(11, 9, 10); 
-	public static Color C_spaceCadet = new Color(50, 50, 75); 
-	public static Color C_slateGray = new Color(111, 116, 146); 
-	public static Color C_powderBlue = new Color(171, 181, 216); 
-	public static Color C_platinum = new Color(225, 225, 225);
+	public static Color textColor2 = new Color(11, 9, 10); 
+	public static Color menuBarColor = new Color(50, 50, 75); 
+	public static Color buttonBackgroundColor = new Color(111, 116, 146); 
+	public static Color mainBackgroundColor = new Color(171, 181, 216); 
+	public static Color textColor1 = new Color(225, 225, 225);
 	
 	protected VocableTrainerFrame vtf;
 	protected VocableTrainerPanel vtp;
@@ -61,7 +61,7 @@ public class VocableTrainerPanel extends JPanel {
 	public VocableTrainerPanel (VocableTrainerFrame vtf) {
 		super();
 		this.vtf = vtf;
-		setBackground(C_platinum);
+		setBackground(textColor1);
 		
 		setLayout(null);
 		
@@ -75,7 +75,7 @@ public class VocableTrainerPanel extends JPanel {
 		
 		panel = new VocableTrainerPanel(this);
 		panel.setBounds(8, getHeight()/12, getWidth() - 32, getHeight() / 12 * 11 - 16);
-		panel.setBackground(C_powderBlue);
+		panel.setBackground(mainBackgroundColor);
 		panel.addMouseListener(new ImageClick(16, 16, (height-32)/16, (height-32)/16, -1));
 		
 	}
@@ -89,34 +89,34 @@ public class VocableTrainerPanel extends JPanel {
 		this.state = state;
 	}
 	
-	public void setColours() {
-		setBackground(C_platinum);
-		barPane.setColours();
-		panel.setBackground(C_powderBlue);
+	public void setColors() {
+		setBackground(textColor1);
+		barPane.setColors();
+		panel.setBackground(mainBackgroundColor);
 	}
 	public void setLocalisation() {
 		barPane.setLocalisation();
 	}
 	
-	public static void changeColourStatic (Color menuBarColour, Color mainBackgroundColour, Color textColour1, Color textColour2, Color buttonBackgroundColour) {
-		C_spaceCadet = menuBarColour;
-		C_powderBlue = mainBackgroundColour;
-		C_platinum = textColour1;
-		C_nigth = textColour2;
-		C_slateGray = buttonBackgroundColour;
+	public static void changeColourStatic (Color newMenuBarColor, Color newMainBackgroundColor, Color newTextColor1, Color newTextColor2, Color newButtonBackgroundColor) {
+		menuBarColor = newMenuBarColor;
+		mainBackgroundColor = newMainBackgroundColor;
+		textColor1 = newTextColor1;
+		textColor2 = newTextColor2;
+		buttonBackgroundColor = newButtonBackgroundColor;
 		
 	}
 	
-	public void changeColour (Color menuBarColour, Color mainBackgroundColour, Color textColour1, Color textColour2, Color buttonBackgroundColour) {
-		C_spaceCadet = menuBarColour;
-		C_powderBlue = mainBackgroundColour;
-		C_platinum = textColour1;
-		C_nigth = textColour2;
-		C_slateGray = buttonBackgroundColour;
+	public void changeColor (Color newMenuBarColor, Color newMainBackgroundColor, Color newTextColor1, Color newTextColor2, Color newButtonBackgroundColor) {
+		menuBarColor = newMenuBarColor;
+		mainBackgroundColor = newMainBackgroundColor;
+		textColor1 = newTextColor1;
+		textColor2 = newTextColor2;
+		buttonBackgroundColor = newButtonBackgroundColor;
 		
 		for (VocableTrainerPanel panel : vtf.getPanels()) {
 			if (panel != null) {
-				panel.setColours();
+				panel.setColors();
 			}
 		}
 	}
@@ -135,7 +135,7 @@ public class VocableTrainerPanel extends JPanel {
 		}
 	}
 	
-//	public static void changeColour(int options) {
+//	public static void changeColor(int options) {
 //		switch (options) {
 //		case -1:
 //			C_nigth = new Color(255 - C_nigth.getRed(), 255 - C_nigth.getGreen(), 255 - C_nigth.getBlue());

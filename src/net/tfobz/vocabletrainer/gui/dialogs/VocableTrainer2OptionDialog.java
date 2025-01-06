@@ -27,14 +27,14 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
 		label = new JLabel(text);
 		label.setBounds(8,  componentPanel.getHeight()/3, componentPanel.getWidth() - 16, componentPanel.getHeight()/8);
 		label.setFont(new Font ("Arial", Font.PLAIN, label.getHeight()*7/10 + 1));
-		label.setForeground(VocableTrainerPanel.C_nigth);
+		label.setForeground(VocableTrainerPanel.textColor2);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		confirmButton = new JButton(option1);
         confirmButton.setBounds(componentPanel.getWidth()/2 + 16, componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth()/2 - 32, componentPanel.getHeight() / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
-        confirmButton.setForeground(VocableTrainerPanel.C_platinum);
-        confirmButton.setBackground(VocableTrainerPanel.C_slateGray);
+        confirmButton.setForeground(VocableTrainerPanel.textColor1);
+        confirmButton.setBackground(VocableTrainerPanel.buttonBackgroundColor);
         confirmButton.setFocusPainted(false);
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
@@ -45,8 +45,8 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
         cancelButton = new JButton(option2);
         cancelButton.setBounds(16 , componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth()/2 - 32, componentPanel.getHeight() / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
-        cancelButton.setForeground(VocableTrainerPanel.C_platinum);
-        cancelButton.setBackground(VocableTrainerPanel.C_slateGray);
+        cancelButton.setForeground(VocableTrainerPanel.textColor1);
+        cancelButton.setBackground(VocableTrainerPanel.buttonBackgroundColor);
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> {

@@ -45,23 +45,23 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         barPane.setTitle("Info");
         panel.setLayout(null);
         topic = new JLabel("Topic:");
-        topic.setForeground(C_nigth);
+        topic.setForeground(textColor2);
         sets = VokabeltrainerDB.getLernkarteien();
         comboBox = new JComboBox<>(sets.toArray(new Lernkartei[0]));
-        comboBox.setForeground(C_nigth);
-        comboBox.setBackground(C_platinum);
+        comboBox.setForeground(textColor2);
+        comboBox.setBackground(textColor1);
         comboBox.addActionListener(e -> retriveTabel());
         renameButton = new JButton("Rename");
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
-        renameButton.setForeground(C_platinum);
-        renameButton.setBackground(C_slateGray);
+        renameButton.setForeground(textColor1);
+        renameButton.setBackground(buttonBackgroundColor);
         renameButton.setMnemonic('e');
         deleteButton = new JButton("Delete");
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
-        deleteButton.setForeground(C_platinum);
-        deleteButton.setBackground(C_slateGray);
+        deleteButton.setForeground(textColor1);
+        deleteButton.setBackground(buttonBackgroundColor);
         deleteButton.setMnemonic('D');
         renameButton.addActionListener(e -> {
             boolean cardSelected = false;
@@ -165,7 +165,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean hf, int r, int c) {
                 Component comp = super.getTableCellRendererComponent(t, v, sel, hf, r, c);
                 comp.setFont(new Font("Arial", Font.PLAIN, (scrollPane == null ? 30 : (scrollPane.getHeight() / 16) / 2 + 2)));
-                comp.setBackground(C_platinum);
+                comp.setBackground(textColor1);
                 setHorizontalAlignment(SwingConstants.CENTER);
                 setVerticalAlignment(SwingConstants.CENTER);
                 return comp;
@@ -239,26 +239,26 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         table.setBorder(null);
         table.getTableHeader().setReorderingAllowed(false);
         JCheckBox editorBox = new JCheckBox();
-        editorBox.setBackground(C_slateGray);
+        editorBox.setBackground(buttonBackgroundColor);
         editorBox.setFocusPainted(false);
         editorBox.setBorderPainted(false);
         editorBox.setOpaque(true);
-        editorBox.setForeground(C_nigth);
+        editorBox.setForeground(textColor2);
         table.setDefaultEditor(Boolean.class, new DefaultCellEditor(editorBox));
         table.setDefaultRenderer(Boolean.class, (t, v, sel, hf, r, c) -> {
             JCheckBox cb = new JCheckBox();
             cb.setSelected(v != null && (Boolean) v);
             cb.setFocusPainted(false);
-            cb.setBackground(C_platinum);
-            cb.setForeground(C_nigth);
+            cb.setBackground(textColor1);
+            cb.setForeground(textColor2);
             cb.setBorderPainted(false);
             cb.setOpaque(true);
             if (sel) {
                 cb.setBackground(t.getSelectionBackground());
                 cb.setForeground(t.getSelectionForeground());
             } else {
-                cb.setBackground(C_platinum);
-                cb.setForeground(C_nigth);
+                cb.setBackground(textColor1);
+                cb.setForeground(textColor2);
             }
             cb.setHorizontalAlignment(SwingConstants.CENTER);
             cb.setVerticalAlignment(SwingConstants.CENTER);
@@ -269,7 +269,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             JLabel lab = new JLabel(new SimpleDateFormat(" dd.MM.yyyy  HH:mm:ss ").format((Date) v));
             lab.setHorizontalAlignment(SwingConstants.CENTER);
             lab.setVerticalAlignment(SwingConstants.CENTER);
-            lab.setBackground(C_platinum);
+            lab.setBackground(textColor1);
             lab.setOpaque(true);
             return lab;
         });
@@ -278,7 +278,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             JLabel lab = new JLabel(String.valueOf(v));
             lab.setHorizontalAlignment(SwingConstants.CENTER);
             lab.setVerticalAlignment(SwingConstants.CENTER);
-            lab.setBackground(C_platinum);
+            lab.setBackground(textColor1);
             lab.setOpaque(true);
             return lab;
         });
@@ -296,9 +296,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         textEditor.setClickCountToStart(1);
         table.getColumnModel().getColumn(1).setCellEditor(textEditor);
         table.getColumnModel().getColumn(2).setCellEditor(textEditor);
-        table.setBackground(C_platinum);
+        table.setBackground(textColor1);
         scrollPane = new JScrollPane(table);
-    	scrollPane.getViewport().setBackground(C_platinum);
+    	scrollPane.getViewport().setBackground(textColor1);
         panel.add(scrollPane);
 
         table.getModel().addTableModelListener(e -> {
@@ -333,19 +333,19 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     }
 
     @Override
-	public void setColours() {
-		super.setColours();
+	public void setColors() {
+		super.setColors();
 		
-        topic.setForeground(C_nigth);
+        topic.setForeground(textColor2);
         
-        comboBox.setForeground(C_nigth);
-        comboBox.setBackground(C_platinum);
+        comboBox.setForeground(textColor2);
+        comboBox.setBackground(textColor1);
 
-        renameButton.setForeground(C_platinum);
-        renameButton.setBackground(C_slateGray);
+        renameButton.setForeground(textColor1);
+        renameButton.setBackground(buttonBackgroundColor);
         
-        deleteButton.setForeground(C_platinum);
-        deleteButton.setBackground(C_slateGray);
+        deleteButton.setForeground(textColor1);
+        deleteButton.setBackground(buttonBackgroundColor);
 	}
     
     @Override
@@ -382,8 +382,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 public Component getTableCellRendererComponent(JTable t, Object v, boolean s, boolean f, int r, int c) {
                     JLabel lbl = (JLabel) super.getTableCellRendererComponent(t, v, s, f, r, c);
                     lbl.setOpaque(true);
-                    lbl.setBackground(C_slateGray);
-                    lbl.setForeground(C_platinum);
+                    lbl.setBackground(buttonBackgroundColor);
+                    lbl.setForeground(textColor1);
                     lbl.setFont(new Font("Arial", Font.BOLD, rowHeight / 2 + 2));
                     lbl.setHorizontalAlignment(SwingConstants.CENTER);
                     lbl.setVerticalAlignment(SwingConstants.CENTER);
@@ -432,9 +432,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             tbl.getTableHeader().addMouseListener(this);
             setHorizontalAlignment(SwingConstants.CENTER);
             setVerticalAlignment(SwingConstants.CENTER);
-            setBackground(C_slateGray);
+            setBackground(buttonBackgroundColor);
             setFocusPainted(false);
-            setForeground(C_platinum);
+            setForeground(textColor1);
         }
         @Override
         public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean hf, int r, int c) {

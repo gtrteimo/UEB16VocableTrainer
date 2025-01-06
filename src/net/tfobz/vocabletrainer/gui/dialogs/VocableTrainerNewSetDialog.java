@@ -45,14 +45,14 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         text = new JLabel(VocableTrainerLocalization.NEW_SET_ENTER_SET_NAME);
         text.setBounds(16, 16, w - 32, h/8);
         text.setFont(new Font ("Arial", Font.PLAIN, text.getHeight()/2 + 1));
-        text.setForeground(VocableTrainerPanel.C_nigth);
+        text.setForeground(VocableTrainerPanel.textColor2);
         text.setHorizontalAlignment(SwingConstants.CENTER);
         
         inputField = new JTextField();
         inputField.setBounds(16, 16 + h/8, w - 32, h/8);
         inputField.setFont(new Font ("Arial", Font.PLAIN, inputField.getHeight()/2 + 1));
-        inputField.setBackground(VocableTrainerPanel.C_platinum);
-        inputField.setForeground(VocableTrainerPanel.C_nigth);
+        inputField.setBackground(VocableTrainerPanel.textColor1);
+        inputField.setForeground(VocableTrainerPanel.textColor2);
         inputField.setBorder(null);
         
 //        inputField.setText("Example Name");
@@ -62,8 +62,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dLabel1 = new JLabel(VocableTrainerLocalization.NEW_SET_DESCRIPTION_1);         	
         dLabel1.setBounds(16, 16 + h/3, w/2 - 32, h/8);
         dLabel1.setFont(new Font ("Arial", Font.PLAIN, dLabel1.getHeight()/2 + 1));
-        dLabel1.setBackground(VocableTrainerPanel.C_platinum);
-        dLabel1.setForeground(VocableTrainerPanel.C_nigth);
+        dLabel1.setBackground(VocableTrainerPanel.textColor1);
+        dLabel1.setForeground(VocableTrainerPanel.textColor2);
         dLabel1.setBorder(null);
         dLabel1.setDisplayedMnemonic('1');
         dLabel1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -71,8 +71,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dLabel2 = new JLabel(VocableTrainerLocalization.NEW_SET_DESCRIPTION_2);         	
         dLabel2.setBounds(w/2 + 16, 16 + h/3, w/2 - 32, h/8);
         dLabel2.setFont(new Font ("Arial", Font.PLAIN, dLabel2.getHeight()/2 + 1));
-        dLabel2.setBackground(VocableTrainerPanel.C_platinum);
-        dLabel2.setForeground(VocableTrainerPanel.C_nigth);
+        dLabel2.setBackground(VocableTrainerPanel.textColor1);
+        dLabel2.setForeground(VocableTrainerPanel.textColor2);
         dLabel2.setBorder(null);
         dLabel2.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel2.setDisplayedMnemonic('2');
@@ -80,8 +80,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dInputField1 = new JTextField();
         dInputField1.setBounds(16, 16 + h/2, w/2 - 32, h/8);
         dInputField1.setFont(new Font ("Arial", Font.PLAIN, dInputField1.getHeight()/2 + 1));
-        dInputField1.setBackground(VocableTrainerPanel.C_platinum);
-        dInputField1.setForeground(VocableTrainerPanel.C_nigth);
+        dInputField1.setBackground(VocableTrainerPanel.textColor1);
+        dInputField1.setForeground(VocableTrainerPanel.textColor2);
         dInputField1.setBorder(null);
         dInputField1.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel1.setLabelFor(dInputField1);
@@ -92,8 +92,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dInputField2 = new JTextField();
         dInputField2.setBounds(w/2 + 16, 16 + h/2, w/2 - 32, h/8);
         dInputField2.setFont(new Font ("Arial", Font.PLAIN, dInputField2.getHeight()/2 + 1));
-        dInputField2.setBackground(VocableTrainerPanel.C_platinum);
-        dInputField2.setForeground(VocableTrainerPanel.C_nigth);
+        dInputField2.setBackground(VocableTrainerPanel.textColor1);
+        dInputField2.setForeground(VocableTrainerPanel.textColor2);
         dInputField2.setBorder(null);
         dInputField2.setHorizontalAlignment(SwingConstants.CENTER);
         dLabel2.setLabelFor(dInputField2);
@@ -103,8 +103,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         confirmButton = new JButton(VocableTrainerLocalization.BUTTON_CONFIRM);
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
-        confirmButton.setForeground(VocableTrainerPanel.C_platinum);
-        confirmButton.setBackground(VocableTrainerPanel.C_slateGray);
+        confirmButton.setForeground(VocableTrainerPanel.textColor1);
+        confirmButton.setBackground(VocableTrainerPanel.buttonBackgroundColor);
         confirmButton.setFocusPainted(false);
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> check());
@@ -112,8 +112,8 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         cancelButton = new JButton(VocableTrainerLocalization.BUTTON_CANCEL);
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
-        cancelButton.setForeground(VocableTrainerPanel.C_platinum);
-        cancelButton.setBackground(VocableTrainerPanel.C_slateGray);
+        cancelButton.setForeground(VocableTrainerPanel.textColor1);
+        cancelButton.setBackground(VocableTrainerPanel.buttonBackgroundColor);
         cancelButton.setFocusPainted(false);
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> closeDialog());

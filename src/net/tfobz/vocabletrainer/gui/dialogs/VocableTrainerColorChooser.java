@@ -41,11 +41,11 @@ public class VocableTrainerColorChooser extends JFrame {
 		labels[2] = new JLabel("Text Colour 1");
 		labels[3] = new JLabel("Text Colour 2");
 		labels[4] = new JLabel("Button Background Colour");
-		colors[0] = VocableTrainerPanel.C_spaceCadet;
-		colors[1] = VocableTrainerPanel.C_powderBlue;
-		colors[2] = VocableTrainerPanel.C_platinum;
-		colors[3] = VocableTrainerPanel.C_nigth;
-		colors[4] = VocableTrainerPanel.C_slateGray;
+		colors[0] = VocableTrainerPanel.menuBarColor;
+		colors[1] = VocableTrainerPanel.mainBackgroundColor;
+		colors[2] = VocableTrainerPanel.textColor1;
+		colors[3] = VocableTrainerPanel.textColor2;
+		colors[4] = VocableTrainerPanel.buttonBackgroundColor;
 		
 		for (int i = 0; i < buttons.length; i++) {
 		    buttons[i] = new JButton();
@@ -61,7 +61,7 @@ public class VocableTrainerColorChooser extends JFrame {
 		}
 		apply = new JButton("Apply");
 		apply.addActionListener(e->{
-			VocableTrainerColorChooser.this.reference.changeColour(colors[0], colors[1], colors[2], colors[3], colors[4]);
+			VocableTrainerColorChooser.this.reference.changeColor(colors[0], colors[1], colors[2], colors[3], colors[4]);
 			});
 		close = new JButton("Close");
 		close.addActionListener(e->{

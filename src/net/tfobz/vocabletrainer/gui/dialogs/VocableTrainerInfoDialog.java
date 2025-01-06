@@ -23,7 +23,7 @@ public class VocableTrainerInfoDialog extends JDialog {
 		
 		label = new JLabel();
 		label.setBounds(8, 8, componentPanel.getWidth() - 16, componentPanel.getHeight() - 16);
-		label.setForeground(VocableTrainerPanel.C_nigth);
+		label.setForeground(VocableTrainerPanel.textColor2);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setVerticalAlignment(SwingConstants.TOP);
 		
@@ -70,8 +70,8 @@ public class VocableTrainerInfoDialog extends JDialog {
 		JButton close = new JButton(VocableTrainerLocalization.BUTTON_CLOSE);
 		close.setBounds( 16, componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth() - 32, componentPanel.getHeight() / 6 );
 		close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2));
-		close.setForeground(VocableTrainerPanel.C_platinum);
-		close.setBackground(VocableTrainerPanel.C_slateGray);
+		close.setForeground(VocableTrainerPanel.textColor1);
+		close.setBackground(VocableTrainerPanel.buttonBackgroundColor);
 		close.setFocusPainted(false);
 		close.setBorderPainted(false);
 		close.addActionListener(e -> closeDialog());
@@ -97,7 +97,7 @@ public class VocableTrainerInfoDialog extends JDialog {
         
         componentPanel = new JPanel();
         componentPanel.setLayout(null);
-        componentPanel.setBackground(VocableTrainerPanel.C_powderBlue);
+        componentPanel.setBackground(VocableTrainerPanel.mainBackgroundColor);
         componentPanel.setBounds(0, 0 , (parent.getWidth() - 6), (parent.getHeight() - 40));
 	}
 	 public void closeDialog() {

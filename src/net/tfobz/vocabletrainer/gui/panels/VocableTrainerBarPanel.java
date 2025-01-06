@@ -33,20 +33,20 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     public VocableTrainerBarPanel(VocableTrainerPanel sourcePanel) {
         super(sourcePanel);
         setLayout(null);
-        setBackground(C_spaceCadet);
+        setBackground(menuBarColor);
 
         loadImage();
 
         title = new JLabel(VocableTrainerLocalization.TITLE);
-        title.setForeground(C_platinum);
+        title.setForeground(textColor1);
         title.setHorizontalAlignment(SwingConstants.LEFT);
         add(title);
     }
     
     @Override
-    public void setColours() {
-    	setBackground(C_spaceCadet);
-    	title.setForeground(C_platinum);
+    public void setColors() {
+    	setBackground(menuBarColor);
+    	title.setForeground(textColor1);
 	}
     
     @Override

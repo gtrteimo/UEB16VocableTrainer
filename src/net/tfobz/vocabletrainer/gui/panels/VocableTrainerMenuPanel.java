@@ -24,7 +24,7 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		
 		panel = new VocableTrainerPanel(this, true);
 		panel.setBounds(0, getHeight()/12, getWidth()/2 - 16, getHeight() / 12 * 11 - 16);
-		panel.setBackground(C_slateGray);
+		panel.setBackground(buttonBackgroundColor);
 		
 		barPane.setTitle("");
 		
@@ -39,8 +39,8 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		options[6] = new JButton(VocableTrainerLocalization.MENU_EXIT);
 
 		for (int i = 0; i < options.length; i++) {
-			options[i].setForeground(C_platinum);
-			options[i].setBackground(C_slateGray);
+			options[i].setForeground(textColor1);
+			options[i].setBackground(buttonBackgroundColor);
 			options[i].setFocusPainted(false);
 			options[i].setBorderPainted(false);
 			
@@ -61,13 +61,13 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setColours() {
-		super.setColours();
-		panel.setBackground(C_slateGray);
+	public void setColors() {
+		super.setColors();
+		panel.setBackground(buttonBackgroundColor);
 		
 		for (int i = 0; i < options.length; i++) {
-			options[i].setForeground(C_platinum);
-			options[i].setBackground(C_slateGray);
+			options[i].setForeground(textColor1);
+			options[i].setBackground(buttonBackgroundColor);
 		}
 	}
 	

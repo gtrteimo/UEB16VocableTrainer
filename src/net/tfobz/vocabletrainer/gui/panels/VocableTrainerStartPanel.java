@@ -56,28 +56,28 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		options[4].setSelected(false);
 
 		for (int i = 0; i < options.length; i++) { 
-			options[i].setForeground(C_nigth);
-			options[i].setBackground(C_powderBlue);
+			options[i].setForeground(textColor2);
+			options[i].setBackground(mainBackgroundColor);
 			options[i].setBorderPainted(false);
 			options[i].setFocusPainted(false);
 		}
 		SpinnerListener spinnerListener = new SpinnerListener();
 		for (int i = 0; i < optionSpinners.length; i++) {
 			optionSpinners[i] = new JSpinner();
-			optionSpinners[i].setForeground(C_nigth);
-			optionSpinners[i].setBackground(C_powderBlue);
+			optionSpinners[i].setForeground(textColor2);
+			optionSpinners[i].setBackground(mainBackgroundColor);
 			optionSpinners[i].setBorder(null);
 			optionSpinners[i].addChangeListener(spinnerListener);
 			JComponent editor = optionSpinners[i].getEditor();
 			if (editor instanceof JSpinner.DefaultEditor) {
 				JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
 				defaultEditor.getTextField().addKeyListener(spinnerListener);
-				defaultEditor.getTextField().setBackground(C_platinum);
-				defaultEditor.getTextField().setForeground(C_nigth);
+				defaultEditor.getTextField().setBackground(textColor1);
+				defaultEditor.getTextField().setForeground(textColor2);
 			}
 			for (Component component : optionSpinners[i].getComponents()) {
-                component.setBackground(C_platinum); 
-                component.setForeground(C_nigth);
+                component.setBackground(textColor1); 
+                component.setForeground(textColor2);
             }
 		}
 		optionSpinners[0].setEnabled(true);
@@ -96,8 +96,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			setComboBox = new JComboBox<Lernkartei>();
 		}
 		setComboBox = new JComboBox<Lernkartei>(sets.toArray(new Lernkartei[0]));
-		setComboBox.setForeground(C_nigth);
-		setComboBox.setBackground(C_platinum);
+		setComboBox.setForeground(textColor2);
+		setComboBox.setBackground(textColor1);
 		setComboBox.setBorder(null);
 		
 		setComboBox.addActionListener(e -> retriveBoxes());
@@ -108,15 +108,15 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		} else {
 			boxComboBoxes = new JComboBox<Fach>();
 		}
-		boxComboBoxes.setForeground(C_nigth);
-		boxComboBoxes.setBackground(C_platinum);
+		boxComboBoxes.setForeground(textColor2);
+		boxComboBoxes.setBackground(textColor1);
 		
 
 		
 		for (int i = 0; i < optionComboBoxesTime.length; i++) {			
 			optionComboBoxesTime[i] = new JComboBox<TimeUnit>(TimeUnit.values());
-			optionComboBoxesTime[i].setForeground(C_nigth);
-			optionComboBoxesTime[i].setBackground(C_platinum);
+			optionComboBoxesTime[i].setForeground(textColor2);
+			optionComboBoxesTime[i].setBackground(textColor1);
 			optionComboBoxesTime[i].setRenderer(new ListCellRenderer<TimeUnit>() {
 				@Override
 				public Component getListCellRendererComponent(JList<? extends TimeUnit> list, TimeUnit value, int index,
@@ -159,8 +159,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionComboBoxesTime[1].setSelectedIndex(1);
 		
 		start = new JButton(VocableTrainerLocalization.BUTTON_START);
-		start.setForeground(C_platinum);
-		start.setBackground(C_slateGray);
+		start.setForeground(textColor1);
+		start.setBackground(buttonBackgroundColor);
 		start.setFocusPainted(false);
 		start.setBorderPainted(false);
 		start.setMnemonic('S');
@@ -322,42 +322,42 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 
 	
 	@Override
-	public void setColours() {
-		super.setColours();
+	public void setColors() {
+		super.setColors();
 		
 		for (int i = 0; i < options.length; i++) { 
-			options[i].setForeground(C_nigth);
-			options[i].setBackground(C_powderBlue);
+			options[i].setForeground(textColor2);
+			options[i].setBackground(mainBackgroundColor);
 		}
 		
 		for (int i = 0; i < optionSpinners.length; i++) {
-			optionSpinners[i].setForeground(C_nigth);
-			optionSpinners[i].setBackground(C_powderBlue);
+			optionSpinners[i].setForeground(textColor2);
+			optionSpinners[i].setBackground(mainBackgroundColor);
 			JComponent editor = optionSpinners[i].getEditor();
 			if (editor instanceof JSpinner.DefaultEditor) {
 				JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
-				defaultEditor.getTextField().setBackground(C_platinum);
-				defaultEditor.getTextField().setForeground(C_nigth);
+				defaultEditor.getTextField().setBackground(textColor1);
+				defaultEditor.getTextField().setForeground(textColor2);
 			}
 			for (Component component : optionSpinners[i].getComponents()) {
-                component.setBackground(C_platinum); 
-                component.setForeground(C_nigth);
+                component.setBackground(textColor1); 
+                component.setForeground(textColor2);
             }
 		}
 		
-		setComboBox.setForeground(C_nigth);
-		setComboBox.setBackground(C_platinum);
+		setComboBox.setForeground(textColor2);
+		setComboBox.setBackground(textColor1);
 		
-		boxComboBoxes.setForeground(C_nigth);
-		boxComboBoxes.setBackground(C_platinum);
+		boxComboBoxes.setForeground(textColor2);
+		boxComboBoxes.setBackground(textColor1);
 		
 		for (int i = 0; i < optionComboBoxesTime.length; i++) {			
-			optionComboBoxesTime[i].setForeground(C_nigth);
-			optionComboBoxesTime[i].setBackground(C_platinum);
+			optionComboBoxesTime[i].setForeground(textColor2);
+			optionComboBoxesTime[i].setBackground(textColor1);
 		}		
 		
-		start.setForeground(C_platinum);
-		start.setBackground(C_slateGray);
+		start.setForeground(textColor1);
+		start.setBackground(buttonBackgroundColor);
 		
 	}
 	

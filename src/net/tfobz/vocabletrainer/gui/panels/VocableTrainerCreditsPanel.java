@@ -24,13 +24,13 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		barPane.setTitle(VocableTrainerLocalization.MENU_CREDITS);
 		
 		labelcreators = new JLabel(VocableTrainerLocalization.CREDITS_CREATORS);
-		labelcreators.setForeground(C_nigth);
+		labelcreators.setForeground(textColor2);
 		creators = new ArrayList<JLabel>();
 		creators.add(createLabel(new JLabel("Nathan C. (21chinat)")));
 		creators.add(createLabel(new JLabel("Gerhard T. R. (gtrteimo)")));
 		
 		labelhelpers = new JLabel(VocableTrainerLocalization.CREDITS_HELPERS);
-		labelhelpers.setForeground(C_nigth);
+		labelhelpers.setForeground(textColor2);
 		helpers = new ArrayList<JLabel>();
 		helpers.add(createLabel(new JLabel("Nick L.")));
 		helpers.add(createLabel(new JLabel("Manuel P.")));
@@ -51,24 +51,24 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 	}
 	
 	private JLabel createLabel (JLabel label) {
-		label.setForeground(C_nigth);
-		label.setBackground(C_powderBlue);
+		label.setForeground(textColor2);
+		label.setBackground(mainBackgroundColor);
 		return label;
 	}
 	
 	@Override
-	public void setColours() {
-		super.setColours();
-		labelcreators.setForeground(C_nigth);
-		labelhelpers.setForeground(C_nigth);
+	public void setColors() {
+		super.setColors();
+		labelcreators.setForeground(textColor2);
+		labelhelpers.setForeground(textColor2);
 		
 		for (int i = 0; i < creators.size(); i++) {
-			creators.get(i).setForeground(C_nigth);
-			creators.get(i).setBackground(C_powderBlue);
+			creators.get(i).setForeground(textColor2);
+			creators.get(i).setBackground(mainBackgroundColor);
 		}
 		for (int i = 0; i < helpers.size(); i++) {
-			helpers.get(i).setForeground(C_nigth);
-			helpers.get(i).setBackground(C_powderBlue);
+			helpers.get(i).setForeground(textColor2);
+			helpers.get(i).setBackground(mainBackgroundColor);
 		}
 	}
 	

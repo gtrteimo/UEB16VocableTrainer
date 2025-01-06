@@ -31,15 +31,15 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		B_info = new JButton (VocableTrainerLocalization.HOME_INFO);
 		B_exit = new JButton (VocableTrainerLocalization.HOME_EXIT);
 		
-		B_start.setBackground(C_slateGray);
-		B_new.setBackground(C_slateGray);
-		B_info.setBackground(C_slateGray);
-		B_exit.setBackground(C_slateGray);
+		B_start.setBackground(buttonBackgroundColor);
+		B_new.setBackground(buttonBackgroundColor);
+		B_info.setBackground(buttonBackgroundColor);
+		B_exit.setBackground(buttonBackgroundColor);
 		
-		B_start.setForeground(C_platinum);
-		B_new.setForeground(C_platinum);
-		B_info.setForeground(C_platinum);
-		B_exit.setForeground(C_platinum);
+		B_start.setForeground(textColor1);
+		B_new.setForeground(textColor1);
+		B_info.setForeground(textColor1);
+		B_exit.setForeground(textColor1);
 
 		B_start.setFocusPainted(false);
 		B_new.setFocusPainted(false);
@@ -72,17 +72,17 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setColours() {
-		super.setColours();
-		B_start.setBackground(C_slateGray);
-		B_new.setBackground(C_slateGray);
-		B_info.setBackground(C_slateGray);
-		B_exit.setBackground(C_slateGray);
+	public void setColors() {
+		super.setColors();
+		B_start.setBackground(buttonBackgroundColor);
+		B_new.setBackground(buttonBackgroundColor);
+		B_info.setBackground(buttonBackgroundColor);
+		B_exit.setBackground(buttonBackgroundColor);
 		
-		B_start.setForeground(C_platinum);
-		B_new.setForeground(C_platinum);
-		B_info.setForeground(C_platinum);
-		B_exit.setForeground(C_platinum);
+		B_start.setForeground(textColor1);
+		B_new.setForeground(textColor1);
+		B_info.setForeground(textColor1);
+		B_exit.setForeground(textColor1);
 	}
 	
 	@Override

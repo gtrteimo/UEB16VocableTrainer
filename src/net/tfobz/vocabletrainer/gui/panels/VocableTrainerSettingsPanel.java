@@ -84,27 +84,27 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		barPane.setTitle(VocableTrainerLocalization.MENU_SETTINGS);
 		
         language = new JLabel("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
-        language.setForeground(C_nigth);
+        language.setForeground(textColor2);
         
         theme = new JLabel("   " + VocableTrainerLocalization.SETTINGS_THEME);
-        theme.setForeground(C_nigth);
+        theme.setForeground(textColor2);
         
-        languageBox.setForeground(C_nigth);
-        languageBox.setBackground(C_platinum);
+        languageBox.setForeground(textColor2);
+        languageBox.setBackground(textColor1);
         
         
-        themeBox.setForeground(C_nigth);
-        themeBox.setBackground(C_platinum);
+        themeBox.setForeground(textColor2);
+        themeBox.setBackground(textColor1);
         
         simplifiedBox.setText(VocableTrainerLocalization.SETTINGS_SIMPLIFIED_VIEW);
-        simplifiedBox.setBackground(C_powderBlue);
-        simplifiedBox.setForeground(C_nigth);
+        simplifiedBox.setBackground(mainBackgroundColor);
+        simplifiedBox.setForeground(textColor2);
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
        
         allwoPremiumBox.setText(VocableTrainerLocalization.SETTINGS_ALLOW_PREMIUM);
-        allwoPremiumBox.setBackground(C_powderBlue);
-        allwoPremiumBox.setForeground(C_nigth);
+        allwoPremiumBox.setBackground(mainBackgroundColor);
+        allwoPremiumBox.setForeground(textColor2);
 
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
@@ -112,8 +112,8 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         button = new JButton(VocableTrainerLocalization.SETTINGS_SUGGEST_FEATURE);
         button.setFocusPainted(false);
         button.setBorderPainted(false);
-        button.setBackground(C_slateGray);
-        button.setForeground(C_platinum);
+        button.setBackground(buttonBackgroundColor);
+        button.setForeground(textColor1);
         
         languageBox.addActionListener(e -> {
         	super.changeLocalisation((localisation) languageBox.getSelectedItem());
@@ -130,15 +130,15 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 				}
 				switch (themeBox.getSelectedIndex()) {
 				case 0:
-					changeColour(colours[0][0], colours[0][1], colours[0][2], colours[0][3], colours[0][4]);
+					changeColor(colours[0][0], colours[0][1], colours[0][2], colours[0][3], colours[0][4]);
 					VocableTrainerSettingsIO.saveSettings(colours[0]);
 					break;
 				case 1:
-					changeColour(colours[1][0], colours[1][1], colours[1][2], colours[1][3], colours[1][4]);
+					changeColor(colours[1][0], colours[1][1], colours[1][2], colours[1][3], colours[1][4]);
 					VocableTrainerSettingsIO.saveSettings(colours[1]);
 					break;
 				case 2:
-					changeColour(colours[2][0], colours[2][1], colours[2][2], colours[2][3], colours[2][4]);
+					changeColor(colours[2][0], colours[2][1], colours[2][2], colours[2][3], colours[2][4]);
 					VocableTrainerSettingsIO.saveSettings(colours[2]);
 		        	break;
 				default:
@@ -198,27 +198,27 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
     }	
 	
 	@Override
-	public void setColours() {
-		super.setColours();
+	public void setColors() {
+		super.setColors();
 		
-        language.setForeground(C_nigth);
+        language.setForeground(textColor2);
         
-        theme.setForeground(C_nigth);
+        theme.setForeground(textColor2);
         
-        languageBox.setForeground(C_nigth);
-        languageBox.setBackground(C_platinum);
+        languageBox.setForeground(textColor2);
+        languageBox.setBackground(textColor1);
         
-        themeBox.setForeground(C_nigth);
-        themeBox.setBackground(C_platinum);
+        themeBox.setForeground(textColor2);
+        themeBox.setBackground(textColor1);
         
-        simplifiedBox.setBackground(C_powderBlue);
-        simplifiedBox.setForeground(C_nigth);
+        simplifiedBox.setBackground(mainBackgroundColor);
+        simplifiedBox.setForeground(textColor2);
         
-        allwoPremiumBox.setBackground(C_powderBlue);
-        allwoPremiumBox.setForeground(C_nigth);
+        allwoPremiumBox.setBackground(mainBackgroundColor);
+        allwoPremiumBox.setForeground(textColor2);
         
-        button.setBackground(C_slateGray);
-        button.setForeground(C_platinum);
+        button.setBackground(buttonBackgroundColor);
+        button.setForeground(textColor1);
 	}
 	
 	@Override

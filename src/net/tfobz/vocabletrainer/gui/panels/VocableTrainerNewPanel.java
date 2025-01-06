@@ -37,45 +37,45 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		barPane.setTitle(VocableTrainerLocalization.MENU_NEW);
 		
 		newSet = new JButton(VocableTrainerLocalization.NEW_SET_TITLE);
-		newSet.setForeground(C_platinum);
-		newSet.setBackground(C_slateGray);
+		newSet.setForeground(textColor1);
+		newSet.setBackground(buttonBackgroundColor);
 		newSet.setBorderPainted(false);
 		newSet.setFocusPainted(false);
 		newSet.setHorizontalAlignment(SwingConstants.CENTER);
 		newSet.setMnemonic('N');
 		
 		impo = new JButton(VocableTrainerLocalization.BUTTON_IMPORT);
-		impo.setForeground(C_platinum);
-		impo.setBackground(C_slateGray);
+		impo.setForeground(textColor1);
+		impo.setBackground(buttonBackgroundColor);
 		impo.setBorderPainted(false);
 		impo.setFocusPainted(false);
 		impo.setHorizontalAlignment(SwingConstants.CENTER);
 		impo.setMnemonic('I');
 		
 		expo = new JButton(VocableTrainerLocalization.BUTTON_EXPORT);
-		expo.setForeground(C_platinum);
-		expo.setBackground(C_slateGray);
+		expo.setForeground(textColor1);
+		expo.setBackground(buttonBackgroundColor);
 		expo.setBorderPainted(false);
 		expo.setFocusPainted(false);
 		expo.setHorizontalAlignment(SwingConstants.CENTER);
 		expo.setMnemonic('E');
 		
 		comboBox = new JComboBox<>();
-		comboBox.setForeground(C_nigth);
-		comboBox.setBackground(C_platinum);
+		comboBox.setForeground(textColor2);
+		comboBox.setBackground(textColor1);
 		comboBox.setBorder(null);
 	
 		renameButton = new JButton(VocableTrainerLocalization.BUTTON_RENAME);
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
-        renameButton.setForeground(C_platinum);
-        renameButton.setBackground(C_slateGray);
+        renameButton.setForeground(textColor1);
+        renameButton.setBackground(buttonBackgroundColor);
         renameButton.setMnemonic('R');
         deleteButton = new JButton(VocableTrainerLocalization.BUTTON_DELETE);
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
-        deleteButton.setForeground(C_platinum);
-        deleteButton.setBackground(C_slateGray);
+        deleteButton.setForeground(textColor1);
+        deleteButton.setBackground(buttonBackgroundColor);
         deleteButton.setMnemonic('D');
         renameButton.addActionListener(e -> {
             Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
@@ -105,29 +105,29 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         });
 		
 		label1 = new JLabel();
-		label1.setForeground(C_nigth);
+		label1.setForeground(textColor2);
 		label1.setHorizontalAlignment(SwingConstants.CENTER);
 
 		
 		label2 = new JLabel();
-		label2.setForeground(C_nigth);
+		label2.setForeground(textColor2);
 		label2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text1 = new JTextField();
-		text1.setForeground(C_nigth);
-		text1.setBackground(C_platinum);
+		text1.setForeground(textColor2);
+		text1.setBackground(textColor1);
 		text1.setBorder(null);
 		text1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		text2 = new JTextField();
-		text2.setForeground(C_nigth);
-		text2.setBackground(C_platinum);
+		text2.setForeground(textColor2);
+		text2.setBackground(textColor1);
 		text2.setBorder(null);
 		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		save = new JButton(VocableTrainerLocalization.BUTTON_SAVE);
-		save.setForeground(C_platinum);
-		save.setBackground(C_slateGray);
+		save.setForeground(textColor1);
+		save.setBackground(buttonBackgroundColor);
 		save.setFocusPainted(false);
 		save.setBorderPainted(false);
 		save.setMnemonic('S');
@@ -278,39 +278,39 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setColours() {
-		super.setColours();
+	public void setColors() {
+		super.setColors();
 		
-		newSet.setForeground(C_platinum);
-		newSet.setBackground(C_slateGray);
+		newSet.setForeground(textColor1);
+		newSet.setBackground(buttonBackgroundColor);
 		
-		impo.setForeground(C_platinum);
-		impo.setBackground(C_slateGray);
+		impo.setForeground(textColor1);
+		impo.setBackground(buttonBackgroundColor);
 		
-		expo.setForeground(C_platinum);
-		expo.setBackground(C_slateGray);
+		expo.setForeground(textColor1);
+		expo.setBackground(buttonBackgroundColor);
 		
-		comboBox.setForeground(C_nigth);
-		comboBox.setBackground(C_platinum);
+		comboBox.setForeground(textColor2);
+		comboBox.setBackground(textColor1);
 		
-        renameButton.setForeground(C_platinum);
-        renameButton.setBackground(C_slateGray);
+        renameButton.setForeground(textColor1);
+        renameButton.setBackground(buttonBackgroundColor);
         
-        deleteButton.setForeground(C_platinum);
-        deleteButton.setBackground(C_slateGray);
+        deleteButton.setForeground(textColor1);
+        deleteButton.setBackground(buttonBackgroundColor);
         
-		label1.setForeground(C_nigth);
+		label1.setForeground(textColor2);
 		
-		label2.setForeground(C_nigth);
+		label2.setForeground(textColor2);
 		
-		text1.setForeground(C_nigth);
-		text1.setBackground(C_platinum);
+		text1.setForeground(textColor2);
+		text1.setBackground(textColor1);
 		
-		text2.setForeground(C_nigth);
-		text2.setBackground(C_platinum);
+		text2.setForeground(textColor2);
+		text2.setBackground(textColor1);
 		
-		save.setForeground(C_platinum);
-		save.setBackground(C_slateGray);
+		save.setForeground(textColor1);
+		save.setBackground(buttonBackgroundColor);
 	}
 	
 	@Override

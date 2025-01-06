@@ -47,13 +47,13 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		this.vtf = vtf;
 		this.settings = settings;
 		
-		setBackground(C_platinum);
+		setBackground(textColor1);
 		setLayout(null);
 		
 		
 		panel = new VocableTrainerPanel();
 		panel.setLocation(16, 16);
-		panel.setBackground(C_powderBlue);
+		panel.setBackground(mainBackgroundColor);
 		
 		panel.setLayout(null);
 		
@@ -89,30 +89,30 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         clock2 = new JLabel("Card Time:  0");
         
         originalWord = new JLabel();
-        originalWord.setForeground(C_nigth);
+        originalWord.setForeground(textColor2);
         answer = new JLabel();
-        answer.setForeground(C_nigth);
+        answer.setForeground(textColor2);
         
         input = new JTextField();
-        input.setForeground(C_nigth);
-        input.setBackground(C_platinum);
+        input.setForeground(textColor2);
+        input.setBackground(textColor1);
         input.setBorder(null);
         
         stop = new JButton("Stop");
-        stop.setForeground(C_platinum);
-        stop.setBackground(C_slateGray);
+        stop.setForeground(textColor1);
+        stop.setBackground(buttonBackgroundColor);
         stop.setFocusPainted(false);
         stop.setBorderPainted(false);
         stop.setMnemonic('S');
         skip = new JButton("Skip");
-        skip.setForeground(C_platinum);
-        skip.setBackground(C_slateGray);
+        skip.setForeground(textColor1);
+        skip.setBackground(buttonBackgroundColor);
         skip.setFocusPainted(false);
         skip.setBorderPainted(false);
         skip.setMnemonic('K');
         next = new JButton("Check");
-        next.setForeground(C_platinum);
-        next.setBackground(C_slateGray);
+        next.setForeground(textColor1);
+        next.setBackground(buttonBackgroundColor);
         next.setFocusPainted(false);
         next.setBorderPainted(false);
         next.setMnemonic('C');
@@ -236,7 +236,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        skip.setVisible(true);
 			next.setText("Check");
 			next.setMnemonic('e');
-			input.setBackground(C_platinum);
+			input.setBackground(textColor1);
 			input.setText("");
 			input.selectAll();
 			answer.setText("Your answer");
@@ -297,8 +297,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		stat = new ArrayList<JLabel>();
 		value = new ArrayList<JLabel>();
 		end = new JButton("End");
-		end.setForeground(C_platinum);
-		end.setBackground(C_slateGray);
+		end.setForeground(textColor1);
+		end.setBackground(buttonBackgroundColor);
 		end.setFocusPainted(false);
 		end.setBorderPainted(false);
 		end.setMnemonic('n');
