@@ -20,21 +20,21 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 	public VocableTrainerCreditsPanel (VocableTrainerFrame vtf) {
 		super(vtf);
 		panel.setLayout(null);
-		
-		barPane.setTitle(VocableTrainerLocalization.MENU_CREDITS);
-		
-		labelcreators = new JLabel(VocableTrainerLocalization.CREDITS_CREATORS);
+				
+		labelcreators = new JLabel();
 		labelcreators.setForeground(textColor2);
 		creators = new ArrayList<JLabel>();
 		creators.add(createLabel(new JLabel("Nathan C. (21chinat)")));
 		creators.add(createLabel(new JLabel("Gerhard T. R. (gtrteimo)")));
 		
-		labelhelpers = new JLabel(VocableTrainerLocalization.CREDITS_HELPERS);
+		labelhelpers = new JLabel();
 		labelhelpers.setForeground(textColor2);
 		helpers = new ArrayList<JLabel>();
 		helpers.add(createLabel(new JLabel("Nick L.")));
 		helpers.add(createLabel(new JLabel("Manuel P.")));
 		helpers.add(createLabel(new JLabel("Johannes W.")));
+		
+		setLocalisation();
 		
 		panel.add(labelcreators);
 		panel.add(labelhelpers);
@@ -76,7 +76,7 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 	public void setLocalisation() {
 		super.setLocalisation();
 		
-		barPane.setTitle(VocableTrainerLocalization.MENU_CREDITS);
+		barPane.setTitle(VocableTrainerLocalization.CREDITS_NAME);
 		
 		labelcreators.setText(VocableTrainerLocalization.CREDITS_CREATORS);
 		labelhelpers.setText(VocableTrainerLocalization.CREDITS_HELPERS);

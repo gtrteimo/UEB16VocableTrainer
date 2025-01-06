@@ -24,8 +24,12 @@ public class VocableTrainerIO {
 	    exportFileChooser.setAcceptAllFileFilterUsed(false);
 	    exportFileChooser.setSelectedFile(new File("export.txt")); // Default file name
 	    	    
-	    VocableTrainer2OptionDialog o = new VocableTrainer2OptionDialog(parent, "Export Option", "Do you want to include the box?", "Yes", "No");
+	    VocableTrainer2OptionDialog o = new VocableTrainer2OptionDialog(parent, VocableTrainerLocalization.EXPORT_EXPORT, VocableTrainerLocalization.EXPORT_QUESTION, VocableTrainerLocalization.DIALOG_TWO_OPTION_YES, VocableTrainerLocalization.DIALOG_TWO_OPTION_NO);
 	    o.setVisible(true);
+	    
+	    if (o.getAnswered() == false) {
+	    	return;
+	    }
 	    
 	    if (exportFileChooser.showSaveDialog(parent) == JFileChooser.APPROVE_OPTION) {
 	        String path = exportFileChooser.getSelectedFile().getAbsolutePath();

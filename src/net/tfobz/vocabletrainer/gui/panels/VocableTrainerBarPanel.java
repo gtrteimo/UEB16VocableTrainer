@@ -21,13 +21,10 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     private static Image barsImage;
 
     private JLabel title;
+    private String text;
 
     public void setTitle(String text) {
-        if (text.trim() != null && !text.trim().equals("")) {
-            title.setText(VocableTrainerLocalization.TITLE + " - " + text);
-        } else {
-            title.setText(VocableTrainerLocalization.TITLE);
-        }
+       this.text = text;
     }
 
     public VocableTrainerBarPanel(VocableTrainerPanel sourcePanel) {
@@ -35,9 +32,10 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
         setLayout(null);
         setBackground(menuBarColor);
 
+        title = new JLabel();
+        
         loadImage();
-
-        title = new JLabel(VocableTrainerLocalization.TITLE);
+        setLocalisation();
         title.setForeground(textColor1);
         title.setHorizontalAlignment(SwingConstants.LEFT);
         add(title);
@@ -51,7 +49,13 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
     
     @Override
 	public void setLocalisation() {
-    	title.setText(VocableTrainerLocalization.TITLE);
+    	if (title != null) {
+	    	 if (text != null && !text.trim().replaceAll("\n", "").isEmpty()) {
+	             title.setText(VocableTrainerLocalization.MAIN_TITLE + " - " + text);
+	         } else {
+	             title.setText(VocableTrainerLocalization.MAIN_TITLE);
+	         }
+    	}
 	}
     
     @Override

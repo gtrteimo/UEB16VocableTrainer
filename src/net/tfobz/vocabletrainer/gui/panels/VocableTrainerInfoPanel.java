@@ -28,8 +28,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainer2OptionDialog;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInputDialog;
 import net.tfobz.vokabeltrainer.model.Karte;
 import net.tfobz.vokabeltrainer.model.Lernkartei;
@@ -52,22 +54,21 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 
     public VocableTrainerInfoPanel(VocableTrainerFrame vtf) {
         super(vtf);
-        barPane.setTitle("Info");
         panel.setLayout(null);
-        topic = new JLabel("Topic:");
+        topic = new JLabel();
         topic.setForeground(textColor2);
         sets = VokabeltrainerDB.getLernkarteien();
         comboBox = new JComboBox<>(sets.toArray(new Lernkartei[0]));
         comboBox.setForeground(textColor2);
         comboBox.setBackground(textColor1);
         comboBox.addActionListener(e -> retriveTabel());
-        renameButton = new JButton("Rename");
+        renameButton = new JButton();
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
         renameButton.setForeground(textColor1);
         renameButton.setBackground(buttonBackgroundColor);
         renameButton.setMnemonic('e');
-        deleteButton = new JButton("Delete");
+        deleteButton = new JButton();
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
         deleteButton.setForeground(textColor1);
@@ -99,7 +100,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 for (int i = 0; i < table.getRowCount(); i++) {
                     table.setValueAt(false, i, 0);
                 }
-                renameButton.setText("Rename");
+                renameButton.setText(VocableTrainerLocalization.INFO_RENAME);
             } else {
                 int selectedRow = -1;
                 for (int i = 0; i < table.getRowCount(); i++) {
@@ -121,7 +122,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
                     if (s != null) {
                         VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf,
-                            "Rename set","Enter new name for the set:", s.getBeschreibung());
+                            VocableTrainerLocalization.DIALOG_INPUT_RENAME, VocableTrainerLocalization.DIALOG_INPUT_RENAME, s.getBeschreibung());
                         d.setVisible(true);
                         if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
                             s.setBeschreibung(d.getInput());
@@ -155,7 +156,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             } else {
                 Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
                 if (s != null) {
-                    VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, "Confirm Delete","Are you sure you want to delete this set?", "Yes", "No");
+                    VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_TITLE,VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_QUESTION, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_CONFIRM, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_CANCEL);
                     d.setVisible(true);
                     if (d.getAnswer()) {
                         VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -166,6 +167,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                 }
             }
         });
+        
+        setLocalisation();
+        
         panel.add(topic);
         panel.add(comboBox);
         panel.add(renameButton);
@@ -200,12 +204,9 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     card.getWortZwei(),
                     new Date(),
                     (card.getGerlerntAm() != null ? card.getGerlerntAm() : "-"),
-//                    new Date(),
                     card.getFachBeschreibung(),
-//                    card.getFnummer(),
                     card.getNummer()
                 });
-//                System.out.println(card.getFnummer());
             }
         }
     }
@@ -216,7 +217,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         if (sets != null) {
             for (Lernkartei set : sets) comboBox.addItem(set);
         } else {
-            JOptionPane.showMessageDialog(this, "Looks like the Sets Database was droped", "Statement", JOptionPane.ERROR_MESSAGE);
+        	new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);;
         }
         retriveTabel();
     }
@@ -226,23 +227,22 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         Lernkartei l = (Lernkartei) comboBox.getSelectedItem();
         if (l == null) return;
         model = new DefaultTableModel(
-            new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), "Date modified", "Last asked", "Box", "knummer"}, 0
-        ) {
-            @Override
-            public boolean isCellEditable(int r, int c) {
-                return c== 0 || c == 1 || c == 2;
-            }
-            @Override
-            public Class<?> getColumnClass(int i) {
-                switch (i) {
-                    case 0: return Boolean.class;
-                    case 3:
-                    case 4: return Date.class;
-                    case 5:
-                    case 6: return Integer.class;
-                    default: return String.class;
-                }
-            }
+            new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), VocableTrainerLocalization.INFO_DATE_MODIFIED, VocableTrainerLocalization.INFO_LAST_ASKED, VocableTrainerLocalization.INFO_BOX, "knummer"}, 0) {
+	            @Override
+	            public boolean isCellEditable(int r, int c) {
+	                return c== 0 || c == 1 || c == 2;
+	            }
+	            @Override
+	            public Class<?> getColumnClass(int i) {
+	                switch (i) {
+	                    case 0: return Boolean.class;
+	                    case 3:
+	                    case 4: return Date.class;
+	                    case 5:
+	                    case 6: return Integer.class;
+	                    default: return String.class;
+	                }
+	            }
         };
         fillTable(model);
         table = new JTable(model);
@@ -360,7 +360,13 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
     
     @Override
 	public void setLocalisation() {
+		super.setLocalisation();
 		
+        barPane.setTitle(VocableTrainerLocalization.INFO_NAME);
+        
+        topic.setText(VocableTrainerLocalization.INFO_TOPIC);
+		renameButton.setText(VocableTrainerLocalization.INFO_RENAME);
+		deleteButton.setText(VocableTrainerLocalization.INFO_DELETE);
 	}
     
     @Override

@@ -47,13 +47,14 @@ public class VocableTrainerFrame extends JFrame {
 	}
 	
 	private void generatePanels () {
-		panels[7] = new VocableTrainerSettingsPanel(this);
 		panels[0] = new VocableTrainerMenuPanel(this);
 		panels[1] = new VocableTrainerHomePanel(this);
 		panels[3] = new VocableTrainerNewPanel(this);
 		panels[4] = new VocableTrainerInfoPanel(this);
 		panels[5] = new VocableTrainerStartPanel(this);
 		panels[6] = new VocableTrainerCreditsPanel(this);
+		panels[7] = new VocableTrainerSettingsPanel(this);
+		panels[0].changeLocalisation(VocableTrainerSettingsIO.localisation);
 	}
 	public void changePanel (int panelIndex) throws RuntimeException {
 		if (panelIndex > 0) {

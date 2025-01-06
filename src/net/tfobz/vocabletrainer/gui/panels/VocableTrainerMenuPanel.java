@@ -30,13 +30,13 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		
 		panel.setLayout(null);
 		
-		options[0] = new JButton(VocableTrainerLocalization.MENU_HOME);
-		options[1] = new JButton(VocableTrainerLocalization.MENU_START);
-		options[2] = new JButton(VocableTrainerLocalization.MENU_INFO);
-		options[3] = new JButton(VocableTrainerLocalization.MENU_NEW);
-		options[4] = new JButton(VocableTrainerLocalization.MENU_CREDITS);
-		options[5] = new JButton(VocableTrainerLocalization.MENU_SETTINGS);
-		options[6] = new JButton(VocableTrainerLocalization.MENU_EXIT);
+		options[0] = new JButton();
+		options[1] = new JButton();
+		options[2] = new JButton();
+		options[3] = new JButton();
+		options[4] = new JButton();
+		options[5] = new JButton();
+		options[6] = new JButton();
 
 		for (int i = 0; i < options.length; i++) {
 			options[i].setForeground(textColor1);
@@ -73,13 +73,13 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 	
 	@Override
 	public void setLocalisation() {
-		options[0] = new JButton(VocableTrainerLocalization.MENU_HOME);
-		options[1] = new JButton(VocableTrainerLocalization.MENU_START);
-		options[2] = new JButton(VocableTrainerLocalization.MENU_INFO);
-		options[3] = new JButton(VocableTrainerLocalization.MENU_NEW);
-		options[4] = new JButton(VocableTrainerLocalization.MENU_CREDITS);
-		options[5] = new JButton(VocableTrainerLocalization.MENU_SETTINGS);
-		options[6] = new JButton(VocableTrainerLocalization.MENU_EXIT);
+		options[0].setText(VocableTrainerLocalization.MENU_HOME);
+		options[1].setText(VocableTrainerLocalization.MENU_START);
+		options[2].setText(VocableTrainerLocalization.MENU_INFO);
+		options[3].setText(VocableTrainerLocalization.MENU_NEW);
+		options[4].setText(VocableTrainerLocalization.MENU_CREDITS);
+		options[5].setText(VocableTrainerLocalization.MENU_SETTINGS);
+		options[6].setText(VocableTrainerLocalization.MENU_HELP);
 	}
 	
 	@Override

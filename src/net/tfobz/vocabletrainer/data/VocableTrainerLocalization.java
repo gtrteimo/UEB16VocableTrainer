@@ -17,38 +17,83 @@ public class VocableTrainerLocalization {
 		English, Deutsch, Italiano
 	}
 	
-	public static String TITLE;
-	public static String SECONDS;
-	public static String MINUTES;
-	public static String HOURS;
-    public static String INFO_DIALOG_CLOSE;
-    public static String TWO_OPTION_YES;
-    public static String TWO_OPTION_NO;
-    public static String NEW_SET_TITLE;
-    public static String NEW_SET_ENTER_SET_NAME;
-    public static String NEW_SET_DESCRIPTION_1;
-    public static String NEW_SET_DESCRIPTION_2;
-    public static String RENAME_SET;
-    public static String RENAME_SET_QUESTION;
-    public static String CONFIRM_DELETE;
-    public static String CONFIRM_DELETE_QUESTION;
-    public static String BUTTON_CONFIRM;
-    public static String BUTTON_CANCEL;
+	public static String MAIN_TITLE;
+	
+	public static String DATA_SECONDS;
+	public static String DATA_MINUTES;
+	public static String DATA_HOURS;
+	
+	public static String EXPORT_EXPORT;
+	public static String EXPORT_QUESTION;
+	
+    public static String DIALOG_INFO_CLOSE;
+    
+    public static String DIALOG_TWO_OPTION_YES;
+    public static String DIALOG_TWO_OPTION_NO;
+    public static String DIALOG_TWO_OPTION_DELETE_TITLE;
+    public static String DIALOG_TWO_OPTION_DELETE_QUESTION;
+    public static String DIALOG_TWO_OPTION_DELETE_CONFIRM;
+    public static String DIALOG_TWO_OPTION_DELETE_CANCEL;
+    
+    public static String DIALOG_NEW_SET_TITLE;
+    public static String DIALOG_NEW_SET_ENTER_SET_NAME;
+    public static String DIALOG_NEW_SET_DESCRIPTION_1;
+    public static String DIALOG_NEW_SET_DESCRIPTION_2;
+    public static String DIALOG_NEW_SET_SAVE;
+    public static String DIALOG_NEW_SET_CANCEL;
+    
+    public static String DIALOG_INPUT_RENAME;
+    public static String DIALOG_INPUT_QUESTION;
+    public static String DIALOG_INPUT_CONFIRM;
+    public static String DIALOG_INPUT_CANCEL;
+    
     public static String ERROR;
-    public static String ERROR_SELECT_SET;
-    public static String ERROR_SELECT_BOX;
-    public static String ERROR_NO_CARDS_IN_BOX;
-    public static String ERROR_TOO_MANY_CARDS;
-    public static String ERROR_SET_DROPPED;
-    public static String ERROR_BOX_CREATION_FAIL;
-    public static String ERROR_CARD_CREATION_FAIL;
-    public static String ERROR_DUPLICATE_CARD;
-    public static String SETTINGS_LANGUAGE;
-    public static String SETTINGS_THEME;
-    public static String SETTINGS_SIMPLIFIED_VIEW;
-    public static String SETTINGS_ALLOW_PREMIUM;
-    public static String SETTINGS_SUGGEST_FEATURE;
-    public static String START_BOX;
+    public static String ERROR_DATABASE_DROPPED;
+    public static String ERROR_START_SELECT_SET;
+    public static String ERROR_START_SELECT_BOX;
+    public static String ERROR_START_NO_CARDS_IN_BOX;
+    public static String ERROR_START_TOO_MANY_CARDS;
+    public static String ERROR_NEW_ENTER_DATA;
+    public static String ERROR_NEW_SET_SET_CREATION_FAIL;
+    public static String ERROR_NEW_BOX_CREATION_FAIL;
+    public static String ERROR_NEW_CARD_CREATION_FAIL;
+    public static String ERROR_IMPORT_DUPLICATE_CARD;
+    public static String ERROR_SETTINGS_NO_INTERNET;
+    public static String ERROR_SETTINGS_NOT_SUPPORTED;
+    
+    public static String MENU_HOME;
+    public static String MENU_START;
+    public static String MENU_INFO;
+    public static String MENU_NEW;
+    public static String MENU_CREDITS;
+    public static String MENU_SETTINGS;
+    public static String MENU_HELP;
+    
+    public static String HOME_NAME;
+    public static String HOME_START;
+    public static String HOME_NEW;
+    public static String HOME_INFO;
+    public static String HOME_EXIT;
+    
+    public static String NEW_NAME;
+    public static String NEW_NEW_SET;
+    public static String NEW_IMPORT;
+    public static String NEW_EXPORT;
+    public static String NEW_SAVE;
+    public static String NEW_RENAME;
+    public static String NEW_DELETE;
+     
+    public static String INFO_NAME;
+    public static String INFO_TOPIC;
+    public static String INFO_RENAME;
+    public static String INFO_SAVE;
+    public static String INFO_DELETE;
+    public static String INFO_DATE_MODIFIED;
+    public static String INFO_LAST_ASKED;
+    public static String INFO_BOX;
+    
+    public static String START_NAME;
+    public static String START_BOX_BOX;
     public static String START_BOX_ALL;
     public static String START_BOX_DUE;
     public static String START_TIME_PER_CARD;
@@ -56,42 +101,18 @@ public class VocableTrainerLocalization {
     public static String START_CASE_SENSITIVE;
     public static String START_AMOUNT_OF_CARDS;
     public static String START_PRACTISE_RUN;
-    public static String MENU_HOME;
-    public static String MENU_START;
-    public static String MENU_INFO;
-    public static String MENU_NEW;
-    public static String MENU_CREDITS;
-    public static String MENU_SETTINGS;
-    public static String MENU_EXIT;
+    public static String START_START;
+    
+    public static String CREDITS_NAME;
     public static String CREDITS_CREATORS;
     public static String CREDITS_HELPERS;
-    public static String HOME_START;
-    public static String HOME_NEW;
-    public static String HOME_INFO;
-    public static String HOME_EXIT;
-    public static String BUTTON_START;
-    public static String BUTTON_SAVE;
-    public static String BUTTON_STOP;
-    public static String BUTTON_SKIP;
-    public static String BUTTON_NEXT;
-    public static String BUTTON_CHECK;
-    public static String BUTTON_END;
-    public static String BUTTON_CLOSE;
-    public static String BUTTON_IMPORT;
-    public static String BUTTON_EXPORT;
-    public static String BUTTON_RENAME;
-    public static String BUTTON_DELETE;
-    public static String STATISTICS_TOTAL_TIME;
-    public static String STATISTICS_MAX_CARD_TIME;
-    public static String STATISTICS_MIN_CARD_TIME;
-    public static String STATISTICS_AVG_CARD_TIME;
-    public static String STATISTICS_TOTAL_CARDS;
-    public static String STATISTICS_SKIPPED_CARDS;
-    public static String STATISTICS_WRONG_ANSWERS;
-    public static String STATISTICS_CORRECT_ANSWERS;
-    public static String STATISTICS_MAX_STREAK;
-    public static String STATISTICS_ACCURACY;
-    public static String PLACEHOLDER_INPUT_WORD;
+
+    public static String SETTINGS_NAME;
+    public static String SETTINGS_LANGUAGE;
+    public static String SETTINGS_THEME;
+    public static String SETTINGS_SIMPLIFIED_VIEW;
+    public static String SETTINGS_ALLOW_PREMIUM;
+    public static String SETTINGS_SUGGEST_FEATURE;
 
     private static String path = "resources/localisation/german.yml";
 
@@ -189,82 +210,103 @@ public class VocableTrainerLocalization {
      * Assigns the parsed localization values to the static fields.
      *
      * @param values the map containing the localization key-value pairs
-     */
+     *///values.getOrDefault(l+".title.title", "");
 	private static void mapValues(Map<String, String> values, localisation l) {
-		TITLE = values.getOrDefault(l+".title.title", "");
-		SECONDS = values.getOrDefault(l+".time.seconds", "");
-		MINUTES = values.getOrDefault(l+".time.minutes", "");
-		HOURS = values.getOrDefault(l+".time.hours", "");
-        INFO_DIALOG_CLOSE = values.getOrDefault(l+".dialogs.info.close", "");
-        TWO_OPTION_YES = values.getOrDefault(l+".dialogs.two_option.yes", "");
-        TWO_OPTION_NO = values.getOrDefault(l+".dialogs.two_option.no", "");
-        NEW_SET_TITLE = values.getOrDefault(l+".dialogs.new_set.title", "");
-        NEW_SET_ENTER_SET_NAME = values.getOrDefault(l+".dialogs.new_set.enter_set_name", "");
-        NEW_SET_DESCRIPTION_1 = values.getOrDefault(l+".dialogs.new_set.description_1", "");
-        NEW_SET_DESCRIPTION_2 = values.getOrDefault(l+".dialogs.new_set.description_2", "");
-        RENAME_SET = values.getOrDefault(l+".dialogs.input.rename_title", "");
-        RENAME_SET_QUESTION = values.getOrDefault(l+".dialogs.input.rename_description", "");
-        CONFIRM_DELETE = values.getOrDefault(l+".dialogs.two_option.confirm_delete", "");
-        CONFIRM_DELETE_QUESTION = values.getOrDefault(l+".dialogs.two_option.confirm_delete_question", "");
-        BUTTON_CONFIRM = values.getOrDefault(l+".dialogs.input.confirm", "");
-        BUTTON_CANCEL = values.getOrDefault(l+".dialogs.input.cancel", "");
-        ERROR = values.getOrDefault(l+".dialogs.errors.error", "");
-        ERROR_SELECT_SET = values.getOrDefault(l+".dialogs.errors.select_set", "");
-        ERROR_SELECT_BOX = values.getOrDefault(l+".dialogs.errors.select_box", "");
-        ERROR_NO_CARDS_IN_BOX = values.getOrDefault(l+".dialogs.errors.no_cards_in_box", "");
-        ERROR_TOO_MANY_CARDS = values.getOrDefault(l+".dialogs.errors.too_many_cards", "");
-        ERROR_SET_DROPPED = values.getOrDefault(l+".dialogs.errors.set_dropped", "");
-        ERROR_BOX_CREATION_FAIL = values.getOrDefault(l+".dialogs.errors.box_creation_fail", "");
-        ERROR_CARD_CREATION_FAIL = values.getOrDefault(l+".dialogs.errors.card_creation_fail", "");
-        ERROR_DUPLICATE_CARD = values.getOrDefault(l+".dialogs.errors.dupilcate_card", "");
-        SETTINGS_LANGUAGE = values.getOrDefault(l+".settings.language", "");
-        SETTINGS_THEME = values.getOrDefault(l+".settings.theme", "");
-        SETTINGS_SIMPLIFIED_VIEW = values.getOrDefault(l+".settings.simplified_view", "");
-        SETTINGS_ALLOW_PREMIUM = values.getOrDefault(l+".settings.allow_premium", "");
-        SETTINGS_SUGGEST_FEATURE = values.getOrDefault(l+".settings.suggest_feature", "");
-        START_BOX = values.getOrDefault(l+".start.box", "");
-        START_BOX_ALL = values.getOrDefault(l+".start.box_all", "");
-        START_BOX_DUE = values.getOrDefault(l+".start.box_due", "");
-        START_TIME_PER_CARD = values.getOrDefault(l+".start.time_per_card", "");
-        START_TOTAL_TIME = values.getOrDefault(l+".start.total_time", "");
-        START_CASE_SENSITIVE = values.getOrDefault(l+".start.case_sensitive", "");
-        START_AMOUNT_OF_CARDS = values.getOrDefault(l+".start.amount_of_cards", "");
-        START_PRACTISE_RUN = values.getOrDefault(l+".start.practise_run", "");
-        MENU_HOME = values.getOrDefault(l+".menu.home", "");
-        MENU_START = values.getOrDefault(l+".menu.start", "");
-        MENU_INFO = values.getOrDefault(l+".menu.info", "");
-        MENU_NEW = values.getOrDefault(l+".menu.new", "");
-        MENU_CREDITS = values.getOrDefault(l+".menu.credits", "");
-        MENU_SETTINGS = values.getOrDefault(l+".menu.settings", "");
-        MENU_EXIT = values.getOrDefault(l+".menu.exit", "");
-        CREDITS_CREATORS = values.getOrDefault(l+".credits.creators", "");
-        CREDITS_HELPERS = values.getOrDefault(l+".credits.helpers", "");
-        HOME_START = values.getOrDefault(l+".home.start", "");
-        HOME_NEW = values.getOrDefault(l+".home.new", "");
-        HOME_INFO = values.getOrDefault(l+".home.info", "");
-        HOME_EXIT = values.getOrDefault(l+".home.exit", "");
-        BUTTON_START = values.getOrDefault(l+".buttons.start", "");
-        BUTTON_SAVE = values.getOrDefault(l+".buttons.save", "");
-        BUTTON_STOP = values.getOrDefault(l+".buttons.stop", "");
-        BUTTON_SKIP = values.getOrDefault(l+".buttons.skip", "");
-        BUTTON_NEXT = values.getOrDefault(l+".buttons.next", "");
-        BUTTON_CHECK = values.getOrDefault(l+".buttons.check", "");
-        BUTTON_END = values.getOrDefault(l+".buttons.end", "");
-        BUTTON_CLOSE = values.getOrDefault(l+".buttons.close", "");
-        BUTTON_IMPORT = values.getOrDefault(l+".buttons.import", "");
-        BUTTON_EXPORT = values.getOrDefault(l+".buttons.export", "");
-        BUTTON_RENAME = values.getOrDefault(l+".buttons.rename", "");
-        BUTTON_DELETE = values.getOrDefault(l+".buttons.delete", "");
-        STATISTICS_TOTAL_TIME = values.getOrDefault(l+".statistics.total_time", "");
-        STATISTICS_MAX_CARD_TIME = values.getOrDefault(l+".statistics.max_card_time", "");
-        STATISTICS_MIN_CARD_TIME = values.getOrDefault(l+".statistics.min_card_time", "");
-        STATISTICS_AVG_CARD_TIME = values.getOrDefault(l+".statistics.avg_card_time", "");
-        STATISTICS_TOTAL_CARDS = values.getOrDefault(l+".statistics.total_cards", "");
-        STATISTICS_SKIPPED_CARDS = values.getOrDefault(l+".statistics.skipped_cards", "");
-        STATISTICS_WRONG_ANSWERS = values.getOrDefault(l+".statistics.wrong_answers", "");
-        STATISTICS_CORRECT_ANSWERS = values.getOrDefault(l+".statistics.correct_answers", "");
-        STATISTICS_MAX_STREAK = values.getOrDefault(l+".statistics.max_streak", "");
-        STATISTICS_ACCURACY = values.getOrDefault(l+".statistics.accuracy", "");
-        PLACEHOLDER_INPUT_WORD = values.getOrDefault(l+".placeholders.input_word", "");
+		 MAIN_TITLE = values.getOrDefault(l+".main.title", "");
+		
+		 DATA_SECONDS = values.getOrDefault(l+".data.seconds", "");
+		 DATA_MINUTES = values.getOrDefault(l+".data.minutes", "");
+		 DATA_HOURS = values.getOrDefault(l+".data.hours", "");
+		
+		 EXPORT_EXPORT = values.getOrDefault(l+".export.export", "");
+		 EXPORT_QUESTION = values.getOrDefault(l+".export.question", "");
+		
+	     DIALOG_INFO_CLOSE = values.getOrDefault(l+".dialog.info.close", "");
+	    
+	     DIALOG_TWO_OPTION_YES = values.getOrDefault(l+".dialog.two_options.yes", "");
+	     DIALOG_TWO_OPTION_NO = values.getOrDefault(l+".dialog.two_options.no", "");
+	     DIALOG_TWO_OPTION_DELETE_TITLE = values.getOrDefault(l+".dialog.two_options.delete.title", "");
+	     DIALOG_TWO_OPTION_DELETE_QUESTION = values.getOrDefault(l+".dialog.two_options.delete.question", "");
+	     DIALOG_TWO_OPTION_DELETE_CONFIRM = values.getOrDefault(l+".dialog.two_options.delete.confirm", "");
+	     DIALOG_TWO_OPTION_DELETE_CANCEL = values.getOrDefault(l+".dialog.two_options.delete.cancel", "");
+	    
+	     DIALOG_NEW_SET_TITLE = values.getOrDefault(l+".dialog.new_set.title", "");
+	     DIALOG_NEW_SET_ENTER_SET_NAME = values.getOrDefault(l+".dialog.new_set.enter_set_name", "");
+	     DIALOG_NEW_SET_DESCRIPTION_1 = values.getOrDefault(l+".dialog.new_set.description1", "");
+	     DIALOG_NEW_SET_DESCRIPTION_2 = values.getOrDefault(l+".dialog.new_set.description2", "");
+	     DIALOG_NEW_SET_SAVE = values.getOrDefault(l+".dialog.new_set.save", "");
+	     DIALOG_NEW_SET_CANCEL = values.getOrDefault(l+".dialog.new_set.cancel", "");
+	    
+	     DIALOG_INPUT_RENAME = values.getOrDefault(l+".dialog.input.rename", "");
+	     DIALOG_INPUT_QUESTION = values.getOrDefault(l+".dialog.input.question", "");
+	     DIALOG_INPUT_CONFIRM = values.getOrDefault(l+".dialog.input.confirm", "");
+	     DIALOG_INPUT_CANCEL = values.getOrDefault(l+".dialog.input.cancel", "");
+	    
+	     ERROR = values.getOrDefault(l+".error.error", "");
+	     ERROR_DATABASE_DROPPED = values.getOrDefault(l+".error.database_dropped", "");
+	     ERROR_START_SELECT_SET = values.getOrDefault(l+".error.start.select_set", "");
+	     ERROR_START_SELECT_BOX = values.getOrDefault(l+".error.start.select_box", "");
+	     ERROR_START_NO_CARDS_IN_BOX = values.getOrDefault(l+".error.start.no_cards_in_box", "");
+	     ERROR_START_TOO_MANY_CARDS = values.getOrDefault(l+".error.start.too_many_cards", "");
+	     ERROR_NEW_ENTER_DATA = values.getOrDefault(l+".error.new.enter_data", "");
+	     ERROR_NEW_SET_SET_CREATION_FAIL = values.getOrDefault(l+".error.new.set_creation_fail", "");
+	     ERROR_NEW_BOX_CREATION_FAIL = values.getOrDefault(l+".error.new.box_creation_fail", "");
+	     ERROR_NEW_CARD_CREATION_FAIL = values.getOrDefault(l+".error.new.card_creation_fail", "");
+	     ERROR_IMPORT_DUPLICATE_CARD = values.getOrDefault(l+".error.import.duplicate_card", "");
+	     ERROR_SETTINGS_NO_INTERNET = values.getOrDefault(l+".error.settings.no_internet", "");
+	     ERROR_SETTINGS_NOT_SUPPORTED = values.getOrDefault(l+".error.settings.not_supported", "");
+	    
+	     MENU_HOME = values.getOrDefault(l+".menu.home", "");
+	     MENU_START = values.getOrDefault(l+".menu.start", "");
+	     MENU_INFO = values.getOrDefault(l+".menu.info", "");
+	     MENU_NEW = values.getOrDefault(l+".menu.new", "");
+	     MENU_CREDITS = values.getOrDefault(l+".menu.credits", "");
+	     MENU_SETTINGS = values.getOrDefault(l+".menu.settings", "");
+	     MENU_HELP = values.getOrDefault(l+".menu.help", "");
+	    
+	     HOME_NAME = values.getOrDefault(l+".home.name", "");
+	     HOME_START = values.getOrDefault(l+".home.start", "");
+	     HOME_NEW = values.getOrDefault(l+".home.new", "");
+	     HOME_INFO = values.getOrDefault(l+".home.info", "");
+	     HOME_EXIT = values.getOrDefault(l+".home.exit", "");
+	    
+	     NEW_NAME = values.getOrDefault(l+".new.name", "");
+	     NEW_NEW_SET = values.getOrDefault(l+".new.new_set", "");
+	     NEW_IMPORT = values.getOrDefault(l+".new.import", "");
+	     NEW_EXPORT = values.getOrDefault(l+".new.export", "");
+	     NEW_SAVE = values.getOrDefault(l+".new.save", "");
+	     NEW_RENAME = values.getOrDefault(l+".new.rename", "");
+	     NEW_DELETE = values.getOrDefault(l+".new.delete", "");
+	     
+	     INFO_NAME = values.getOrDefault(l+".info.name", "");
+	     INFO_TOPIC = values.getOrDefault(l+".info.topic", "");
+	     INFO_RENAME = values.getOrDefault(l+".info.rename", "");
+	     INFO_SAVE = values.getOrDefault(l+".info.save", "");
+	     INFO_DELETE = values.getOrDefault(l+".info.delete", "");
+	     INFO_DATE_MODIFIED = values.getOrDefault(l+".info.date_modified", "");
+	     INFO_LAST_ASKED = values.getOrDefault(l+".info.last_asked", "");
+	     INFO_BOX = values.getOrDefault(l+".info.box", "");
+	    
+	     START_NAME = values.getOrDefault(l+".start.name", "");
+	     START_BOX_BOX = values.getOrDefault(l+".start.box.box", "");
+	     START_BOX_ALL = values.getOrDefault(l+".start.box.all", "");
+	     START_BOX_DUE = values.getOrDefault(l+".start.box.due", "");
+	     START_TIME_PER_CARD = values.getOrDefault(l+".start.time_per_card", "");
+	     START_TOTAL_TIME = values.getOrDefault(l+".start.total_time", "");
+	     START_CASE_SENSITIVE = values.getOrDefault(l+".start.case_sensitive", "");
+	     START_AMOUNT_OF_CARDS = values.getOrDefault(l+".start.amount_of_cards", "");
+	     START_PRACTISE_RUN = values.getOrDefault(l+".start.practise_run", "");
+	     START_START = values.getOrDefault(l+".start.start", "");
+	    
+	     CREDITS_NAME = values.getOrDefault(l+".credits.name", "");
+	     CREDITS_CREATORS = values.getOrDefault(l+".credits.creators", "");
+	     CREDITS_HELPERS = values.getOrDefault(l+".credits.helpers", "");
+
+	     SETTINGS_NAME = values.getOrDefault(l+".settings.name", "");
+	     SETTINGS_LANGUAGE = values.getOrDefault(l+".settings.language", "");
+	     SETTINGS_THEME = values.getOrDefault(l+".settings.theme", "");
+	     SETTINGS_SIMPLIFIED_VIEW = values.getOrDefault(l+".settings.simplified_view", "");
+	     SETTINGS_ALLOW_PREMIUM = values.getOrDefault(l+".settings.allow_premium", "");
+	     SETTINGS_SUGGEST_FEATURE = values.getOrDefault(l+".settings.suggest_feature", "");
     }
 }

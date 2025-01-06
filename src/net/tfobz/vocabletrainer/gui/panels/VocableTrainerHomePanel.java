@@ -21,15 +21,13 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		super(vtf);
 		
 		panel.loadImage();
-		
-		barPane.setTitle(VocableTrainerLocalization.MENU_HOME);
-		
+				
 		panel.setLayout(null);
 		
-		B_start = new JButton (VocableTrainerLocalization.HOME_START);
-		B_new = new JButton (VocableTrainerLocalization.HOME_NEW);
-		B_info = new JButton (VocableTrainerLocalization.HOME_INFO);
-		B_exit = new JButton (VocableTrainerLocalization.HOME_EXIT);
+		B_start = new JButton();
+		B_new = new JButton();
+		B_info = new JButton();
+		B_exit = new JButton();
 		
 		B_start.setBackground(buttonBackgroundColor);
 		B_new.setBackground(buttonBackgroundColor);
@@ -61,11 +59,12 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 		B_info.addActionListener(new ButtonListener(4));
 		B_exit.addActionListener(new ButtonListener(-1));
 		
+		setLocalisation();
+		
 		panel.add(B_start);
 		panel.add(B_new);
 		panel.add(B_info);
 		panel.add(B_exit);
-		
 		
 		this.add(barPane);
 		this.add(panel);
@@ -89,12 +88,12 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 	public void setLocalisation() {
 		super.setLocalisation();
 		
-		barPane.setTitle(VocableTrainerLocalization.MENU_HOME);
+		barPane.setTitle(VocableTrainerLocalization.HOME_NAME);
 		
-		B_start = new JButton (VocableTrainerLocalization.HOME_START);
-		B_new = new JButton (VocableTrainerLocalization.HOME_NEW);
-		B_info = new JButton (VocableTrainerLocalization.HOME_INFO);
-		B_exit = new JButton (VocableTrainerLocalization.HOME_EXIT);
+		B_start.setText(VocableTrainerLocalization.HOME_START);
+		B_new.setText(VocableTrainerLocalization.HOME_NEW);
+		B_info.setText(VocableTrainerLocalization.HOME_INFO);
+		B_exit.setText(VocableTrainerLocalization.HOME_EXIT);
 	}
 	
 	@Override

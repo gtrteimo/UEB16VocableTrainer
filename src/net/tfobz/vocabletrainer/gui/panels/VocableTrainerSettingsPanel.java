@@ -11,7 +11,6 @@ import java.net.URI;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -20,6 +19,7 @@ import net.tfobz.vocabletrainer.data.VocableTrainerLocalization.localisation;
 import net.tfobz.vocabletrainer.data.VocableTrainerSettingsIO;
 import net.tfobz.vocabletrainer.gui.VocableTrainerFrame;
 import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerColorChooser;
+import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 
 
 @SuppressWarnings("serial")
@@ -72,12 +72,11 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         	themeBox.setSelectedItem("Custom");
         }
         
-		barPane.setTitle(VocableTrainerLocalization.MENU_SETTINGS);
 		
-        language = new JLabel("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
+        language = new JLabel();
         language.setForeground(textColor2);
         
-        theme = new JLabel("   " + VocableTrainerLocalization.SETTINGS_THEME);
+        theme = new JLabel();
         theme.setForeground(textColor2);
         
         languageBox.setForeground(textColor2);
@@ -87,20 +86,18 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         themeBox.setForeground(textColor2);
         themeBox.setBackground(textColor1);
         
-        simplifiedBox.setText(VocableTrainerLocalization.SETTINGS_SIMPLIFIED_VIEW);
         simplifiedBox.setBackground(mainBackgroundColor);
         simplifiedBox.setForeground(textColor2);
         simplifiedBox.setEnabled(false);
         simplifiedBox.setSelected(true);
        
-        allwoPremiumBox.setText(VocableTrainerLocalization.SETTINGS_ALLOW_PREMIUM);
         allwoPremiumBox.setBackground(mainBackgroundColor);
         allwoPremiumBox.setForeground(textColor2);
 
         allwoPremiumBox.setEnabled(false);
         allwoPremiumBox.setSelected(false);
         
-        button = new JButton(VocableTrainerLocalization.SETTINGS_SUGGEST_FEATURE);
+        button = new JButton();
         button.setFocusPainted(false);
         button.setBorderPainted(false);
         button.setBackground(buttonBackgroundColor);
@@ -122,41 +119,33 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 				switch (themeBox.getSelectedIndex()) {
 				case 0:
 					changeColor(colours[0][0], colours[0][1], colours[0][2], colours[0][3], colours[0][4]);
-					VocableTrainerSettingsIO.saveSettings(colours[0]);
+					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[0])).start();
 					break;
 				case 1:
 					changeColor(colours[1][0], colours[1][1], colours[1][2], colours[1][3], colours[1][4]);
-					VocableTrainerSettingsIO.saveSettings(colours[1]);
+					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[1])).start();
 					break;
 				case 2:
 					changeColor(colours[2][0], colours[2][1], colours[2][2], colours[2][3], colours[2][4]);
-					VocableTrainerSettingsIO.saveSettings(colours[2]);
+					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[2])).start();
 		        	break;
 				default:
 					colorChooser = new VocableTrainerColorChooser(VocableTrainerSettingsPanel.this);
 					colorChooser.setVisible(true);
-					VocableTrainerSettingsIO.saveSettings(colorChooser.getColors()); //TODO
+					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colorChooser.getColors())).start();
 					break;
 				}
 			}
 		});
 
         button.addActionListener(e -> openWebpage("https://github.com/gtrteimo/UEB16VocableTrainer"));
-        
-//        button.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent ae) {
-//				try {
-//					java.awt.Desktop.getDesktop().browse(new URL("https://github.com/gtrteimo/UEB16VocableTrainer").toURI());
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//				
-//			}
-//		});
-		
-        simplifiedBox.addActionListener(e -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected()));
-        allwoPremiumBox.addActionListener(e -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected()));
+        		
+        simplifiedBox.addActionListener(e -> {
+        	new Thread(() -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected())).start();;
+        });
+        allwoPremiumBox.addActionListener(e -> {
+        	new Thread(() -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected())).start();;
+        });
 
         panel.add(language);
         panel.add(theme);
@@ -170,21 +159,17 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		add(panel);
 	}
 	
-	private static void openWebpage(String urlString) {
+	private void openWebpage(String urlString) {
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
             try {
                 URI uri = new URI(urlString);
                 desktop.browse(uri);
             } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, 
-                    "Failed to open the webpage: " + e.getMessage());
+                new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NO_INTERNET);
             }
         } else {
-            System.err.println("Desktop is not supported on this platform.");
-            JOptionPane.showMessageDialog(null, 
-                "Cannot open the webpage on this platform.");
+            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NOT_SUPPORTED+"https://github.com/gtrteimo/UEB16VocableTrainer");
         }
     }	
 	
@@ -216,7 +201,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	public void setLocalisation() {
 		super.setLocalisation();
 		
-		barPane.setTitle(VocableTrainerLocalization.MENU_SETTINGS);
+		barPane.setTitle(VocableTrainerLocalization.SETTINGS_NAME);
         language.setText("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
         theme.setText("   " + VocableTrainerLocalization.SETTINGS_THEME);
         simplifiedBox.setText(VocableTrainerLocalization.SETTINGS_SIMPLIFIED_VIEW);

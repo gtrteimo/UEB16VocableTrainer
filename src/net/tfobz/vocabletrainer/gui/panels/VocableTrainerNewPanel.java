@@ -35,7 +35,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		
 		barPane.setTitle(VocableTrainerLocalization.MENU_NEW);
 		
-		newSet = new JButton(VocableTrainerLocalization.NEW_SET_TITLE);
+		newSet = new JButton();
 		newSet.setForeground(textColor1);
 		newSet.setBackground(buttonBackgroundColor);
 		newSet.setBorderPainted(false);
@@ -43,7 +43,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		newSet.setHorizontalAlignment(SwingConstants.CENTER);
 		newSet.setMnemonic('N');
 		
-		impo = new JButton(VocableTrainerLocalization.BUTTON_IMPORT);
+		impo = new JButton();
 		impo.setForeground(textColor1);
 		impo.setBackground(buttonBackgroundColor);
 		impo.setBorderPainted(false);
@@ -51,7 +51,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		impo.setHorizontalAlignment(SwingConstants.CENTER);
 		impo.setMnemonic('I');
 		
-		expo = new JButton(VocableTrainerLocalization.BUTTON_EXPORT);
+		expo = new JButton();
 		expo.setForeground(textColor1);
 		expo.setBackground(buttonBackgroundColor);
 		expo.setBorderPainted(false);
@@ -64,13 +64,14 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		comboBox.setBackground(textColor1);
 		comboBox.setBorder(null);
 	
-		renameButton = new JButton(VocableTrainerLocalization.BUTTON_RENAME);
+		renameButton = new JButton();
         renameButton.setFocusPainted(false);
         renameButton.setBorderPainted(false);
         renameButton.setForeground(textColor1);
         renameButton.setBackground(buttonBackgroundColor);
         renameButton.setMnemonic('R');
-        deleteButton = new JButton(VocableTrainerLocalization.BUTTON_DELETE);
+        
+        deleteButton = new JButton();
         deleteButton.setFocusPainted(false);
         deleteButton.setBorderPainted(false);
         deleteButton.setForeground(textColor1);
@@ -79,7 +80,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         renameButton.addActionListener(e -> {
             Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
             if (s != null) {
-                VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, VocableTrainerLocalization.RENAME_SET,VocableTrainerLocalization.RENAME_SET_QUESTION, s.getBeschreibung());
+                VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf, VocableTrainerLocalization.DIALOG_INPUT_RENAME,VocableTrainerLocalization.DIALOG_INPUT_QUESTION, s.getBeschreibung());
                 d.setVisible(true);
                 if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
                     s.setBeschreibung(d.getInput());
@@ -92,7 +93,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
         deleteButton.addActionListener(e -> {
 	        Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
 	        if (s != null) {
-	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, VocableTrainerLocalization.CONFIRM_DELETE, VocableTrainerLocalization.CONFIRM_DELETE_QUESTION, VocableTrainerLocalization.TWO_OPTION_YES, VocableTrainerLocalization.TWO_OPTION_NO);
+	            VocableTrainer2OptionDialog d = new VocableTrainer2OptionDialog(vtf, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_TITLE, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_QUESTION, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_CONFIRM, VocableTrainerLocalization.DIALOG_TWO_OPTION_DELETE_CANCEL);
 	            d.setVisible(true);
 	            if (d.getAnswer()) {
 	                VokabeltrainerDB.loeschenLernkartei(s.getNummer());
@@ -124,7 +125,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		text2.setBorder(null);
 		text2.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		save = new JButton(VocableTrainerLocalization.BUTTON_SAVE);
+		save = new JButton();
 		save.setForeground(textColor1);
 		save.setBackground(buttonBackgroundColor);
 		save.setFocusPainted(false);
@@ -203,7 +204,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	            List<Fach> faecher = VokabeltrainerDB.getFaecher(s.getNummer());
 
 	            if (faecher == null) {
-	                new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
+	                new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);
 	                return;
 	            }
 
@@ -213,7 +214,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                newFach.setBeschreibung("1");
 	                int result = VokabeltrainerDB.hinzufuegenFach(s.getNummer(), newFach);
 	                if (result != 0) {
-	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_BOX_CREATION_FAIL).setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_NEW_BOX_CREATION_FAIL).setVisible(true);
 	                    return;
 	                }
 	                faecher = VokabeltrainerDB.getFaecher(s.getNummer());
@@ -234,17 +235,20 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	                    vtf.changePanel(-1);
 	                    break;
 	                case -5:
-	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DUPLICATE_CARD).setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_IMPORT_DUPLICATE_CARD).setVisible(true);
 	                    break;
 	                default:
-	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_CARD_CREATION_FAIL).setVisible(true);
+	                    new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_NEW_CARD_CREATION_FAIL).setVisible(true);
 	                    break;
 	            }
 	        } else {
-	            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, "Both \"" + s.getWortEinsBeschreibung() + "\" and \"" + s.getWortZweiBeschreibung() + "\" must be filled out.").setVisible(true);
+	        	String e = VocableTrainerLocalization.ERROR_NEW_ENTER_DATA;
+	        	String e1 = e.substring(e.indexOf('}')+1, e.indexOf('{'));
+	        	e.replaceFirst("}", "");
+	            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR,  s.getWortEinsBeschreibung() + e1 + s.getWortZweiBeschreibung() + e.substring(e.indexOf('}'))).setVisible(true);
 	        }
 	    } else {
-	        new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SELECT_SET).setVisible(true);
+	        new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_SELECT_SET).setVisible(true);
 	    }
 	}
 
@@ -258,7 +262,7 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 		    }
 		    retriveLabels();
 	    } else {
-            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
+            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);
 	    }
 	}
 	
@@ -314,12 +318,13 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
 	
 	@Override
 	public void setLocalisation() {
-		barPane.setTitle(VocableTrainerLocalization.MENU_NEW);
-		newSet.setText(VocableTrainerLocalization.NEW_SET_TITLE);
-		impo.setText(VocableTrainerLocalization.BUTTON_IMPORT);
-		expo.setText(VocableTrainerLocalization.BUTTON_EXPORT);
-		renameButton.setText(VocableTrainerLocalization.BUTTON_RENAME);
-        deleteButton.setText(VocableTrainerLocalization.BUTTON_DELETE);
+		barPane.setTitle(VocableTrainerLocalization.NEW_NAME);
+		newSet.setText(VocableTrainerLocalization.NEW_NEW_SET);
+		impo.setText(VocableTrainerLocalization.NEW_IMPORT);
+		expo.setText(VocableTrainerLocalization.NEW_EXPORT);
+		renameButton.setText(VocableTrainerLocalization.NEW_RENAME);
+        deleteButton.setText(VocableTrainerLocalization.NEW_DELETE);
+        save.setText(VocableTrainerLocalization.NEW_SAVE);
 	}
 	
     @Override

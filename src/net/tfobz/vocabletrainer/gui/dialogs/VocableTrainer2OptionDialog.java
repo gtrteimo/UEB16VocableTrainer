@@ -11,6 +11,7 @@ import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
 
+	protected boolean answered;
 	protected boolean answer;
 	
 	protected JLabel label;
@@ -39,6 +40,7 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> {
         	setVisible(false);
+        	answered = true;
         	answer = true;
         });
 
@@ -51,6 +53,7 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
         cancelButton.setBorderPainted(false);
         cancelButton.addActionListener(e -> {
         	setVisible(false);
+        	answered = true;
         	answer = false;
         });
 		
@@ -60,7 +63,9 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
 		
 		add(componentPanel);
 	}
-	
+	public boolean getAnswered() {
+		return answered;
+	}
 	public boolean getAnswer() {
 		return answer;
 	}

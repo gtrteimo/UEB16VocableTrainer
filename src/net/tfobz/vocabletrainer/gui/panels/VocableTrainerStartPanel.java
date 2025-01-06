@@ -34,23 +34,21 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		super(vtf);
 		
 		panel.loadImage();
-		
-		barPane.setTitle(VocableTrainerLocalization.MENU_START);
-		
+				
 		panel.setLayout(null);
-		options[0] = new JCheckBox(VocableTrainerLocalization.START_TIME_PER_CARD);
+		options[0] = new JCheckBox();
 		options[0].setMnemonic('T');
 		options[0].setSelected(true);
-		options[1] = new JCheckBox(VocableTrainerLocalization.START_TOTAL_TIME);
+		options[1] = new JCheckBox();
 		options[1].setMnemonic('O');
 		options[1].setSelected(false);
-		options[2] = new JCheckBox(VocableTrainerLocalization.START_CASE_SENSITIVE);
+		options[2] = new JCheckBox();
 		options[2].setMnemonic('C');
 		options[2].setSelected(true);
-		options[3] = new JCheckBox(VocableTrainerLocalization.START_AMOUNT_OF_CARDS);
+		options[3] = new JCheckBox();
 		options[3].setMnemonic('A');
 		options[3].setSelected(false);
-		options[4] = new JCheckBox(VocableTrainerLocalization.START_PRACTISE_RUN);
+		options[4] = new JCheckBox();
 		options[4].setMnemonic('P');
 		options[4].setSelected(false);
 
@@ -122,15 +120,16 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 						boolean isSelected, boolean cellHasFocus) {
 					if (value != null) {
 						JLabel label = new JLabel();
+		    			label.setFont(new Font ("Arial", Font.PLAIN, options[0].getHeight()/2));
 						switch (value) {
 							case Seconds:
-								label.setText(VocableTrainerLocalization.SECONDS);
+								label.setText(VocableTrainerLocalization.DATA_SECONDS);
 								break;
 							case Minutes:
-								label.setText(VocableTrainerLocalization.MINUTES);
+								label.setText(VocableTrainerLocalization.DATA_MINUTES);
 								break;
 							case Hours:
-								label.setText(VocableTrainerLocalization.HOURS);
+								label.setText(VocableTrainerLocalization.DATA_HOURS);
 								break;
 							default:
 								label.setText(value.toString());
@@ -157,7 +156,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		optionComboBoxesTime[0].setSelectedIndex(0);
 		optionComboBoxesTime[1].setSelectedIndex(1);
 		
-		start = new JButton(VocableTrainerLocalization.BUTTON_START);
+		start = new JButton();
 		start.setForeground(textColor1);
 		start.setBackground(buttonBackgroundColor);
 		start.setFocusPainted(false);
@@ -219,10 +218,10 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 			 settings = new VocableTrainerRunSettings((Fach) boxComboBoxes.getSelectedItem(), (Lernkartei) setComboBox.getSelectedItem());
 		} catch (NullPointerException e) {
 			if ((Lernkartei) setComboBox.getSelectedItem() == null) {
-				new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SELECT_SET).setVisible(true);
+				new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_SELECT_SET).setVisible(true);
 			}
 			if ((Fach) boxComboBoxes.getSelectedItem() == null) {
-				new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SELECT_BOX).setVisible(true);
+				new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_SELECT_BOX).setVisible(true);
 			}
 			return;
 		}
@@ -251,20 +250,22 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 					vtf.add(run);
 				} catch (IllegalArgumentException e0) {
 					if (options[3].isSelected()) {
-						new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, "You are trying to start with "+((Integer)(optionSpinners[2].getValue())).intValue() + "crads while there are only "+k.size()+ " Cards in the Box").setVisible(true);;
+						String t = VocableTrainerLocalization.ERROR_START_TOO_MANY_CARDS;
+						String t2 = t.substring(t.indexOf('}')+1);
+						new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, t.substring(0, t.indexOf('{'))+((Integer)(optionSpinners[2].getValue())).intValue() + t.substring(t.indexOf('}') + 1, t2.indexOf('{')) + k.size() + t.substring(t2.indexOf('}') + 1) );
 					} else {
-						new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, "The Box you are trying to start has 0 Cards in it. Either add some Cards or chose another Box").setVisible(true);;
+						new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_NO_CARDS_IN_BOX).setVisible(true);;
 					}
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
 		} else if (options[3].isSelected()) {
-			String t = VocableTrainerLocalization.ERROR_TOO_MANY_CARDS;
+			String t = VocableTrainerLocalization.ERROR_START_TOO_MANY_CARDS;
 			String t2 = t.substring(t.indexOf('}')+1);
 			new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, t.substring(0, t.indexOf('{'))+((Integer)(optionSpinners[2].getValue())).intValue() + t.substring(t.indexOf('}') + 1, t2.indexOf('{')) + k.size() + t.substring(t2.indexOf('}') + 1) );
 		} else {
-			new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_NO_CARDS_IN_BOX).setVisible(true);;
+			new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_NO_CARDS_IN_BOX).setVisible(true);;
 		}
 	}
 	
@@ -278,7 +279,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		    }
 		    retriveBoxes();
 	    } else {
-            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
+            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);
 	    }
 	}
 	
@@ -296,7 +297,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	                boxComboBoxes.addItem(box);
 	            }
 	        } else {
-	            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SET_DROPPED).setVisible(true);
+	            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);
 	        }
 	    }
 
@@ -311,7 +312,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	                } else if (fach.getNummer() == -22) {
 	                    label.setText(VocableTrainerLocalization.START_BOX_ALL);
 	                } else {
-	                    label.setText(fach.getBeschreibung() + ". "+VocableTrainerLocalization.START_BOX);
+	                    label.setText(fach.getBeschreibung() + ". "+VocableTrainerLocalization.START_BOX_BOX);
 	                }
 	            }
 	            return label;
@@ -364,7 +365,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	public void setLocalisation() {
 		super.setLocalisation();
 		
-		barPane.setTitle(VocableTrainerLocalization.MENU_START);
+		barPane.setTitle(VocableTrainerLocalization.START_NAME);
 		
 		options[0].setText(VocableTrainerLocalization.START_TIME_PER_CARD);
 		options[1].setText(VocableTrainerLocalization.START_TOTAL_TIME);
@@ -372,7 +373,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		options[3].setText(VocableTrainerLocalization.START_AMOUNT_OF_CARDS);
 		options[4].setText(VocableTrainerLocalization.START_PRACTISE_RUN);
 		
-		start.setText(VocableTrainerLocalization.BUTTON_START);
+		start.setText(VocableTrainerLocalization.START_START);
 	}
 	
 	@Override
@@ -383,7 +384,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		setComboBox.setFont(new Font ("Arial", Font.BOLD, setComboBox.getHeight()/2 + 5));
 		
 		boxComboBoxes.setBounds((int)(panel.getWidth()/(12/9.0)), panel.getHeight()/50, panel.getWidth()/5, panel.getHeight()/12);
-		boxComboBoxes.setFont(new Font ("Arial", Font.BOLD, boxComboBoxes.getHeight()/2 + 5));
+		boxComboBoxes.setFont(new Font ("Arial", Font.BOLD, boxComboBoxes.getHeight()/2));
 		
 		for (int i = 0; i < options.length; i++) {
 			options[i].setBounds((int)(panel.getWidth()/(32/3.0)), (int)(panel.getHeight()/(64/3.0)*(i*(5/2.0)+3)), panel.getHeight()/2, panel.getHeight()/16);
@@ -450,21 +451,6 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 
 	    @Override
 	    public void keyPressed(KeyEvent e) {}
-	}
-	private class StartThread implements Runnable {
-
-		private VocableTrainerRunSettings settings;
-		
-		public StartThread(VocableTrainerRunSettings settings) {
-			this.settings = settings;
-		}
-		
-		@Override
-		public void run() {
-			
-			
-		}
-		
 	}
 }
 

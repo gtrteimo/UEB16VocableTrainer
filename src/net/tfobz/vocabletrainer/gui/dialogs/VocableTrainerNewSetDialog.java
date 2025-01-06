@@ -28,7 +28,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
 	protected JButton cancelButton;
 
     public VocableTrainerNewSetDialog(JFrame parent) {
-        super(parent, VocableTrainerLocalization.NEW_SET_TITLE);
+        super(parent, VocableTrainerLocalization.DIALOG_NEW_SET_TITLE);
 
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -42,7 +42,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         int w = componentPanel.getWidth();
         int h = componentPanel.getHeight();
                 
-        text = new JLabel(VocableTrainerLocalization.NEW_SET_ENTER_SET_NAME);
+        text = new JLabel(VocableTrainerLocalization.DIALOG_NEW_SET_ENTER_SET_NAME);
         text.setBounds(16, 16, w - 32, h/8);
         text.setFont(new Font ("Arial", Font.PLAIN, text.getHeight()/2 + 1));
         text.setForeground(VocableTrainerPanel.textColor2);
@@ -59,7 +59,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         //"', '', '', true, false); DROP SCHEMA PUBLIC CASCADE; --"
 //SQL injection potential: 
         
-        dLabel1 = new JLabel(VocableTrainerLocalization.NEW_SET_DESCRIPTION_1);         	
+        dLabel1 = new JLabel(VocableTrainerLocalization.DIALOG_NEW_SET_DESCRIPTION_1);         	
         dLabel1.setBounds(16, 16 + h/3, w/2 - 32, h/8);
         dLabel1.setFont(new Font ("Arial", Font.PLAIN, dLabel1.getHeight()/2 + 1));
         dLabel1.setBackground(VocableTrainerPanel.textColor1);
@@ -68,7 +68,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         dLabel1.setDisplayedMnemonic('1');
         dLabel1.setHorizontalAlignment(SwingConstants.CENTER);
         
-        dLabel2 = new JLabel(VocableTrainerLocalization.NEW_SET_DESCRIPTION_2);         	
+        dLabel2 = new JLabel(VocableTrainerLocalization.DIALOG_NEW_SET_DESCRIPTION_2);         	
         dLabel2.setBounds(w/2 + 16, 16 + h/3, w/2 - 32, h/8);
         dLabel2.setFont(new Font ("Arial", Font.PLAIN, dLabel2.getHeight()/2 + 1));
         dLabel2.setBackground(VocableTrainerPanel.textColor1);
@@ -100,7 +100,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
 
 //        dInputField2.setText("English");
         
-        confirmButton = new JButton(VocableTrainerLocalization.BUTTON_CONFIRM);
+        confirmButton = new JButton(VocableTrainerLocalization.DIALOG_NEW_SET_SAVE);
         confirmButton.setBounds(w/2 + 16, h - h/6 - 16, w/2 - 32, h / 6 );
         confirmButton.setFont(new Font ("Arial", Font.PLAIN, confirmButton.getHeight()/2));
         confirmButton.setForeground(VocableTrainerPanel.textColor1);
@@ -109,7 +109,7 @@ public class VocableTrainerNewSetDialog extends VocableTrainerInfoDialog {
         confirmButton.setBorderPainted(false);
         confirmButton.addActionListener(e -> check());
 
-        cancelButton = new JButton(VocableTrainerLocalization.BUTTON_CANCEL);
+        cancelButton = new JButton(VocableTrainerLocalization.DIALOG_NEW_SET_CANCEL);
         cancelButton.setBounds(16 , h - h/6 - 16, w/2 - 32, h / 6 );
         cancelButton.setFont(new Font ("Arial", Font.PLAIN, cancelButton.getHeight()/2));
         cancelButton.setForeground(VocableTrainerPanel.textColor1);
