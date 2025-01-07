@@ -50,7 +50,7 @@ English:
     start:
       select_set: "Select a Set to continue"
       select_box: "Select a Box to continue"
-      no_cards_in_box: "There are currently no Cards in the current Box!\nAdd some or change to a box that has some"
+      no_cards_in_box: "There are currently no Cards in the selected Box!\nAdd some or change to a box that has some"
       too_many_cards: "You have selected { Cards set in the Start settings } Cards in the Start settings but you only have { Amount of Cards in the Box } Cards in your Box"
     new:
       enter_data: "\"{ Textfield 1}\" and \"{ Textfield 2}\" have to contain Data"
