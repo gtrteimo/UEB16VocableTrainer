@@ -9,6 +9,8 @@ import net.tfobz.vocabletrainer.gui.dialogs.VocableTrainerInfoDialog;
 import net.tfobz.vokabeltrainer.model.*;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
@@ -435,20 +437,16 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	    public void keyReleased(KeyEvent e) {
 	        JTextField textField = (JTextField) e.getSource();
 	        String text = textField.getText();
-	        if (text.trim().replaceAll("\n", "").isEmpty()) {
-                textField.setText(String.valueOf(1));
-	        } else {
-		        try {
-		            int intValue = Integer.parseInt(text);
-	
-		            if (intValue < 1) {
-		                intValue = Math.abs(intValue);
-		                textField.setText(String.valueOf(intValue));
-		            }
-		        } catch (NumberFormatException ex) {
-		            String sanitized = text.replaceAll("[^0-9]", "");
-		            textField.setText(sanitized);
-		        }
+	        try {
+	            int intValue = Integer.parseInt(text);
+
+	            if (intValue < 1) {
+	                intValue = Math.abs(intValue);
+	                textField.setText(String.valueOf(intValue));
+	            }
+	        } catch (NumberFormatException ex) {
+	            String sanitized = text.replaceAll("[^0-9]", "");
+	            textField.setText(sanitized);
 	        }
 	    }
 
@@ -458,6 +456,4 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	    @Override
 	    public void keyPressed(KeyEvent e) {}
 	}
-}
-
-				
+}				
