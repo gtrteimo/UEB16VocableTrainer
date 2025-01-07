@@ -122,7 +122,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                     Lernkartei s = (Lernkartei) comboBox.getSelectedItem();
                     if (s != null) {
                         VocableTrainerInputDialog d = new VocableTrainerInputDialog(vtf,
-                            VocableTrainerLocalization.DIALOG_INPUT_RENAME, VocableTrainerLocalization.DIALOG_INPUT_RENAME, s.getBeschreibung());
+                            VocableTrainerLocalization.DIALOG_INPUT_RENAME, VocableTrainerLocalization.DIALOG_INPUT_QUESTION, s.getBeschreibung());
                         d.setVisible(true);
                         if (d.getInput() != null && !d.getInput().trim().isEmpty()) {
                             s.setBeschreibung(d.getInput());
@@ -321,7 +321,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                             break;
                         }
                     }
-                    renameButton.setText(atLeastOneSelected ? "Save" : "Rename");
+                    renameButton.setText(atLeastOneSelected ? VocableTrainerLocalization.INFO_SAVE : VocableTrainerLocalization.INFO_RENAME);
                     table.getTableHeader().repaint();
                 }
                 if (e.getColumn() == 1 || e.getColumn() == 2) {
@@ -376,7 +376,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         int w = panel.getWidth();
         int h = panel.getHeight();
         
-        topic.setBounds(w / 12, h / 50, w / 4, h / 12);
+        topic.setBounds(32 + h/16, h / 50, w / 4, h / 12);
         topic.setFont(new Font("Arial", Font.BOLD, topic.getHeight() / 2 + 1));
         
         comboBox.setBounds((int)(w / (24 / 5.0)), h / 50, (int)(w / (48 / 31.0)), h / 12);

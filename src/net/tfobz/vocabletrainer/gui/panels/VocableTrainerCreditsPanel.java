@@ -33,6 +33,7 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 		helpers.add(createLabel(new JLabel("Nick L.")));
 		helpers.add(createLabel(new JLabel("Manuel P.")));
 		helpers.add(createLabel(new JLabel("Johannes W.")));
+		helpers.add(createLabel(new JLabel("Niklas P.")));
 		
 		setLocalisation();
 		

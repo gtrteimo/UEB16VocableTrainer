@@ -1,6 +1,6 @@
 English:
   main:
-    title: "VocableTrainer"
+    title: "Vocable Trainer"
   data:
     seconds: "Seconds"
     minutes: "Minutes"
@@ -97,9 +97,31 @@ English:
     creators: "Creators:"
     helpers: "Special thanks to our slaves for ideas:"
   settings:
-    name: "Name"
+    name: "Settings"
     language: "Language"
     theme: "Theme"
     simplified_view: "Simplified view"
     allow_premium: "Allow premium"
     suggest_feature: "Suggest feature"
+  run: 
+    name: "Run"
+    time:
+      total_time: "Total Time: "
+      time_per_card: "Card Time:  "
+    stop: "Stop"
+    skip: "Skip"
+    check: "Check"
+    next: "Next"
+    end: "End"
+    answer: "Your answer"
+    stats:
+      total_time: "Total Time: "
+      max_card_time: "Max Card Time: "
+      min_card_time: "Min Card Time: "
+      avg_card_time: "Avg Card Time: "
+      total_cards: "Total Cards: "
+      skipped_cards: "Skipped Cards: "
+      wrong_ansers: "Wrong Answers: "
+      correct_answers: "Correct Answers: "
+      max_streak: "Max Streak: "
+      accuracy: "Accuracy: "

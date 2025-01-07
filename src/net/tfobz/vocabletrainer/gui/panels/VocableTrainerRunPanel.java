@@ -85,8 +85,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         results = new int[times.length];
         cardNum = -1;
 
-        clock1 = new JLabel("Total Time: 0");
-        clock2 = new JLabel("Card Time:  0");
+        clock1 = new JLabel(VocableTrainerLocalization.RUN_TIME_TOTAL_TIME+"0");
+        clock2 = new JLabel(VocableTrainerLocalization.RUN_TIME_TIME_PER_CARD+"0");
         
         originalWord = new JLabel();
         originalWord.setForeground(textColor2);
@@ -98,19 +98,19 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         input.setBackground(textColor1);
         input.setBorder(null);
         
-        stop = new JButton("Stop");
+        stop = new JButton(VocableTrainerLocalization.RUN_STOP);
         stop.setForeground(textColor1);
         stop.setBackground(buttonBackgroundColor);
         stop.setFocusPainted(false);
         stop.setBorderPainted(false);
         stop.setMnemonic('S');
-        skip = new JButton("Skip");
+        skip = new JButton(VocableTrainerLocalization.RUN_SKIP);
         skip.setForeground(textColor1);
         skip.setBackground(buttonBackgroundColor);
         skip.setFocusPainted(false);
         skip.setBorderPainted(false);
         skip.setMnemonic('K');
-        next = new JButton("Check");
+        next = new JButton(VocableTrainerLocalization.RUN_NEXT);
         next.setForeground(textColor1);
         next.setBackground(buttonBackgroundColor);
         next.setFocusPainted(false);
@@ -123,7 +123,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         answer.setHorizontalAlignment(SwingConstants.CENTER);
         input.setHorizontalAlignment(SwingConstants.CENTER);
         
-        answer.setText("Your answer");
+        answer.setText(VocableTrainerLocalization.RUN_ANSWER);
         input.setText("");
         input.addFocusListener(new FocusListener() {
 			
@@ -183,13 +183,13 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time1++;
-				clock1.setText("Total Time: "+String.format("%.2f", time1/100.0));
+				clock1.setText(VocableTrainerLocalization.RUN_TIME_TOTAL_TIME+String.format("%.2f", time1/100.0));
 				if(settings.isTotalTimeLimit()&&time1/100>=settings.getTotalTimeLimit()) {
 					checkCard();
 					endRun();
 				}
 				time2++;
-				clock2.setText("Card Time: "+String.format("%.2f", time2/100.0));
+				clock2.setText(VocableTrainerLocalization.RUN_TIME_TIME_PER_CARD+String.format("%.2f", time2/100.0));
 				if(settings.isCardTimeLimit()&&time2/100>=settings.getCardTimeLimit()) {
 					checkCard();
 				}
@@ -234,14 +234,14 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        cards.remove(currentCard);
 	        originalWord.setText(currentCard.getWortEins());
 	        skip.setVisible(true);
-			next.setText("Check");
+			next.setText(VocableTrainerLocalization.RUN_NEXT);
 			next.setMnemonic('e');
 			input.setBackground(textColor1);
 			input.setText("");
 			input.selectAll();
-			answer.setText("Your answer");
+			answer.setText(VocableTrainerLocalization.RUN_ANSWER);
 	        time2=0;
-	        clock2.setText("Card Time:  0");
+	        clock2.setText(VocableTrainerLocalization.RUN_TIME_TIME_PER_CARD+"0");
 	        timer.start();
 		} else {
 			endRun();
@@ -282,7 +282,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		}
 	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
 		skip.setVisible(false);
-		next.setText("Next");
+		next.setText(VocableTrainerLocalization.RUN_NEXT);
 	}
 	
 	public void skipCard() {
@@ -296,7 +296,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		panel.removeAll();
 		stat = new ArrayList<JLabel>();
 		value = new ArrayList<JLabel>();
-		end = new JButton("End");
+		end = new JButton(VocableTrainerLocalization.RUN_END);
 		end.setForeground(textColor1);
 		end.setBackground(buttonBackgroundColor);
 		end.setFocusPainted(false);

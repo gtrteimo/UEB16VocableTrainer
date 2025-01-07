@@ -114,7 +114,28 @@ public class VocableTrainerLocalization {
     public static String SETTINGS_ALLOW_PREMIUM;
     public static String SETTINGS_SUGGEST_FEATURE;
 
-    private static String path = "resources/localisation/german.yml";
+    public static String RUN_NAME;
+    public static String RUN_TIME_TOTAL_TIME;
+    public static String RUN_TIME_TIME_PER_CARD;
+    public static String RUN_STOP;
+    public static String RUN_SKIP;
+    public static String RUN_CHECK;
+    public static String RUN_NEXT;
+    public static String RUN_END;
+    public static String RUN_ANSWER;
+
+    public static String RUN_STATS_TOTAL_TIME;
+    public static String RUN_STATS_MAX_CARD_TIME;
+    public static String RUN_STATS_MIN_CARD_TIME;
+    public static String RUN_STATS_AVG_CARD_TIME;
+    public static String RUN_STATS_TOTAL_CARDS;
+    public static String RUN_STATS_SKIPPED_CARDS;
+    public static String RUN_STATS_WRONG_ANSWERS;
+    public static String RUN_STATS_CORRECT_ANSWERS;
+    public static String RUN_STATS_MAX_STREAK;
+    public static String RUN_STATS_ACCURACY;
+    
+    private static String path = "resources/localisation/*.yml";
 
     /**
      * Loads localization data from the specified YAML file based on the selected language.
@@ -308,5 +329,27 @@ public class VocableTrainerLocalization {
 	     SETTINGS_SIMPLIFIED_VIEW = values.getOrDefault(l+".settings.simplified_view", "");
 	     SETTINGS_ALLOW_PREMIUM = values.getOrDefault(l+".settings.allow_premium", "");
 	     SETTINGS_SUGGEST_FEATURE = values.getOrDefault(l+".settings.suggest_feature", "");
+	     
+	      RUN_NAME = values.getOrDefault(l+".run.name", "");
+	      RUN_TIME_TOTAL_TIME = values.getOrDefault(l+".run.time.total_time", "");
+	      RUN_TIME_TIME_PER_CARD = values.getOrDefault(l+".run.time.time_per_card", "");
+	      RUN_STOP = values.getOrDefault(l+".run.stop", "");
+	      RUN_SKIP = values.getOrDefault(l+".run.skip", "");
+	      RUN_CHECK = values.getOrDefault(l+".run.check", "");
+	      RUN_NEXT = values.getOrDefault(l+".run.next", "");
+	      RUN_END = values.getOrDefault(l+".run.end", "");
+	      RUN_ANSWER = values.getOrDefault(l+".run.answer", "");
+	      
+	      RUN_STATS_TOTAL_TIME = values.getOrDefault(l+".run.stats.", "");
+	      RUN_STATS_MAX_CARD_TIME = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_MIN_CARD_TIME = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_AVG_CARD_TIME = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_TOTAL_CARDS = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_SKIPPED_CARDS = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_WRONG_ANSWERS = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_CORRECT_ANSWERS = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_MAX_STREAK = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_ACCURACY = values.getOrDefault(l+".run.stats", "");
+	      
     }
 }

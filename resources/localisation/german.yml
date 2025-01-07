@@ -1,46 +1,54 @@
 Deutsch:
-  title: 
+  main:
     title: "Vokabel Trainer"
-  time:
+  data:
     seconds: "Sekunden"
     minutes: "Minuten"
     hours: "Stunden"
-  dialogs:
+  export:
+    export: "Karten mit Fach exportieren"
+    question: "Möchten Sie auch die Fächer exportieren?"
+  dialog:
     info:
-      close: "Schliessen"
-    two_option:
-      confirm_delete: "Löschen bestaetigen"
-      confirm_delete_question: "Sind Sie sicher, dass Sie diese Lernkartei löschen moechten?"
+      close: "Schließen"
+    two_options:
       yes: "Ja"
       no: "Nein"
+      delete:
+        title: "Löschen bestätigung"
+        question: "Sind Sie sicher, dass Sie diese Lernkartei löschen möchten?"
+        confirm: "Löschen"
+        cancel: "Abbrechen"
     new_set:
-      title: "Neue Lernkartei"
-      enter_set_name: "Lernkarteiname eingeben:"
-      description_1: "Beschreibung 1"
-      description_2: "Beschreibung 2"
-      confirm: "Bestätigen"
+      title: "Neue Lernkartei erstellen"
+      enter_set_name: "Geben Sie den Namen der neuen Lernkartei ein"
+      description1: "Beschreibung 1"
+      description2: "Beschreibung 2"
+      save: "Speichern"
       cancel: "Abbrechen"
     input:
-      rename_title: "Satz umbenennen"
-      rename_description: "Geben Sie einen neuen Namen für den Satz ein:"
+      rename: "Lernkartei umbenennen"
+      question: "Geben Sie einen neuen Namen für die Lernkartei ein"
       confirm: "Bestätigen"
       cancel: "Abbrechen"
-    errors:
-      error: "Fehler"
-      select_set: "Bitte wählen oder erstellen Sie einen Lernkartei"
-      select_box: "Bitte wählen oder erstellen Sie eine Fach"
-      no_cards_in_box: "Die von Ihnen zu startende Fach enthält keine Karten. Fügen Sie einige Karten hinzu oder wählen Sie eine andere Fach"
-      too_many_cards: "Sie versuchen mit {requested_cards} Karten zu starten, während sich nur {available_cards} Karten in dem Fach befinden"
-      set_dropped: "Es scheint, als wären die Datenbanktabellen gelöscht worden"
-      box_creation_fail: "Beim Hinzufügen des Fachs ist ein Fehler aufgetreten"
-      card_creation_fail: "Beim Hinzufügen der Karte ist ein Fehler aufgetreten"
-      dupilcate_card: "Eine Karte mit demselben Inhalt existiert bereits in diesem Lernkartei"
-  settings:
-    language: "Sprache"
-    theme: "Thema"
-    simplified_view: "Vereinfachte Ansicht"
-    allow_premium: "Premium"
-    suggest_feature: "Neues Feature vorschlagen"
+  error:
+    error: "Fehler"
+    database_dropped: "Die Tabellen in der Datenbank wurden gelöscht"
+    start:
+      select_set: "Wählen Sie ein Lernkartei aus, um fortzufahren"
+      select_box: "Wählen Sie eine Fach aus, um fortzufahren"
+      no_cards_in_box: "In dem aktuellen FAch sind derzeit keine Karten!\nFügen Sie einige hinzu oder wechseln Sie zu eine, Fach, die welche enthält"
+      too_many_cards: "Sie haben { Cards set in the Start settings } Karten in den Starteinstellungen ausgewählt, aber Sie haben nur { Amount of Cards in the Box } Karten in Ihrem Fach"
+    new:
+      enter_data: "\"{ Textfield 1 }\" und \"{ Textfield 2 }\" müssen Daten enthalten"
+      set_creation_fail: "Erstellung einer neuen Lernkartei fehlgeschlagen"
+      box_creation_fail: "Erstellung eines neuen Fachs fehlgeschlagen"
+      card_creation_fail: "Erstellung einer neuen Karte fehlgeschlagen"
+    import:
+      duplicate_card: "Es existiert bereits eine Karte mit demselben Namen in der Lernkartei"
+    settings:
+      no_internet: "Verbindung zur Webseite fehlgeschlagen"
+      not_supported: "Es scheint, dass Ihr Betriebssystem mit diesem Knopf nicht kompatibel ist. Webseite: "
   menu:
     home: "Startseite"
     start: "Start"
@@ -48,53 +56,50 @@ Deutsch:
     new: "Neu"
     credits: "Credits"
     settings: "Einstellungen"
-    exit: "Beenden"
-  credits:
-    creators: "Ersteller:"
-    helpers: "Besonderer Dank an unsere Sklaven:"
+    help: "Hilfe"
   home:
+    name: "Startseite"
     start: "Start"
     new: "Neu"
     info: "Info"
     exit: "Stop"
-  start:
-    box: "Fach"
-    box_all: "Alle Fächer"
-    box_due: "Fällige Fächer"
-    time_per_card: "Zeit pro Karte"
-    total_time: "Gesamtzeit"
-    case_sensitive: "Groß-/Kleinschreibung"
-    amount_of_cards: "Anzahl der Karten"
-    practise_run: "Übungsdurchlauf"
-  buttons:
-    start: "Start"
-    new_set: "Neuer Satz"
+  new: 
+    name: "Neu"
+    new_set: "Neue Lernkartei"
     import: "Importieren"
     export: "Exportieren"
+    save: "Speichern"
     rename: "Umbenennen"
     delete: "Löschen"
+  info: 
+    name: "Info"
+    topic: "Lernkartei: "
+    rename: "Umbenennen"
     save: "Speichern"
-    stop: "Stop"
-    skip: "Überspringen"
-    next: "Weiter"
-    check: "Überprüfen"
-    close: "Schließen"
-    end: "Beenden"
-  labels:
+    delete: "Löschen"
+    date_modified: "Änderungsdatum"
+    last_asked: "Zuletzt gefragt"
+    box: "Fach"
+  start:
+    name: "Start"
+    box:
+      box: "Fach"
+      all: "Alle Fächer"
+      due: "Fällige Fächer"
+    time_per_card: "Zeit pro Karte"
+    total_time: "Gesamtzeit"
+    case_sensitive: "Groß-/Kleinschreibung beachten"
+    amount_of_cards: "Anzahl der Karten"
+    practise_run: "Übungsdurchlauf"
+    start: "Starten"
+  credits:
+    name: "Credits"
+    creators: "Ersteller:"
+    helpers: "Besonderer Dank an unsere Sklaven für Ideen:"
+  settings:
+    name: "Einstellungen"
     language: "Sprache"
     theme: "Thema"
     simplified_view: "Vereinfachte Ansicht"
-    allow_premium: "Premium"
-  statistics:
-    total_time: "Gesamtzeit"
-    max_card_time: "Maximale Kartenzeit"
-    min_card_time: "Minimale Kartenzeit"
-    avg_card_time: "Durchschnittliche Kartenzeit"
-    total_cards: "Gesamtkarten"
-    skipped_cards: "Übersprungene Karten"
-    wrong_answers: "Falsche Antworten"
-    correct_answers: "Korrekte Antworten"
-    max_streak: "Maximale Serie"
-    accuracy: "Genauigkeit"
-  placeholders:
-    input_word: "Geben Sie das korrekte Aequivalentwort ein"
+    allow_premium: "Premium erlauben"
+    suggest_feature: "Funktion vorschlagen"

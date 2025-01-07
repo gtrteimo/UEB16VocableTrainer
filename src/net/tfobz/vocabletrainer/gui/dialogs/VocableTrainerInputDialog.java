@@ -1,6 +1,7 @@
 package net.tfobz.vocabletrainer.gui.dialogs;
 
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -30,12 +31,51 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
 		int w = componentPanel.getWidth();
         int h = componentPanel.getHeight();
 		
-		label = new JLabel();
-		label.setText(text);
-		label.setBounds(16, 16 , w - 32, h / 6 );
-		label.setFont(new Font ("Arial", Font.PLAIN, label.getHeight()/2));
+        label = new JLabel();
+		label.setBounds(8, 8, componentPanel.getWidth() - 16, componentPanel.getHeight() - 16);
 		label.setForeground(VocableTrainerPanel.textColor2);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setVerticalAlignment(SwingConstants.TOP);
+        
+        Font font = new Font("Arial", Font.PLAIN, label.getHeight()/10+1);
+		int maxWidth = componentPanel.getWidth() - 16;
+		int maxHeight = componentPanel.getHeight() - 16;
+		FontMetrics metrics;
+		
+		while (true) {
+			label.setFont(font);
+			metrics = label.getFontMetrics(font);
+			StringBuilder formattedText = new StringBuilder();
+			int lineHeight = metrics.getHeight();
+			int totalHeight = 0;
+			boolean fits = true;
+			StringBuilder line = new StringBuilder();
+			for (String word : text.split(" ")) {
+				if (metrics.stringWidth(line.toString() + word + " ") > maxWidth) {
+					if (line.length() > 0) {
+						formattedText.append(line).append("<br>");
+						totalHeight += lineHeight;
+						line.setLength(0);
+					}
+					if (totalHeight + lineHeight > maxHeight) {
+						fits = false;
+						break;
+					}
+					line.append(word).append(" ");
+				} else {
+					line.append(word).append(" ");
+				}
+			}
+			if (line.length() > 0) {
+				formattedText.append(line);
+				totalHeight += lineHeight;
+			}
+			if (fits && totalHeight <= maxHeight) {
+				label.setText("<html><div style='text-align:center;'>" + formattedText.toString().trim() + "</div></html>");
+				break;
+			}
+			font = new Font("Arial", Font.PLAIN, font.getSize() - 1);
+		}
 		
 		input = new JTextField();
 		input.setText(defaultText);
