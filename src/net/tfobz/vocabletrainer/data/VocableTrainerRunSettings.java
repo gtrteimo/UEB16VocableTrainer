@@ -30,22 +30,6 @@ public class VocableTrainerRunSettings {
 		this.set = lernkartei;
 	}
 	
-	/**
-	 * Testing only
-	 * @deprecated
-	 */
-	public VocableTrainerRunSettings() {
-		box = new Fach(1, "Hello World Test", 0, null);
-		set = new Lernkartei();
-		totalTimeLimitState = true;
-		totalTimeLimit = 15;
-		cardTimeLimitState = true;
-		cardTimeLimit = 10;
-		cardLimitState = true;
-		cardLimit = 10;
-		practiceRun = true;
-	}
-	
 	public boolean isCaseSensitiv() {
 		return caseSensitiv;
 	}

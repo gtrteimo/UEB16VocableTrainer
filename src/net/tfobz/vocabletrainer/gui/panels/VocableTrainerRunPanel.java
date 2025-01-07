@@ -183,14 +183,16 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				time1++;
+				time2++;
 				clock1.setText(VocableTrainerLocalization.RUN_TIME_TOTAL_TIME+String.format("%.2f", time1/100.0));
 				if(settings.isTotalTimeLimit()&&time1/100>=settings.getTotalTimeLimit()) {
+					System.out.println("tot");
 					checkCard();
 					endRun();
 				}
-				time2++;
 				clock2.setText(VocableTrainerLocalization.RUN_TIME_TIME_PER_CARD+String.format("%.2f", time2/100.0));
 				if(settings.isCardTimeLimit()&&time2/100>=settings.getCardTimeLimit()) {
+					System.out.println("card");
 					checkCard();
 				}
 			}
@@ -355,7 +357,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		value.add(new JLabel(Integer.toString(maxCardStreak)));
 		
 		stat.add(new JLabel("Accuracy: "));
-		value.add(new JLabel(Integer.toString(100*correctCards/results.length)+"%"));
+		value.add(new JLabel(Integer.toString(100*correctCards/(correctCards+wrongCards))+"%"));
 
 		for (JLabel label : stat) {
 			panel.add(label);
