@@ -105,6 +105,11 @@ English:
     case_sensitive: "Case sensitive"
     amount_of_cards: "Amount of Cards"
     practise_run: "Practise run"
+    direction:
+      direction: "Direction"
+      option_1: "Both"
+      option_2: "Word 1 >> Word 2"
+      option_3: "Word 2 >> Word 1"
     start: "Start"
   credits:
     name: "Credits"

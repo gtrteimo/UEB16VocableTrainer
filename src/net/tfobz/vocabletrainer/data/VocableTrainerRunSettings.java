@@ -21,7 +21,8 @@ public class VocableTrainerRunSettings {
 	protected int cardLimit;
 	protected boolean practiceRun = false;
 	protected boolean caseSensitiv = false;
-
+	protected int direction = 0;
+	
 	public VocableTrainerRunSettings(Fach fach, Lernkartei lernkartei) {
 		if(fach==null||lernkartei==null) {
 			throw new NullPointerException("Invalid Fach or Lernkartei");
@@ -127,6 +128,14 @@ public class VocableTrainerRunSettings {
 
 	public Lernkartei getSet() {
 		return set;
+	}
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
 	}
 	
 }

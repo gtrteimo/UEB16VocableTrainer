@@ -111,6 +111,10 @@ public class VocableTrainerLocalization {
     public static String START_CASE_SENSITIVE;
     public static String START_AMOUNT_OF_CARDS;
     public static String START_PRACTISE_RUN;
+    public static String START_DIRECTION_DIRECTION;
+    public static String START_DIRECTION_OPTION_1;
+    public static String START_DIRECTION_OPTION_2;
+    public static String START_DIRECTION_OPTION_3;
     public static String START_START;
     
     public static String CREDITS_NAME;
@@ -313,6 +317,10 @@ public class VocableTrainerLocalization {
 	     START_CASE_SENSITIVE = values.getOrDefault(l+".start.case_sensitive", "");
 	     START_AMOUNT_OF_CARDS = values.getOrDefault(l+".start.amount_of_cards", "");
 	     START_PRACTISE_RUN = values.getOrDefault(l+".start.practise_run", "");
+	     START_DIRECTION_DIRECTION = values.getOrDefault(l+".start.direction.direction", "");
+	     START_DIRECTION_OPTION_1 = values.getOrDefault(l+".start.direction.option_1", "");
+	     START_DIRECTION_OPTION_2 = values.getOrDefault(l+".start.direction.option_2", "");
+	     START_DIRECTION_OPTION_3 = values.getOrDefault(l+".start.direction.option_3", "");
 	     START_START = values.getOrDefault(l+".start.start", "");
 	    
 	     CREDITS_NAME = values.getOrDefault(l+".credits.name", "");

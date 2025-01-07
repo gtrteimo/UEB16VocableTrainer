@@ -42,6 +42,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	private ArrayList<JLabel> value;
 	private JButton end;
 	
+	private boolean cardOne = true;
+	
 	public VocableTrainerRunPanel (VocableTrainerFrame vtf, VocableTrainerRunSettings settings) throws IllegalArgumentException{
 		super();
 		this.vtf = vtf;
@@ -186,13 +188,11 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 				time2++;
 				clock1.setText(VocableTrainerLocalization.RUN_TIME_TOTAL_TIME+String.format("%.2f", time1/100.0));
 				if(settings.isTotalTimeLimit()&&time1/100>=settings.getTotalTimeLimit()) {
-					System.out.println("tot");
 					checkCard();
 					endRun();
 				}
 				clock2.setText(VocableTrainerLocalization.RUN_TIME_TIME_PER_CARD+String.format("%.2f", time2/100.0));
 				if(settings.isCardTimeLimit()&&time2/100>=settings.getCardTimeLimit()) {
-					System.out.println("card");
 					checkCard();
 				}
 			}
@@ -234,7 +234,13 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		if(cardNum<times.length){
 			currentCard = cards.get((int)(Math.random()*cards.size()));
 	        cards.remove(currentCard);
-	        originalWord.setText(currentCard.getWortEins());
+	        if (settings.getDirection() == 1 || (settings.getDirection() == 0 && Math.round(Math.random()) == 1)) {
+		        originalWord.setText(currentCard.getWortEins());
+		        cardOne = true;
+	        } else {
+		        originalWord.setText(currentCard.getWortZwei());
+		        cardOne = false;
+	        }
 	        skip.setVisible(true);
 			next.setText(VocableTrainerLocalization.RUN_NEXT);
 			next.setMnemonic('e');
@@ -255,9 +261,17 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		times[cardNum]=time2;
 		boolean correct;
 		if(settings.isCaseSensitiv()) {
-			correct = input.getText().equals(currentCard.getWortZwei());
+			if (cardOne) {
+				correct = input.getText().equals(currentCard.getWortZwei());
+			} else {
+				correct = input.getText().equals(currentCard.getWortEins());
+			}
 		} else {
-			correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
+			if (cardOne) {
+				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
+			} else {
+				correct = input.getText().equalsIgnoreCase(currentCard.getWortEins());
+			}
 		}
 		if (correct) {
 			results[cardNum] = 1;
@@ -282,7 +296,11 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 				}
 			}).start();
 		}
-	    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
+		if (cardOne) {
+		    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
+		} else {
+		    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortEins()+"</span></html>");
+		}
 		skip.setVisible(false);
 		next.setText(VocableTrainerLocalization.RUN_NEXT);
 	}
