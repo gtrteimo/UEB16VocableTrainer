@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
 @SuppressWarnings("serial")
@@ -36,11 +37,11 @@ public class VocableTrainerColorChooser extends JFrame {
 		buttons = new JButton[5];
 		colors = new Color[5];
 		
-		labels[0] = new JLabel("Menu Bar Colour");
-		labels[1] = new JLabel("Main Background Colour");
-		labels[2] = new JLabel("Text Colour 1");
-		labels[3] = new JLabel("Text Colour 2");
-		labels[4] = new JLabel("Button Background Colour");
+		labels[0] = new JLabel(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR);
+		labels[1] = new JLabel(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND);
+		labels[2] = new JLabel(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1);
+		labels[3] = new JLabel(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2);
+		labels[4] = new JLabel(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND);
 		colors[0] = VocableTrainerPanel.menuBarColor;
 		colors[1] = VocableTrainerPanel.mainBackgroundColor;
 		colors[2] = VocableTrainerPanel.textColor1;
@@ -59,11 +60,19 @@ public class VocableTrainerColorChooser extends JFrame {
 		        }
 		    });
 		}
-		apply = new JButton("Apply");
+		apply = new JButton(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_APPLY);
+		apply.setBackground(VocableTrainerPanel.buttonBackgroundColor);
+		apply.setForeground(VocableTrainerPanel.textColor1);
+		apply.setBorderPainted(false);
+		apply.setFocusPainted(false);
 		apply.addActionListener(e->{
 			VocableTrainerColorChooser.this.reference.changeColor(colors[0], colors[1], colors[2], colors[3], colors[4]);
 			});
-		close = new JButton("Close");
+		close = new JButton(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_CLOSE);
+		close.setBackground(VocableTrainerPanel.buttonBackgroundColor);
+		close.setForeground(VocableTrainerPanel.textColor1);
+		close.setBorderPainted(false);
+		close.setFocusPainted(false);
 		close.addActionListener(e->{
 				setVisible(false);
 				dispose();
@@ -76,9 +85,9 @@ public class VocableTrainerColorChooser extends JFrame {
 		        int height = this.getHeight();
 		        int width = this.getWidth();
 		        
-		        apply.setBounds(10, getHeight()-height/6, width/2-15, height/6-10);
+		        apply.setBounds(10 + width/2, getHeight()-height/6, width/2-15, height/6-10);
 				apply.setFont(new Font ("Arial", Font.PLAIN, apply.getHeight()/2));
-				close.setBounds(10+width/2, getHeight()-height/6, width/2-15, height/6-10);
+				close.setBounds(10, getHeight()-height/6, width/2-15, height/6-10);
 				close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2));
 				
 				for (int i = 0; i < 5; i++) {

@@ -1,0 +1,138 @@
+English:
+  main:
+    title: "Vocable Trainer"
+  data:
+    seconds: "Seconds"
+    minutes: "Minutes"
+    hours: "Hours"
+  export:
+    export: "Export Cards with Box"
+    question: "Do you also want to export the Boxes"
+  dialog:
+    info:
+      close: "Close"
+    two_options:
+      yes: "Yes"
+      no: "No"
+      delete:
+        title: "Delete Set Confirmation"
+        question: "Are you sure you want to delete this Set?"
+        confirm: "Delete"
+        cancel: "Cancel"
+    new_set:
+      title: "Create new Set"
+      enter_set_name: "Enter the name of the new Set"
+      description1: "Description 1"
+      description2: "Description 2"
+      save: "Save"
+      cancel: "Cancel"
+    input:
+      rename: "Rename Set"
+      question: "Enter a new name for the Set"
+      confirm: "Confirm"
+      cancel: "Cancel"
+    colour_chooser:
+      title: "Theme customiser"
+      apply: "Hello World"
+      colour:
+        menu_bar: "Menu Bar Colour"
+        main_background: "Main Background Colour"
+        text_1: "Text Colour 1"
+        text_2: "Text Colour 2"
+        button_background: "Button Background Colour"
+      apply1: "Apply"
+      close: "Close"
+  error:
+    error: "Error"
+    database_dropped: "The tables in the database where deleted"
+    start:
+      select_set: "Select a Set to continue"
+      select_box: "Select a Box to continue"
+      no_cards_in_box: "There are currently no Cards in the current Box!\nAdd some or change to a box that has some"
+      too_many_cards: "You have selected { Cards set in the Start settings } Cards in the Start settings but you only have { Amount of Cards in the Box } Cards in your Box"
+    new:
+      enter_data: "\"{ Textfield 1}\" and \"{ Textfield 2}\" have to contain Data"
+      set_creation_fail: "Failed to create a new Set"
+      box_creation_fail: "Failed to create a new Box"
+      card_creation_fail: "Failed to create a new Card"
+    import:
+      duplicate_card: "There already exists a card with the same name in the Lernkartei"
+    settings:
+      no_internet: "Failed to connect to the Website"
+      not_supported: "It seems your OS isn't comatible with this button. Website: "
+  menu:
+    home: "Home"
+    start: "Start"
+    info: "Info"
+    new: "New"
+    credits: "Credits"
+    settings: "Settings"
+    help: "Help"
+  home:
+    name: "Home"
+    start: "Start"
+    new: "New"
+    info: "Info"
+    exit: "Exit"
+  new: 
+    name: "New"
+    new_set: "New Set"
+    import: "Import"
+    export: "Export"
+    save: "Save"
+    rename: "Rename"
+    delete: "Delete"
+  info: 
+    name: "Info"
+    topic: "Set: "
+    rename: "Rename"
+    save: "Save"
+    delete: "Delete"
+    date_modified: "Date modified"
+    last_asked: "Last asked"
+    box: "Box"
+  start:
+    name: "Start"
+    box:
+      box: "Box"
+      all: "All Boxes"
+      due: "Due Boxes"
+    time_per_card: "Time per Card"
+    total_time: "Total time"
+    case_sensitive: "Case sensitive"
+    amount_of_cards: "Amount of Cards"
+    practise_run: "Practise run"
+    start: "Start"
+  credits:
+    name: "Credits"
+    creators: "Creators:"
+    helpers: "Special thanks to our slaves for ideas:"
+  settings:
+    name: "Settings"
+    language: "Language"
+    theme: "Theme"
+    simplified_view: "Simplified view"
+    allow_premium: "Allow premium"
+    suggest_feature: "Suggest feature"
+  run: 
+    name: "Run"
+    time:
+      total_time: "Total Time: "
+      time_per_card: "Card Time:  "
+    stop: "Stop"
+    skip: "Skip"
+    check: "Check"
+    next: "Next"
+    end: "End"
+    answer: "Your answer"
+    stats:
+      total_time: "Total Time: "
+      max_card_time: "Max Card Time: "
+      min_card_time: "Min Card Time: "
+      avg_card_time: "Avg Card Time: "
+      total_cards: "Total Cards: "
+      skipped_cards: "Skipped Cards: "
+      wrong_ansers: "Wrong Answers: "
+      correct_answers: "Correct Answers: "
+      max_streak: "Max Streak: "
+      accuracy: "Accuracy: "
