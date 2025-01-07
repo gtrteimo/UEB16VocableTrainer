@@ -33,7 +33,7 @@ English:
       cancel: "Cancel"
     chooser:
       title: "Theme customiser"
-    colour_chooser1:
+    colour_chooser:
       title: "Theme customiser"
       apply: "Hello World"
       colour:
