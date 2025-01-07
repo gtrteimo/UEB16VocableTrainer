@@ -31,8 +31,6 @@ English:
       question: "Enter a new name for the Set"
       confirm: "Confirm"
       cancel: "Cancel"
-    chooser:
-      title: "Theme customiser"
     colour_chooser:
       title: "Theme customiser"
       choose_color: "Choose Color"

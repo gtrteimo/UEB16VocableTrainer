@@ -396,9 +396,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setLocalisation() {
-		super.setLocalisation();
-		
+	public void setLocalisation() {		
 		barPane.setTitle(VocableTrainerLocalization.START_NAME);
 		
 		options[0].setText(VocableTrainerLocalization.START_TIME_PER_CARD);

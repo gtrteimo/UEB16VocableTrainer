@@ -73,6 +73,8 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 	
 	@Override
 	public void setLocalisation() {
+		barPane.setTitle(null);
+		
 		options[0].setText(VocableTrainerLocalization.MENU_HOME);
 		options[1].setText(VocableTrainerLocalization.MENU_START);
 		options[2].setText(VocableTrainerLocalization.MENU_INFO);

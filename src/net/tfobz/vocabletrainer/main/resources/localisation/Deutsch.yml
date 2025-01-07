@@ -102,7 +102,7 @@ Deutsch:
       due: "Faellige Boxen"
     time_per_card: "Zeit pro Karte"
     total_time: "Gesamtzeit"
-    case_sensitive: "Gross-/Kleinschreibung beachten"
+    case_sensitive: "Gross-/Kleinschreibung"
     amount_of_cards: "Anzahl der Karten"
     practise_run: "Uebungslauf"
     start: "Start"

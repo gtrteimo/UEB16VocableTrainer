@@ -46,10 +46,10 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         
         languageBox = new JComboBox<VocableTrainerLocalization.localisation>(VocableTrainerLocalization.localisation.values());
         themeBox = new JComboBox<String>();
+        themeBox.addItem("Custom");
         themeBox.addItem("Acqua");
         themeBox.addItem("Monochrom light");
         themeBox.addItem("Dark Blue");
-        themeBox.addItem("Custom");
         
         simplifiedBox = new JCheckBox();
 
@@ -62,13 +62,13 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         Color[] t = VocableTrainerSettingsIO.colours;
         
         if (t[0].equals(colours[0][0]) && t[1].equals(colours[0][1]) && t[2].equals(colours[0][2]) && t[3].equals(colours[0][3]) && t[4].equals(colours[0][4])) {
-        	themeBox.setSelectedIndex(0);
-        } else if (t[0].equals(colours[1][0]) && t[1].equals(colours[1][1]) && t[2].equals(colours[1][2]) && t[3].equals(colours[1][3]) && t[4].equals(colours[1][4])) {
         	themeBox.setSelectedIndex(1);
-        } else if (t[0].equals(colours[2][0]) && t[1].equals(colours[2][1]) && t[2].equals(colours[2][2]) && t[3].equals(colours[2][3]) && t[4].equals(colours[2][4])) {
+        } else if (t[0].equals(colours[1][0]) && t[1].equals(colours[1][1]) && t[2].equals(colours[1][2]) && t[3].equals(colours[1][3]) && t[4].equals(colours[1][4])) {
         	themeBox.setSelectedIndex(2);
+        } else if (t[0].equals(colours[2][0]) && t[1].equals(colours[2][1]) && t[2].equals(colours[2][2]) && t[3].equals(colours[2][3]) && t[4].equals(colours[2][4])) {
+        	themeBox.setSelectedIndex(3);
         } else {
-        	themeBox.setSelectedItem("Custom");
+        	themeBox.setSelectedItem(0);
         }
         
 		
@@ -199,8 +199,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 	
 	@Override
 	public void setLocalisation() {
-		super.setLocalisation();
-		
+		barPane.setTitle(VocableTrainerLocalization.SETTINGS_NAME);
 		barPane.setTitle(VocableTrainerLocalization.SETTINGS_NAME);
         language.setText("   " + VocableTrainerLocalization.SETTINGS_LANGUAGE);
         theme.setText("   " + VocableTrainerLocalization.SETTINGS_THEME);

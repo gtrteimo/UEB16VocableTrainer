@@ -85,9 +85,7 @@ public class VocableTrainerHomePanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setLocalisation() {
-		super.setLocalisation();
-		
+	public void setLocalisation() {		
 		barPane.setTitle(VocableTrainerLocalization.HOME_NAME);
 		
 		B_start.setText(VocableTrainerLocalization.HOME_START);

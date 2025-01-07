@@ -359,9 +359,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
 	}
     
     @Override
-	public void setLocalisation() {
-		super.setLocalisation();
-		
+	public void setLocalisation() {		
         barPane.setTitle(VocableTrainerLocalization.INFO_NAME);
         
         topic.setText(VocableTrainerLocalization.INFO_TOPIC);

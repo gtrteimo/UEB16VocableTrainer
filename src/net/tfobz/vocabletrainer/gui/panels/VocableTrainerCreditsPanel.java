@@ -74,9 +74,7 @@ public class VocableTrainerCreditsPanel extends VocableTrainerPanel {
 	}
 	
 	@Override
-	public void setLocalisation() {
-		super.setLocalisation();
-		
+	public void setLocalisation() {		
 		barPane.setTitle(VocableTrainerLocalization.CREDITS_NAME);
 		
 		labelcreators.setText(VocableTrainerLocalization.CREDITS_CREATORS);
