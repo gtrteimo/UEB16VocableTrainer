@@ -52,7 +52,7 @@ Italiano:
       select_set: "Seleziona un Set per continuare"
       select_box: "Seleziona una Box per continuare"
       no_cards_in_box: "Attualmente non ci sono Carte nella Box seleyionata!\nAggiungiere Carte o slezionare a una Box che gia contiene Carte"
-      too_many_cards: "Hai selezionato { Carte impostate nelle impostazioni iniziali } Carte nelle impostazioni iniziali, ma hai solo { Quantita' di Carte nella Box } Carte nella tua Box"
+      too_many_cards: "Hai selezionato { Cards set in the Start settings } Carte nelle impostazioni iniziali, ma hai solo { Amount of Cards in the Box } Carte nella tua Box"
     new:
       enter_data: "\"{ Textfield 1}\" e \"{ Textfield 2}\" devono contenere dati"
       set_creation_fail: "Creazione di un nuovo Set non riuscita"
