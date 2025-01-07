@@ -31,6 +31,19 @@ Italiano:
       question: "Inserisci un nuovo nome per il Set"
       confirm: "Conferma"
       cancel: "Annulla"
+    chooser:
+      title: "Personalizzatore di Tema"
+    colour_chooser:
+      title: "Personalizzatore di Tema"
+      apply: "Ciao Mondo"
+      colour:
+        menu_bar: "Colore della Barra del Menu"
+        main_background: "Colore dello Sfondo Principale"
+        text_1: "Colore del Testo 1"
+        text_2: "Colore del Testo 2"
+        button_background: "Colore dello Sfondo del Pulsante"
+      apply1: "Applica"
+      close: "Chiudi"
   error:
     error: "Errore"
     database_dropped: "Le tabelle nella banca dati sono state eliminate"
