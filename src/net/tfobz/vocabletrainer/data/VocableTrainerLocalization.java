@@ -248,14 +248,14 @@ public class VocableTrainerLocalization {
 	     DIALOG_INPUT_CONFIRM = values.getOrDefault(l+".dialog.input.confirm", "");
 	     DIALOG_INPUT_CANCEL = values.getOrDefault(l+".dialog.input.cancel", "");
 	    
-	      DIALOG_COLOUR_CHOOSER_TITLE = values.getOrDefault(l+".dialog.colour_chooser.title", "");
-	      DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR = values.getOrDefault(l+".dialog.colour_chooser.colour.menu_bar", "Test");
-	      DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.main_background", "");
-	      DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_1", "");
-	      DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_2", "");
-	      DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.button_background", "");
-	      DIALOG_COLOUR_CHOOSER_APPLY = values.getOrDefault(l+".dialog.colour_chooser.apply", "Test");
-	      DIALOG_COLOUR_CHOOSER_CLOSE = values.getOrDefault(l+".dialog.colour_chooser.close", "Test");
+	     DIALOG_COLOUR_CHOOSER_TITLE = values.getOrDefault(l+".dialog.colour_chooser.title", "");
+	     DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR = values.getOrDefault(l+".dialog.colour_chooser.colour.menu_bar", "Test");
+	     DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.main_background", "");
+	     DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_1", "");
+	     DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_2", "");
+	     DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.button_background", "");
+	     DIALOG_COLOUR_CHOOSER_APPLY = values.getOrDefault(l+".dialog.colour_chooser.apply", "Test");
+	     DIALOG_COLOUR_CHOOSER_CLOSE = values.getOrDefault(l+".dialog.colour_chooser.close", "Test");
 	     
 	     ERROR = values.getOrDefault(l+".error.error", "");
 	     ERROR_DATABASE_DROPPED = values.getOrDefault(l+".error.database_dropped", "");

@@ -26,7 +26,7 @@ public class VocableTrainerColorChooser extends JFrame {
 	private VocableTrainerPanel reference;
 
 	public VocableTrainerColorChooser(VocableTrainerPanel reference) {
-		super("Theme customiser");
+		super(VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_TITLE);
 		setBounds(100,100,reference.getWidth()/2,reference.getHeight()/2);
 	    setResizable(true);
         this.setMinimumSize(new Dimension(600, 300));
