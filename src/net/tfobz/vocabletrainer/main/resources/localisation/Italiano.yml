@@ -1,0 +1,127 @@
+Italian:
+  main:
+    title: "Allenatore di Vocabolario"
+  data:
+    seconds: "Secondi"
+    minutes: "Minuti"
+    hours: "Ore"
+  export:
+    export: "Esporta Carte con Box"
+    question: "Vuoi anche esportare le Box?"
+  dialog:
+    info:
+      close: "Chiudi"
+    two_options:
+      yes: "Si"
+      no: "No"
+      delete:
+        title: "Conferma Eliminazione Set"
+        question: "Sei sicuro di voler eliminare questo Set?"
+        confirm: "Elimina"
+        cancel: "Annulla"
+    new_set:
+      title: "Crea nuovo Set"
+      enter_set_name: "Inserisci il nome del nuovo Set"
+      description1: "Descrizione 1"
+      description2: "Descrizione 2"
+      save: "Salva"
+      cancel: "Annulla"
+    input:
+      rename: "Rinomina Set"
+      question: "Inserisci un nuovo nome per il Set"
+      confirm: "Conferma"
+      cancel: "Annulla"
+  error:
+    error: "Errore"
+    database_dropped: "Le tabelle nella banca dati sono state eliminate"
+    start:
+      select_set: "Seleziona un Set per continuare"
+      select_box: "Seleziona una Box per continuare"
+      no_cards_in_box: "Attualmente non ci sono Carte nella Box seleyionata!\nAggiungiere Carte o slezionare a una Box che gia contiene Carte"
+      too_many_cards: "Hai selezionato { Carte impostate nelle impostazioni iniziali } Carte nelle impostazioni iniziali, ma hai solo { Quantit� di Carte nella Box } Carte nella tua Box"
+    new:
+      enter_data: "\"{ Textfield 1}\" e \"{ Textfield 2}\" devono contenere dati"
+      set_creation_fail: "Creazione di un nuovo Set non riuscita"
+      box_creation_fail: "Creazione di una nuova Box non riuscita"
+      card_creation_fail: "Creazione di una nuova Carta non riuscita"
+    import:
+      duplicate_card: "Esiste gia' una carta con lo stesso nome nella Lernkartei"
+    settings:
+      no_internet: "Impossibile connettersi al sito web"
+      not_supported: "Sembra che il tuo sistema operativo non sia compatibile con questo pulsante. Sito web: "
+  menu:
+    home: "Home"
+    start: "Avvia"
+    info: "Informazioni"
+    new: "Nuovo"
+    credits: "Crediti"
+    settings: "Impostazioni"
+    help: "Aiuto"
+  home:
+    name: "Home"
+    start: "Avvia"
+    new: "Nuovo"
+    info: "Informazioni"
+    exit: "Esci"
+  new: 
+    name: "Nuovo"
+    new_set: "Nuovo Set"
+    import: "Importa"
+    export: "Esporta"
+    save: "Salva"
+    rename: "Rinomina"
+    delete: "Elimina"
+  info: 
+    name: "Informazioni"
+    topic: "Set: "
+    rename: "Rinomina"
+    save: "Salva"
+    delete: "Elimina"
+    date_modified: "Data modifica"
+    last_asked: "Ultimo allenamento"
+    box: "Box"
+  start:
+    name: "Avvia"
+    box:
+      box: "Box"
+      all: "Tutte le Box"
+      due: "Box Scadute"
+    time_per_card: "Tempo per Carta"
+    total_time: "Tempo Totale"
+    case_sensitive: "Capitalizzazione"
+    amount_of_cards: "Numero di Carte"
+    practise_run: "Modalita di prova"
+    start: "Avvia"
+  credits:
+    name: "Crediti"
+    creators: "Creatori:"
+    helpers: "Un ringraziamento speciale ai nostri schiavi per le idee:"
+  settings:
+    name: "Impostazioni"
+    language: "Lingua"
+    theme: "Tema"
+    simplified_view: "Vista semplificata"
+    allow_premium: "Consenti premium"
+    suggest_feature: "Suggerisci funzionalita'"
+  run: 
+    name: "Allenamento"
+    time:
+      total_time: "Tempo Totale: "
+      time_per_card: "Tempo per Carta:  "
+    stop: "Interrompi"
+    skip: "Salta"
+    check: "Controlla"
+    next: "Prossimo"
+    end: "Fine"
+    answer: "La tua risposta"
+    stats:
+      total_time: "Tempo Totale"
+      max_card_time: "Tempo massimo per Carta"
+      min_card_time: "Tempo minimo per Carta"
+      avg_card_time: "Tempo medio per Carta"
+      total_cards: "Totale Carte"
+      skipped_cards: "Carte saltate"
+      wrong_ansers: "Risposte sbagliate"
+      correct_answers: "Risposte corrette"
+      max_streak: "Serie massima"
+      accuracy: "Accuratezza"
