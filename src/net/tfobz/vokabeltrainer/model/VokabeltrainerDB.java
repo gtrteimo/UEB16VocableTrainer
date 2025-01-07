@@ -653,9 +653,10 @@ public class VokabeltrainerDB
 				con = getConnection();
 				stmt = con.createStatement();
 				String sqlBeschreibung = null;
-				if (fach.getBeschreibung() == null || fach.getBeschreibung().length() == 0) {
+				if (fach.getBeschreibung() != null && fach.getBeschreibung().equals("SetReminder")) {
+					fach.setErinnerungsIntervall((int)(getFaecher(nummerLernkartei).size() + 1));
+				}
 					sqlBeschreibung = "'" + (int)(getFaecher(nummerLernkartei).size() + 1) + "'";
-				} else
 					sqlBeschreibung = "'" + (int)(getFaecher(nummerLernkartei).size() + 1) + "'";
 				System.out.println(sqlBeschreibung);
 				String sqlGelerntAm = null;

@@ -285,7 +285,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 				if(correct) {
 					if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
 						Fach fach = new Fach();
-						fach.setBeschreibung("TODO");
+						fach.setBeschreibung("SetReminder");
 						
 						VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
 						
