@@ -135,26 +135,13 @@ public class VocableTrainerLocalization {
     public static String RUN_STATS_MAX_STREAK;
     public static String RUN_STATS_ACCURACY;
     
-    private static String path = "resources/localisation/*.yml";
+    private static final String PATH = "src/net/tfobz/vocabletrainer/main/resources/localisation/_.yml";
 
-    /**
-     * Loads localization data from the specified YAML file based on the selected language.
-     *
-     * @param l the selected localization enum (English, Deutsch, Italiano)
-     */
     public static void loadLocalization(localisation l) {
+    	    	
+    	String path = PATH.replaceAll("_", l+"");
     	
-    	switch (l) {
-    	case English:
-    		path = "resources/localisation/english.yml";
-    		break;
-    	case Deutsch:
-    		path = "resources/localisation/german.yml";
-    		break;
-    	case Italiano:
-    		path = "resources/localisation/italian.yml";
-    		break;
-		}
+    	System.out.println(path);
     	
          Map<String, String> values = new HashMap<>();
          try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -213,12 +200,6 @@ public class VocableTrainerLocalization {
          mapValues(values, l);
      }
 
-	/**
-     * Counts the number of leading spaces in a string.
-     *
-     * @param s the string to evaluate
-     * @return the number of leading spaces
-     */
 	private static int countLeadingSpaces(String s) {
 	     int count = 0;
 	     while (count < s.length() && s.charAt(count) == ' ') {
@@ -226,12 +207,7 @@ public class VocableTrainerLocalization {
 	     }
 	     return count;
 	}
-
-	/**
-     * Assigns the parsed localization values to the static fields.
-     *
-     * @param values the map containing the localization key-value pairs
-     *///values.getOrDefault(l+".title.title", "");
+	
 	private static void mapValues(Map<String, String> values, localisation l) {
 		 MAIN_TITLE = values.getOrDefault(l+".main.title", "");
 		

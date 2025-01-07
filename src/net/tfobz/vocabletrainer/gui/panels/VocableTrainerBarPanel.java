@@ -17,7 +17,7 @@ public class VocableTrainerBarPanel extends VocableTrainerPanel {
 
     VocableTrainerPanel sourcePanel;
 
-    final static String barPath = "/icons/bars.png";
+    final static String barPath = "/net/tfobz/vocabletrainer/main/resources/icons/bars.png";
     private static Image barsImage;
 
     private JLabel title;

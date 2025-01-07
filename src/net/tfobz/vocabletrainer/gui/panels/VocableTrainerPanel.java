@@ -29,7 +29,7 @@ public class VocableTrainerPanel extends JPanel {
 	
 	protected boolean state = false;
 			
-	final static String backPath = "/icons/back.png";
+	final static String backPath =  "/net/tfobz/vocabletrainer/main/resources/icons/back.png";
     private static Image backImage;
 	
 	protected VocableTrainerBarPanel barPane;
@@ -117,6 +117,8 @@ public class VocableTrainerPanel extends JPanel {
 	}
 	
 	public void changeLocalisation (VocableTrainerLocalization.localisation l) {
+		System.out.println(l);
+		
 		VocableTrainerLocalization.loadLocalization(l);
 		
 		for (VocableTrainerPanel panel : vtf.getPanels()) {

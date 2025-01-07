@@ -105,7 +105,8 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
         
         languageBox.addActionListener(e -> {
         	super.changeLocalisation((localisation) languageBox.getSelectedItem());
-        	VocableTrainerSettingsIO.saveSettings((localisation) languageBox.getSelectedItem());
+        	repaint();
+        	new Thread(() -> VocableTrainerSettingsIO.saveSettings((localisation) languageBox.getSelectedItem()));
         });
                 
         themeBox.addActionListener(new ActionListener() {

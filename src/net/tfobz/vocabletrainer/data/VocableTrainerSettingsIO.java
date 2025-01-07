@@ -15,7 +15,7 @@ public class VocableTrainerSettingsIO {
 	public static boolean premium;
 	
     public static void loadSettings() {
-        File settingsFile = new File("settings.txt");
+        File settingsFile = new File("src/net/tfobz/vocabletrainer/main/resources/settings.txt");
 
         if (!settingsFile.exists()) {
             createDefaultSettings(settingsFile);
@@ -77,7 +77,7 @@ public class VocableTrainerSettingsIO {
     }
     
     public static void saveSettings() {
-    	File settingsFile = new File("settings.txt");
+    	File settingsFile = new File("src/net/tfobz/vocabletrainer/main/settings.txt");
         try (FileWriter writer = new FileWriter(settingsFile)) {
             writer.write(localisation.name() + "\n");
 
