@@ -53,7 +53,7 @@ public class VocableTrainerColorChooser extends JFrame {
 		    buttons[i].setBackground(colors[i]);
 		    int index = i;
 		    buttons[i].addActionListener(e -> {
-		        Color chosenColor = JColorChooser.showDialog(null, "Choose a Color", buttons[index].getBackground());
+		        Color chosenColor = JColorChooser.showDialog(null, VocableTrainerLocalization.DIALOG_COLOUR_CHOOSER_CHOOSE_COLOR, buttons[index].getBackground());
 		        if (chosenColor != null) {
 		            buttons[index].setBackground(chosenColor);
 		            colors[index] = chosenColor;

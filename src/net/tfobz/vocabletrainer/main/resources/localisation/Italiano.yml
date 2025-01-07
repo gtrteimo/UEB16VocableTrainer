@@ -35,6 +35,7 @@ Italiano:
       title: "Personalizzatore di Tema"
     colour_chooser:
       title: "Personalizzatore di Tema"
+      choose_color: "Seleziona Colore"
       apply: "Ciao Mondo"
       colour:
         menu_bar: "Colore della Barra del Menu"
@@ -74,7 +75,7 @@ Italiano:
     name: "Home"
     start: "Avvia"
     new: "Nuovo"
-    info: "Informazioni"
+    info: "Info"
     exit: "Esci"
   new: 
     name: "Nuovo"

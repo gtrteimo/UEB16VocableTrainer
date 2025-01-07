@@ -35,7 +35,8 @@ English:
       title: "Theme customiser"
     colour_chooser:
       title: "Theme customiser"
-      apply: "Hello World"
+      choose_color: "Choose Color"
+      apply: "Apply"
       colour:
         menu_bar: "Menu Bar Colour"
         main_background: "Main Background Colour"
