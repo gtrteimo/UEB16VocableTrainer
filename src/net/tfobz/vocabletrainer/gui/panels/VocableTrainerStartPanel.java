@@ -423,8 +423,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
 		        if (value == 0) {
 		            spinner.setValue(1);
 		        }
-		        if (value > 1000000) {
-		            spinner.setValue(1000000);
+		        if (value > 100000) {
+		            spinner.setValue(100000);
 		        }
 		        if (value < 0) {
 		            spinner.setValue(value*-1);

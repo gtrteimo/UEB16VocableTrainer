@@ -329,34 +329,34 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 		}
 		avgTime = avgTime/times.length;
 		
-		stat.add(new JLabel("Total Time: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_TOTAL_TIME+": "));
 		value.add(new JLabel(String.format("%.2f", time1/100.0)+" seconds"));
 		
-		stat.add(new JLabel("Max Card Time: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_MAX_CARD_TIME+": "));
 		value.add(new JLabel(String.format("%.2f", maxTime/100.0)+" seconds"));
 
-		stat.add(new JLabel("Min Card Time: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_MIN_CARD_TIME+": "));
 		value.add(new JLabel(correctCards!=0?String.format("%.2f", minTime/100.0)+" seconds":"No correct answer"));
 
-		stat.add(new JLabel("Avg Card Time: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_AVG_CARD_TIME+": "));
 		value.add(new JLabel(String.format("%.2f", avgTime/100)+" seconds"));
 		
-		stat.add(new JLabel("Total Cards: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_TOTAL_CARDS+": "));
 		value.add(new JLabel(Integer.toString(results.length)));
 
-		stat.add(new JLabel("Skipped Cards: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_SKIPPED_CARDS+": "));
 		value.add(new JLabel(Integer.toString(skippedCards)));
 
-		stat.add(new JLabel("Wrong Answers: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_WRONG_ANSWERS+": "));
 		value.add(new JLabel(Integer.toString(wrongCards)));
 		
-		stat.add(new JLabel("Correct Answers: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_CORRECT_ANSWERS+": "));
 		value.add(new JLabel(Integer.toString(correctCards)));
 
-		stat.add(new JLabel("Max Streak: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_MAX_STREAK+": "));
 		value.add(new JLabel(Integer.toString(maxCardStreak)));
 		
-		stat.add(new JLabel("Accuracy: "));
+		stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_ACCURACY+": "));
 		value.add(new JLabel(Integer.toString(100*correctCards/(correctCards+wrongCards))+"%"));
 
 		for (JLabel label : stat) {
@@ -406,9 +406,11 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 			height -= height/10*2;
 			for (int i = 0; i < stat.size(); i++) {
 				stat.get(i).setBounds(10, 10+i*((height-20)/stat.size()), (width-30)/2, (height-20)/stat.size()-10);
+				stat.get(i).setFont(new Font("Arial", Font.PLAIN, stat.get(i).getHeight()/2));
 			}
 			for (int i = 0; i < value.size(); i++) {
 				value.get(i).setBounds(width/2+5, 10+i*((height-20)/value.size()), (width-30)/2, (height-20)/value.size()-10);
+				value.get(i).setFont(new Font("Arial", Font.PLAIN, value.get(i).getHeight()/2));
 			}
 		}
     }

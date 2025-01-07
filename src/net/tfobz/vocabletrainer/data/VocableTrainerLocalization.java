@@ -316,16 +316,16 @@ public class VocableTrainerLocalization {
 	      RUN_END = values.getOrDefault(l+".run.end", "");
 	      RUN_ANSWER = values.getOrDefault(l+".run.answer", "");
 	      
-	      RUN_STATS_TOTAL_TIME = values.getOrDefault(l+".run.stats.", "");
-	      RUN_STATS_MAX_CARD_TIME = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_MIN_CARD_TIME = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_AVG_CARD_TIME = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_TOTAL_CARDS = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_SKIPPED_CARDS = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_WRONG_ANSWERS = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_CORRECT_ANSWERS = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_MAX_STREAK = values.getOrDefault(l+".run.stats", "");
-	      RUN_STATS_ACCURACY = values.getOrDefault(l+".run.stats", "");
+	      RUN_STATS_TOTAL_TIME = values.getOrDefault(l+".run.stats.total_time", "");
+	      RUN_STATS_MAX_CARD_TIME = values.getOrDefault(l+".run.stats.max_card_time", "");
+	      RUN_STATS_MIN_CARD_TIME = values.getOrDefault(l+".run.stats.min_card_time", "");
+	      RUN_STATS_AVG_CARD_TIME = values.getOrDefault(l+".run.stats.avg_card_time", "");
+	      RUN_STATS_TOTAL_CARDS = values.getOrDefault(l+".run.stats.total_cards", "");
+	      RUN_STATS_SKIPPED_CARDS = values.getOrDefault(l+".run.stats.skipped_cards", "");
+	      RUN_STATS_WRONG_ANSWERS = values.getOrDefault(l+".run.stats.wrong_ansers", "");
+	      RUN_STATS_CORRECT_ANSWERS = values.getOrDefault(l+".run.stats.correct_answers", "");
+	      RUN_STATS_MAX_STREAK = values.getOrDefault(l+".run.stats.max_streak", "");
+	      RUN_STATS_ACCURACY = values.getOrDefault(l+".run.stats.accuracy", "");
 	      
     }
 }
