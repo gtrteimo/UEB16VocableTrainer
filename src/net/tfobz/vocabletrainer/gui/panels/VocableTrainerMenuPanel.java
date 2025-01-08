@@ -108,7 +108,7 @@ public class VocableTrainerMenuPanel extends VocableTrainerPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (panelIndex < 0) {
-				vtf.close();
+				VocableTrainerSettingsPanel.openWebpage(vtf, "https://github.com/gtrteimo/UEB16VocableTrainer/blob/main/help.txt");
 			} else {
 				try {
 					vtf.changePanel(-2);

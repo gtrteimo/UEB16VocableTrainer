@@ -11,6 +11,7 @@ import java.net.URI;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
@@ -138,7 +139,7 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 			}
 		});
 
-        button.addActionListener(e -> openWebpage("https://github.com/gtrteimo/UEB16VocableTrainer"));
+        button.addActionListener(e -> openWebpage(vtf, "https://github.com/gtrteimo/UEB16VocableTrainer"));
         		
         simplifiedBox.addActionListener(e -> {
         	new Thread(() -> VocableTrainerSettingsIO.saveSettings(simplifiedBox.isEnabled(), allwoPremiumBox.isSelected())).start();;
@@ -159,17 +160,17 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 		add(panel);
 	}
 	
-	private void openWebpage(String urlString) {
+	public static void openWebpage(JFrame parent, String urlString) {
         if (Desktop.isDesktopSupported()) {
             Desktop desktop = Desktop.getDesktop();
             try {
                 URI uri = new URI(urlString);
                 desktop.browse(uri);
             } catch (Exception e) {
-                new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NO_INTERNET);
+                new VocableTrainerInfoDialog(parent, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NO_INTERNET);
             }
         } else {
-            new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NOT_SUPPORTED+"https://github.com/gtrteimo/UEB16VocableTrainer");
+            new VocableTrainerInfoDialog(parent, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_SETTINGS_NOT_SUPPORTED+"https://github.com/gtrteimo/UEB16VocableTrainer");
         }
     }	
 	
