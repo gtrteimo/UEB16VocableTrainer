@@ -139,6 +139,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
                         d.closeDialog();
                     }
                 }
+                paintComponent(getGraphics());
             }
         });
         deleteButton.addActionListener(e -> {
@@ -204,7 +205,6 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             }
             List<Karte> cards = VokabeltrainerDB.getKartenUndBoxenVonLernkartei(l.getNummer());
             for (Karte card : cards) {
-                System.out.println("Class of Last Asked: " +  card.getGerlerntAm().getClass().getName()); // Should print java.util.Date
                 model.addRow(new Object[]{
                     false,
                     card.getWortEins(),
