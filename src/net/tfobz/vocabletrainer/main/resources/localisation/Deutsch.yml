@@ -105,6 +105,11 @@ Deutsch:
     case_sensitive: "Gross-/Kleinschreibung"
     amount_of_cards: "Anzahl der Karten"
     practise_run: "Uebungslauf"
+    direction:
+      direction: "Richtung"
+      option_1: "Zufaellig"
+      option_2: "Wort 1 >> Wort 2"
+      option_3: "Wort 2 >> Wort 1"
     start: "Start"
   credits:
     name: "Credits"

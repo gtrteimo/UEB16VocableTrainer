@@ -105,6 +105,11 @@ Italiano:
     case_sensitive: "Capitalizzazione"
     amount_of_cards: "Numero di Carte"
     practise_run: "Modalita di prova"
+    direction:
+      direction: "Direzione"
+      option_1: "Casuale"
+      option_2: "Parola 1 >> Parola 2"
+      option_3: "Parola 2 >> Parola 1"
     start: "Avvia"
   credits:
     name: "Crediti"

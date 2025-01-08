@@ -105,7 +105,7 @@ English:
     practise_run: "Practise run"
     direction:
       direction: "Direction"
-      option_1: "Both"
+      option_1: "Random"
       option_2: "Word 1 >> Word 2"
       option_3: "Word 2 >> Word 1"
     start: "Start"
