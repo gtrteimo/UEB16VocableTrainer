@@ -1,17 +1,24 @@
 package net.tfobz.vocabletrainer.gui.panels;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLXML;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.AbstractButton;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -197,7 +204,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             }
             List<Karte> cards = VokabeltrainerDB.getKartenUndBoxenVonLernkartei(l.getNummer());
             for (Karte card : cards) {
-            	System.out.println(card.getGerlerntAm());
+                System.out.println("Class of Last Asked: " +  card.getGerlerntAm().getClass().getName()); // Should print java.util.Date
                 model.addRow(new Object[]{
                     false,
                     card.getWortEins(),
@@ -228,21 +235,21 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         if (l == null) return;
         model = new DefaultTableModel(
             new Object[]{" ", l.getWortEinsBeschreibung(), l.getWortZweiBeschreibung(), VocableTrainerLocalization.INFO_DATE_MODIFIED, VocableTrainerLocalization.INFO_LAST_ASKED, VocableTrainerLocalization.INFO_BOX, "knummer"}, 0) {
-	            @Override
-	            public boolean isCellEditable(int r, int c) {
-	                return c== 0 || c == 1 || c == 2;
-	            }
-	            @Override
-	            public Class<?> getColumnClass(int i) {
-	                switch (i) {
-	                    case 0: return Boolean.class;
-	                    case 3:
-	                    case 4: return Date.class;
-	                    case 5:
-	                    case 6: return Integer.class;
-	                    default: return String.class;
-	                }
-	            }
+                @Override
+                public boolean isCellEditable(int r, int c) {
+                    return c == 0 || c == 1 || c == 2;
+                }
+                @Override
+                public Class<?> getColumnClass(int i) {
+                    switch (i) {
+                        case 0: return Boolean.class;
+                        case 3:
+                        case 4: return java.sql.Date.class;
+                        case 5:
+                        case 6: return Integer.class;
+                        default: return String.class;
+                    }
+                }
         };
         fillTable(model);
         table = new JTable(model);
@@ -275,8 +282,8 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             cb.setFont(new Font("Arial", Font.PLAIN, (scrollPane == null ? 30 : (scrollPane.getHeight() / 16) / 2 + 2)));
             return cb;
         });
-        table.setDefaultRenderer(Date.class, (t, v, sel, hf, r, c) -> {
-            JLabel lab = new JLabel(new SimpleDateFormat(" dd.MM.yyyy  HH:mm:ss ").format((Date) v));
+        table.setDefaultRenderer(java.sql.Date.class, (t, v, sel, hf, r, c) -> {
+            JLabel lab = new JLabel(new SimpleDateFormat(" dd.MM.yyyy ").format((java.sql.Date) v));
             lab.setHorizontalAlignment(SwingConstants.CENTER);
             lab.setVerticalAlignment(SwingConstants.CENTER);
             lab.setBackground(textColor1);
@@ -295,22 +302,56 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         for (int col = 1; col < table.getColumnCount() - 1; col++) {
             table.getColumnModel().getColumn(col).setCellRenderer(dynamicRenderer);
         }
+        
+        // *** UPDATED CODE START ***
         DefaultCellEditor textEditor = new DefaultCellEditor(new JTextField()) {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                repaint();
                 JTextField field = (JTextField) super.getTableCellEditorComponent(table, value, isSelected, row, column);
+                field.setFont(new Font("Arial", Font.PLAIN, scrollPane.getHeight() / 32 + 1));
+                field.setHorizontalAlignment(SwingConstants.CENTER);
+                field.setBackground(textColor1);
+                field.setForeground(textColor2);
                 SwingUtilities.invokeLater(field::selectAll);
+                
                 return field;
             }
         };
         textEditor.setClickCountToStart(1);
         table.getColumnModel().getColumn(1).setCellEditor(textEditor);
         table.getColumnModel().getColumn(2).setCellEditor(textEditor);
+        
         table.setBackground(textColor1);
         scrollPane = new JScrollPane(table);
-    	scrollPane.getViewport().setBackground(textColor1);
+        scrollPane.getViewport().setBackground(textColor1);
+        
+        scrollPane.setFocusable(true);
+        scrollPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                scrollPane.requestFocusInWindow();
+            }
+        });
+        
+        panel.setFocusable(true);
+        panel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	panel.requestFocusInWindow();
+            }
+        });
+        
+        barPane.setFocusable(true);
+        barPane.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+            	barPane.requestFocusInWindow();
+            }
+        });
+        
         panel.add(scrollPane);
-
+        
         table.getModel().addTableModelListener(e -> {
             if (e.getType() == TableModelEvent.UPDATE) {
                 if (e.getColumn() == 0) {
@@ -341,6 +382,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
         table.getColumnModel().getColumn(6).setMaxWidth(0);
         table.getColumnModel().getColumn(6).setWidth(0);
     }
+
 
     @Override
 	public void setColors() {
