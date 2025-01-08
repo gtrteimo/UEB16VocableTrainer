@@ -14,6 +14,8 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	
+	private static final Object DB_LOCK = new Object();
+	
 	private VocableTrainerRunSettings settings;
 	
 	private int[] times;
@@ -213,22 +215,38 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void endRun() {
-		if(timer.isRunning())
-			timer.stop();
-		if (settings.getBox().getNummer() == -11) {
-			for (Fach f : VokabeltrainerDB.getFaecherErinnerung(settings.getSet().getNummer())) {
-				f.setGelerntAm(new Date());
-			}
-		} else if (settings.getBox().getNummer() == -22) {
-			for (Fach f : VokabeltrainerDB.getFaecher(settings.getSet().getNummer())) {
-				f.setGelerntAm(new Date());
-			}
-		} else {
-			settings.getBox().setGelerntAm(new Date());
-		}
-		loadStats();
+	    if (timer.isRunning()) {
+	        timer.stop();
+	    }
+	    new Thread(() -> {
+	        synchronized (this) {
+	            boolean repeat = true;
+	            while (repeat) {
+	                try {
+	                    if (settings.getBox().getNummer() == -11) {
+	                        for (Fach f : VokabeltrainerDB.getFaecherErinnerung(settings.getSet().getNummer())) {
+	                            f.setGelerntAm(new Date());
+	                        }
+	                    } else if (settings.getBox().getNummer() == -22) {
+	                        for (Fach f : VokabeltrainerDB.getFaecher(settings.getSet().getNummer())) {
+	                            f.setGelerntAm(new Date());
+	                        }
+	                    } else {
+	                        settings.getBox().setGelerntAm(new Date());
+	                    }
+	                    repeat = false;
+	                } catch (Exception e) {
+	                    try {
+	                        Thread.sleep(500);
+	                    } catch (InterruptedException e1) {}
+	                }
+	            }
+	        }
+	    }).start();
+	    loadStats();
 	}
-	
+
+
 	public void nextCard() {
 		cardNum++;
 		if(cardNum<times.length){
@@ -257,53 +275,62 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	}
 	
 	public void checkCard() {
-		timer.stop();
-		times[cardNum]=time2;
-		boolean correct;
-		if(settings.isCaseSensitiv()) {
-			if (cardOne) {
-				correct = input.getText().equals(currentCard.getWortZwei());
-			} else {
-				correct = input.getText().equals(currentCard.getWortEins());
-			}
-		} else {
-			if (cardOne) {
-				correct = input.getText().equalsIgnoreCase(currentCard.getWortZwei());
-			} else {
-				correct = input.getText().equalsIgnoreCase(currentCard.getWortEins());
-			}
-		}
-		if (correct) {
-			results[cardNum] = 1;
-			input.setBackground(Color.GREEN);
-		} else {
-			results[cardNum] = -1;
-			input.setBackground(Color.RED);
-		}
-		if(!settings.isParcticeRun()) {
-			new Thread(()->{
-				if(correct) {
-					if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
-						Fach fach = new Fach();
-						fach.setBeschreibung("SetReminder");
-						
-						VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
-						
-						VokabeltrainerDB.setKarteRichtig(currentCard);
-					}
-				}else {
-					VokabeltrainerDB.setKarteFalsch(currentCard);
-				}
-			}).start();
-		}
-		if (cardOne) {
-		    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortZwei()+"</span></html>");
-		} else {
-		    answer.setText("<html>Correct answer: <span style='color:green;'>"+currentCard.getWortEins()+"</span></html>");
-		}
-		skip.setVisible(false);
-		next.setText(VocableTrainerLocalization.RUN_NEXT);
+	    timer.stop();
+	    times[cardNum] = time2;
+	    boolean correct;
+
+	    if (settings.isCaseSensitiv()) {
+	        correct = cardOne ? input.getText().equals(currentCard.getWortZwei())
+	                          : input.getText().equals(currentCard.getWortEins());
+	    } else {
+	        correct = cardOne ? input.getText().equalsIgnoreCase(currentCard.getWortZwei())
+	                          : input.getText().equalsIgnoreCase(currentCard.getWortEins());
+	    }
+
+	    results[cardNum] = correct ? 1 : -1;
+	    input.setBackground(correct ? Color.GREEN : Color.RED);
+
+	    if (!settings.isParcticeRun()) {
+	        new Thread(() -> {
+	            synchronized (DB_LOCK) {
+	                boolean repeat = true;
+	                while (repeat) {
+	                    try {
+	                        if (correct) {
+	                            if (VokabeltrainerDB.setKarteRichtig(currentCard) == -2) {
+	                                Fach fach = new Fach();
+	                                fach.setBeschreibung("SetReminder");
+
+	                                VokabeltrainerDB.hinzufuegenFach(settings.getSet().getNummer(), fach);
+
+	                                VokabeltrainerDB.setKarteRichtig(currentCard);
+	                            }
+	                        } else {
+	                            VokabeltrainerDB.setKarteFalsch(currentCard);
+	                        }
+	                        repeat = false;
+	                    } catch (Exception e) {
+	                        try {
+	                            Thread.sleep(500);
+	                        } catch (InterruptedException e1) {
+	                            Thread.currentThread().interrupt();
+	                        }
+	                    }
+	                }
+	            }
+	        }).start();
+	    }
+
+	    if (cardOne) {
+	        answer.setText("<html>Correct answer: <span style='color:green;'>" + currentCard.getWortZwei() + "</span></html>");
+	    } else {
+	        answer.setText("<html>Correct answer: <span style='color:green;'>" + currentCard.getWortEins() + "</span></html>");
+	    }
+
+	    skip.setVisible(false);
+	    next.setText(VocableTrainerLocalization.RUN_NEXT);
 	}
+
 	
 	public void skipCard() {
 		timer.stop();

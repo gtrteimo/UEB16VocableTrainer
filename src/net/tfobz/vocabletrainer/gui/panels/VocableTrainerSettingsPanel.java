@@ -117,15 +117,15 @@ public class VocableTrainerSettingsPanel extends VocableTrainerPanel {
 					colorChooser = null;
 				}
 				switch (themeBox.getSelectedIndex()) {
-				case 0:
+				case 1:
 					changeColor(colours[0][0], colours[0][1], colours[0][2], colours[0][3], colours[0][4]);
 					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[0])).start();
 					break;
-				case 1:
+				case 2:
 					changeColor(colours[1][0], colours[1][1], colours[1][2], colours[1][3], colours[1][4]);
 					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[1])).start();
 					break;
-				case 2:
+				case 3:
 					changeColor(colours[2][0], colours[2][1], colours[2][2], colours[2][3], colours[2][4]);
 					new Thread(() -> VocableTrainerSettingsIO.saveSettings(colours[2])).start();
 		        	break;
