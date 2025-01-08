@@ -219,7 +219,7 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
 	        timer.stop();
 	    }
 	    new Thread(() -> {
-	        synchronized (this) {
+	        synchronized (DB_LOCK) {
 	            boolean repeat = true;
 	            while (repeat) {
 	                try {
