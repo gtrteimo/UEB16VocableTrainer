@@ -11,42 +11,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handles localization for the Vocable Trainer application by loading language-specific
+ * strings from YAML files and mapping them to application constants.
+ */
 public class VocableTrainerLocalization {
-	
-	public static enum localisation {
-		English, Deutsch, Italiano
-	}
-	
-	public static String MAIN_TITLE;
-	
-	public static String DATA_SECONDS;
-	public static String DATA_MINUTES;
-	public static String DATA_HOURS;
-	
-	public static String EXPORT_EXPORT;
-	public static String EXPORT_QUESTION;
-	
+
+    /**
+     * Supported localizations for the application.
+     */
+    public static enum localisation {
+        English, Deutsch, Italiano
+    }
+
+    // Localization string constants
+    public static String MAIN_TITLE;
+
+    public static String DATA_SECONDS;
+    public static String DATA_MINUTES;
+    public static String DATA_HOURS;
+
+    public static String EXPORT_EXPORT;
+    public static String EXPORT_QUESTION;
+
     public static String DIALOG_INFO_CLOSE;
-    
+
     public static String DIALOG_TWO_OPTION_YES;
     public static String DIALOG_TWO_OPTION_NO;
     public static String DIALOG_TWO_OPTION_DELETE_TITLE;
     public static String DIALOG_TWO_OPTION_DELETE_QUESTION;
     public static String DIALOG_TWO_OPTION_DELETE_CONFIRM;
     public static String DIALOG_TWO_OPTION_DELETE_CANCEL;
-    
+
     public static String DIALOG_NEW_SET_TITLE;
     public static String DIALOG_NEW_SET_ENTER_SET_NAME;
     public static String DIALOG_NEW_SET_DESCRIPTION_1;
     public static String DIALOG_NEW_SET_DESCRIPTION_2;
     public static String DIALOG_NEW_SET_SAVE;
     public static String DIALOG_NEW_SET_CANCEL;
-    
+
     public static String DIALOG_INPUT_RENAME;
     public static String DIALOG_INPUT_QUESTION;
     public static String DIALOG_INPUT_CONFIRM;
     public static String DIALOG_INPUT_CANCEL;
-    
+
     public static String DIALOG_COLOUR_CHOOSER_TITLE;
     public static String DIALOG_COLOUR_CHOOSER_TITLE2;
     public static String DIALOG_COLOUR_CHOOSER_CHOOSE_COLOR;
@@ -57,7 +65,7 @@ public class VocableTrainerLocalization {
     public static String DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND;
     public static String DIALOG_COLOUR_CHOOSER_APPLY;
     public static String DIALOG_COLOUR_CHOOSER_CLOSE;
-    
+
     public static String ERROR;
     public static String ERROR_DATABASE_DROPPED;
     public static String ERROR_START_SELECT_SET;
@@ -71,7 +79,7 @@ public class VocableTrainerLocalization {
     public static String ERROR_IMPORT_DUPLICATE_CARD;
     public static String ERROR_SETTINGS_NO_INTERNET;
     public static String ERROR_SETTINGS_NOT_SUPPORTED;
-    
+
     public static String MENU_HOME;
     public static String MENU_START;
     public static String MENU_INFO;
@@ -79,13 +87,13 @@ public class VocableTrainerLocalization {
     public static String MENU_CREDITS;
     public static String MENU_SETTINGS;
     public static String MENU_HELP;
-    
+
     public static String HOME_NAME;
     public static String HOME_START;
     public static String HOME_NEW;
     public static String HOME_INFO;
     public static String HOME_EXIT;
-    
+
     public static String NEW_NAME;
     public static String NEW_NEW_SET;
     public static String NEW_IMPORT;
@@ -93,7 +101,7 @@ public class VocableTrainerLocalization {
     public static String NEW_SAVE;
     public static String NEW_RENAME;
     public static String NEW_DELETE;
-     
+
     public static String INFO_NAME;
     public static String INFO_TOPIC;
     public static String INFO_RENAME;
@@ -102,7 +110,7 @@ public class VocableTrainerLocalization {
     public static String INFO_DATE_MODIFIED;
     public static String INFO_LAST_ASKED;
     public static String INFO_BOX;
-    
+
     public static String START_NAME;
     public static String START_BOX_BOX;
     public static String START_BOX_ALL;
@@ -117,7 +125,7 @@ public class VocableTrainerLocalization {
     public static String START_DIRECTION_OPTION_2;
     public static String START_DIRECTION_OPTION_3;
     public static String START_START;
-    
+
     public static String CREDITS_NAME;
     public static String CREDITS_CREATORS;
     public static String CREDITS_HELPERS;
@@ -149,162 +157,168 @@ public class VocableTrainerLocalization {
     public static String RUN_STATS_CORRECT_ANSWERS;
     public static String RUN_STATS_MAX_STREAK;
     public static String RUN_STATS_ACCURACY;
-    
+
     private static final String PATH = "src/net/tfobz/vocabletrainer/main/resources/localisation/_.yml";
 
+    /**
+     * Loads localization data from a YAML file corresponding to the specified language.
+     * 
+     * @param l the desired localization language
+     * @throws RuntimeException if the localization file cannot be loaded
+     */
     public static void loadLocalization(localisation l) {
-    	    	
-    	String path = PATH.replaceAll("_", l+"");
-    	
-    	System.out.println(path);
-    	
-         Map<String, String> values = new HashMap<>();
-         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-             String line;
-             // Stack to keep track of the current key hierarchy
-             Deque<String> keyStack = new ArrayDeque<>();
-             // Number of spaces per indentation level (assuming 2)
-             final int indentSize = 2;
 
-             while ((line = reader.readLine()) != null) {
-                 // Trim trailing spaces but keep leading spaces for indentation
-                 String trimmedLine = line.replaceAll("\\s+$", "");
+        String path = PATH.replaceAll("_", l + "");
 
-                 if (trimmedLine.trim().isEmpty() || trimmedLine.trim().startsWith("#")) {
-                     continue; // Skip empty lines and comments
-                 }
+        Map<String, String> values = new HashMap<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String line;
+            Deque<String> keyStack = new ArrayDeque<>();
+            final int indentSize = 2;
 
-                 // Determine current indentation level (number of leading spaces)
-                 int currentIndent = countLeadingSpaces(trimmedLine);
-                 // Calculate depth based on indentation
-                 int depth = currentIndent / indentSize;
+            while ((line = reader.readLine()) != null) {
+                String trimmedLine = line.replaceAll("\\s+$", "");
 
-                 // Extract the actual content without leading spaces
-                 String content = trimmedLine.trim();
+                if (trimmedLine.trim().isEmpty() || trimmedLine.trim().startsWith("#")) {
+                    continue;
+                }
 
-                 // Adjust the stack based on the current depth
-                 while (keyStack.size() > depth) {
-                     keyStack.pop();
-                 }
+                int currentIndent = countLeadingSpaces(trimmedLine);
+                int depth = currentIndent / indentSize;
 
-                 if (content.endsWith(":")) {
-                     // It's a key that has nested keys
-                     String key = content.substring(0, content.length() - 1).trim();
-                     keyStack.push(key);
-                 } else if (content.contains(":")) {
-                     // It's a key-value pair
-                     String[] parts = content.split(":", 2);
-                     String keyPart = parts[0].trim();
-                     String valuePart = parts[1].trim().replaceAll("^\"|\"$", ""); // Remove surrounding quotes
+                String content = trimmedLine.trim();
 
-                     // Build the full key by joining the stack (reversed) and the current key
-                     List<String> keys = new ArrayList<>(keyStack);
-                     Collections.reverse(keys);
-                     keys.add(keyPart);
-                     String fullKey = String.join(".", keys);
+                while (keyStack.size() > depth) {
+                    keyStack.pop();
+                }
 
-                     values.put(fullKey, valuePart);
-                 }
-                 // Lines without ":" are ignored in this implementation
-             }
+                if (content.endsWith(":")) {
+                    String key = content.substring(0, content.length() - 1).trim();
+                    keyStack.push(key);
+                } else if (content.contains(":")) {
+                    String[] parts = content.split(":", 2);
+                    String keyPart = parts[0].trim();
+                    String valuePart = parts[1].trim().replaceAll("^\"|\"$", "");
 
-         } catch (IOException e) {
-             throw new RuntimeException("Failed to load localization: " + e.getMessage(), e);
-         }
+                    List<String> keys = new ArrayList<>(keyStack);
+                    Collections.reverse(keys);
+                    keys.add(keyPart);
+                    String fullKey = String.join(".", keys);
 
-         mapValues(values, l);
-     }
+                    values.put(fullKey, valuePart);
+                }
+            }
 
-	private static int countLeadingSpaces(String s) {
-	     int count = 0;
-	     while (count < s.length() && s.charAt(count) == ' ') {
-	         count++;
-	     }
-	     return count;
-	}
-	
-	private static void mapValues(Map<String, String> values, localisation l) {
-		 MAIN_TITLE = values.getOrDefault(l+".main.title", "MAIN_TITLE");
-		
-		 DATA_SECONDS = values.getOrDefault(l+".data.seconds", "DATA_SECONDS");
-		 DATA_MINUTES = values.getOrDefault(l+".data.minutes", "DATA_MINUTES");
-		 DATA_HOURS = values.getOrDefault(l+".data.hours", "DATA_HOURS");
-		
-		 EXPORT_EXPORT = values.getOrDefault(l+".export.export", "EXPORT_EXPORT");
-		 EXPORT_QUESTION = values.getOrDefault(l+".export.question", "EXPORT_QUESTION");
-		
-	     DIALOG_INFO_CLOSE = values.getOrDefault(l+".dialog.info.close", "DIALOG_INFO_CLOSE");
-	    
-	     DIALOG_TWO_OPTION_YES = values.getOrDefault(l+".dialog.two_options.yes", "DIALOG_TWO_OPTION_YES");
-	     DIALOG_TWO_OPTION_NO = values.getOrDefault(l+".dialog.two_options.no", "DIALOG_TWO_OPTION_NO");
-	     DIALOG_TWO_OPTION_DELETE_TITLE = values.getOrDefault(l+".dialog.two_options.delete.title", "DIALOG_TWO_OPTION_DELETE_TITLE");
-	     DIALOG_TWO_OPTION_DELETE_QUESTION = values.getOrDefault(l+".dialog.two_options.delete.question", "DIALOG_TWO_OPTION_DELETE_QUESTION");
-	     DIALOG_TWO_OPTION_DELETE_CONFIRM = values.getOrDefault(l+".dialog.two_options.delete.confirm", "DIALOG_TWO_OPTION_DELETE_CONFIRM");
-	     DIALOG_TWO_OPTION_DELETE_CANCEL = values.getOrDefault(l+".dialog.two_options.delete.cancel", "DIALOG_TWO_OPTION_DELETE_CANCEL");
-	    
-	     DIALOG_NEW_SET_TITLE = values.getOrDefault(l+".dialog.new_set.title", "DIALOG_NEW_SET_TITLE");
-	     DIALOG_NEW_SET_ENTER_SET_NAME = values.getOrDefault(l+".dialog.new_set.enter_set_name", "DIALOG_NEW_SET_ENTER_SET_NAME");
-	     DIALOG_NEW_SET_DESCRIPTION_1 = values.getOrDefault(l+".dialog.new_set.description1", "DIALOG_NEW_SET_DESCRIPTION_1");
-	     DIALOG_NEW_SET_DESCRIPTION_2 = values.getOrDefault(l+".dialog.new_set.description2", "DIALOG_NEW_SET_DESCRIPTION_2");
-	     DIALOG_NEW_SET_SAVE = values.getOrDefault(l+".dialog.new_set.save", "DIALOG_NEW_SET_SAVE");
-	     DIALOG_NEW_SET_CANCEL = values.getOrDefault(l+".dialog.new_set.cancel", "DIALOG_NEW_SET_CANCEL");
-	    
-	     DIALOG_INPUT_RENAME = values.getOrDefault(l+".dialog.input.rename", "DIALOG_INPUT_RENAME");
-	     DIALOG_INPUT_QUESTION = values.getOrDefault(l+".dialog.input.question", "DIALOG_INPUT_QUESTION");
-	     DIALOG_INPUT_CONFIRM = values.getOrDefault(l+".dialog.input.confirm", "DIALOG_INPUT_CONFIRM");
-	     DIALOG_INPUT_CANCEL = values.getOrDefault(l+".dialog.input.cancel", "DIALOG_INPUT_CANCEL");
-	    
-	     DIALOG_COLOUR_CHOOSER_TITLE = values.getOrDefault(l+".dialog.colour_chooser.title", "DIALOG_COLOUR_CHOOSER_TITLE");
-	     DIALOG_COLOUR_CHOOSER_TITLE2 = values.getOrDefault(l+".dialog.colour_chooser.choose_color", "DIALOG_COLOUR_CHOOSER_TITLE2");
-	     DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR = values.getOrDefault(l+".dialog.colour_chooser.colour.menu_bar", "DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR");
-	     DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.main_background", "DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND");
-	     DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_1", "DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1");
-	     DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2 = values.getOrDefault(l+".dialog.colour_chooser.colour.text_2", "DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2");
-	     DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND = values.getOrDefault(l+".dialog.colour_chooser.colour.button_background", "DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND");
-	     DIALOG_COLOUR_CHOOSER_APPLY = values.getOrDefault(l+".dialog.colour_chooser.apply", "DIALOG_COLOUR_CHOOSER_APPLY");
-	     DIALOG_COLOUR_CHOOSER_CLOSE = values.getOrDefault(l+".dialog.colour_chooser.close", "DIALOG_COLOUR_CHOOSER_CLOSE");
-	     
-	     ERROR = values.getOrDefault(l+".error.error", "ERROR");
-	     ERROR_DATABASE_DROPPED = values.getOrDefault(l+".error.database_dropped", "ERROR_DATABASE_DROPPED");
-	     ERROR_START_SELECT_SET = values.getOrDefault(l+".error.start.select_set", "ERROR_START_SELECT_SET");
-	     ERROR_START_SELECT_BOX = values.getOrDefault(l+".error.start.select_box", "ERROR_START_SELECT_BOX");
-	     ERROR_START_NO_CARDS_IN_BOX = values.getOrDefault(l+".error.start.no_cards_in_box", "ERROR_START_NO_CARDS_IN_BOX");
-	     ERROR_START_TOO_MANY_CARDS = values.getOrDefault(l+".error.start.too_many_cards", "ERROR_START_TOO_MANY_CARDS");
-	     ERROR_NEW_ENTER_DATA = values.getOrDefault(l+".error.new.enter_data", "ERROR_NEW_ENTER_DATA");
-	     ERROR_NEW_SET_SET_CREATION_FAIL = values.getOrDefault(l+".error.new.set_creation_fail", "ERROR_NEW_SET_SET_CREATION_FAIL");
-	     ERROR_NEW_BOX_CREATION_FAIL = values.getOrDefault(l+".error.new.box_creation_fail", "ERROR_NEW_BOX_CREATION_FAIL");
-	     ERROR_NEW_CARD_CREATION_FAIL = values.getOrDefault(l+".error.new.card_creation_fail", "ERROR_NEW_CARD_CREATION_FAIL");
-	     ERROR_IMPORT_DUPLICATE_CARD = values.getOrDefault(l+".error.import.duplicate_card", "ERROR_IMPORT_DUPLICATE_CARD");
-	     ERROR_SETTINGS_NO_INTERNET = values.getOrDefault(l+".error.settings.no_internet", "ERROR_SETTINGS_NO_INTERNET");
-	     ERROR_SETTINGS_NOT_SUPPORTED = values.getOrDefault(l+".error.settings.not_supported", "ERROR_SETTINGS_NOT_SUPPORTED");
-	    
-	     MENU_HOME = values.getOrDefault(l+".menu.home", "MENU_HOME");
-	     MENU_START = values.getOrDefault(l+".menu.start", "MENU_START");
-	     MENU_INFO = values.getOrDefault(l+".menu.info", "MENU_INFO");
-	     MENU_NEW = values.getOrDefault(l+".menu.new", "MENU_NEW");
-	     MENU_CREDITS = values.getOrDefault(l+".menu.credits", "MENU_CREDITS");
-	     MENU_SETTINGS = values.getOrDefault(l+".menu.settings", "MENU_SETTINGS");
-	     MENU_HELP = values.getOrDefault(l+".menu.help", "MENU_HELP");
-	    
-	     HOME_NAME = values.getOrDefault(l+".home.name", "HOME_NAME");
-	     HOME_START = values.getOrDefault(l+".home.start", "HOME_START");
-	     HOME_NEW = values.getOrDefault(l+".home.new", "HOME_NEW");
-	     HOME_INFO = values.getOrDefault(l+".home.info", "HOME_INFO");
-	     HOME_EXIT = values.getOrDefault(l+".home.exit", "HOME_EXIT");
-	    
-	     NEW_NAME = values.getOrDefault(l+".new.name", "NEW_NAME");
-	     NEW_NEW_SET = values.getOrDefault(l+".new.new_set", "NEW_NEW_SET");
-	     NEW_IMPORT = values.getOrDefault(l+".new.import", "NEW_IMPORT");
-	     NEW_EXPORT = values.getOrDefault(l+".new.export", "NEW_EXPORT");
-	     NEW_SAVE = values.getOrDefault(l+".new.save", "NEW_SAVE");
-	     NEW_RENAME = values.getOrDefault(l+".new.rename", "NEW_RENAME");
-	     NEW_DELETE = values.getOrDefault(l+".new.delete", "NEW_DELETE");
-	     
-	     INFO_NAME = values.getOrDefault(l+".info.name", "INFO_NAME");
-	     INFO_TOPIC = values.getOrDefault(l+".info.topic", "INFO_TOPIC");
-	     INFO_RENAME = values.getOrDefault(l+".info.rename", "INFO_RENAME");
-	     INFO_SAVE = values.getOrDefault(l+".info.save", "INFO_SAVE");
-	     INFO_DELETE = values.getOrDefault(l+".info.delete", "INFO_DELETE");
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load localization: " + e.getMessage(), e);
+        }
+
+        mapValues(values, l);
+    }
+
+    /**
+     * Counts the number of leading spaces in a string.
+     * 
+     * @param s the string to analyze
+     * @return the number of leading spaces
+     */
+    private static int countLeadingSpaces(String s) {
+        int count = 0;
+        while (count < s.length() && s.charAt(count) == ' ') {
+            count++;
+        }
+        return count;
+    }
+
+    /**
+     * Maps the loaded localization values to the application constants.
+     * 
+     * @param values the key-value map of localized strings
+     * @param l the selected localization language
+     */
+    private static void mapValues(Map<String, String> values, localisation l) {
+        MAIN_TITLE = values.getOrDefault(l + ".main.title", "MAIN_TITLE");
+
+        DATA_SECONDS = values.getOrDefault(l + ".data.seconds", "DATA_SECONDS");
+        DATA_MINUTES = values.getOrDefault(l + ".data.minutes", "DATA_MINUTES");
+        DATA_HOURS = values.getOrDefault(l + ".data.hours", "DATA_HOURS");
+
+        EXPORT_EXPORT = values.getOrDefault(l + ".export.export", "EXPORT_EXPORT");
+        EXPORT_QUESTION = values.getOrDefault(l + ".export.question", "EXPORT_QUESTION");
+
+        DIALOG_INFO_CLOSE = values.getOrDefault(l + ".dialog.info.close", "DIALOG_INFO_CLOSE");
+
+        DIALOG_TWO_OPTION_YES = values.getOrDefault(l + ".dialog.two_options.yes", "DIALOG_TWO_OPTION_YES");
+        DIALOG_TWO_OPTION_NO = values.getOrDefault(l + ".dialog.two_options.no", "DIALOG_TWO_OPTION_NO");
+        DIALOG_TWO_OPTION_DELETE_TITLE = values.getOrDefault(l + ".dialog.two_options.delete.title", "DIALOG_TWO_OPTION_DELETE_TITLE");
+        DIALOG_TWO_OPTION_DELETE_QUESTION = values.getOrDefault(l + ".dialog.two_options.delete.question", "DIALOG_TWO_OPTION_DELETE_QUESTION");
+        DIALOG_TWO_OPTION_DELETE_CONFIRM = values.getOrDefault(l + ".dialog.two_options.delete.confirm", "DIALOG_TWO_OPTION_DELETE_CONFIRM");
+        DIALOG_TWO_OPTION_DELETE_CANCEL = values.getOrDefault(l + ".dialog.two_options.delete.cancel", "DIALOG_TWO_OPTION_DELETE_CANCEL");
+
+        DIALOG_NEW_SET_TITLE = values.getOrDefault(l + ".dialog.new_set.title", "DIALOG_NEW_SET_TITLE");
+        DIALOG_NEW_SET_ENTER_SET_NAME = values.getOrDefault(l + ".dialog.new_set.enter_set_name", "DIALOG_NEW_SET_ENTER_SET_NAME");
+        DIALOG_NEW_SET_DESCRIPTION_1 = values.getOrDefault(l + ".dialog.new_set.description1", "DIALOG_NEW_SET_DESCRIPTION_1");
+        DIALOG_NEW_SET_DESCRIPTION_2 = values.getOrDefault(l + ".dialog.new_set.description2", "DIALOG_NEW_SET_DESCRIPTION_2");
+        DIALOG_NEW_SET_SAVE = values.getOrDefault(l + ".dialog.new_set.save", "DIALOG_NEW_SET_SAVE");
+        DIALOG_NEW_SET_CANCEL = values.getOrDefault(l + ".dialog.new_set.cancel", "DIALOG_NEW_SET_CANCEL");
+
+        DIALOG_INPUT_RENAME = values.getOrDefault(l + ".dialog.input.rename", "DIALOG_INPUT_RENAME");
+        DIALOG_INPUT_QUESTION = values.getOrDefault(l + ".dialog.input.question", "DIALOG_INPUT_QUESTION");
+        DIALOG_INPUT_CONFIRM = values.getOrDefault(l + ".dialog.input.confirm", "DIALOG_INPUT_CONFIRM");
+        DIALOG_INPUT_CANCEL = values.getOrDefault(l + ".dialog.input.cancel", "DIALOG_INPUT_CANCEL");
+
+        DIALOG_COLOUR_CHOOSER_TITLE = values.getOrDefault(l + ".dialog.colour_chooser.title", "DIALOG_COLOUR_CHOOSER_TITLE");
+        DIALOG_COLOUR_CHOOSER_TITLE2 = values.getOrDefault(l + ".dialog.colour_chooser.choose_color", "DIALOG_COLOUR_CHOOSER_TITLE2");
+        DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR = values.getOrDefault(l + ".dialog.colour_chooser.colour.menu_bar", "DIALOG_COLOUR_CHOOSER_COLOUR_MENU_BAR");
+        DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND = values.getOrDefault(l + ".dialog.colour_chooser.colour.main_background", "DIALOG_COLOUR_CHOOSER_COLOUR_MAIN_BACKGROUND");
+        DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1 = values.getOrDefault(l + ".dialog.colour_chooser.colour.text_1", "DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_1");
+        DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2 = values.getOrDefault(l + ".dialog.colour_chooser.colour.text_2", "DIALOG_COLOUR_CHOOSER_COLOUR_TEXT_2");
+        DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND = values.getOrDefault(l + ".dialog.colour_chooser.colour.button_background", "DIALOG_COLOUR_CHOOSER_COLOUR_BUTTON_BACKGROUND");
+        DIALOG_COLOUR_CHOOSER_APPLY = values.getOrDefault(l + ".dialog.colour_chooser.apply", "DIALOG_COLOUR_CHOOSER_APPLY");
+        DIALOG_COLOUR_CHOOSER_CLOSE = values.getOrDefault(l + ".dialog.colour_chooser.close", "DIALOG_COLOUR_CHOOSER_CLOSE");
+
+        ERROR = values.getOrDefault(l + ".error.error", "ERROR");
+        ERROR_DATABASE_DROPPED = values.getOrDefault(l + ".error.database_dropped", "ERROR_DATABASE_DROPPED");
+        ERROR_START_SELECT_SET = values.getOrDefault(l + ".error.start.select_set", "ERROR_START_SELECT_SET");
+        ERROR_START_SELECT_BOX = values.getOrDefault(l + ".error.start.select_box", "ERROR_START_SELECT_BOX");
+        ERROR_START_NO_CARDS_IN_BOX = values.getOrDefault(l + ".error.start.no_cards_in_box", "ERROR_START_NO_CARDS_IN_BOX");
+        ERROR_START_TOO_MANY_CARDS = values.getOrDefault(l + ".error.start.too_many_cards", "ERROR_START_TOO_MANY_CARDS");
+        ERROR_NEW_ENTER_DATA = values.getOrDefault(l + ".error.new.enter_data", "ERROR_NEW_ENTER_DATA");
+        ERROR_NEW_SET_SET_CREATION_FAIL = values.getOrDefault(l + ".error.new.set_creation_fail", "ERROR_NEW_SET_SET_CREATION_FAIL");
+        ERROR_NEW_BOX_CREATION_FAIL = values.getOrDefault(l + ".error.new.box_creation_fail", "ERROR_NEW_BOX_CREATION_FAIL");
+        ERROR_NEW_CARD_CREATION_FAIL = values.getOrDefault(l + ".error.new.card_creation_fail", "ERROR_NEW_CARD_CREATION_FAIL");
+        ERROR_IMPORT_DUPLICATE_CARD = values.getOrDefault(l + ".error.import.duplicate_card", "ERROR_IMPORT_DUPLICATE_CARD");
+        ERROR_SETTINGS_NO_INTERNET = values.getOrDefault(l + ".error.settings.no_internet", "ERROR_SETTINGS_NO_INTERNET");
+        ERROR_SETTINGS_NOT_SUPPORTED = values.getOrDefault(l + ".error.settings.not_supported", "ERROR_SETTINGS_NOT_SUPPORTED");
+
+        MENU_HOME = values.getOrDefault(l + ".menu.home", "MENU_HOME");
+        MENU_START = values.getOrDefault(l + ".menu.start", "MENU_START");
+        MENU_INFO = values.getOrDefault(l + ".menu.info", "MENU_INFO");
+        MENU_NEW = values.getOrDefault(l + ".menu.new", "MENU_NEW");
+        MENU_CREDITS = values.getOrDefault(l + ".menu.credits", "MENU_CREDITS");
+        MENU_SETTINGS = values.getOrDefault(l + ".menu.settings", "MENU_SETTINGS");
+        MENU_HELP = values.getOrDefault(l + ".menu.help", "MENU_HELP");
+
+        HOME_NAME = values.getOrDefault(l + ".home.name", "HOME_NAME");
+        HOME_START = values.getOrDefault(l + ".home.start", "HOME_START");
+        HOME_NEW = values.getOrDefault(l + ".home.new", "HOME_NEW");
+        HOME_INFO = values.getOrDefault(l + ".home.info", "HOME_INFO");
+        HOME_EXIT = values.getOrDefault(l + ".home.exit", "HOME_EXIT");
+
+        NEW_NAME = values.getOrDefault(l + ".new.name", "NEW_NAME");
+        NEW_NEW_SET = values.getOrDefault(l + ".new.new_set", "NEW_NEW_SET");
+        NEW_IMPORT = values.getOrDefault(l + ".new.import", "NEW_IMPORT");
+        NEW_EXPORT = values.getOrDefault(l + ".new.export", "NEW_EXPORT");
+        NEW_SAVE = values.getOrDefault(l + ".new.save", "NEW_SAVE");
+        NEW_RENAME = values.getOrDefault(l + ".new.rename", "NEW_RENAME");
+        NEW_DELETE = values.getOrDefault(l + ".new.delete", "NEW_DELETE");
+
+        INFO_NAME = values.getOrDefault(l + ".info.name", "INFO_NAME");
+        INFO_TOPIC = values.getOrDefault(l + ".info.topic", "INFO_TOPIC");
+        INFO_RENAME = values.getOrDefault(l + ".info.rename", "INFO_RENAME");
+        INFO_SAVE = values.getOrDefault(l + ".info.save", "INFO_SAVE");
+        INFO_DELETE = values.getOrDefault(l + ".info.delete", "INFO_DELETE");
+
 	     INFO_DATE_MODIFIED = values.getOrDefault(l+".info.date_modified", "INFO_DATE_MODIFIED");
 	     INFO_LAST_ASKED = values.getOrDefault(l+".info.last_asked", "INFO_LAST_ASKED");
 	     INFO_BOX = values.getOrDefault(l+".info.box", "INFO_BOX");
