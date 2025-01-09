@@ -8,18 +8,30 @@ import javax.swing.*;
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
 import net.tfobz.vocabletrainer.gui.panels.VocableTrainerPanel;
 
+/**
+ * A dialog displaying information to the user with formatted text and a close button.
+ */
 @SuppressWarnings("serial")
 public class VocableTrainerInfoDialog extends JDialog {
 	
+	/** Panel to hold all components of the dialog */
 	protected JPanel componentPanel;
 	
+	/** Label to display the formatted informational text */
 	private JLabel label;
+	
+	/**
+	 * Constructs an information dialog with the specified title and text.
+	 * Automatically formats the text to fit within the dialog bounds.
+	 * 
+	 * @param parent the parent frame of the dialog
+	 * @param title the title of the dialog
+	 * @param text the informational text to be displayed
+	 */
 	public VocableTrainerInfoDialog(JFrame parent, String title, String text) {
-		this(parent, title);
+		super(parent, title, true);
 		
-		setSize(getWidth()/3, getHeight()/3);
-		setLocation((parent.getWidth() - 6)/2 - (parent.getWidth()/3 - 6)/2, (parent.getHeight() - 6)/2 - (parent.getHeight()/3 - 6)/2 );
-	    componentPanel.setBounds(0, 0, (parent.getWidth()/3 - 6), (parent.getHeight()/3 - 40));
+		initializeDialog(parent);
 		
 		label = new JLabel();
 		label.setBounds(8, 8, componentPanel.getWidth() - 16, componentPanel.getHeight() - 16);
@@ -27,9 +39,60 @@ public class VocableTrainerInfoDialog extends JDialog {
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setVerticalAlignment(SwingConstants.TOP);
 		
-		Font font = new Font("Arial", Font.PLAIN, label.getHeight()/10+1);
-		int maxWidth = componentPanel.getWidth() - 16;
-		int maxHeight = componentPanel.getHeight() - 16;
+		setFormattedText(label, text, componentPanel.getWidth() - 16, componentPanel.getHeight() - 16);
+		
+		JButton close = createCloseButton();
+		componentPanel.add(label);
+		componentPanel.add(close);
+		
+		add(componentPanel);
+	}
+
+	/**
+	 * Initializes the dialog properties and the main component panel.
+	 * 
+	 * @param parent the parent frame of the dialog
+	 */
+	private void initializeDialog(JFrame parent) {
+		setResizable(false);
+		setLayout(null);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setSize(parent.getWidth(), parent.getHeight());
+		setLocation(parent.getX(), parent.getY());
+		
+		componentPanel = new JPanel();
+		componentPanel.setLayout(null);
+		componentPanel.setBackground(VocableTrainerPanel.mainBackgroundColor);
+		componentPanel.setBounds(0, 0, parent.getWidth() - 6, parent.getHeight() - 40);
+	}
+
+	/**
+	 * Creates and returns a close button for the dialog.
+	 * 
+	 * @return a JButton configured as a close button
+	 */
+	private JButton createCloseButton() {
+		JButton close = new JButton(VocableTrainerLocalization.DIALOG_INFO_CLOSE);
+		close.setBounds(16, componentPanel.getHeight() - componentPanel.getHeight() / 6 - 16, componentPanel.getWidth() - 32, componentPanel.getHeight() / 6);
+		close.setFont(new Font("Arial", Font.PLAIN, close.getHeight() / 2));
+		close.setForeground(VocableTrainerPanel.textColor1);
+		close.setBackground(VocableTrainerPanel.buttonBackgroundColor);
+		close.setFocusPainted(false);
+		close.setBorderPainted(false);
+		close.addActionListener(e -> closeDialog());
+		return close;
+	}
+
+	/**
+	 * Sets the text of the label, formatting it to fit within the specified bounds.
+	 * 
+	 * @param label the label to set the text for
+	 * @param text the text to be formatted
+	 * @param maxWidth the maximum width of the text
+	 * @param maxHeight the maximum height of the text
+	 */
+	private void setFormattedText(JLabel label, String text, int maxWidth, int maxHeight) {
+		Font font = new Font("Arial", Font.PLAIN, label.getHeight() / 10 + 1);
 		FontMetrics metrics;
 		
 		while (true) {
@@ -66,42 +129,24 @@ public class VocableTrainerInfoDialog extends JDialog {
 			}
 			font = new Font("Arial", Font.PLAIN, font.getSize() - 1);
 		}
-		
-		JButton close = new JButton(VocableTrainerLocalization.DIALOG_INFO_CLOSE);
-		close.setBounds( 16, componentPanel.getHeight() - componentPanel.getHeight()/6 - 16, componentPanel.getWidth() - 32, componentPanel.getHeight() / 6 );
-		close.setFont(new Font ("Arial", Font.PLAIN, close.getHeight()/2));
-		close.setForeground(VocableTrainerPanel.textColor1);
-		close.setBackground(VocableTrainerPanel.buttonBackgroundColor);
-		close.setFocusPainted(false);
-		close.setBorderPainted(false);
-		close.addActionListener(e -> closeDialog());
-		
-		componentPanel.add(label);
-		componentPanel.add(close);
-		
-		add(componentPanel);
 	}
 
+	/**
+	 * Closes the dialog and releases resources.
+	 */
+	public void closeDialog() {
+		setVisible(false);
+		dispose();
+	}
 
-
+	/**
+	 * Constructs an information dialog with the specified title.
+	 * 
+	 * @param parent the parent frame of the dialog
+	 * @param title the title of the dialog
+	 */
 	public VocableTrainerInfoDialog(JFrame parent, String title) {
-	    super(parent, title, true);
-	    
-	    setResizable(false);
-	    
-	    setLayout(null);
-	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-	    
-	    setSize(parent.getWidth(), parent.getHeight());
-        setLocation(parent.getX(), parent.getY());
-        
-        componentPanel = new JPanel();
-        componentPanel.setLayout(null);
-        componentPanel.setBackground(VocableTrainerPanel.mainBackgroundColor);
-        componentPanel.setBounds(0, 0 , (parent.getWidth() - 6), (parent.getHeight() - 40));
+		super(parent, title, true);
+		initializeDialog(parent);
 	}
-	 public void closeDialog() {
-	        setVisible(false);
-	        dispose();
-	    }
 }
