@@ -3,7 +3,7 @@
 ## The Assignment
 This exercise is part of the Java lessons at the TFO Max Valier (highscool). To be precise this is the exercise of Chapter 16.  
 
-##### The assignment we had to complete in groups of 2 students each (except that one lonely guy that noticed the fact that there is an odd number of students too late) was the to create a program that:
+##### The assignment we had to complete in groups of 2 students each (except those two lonely guys that weren't friendly enough to enter a group) was the to create a program that:
 
 - works according to the flashcard concept described in Wikipedia (https://en.wikipedia.org/wiki/Flashcard)
 - allows you to manage several flashcards
