@@ -762,7 +762,7 @@ public class VokabeltrainerDB {
     public static int hinzufuegenLernkartei(Lernkartei lernkartei) {
         int ret = -1;
         if (lernkartei != null && lernkartei.getNummer() == -1) {
-            lernkartei.validiere();
+            lernkartei.validate();
             if (lernkartei.getFehler() != null)
                 ret = -2;
             else {
@@ -826,7 +826,7 @@ public class VokabeltrainerDB {
     public static int aendernLernkartei(Lernkartei lernkartei) {
         int ret = -1;
         if (lernkartei != null && lernkartei.getNummer() != -1) {
-            lernkartei.validiere();
+            lernkartei.validate();
             if (lernkartei.getFehler() != null)
                 ret = -2;
             else {

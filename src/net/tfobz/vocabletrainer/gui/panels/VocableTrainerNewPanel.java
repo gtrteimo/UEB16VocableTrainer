@@ -217,9 +217,11 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
                 sets.add(newSet);
                 comboBox.addItem(newSet);
             } else {
-                JOptionPane.showMessageDialog(this, "There was an Error while writing the Set to the Database!", "Error", JOptionPane.ERROR_MESSAGE);
+            	new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_DATABASE_DROPPED).setVisible(true);
             }
-        }
+	    } else {
+        	new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_NEW_SET_SET_CREATION_FAIL).setVisible(true);
+	    }
         nameDialog.closeDialog();
         retrive();
     }
@@ -332,9 +334,10 @@ public class VocableTrainerNewPanel extends VocableTrainerPanel {
      */
     private void showInputErrorDialog(Lernkartei set) {
         String errorMessage = VocableTrainerLocalization.ERROR_NEW_ENTER_DATA;
-        String part1 = errorMessage.substring(errorMessage.indexOf('}') + 1, errorMessage.indexOf('{'));
-        String part2 = errorMessage.substring(errorMessage.indexOf('}'));
-        errorMessage = set.getWortEinsBeschreibung() + part1 + set.getWortZweiBeschreibung() + part2;
+        String part1 = errorMessage.substring(0, errorMessage.indexOf('{'));
+        String part2 = errorMessage.substring(errorMessage.indexOf('}') + 1, errorMessage.lastIndexOf('{'));
+        String part3 = errorMessage.substring(errorMessage.lastIndexOf('}') + 1);
+        errorMessage = part1 + set.getWortEinsBeschreibung() + part2 + set.getWortZweiBeschreibung() + part3;
         new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, errorMessage).setVisible(true);
     }
     
