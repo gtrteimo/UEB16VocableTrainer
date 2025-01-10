@@ -57,13 +57,14 @@ public class VocableTrainerInfoDialog extends JDialog {
 		setResizable(false);
 		setLayout(null);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setSize(parent.getWidth(), parent.getHeight());
-		setLocation(parent.getX(), parent.getY());
+		setSize(parent.getWidth()/2, parent.getHeight()/2);
+//		setLocation(parent.getX() + parent.getWidth()/2 - getWidth()/2, parent.getY());
+		setLocationRelativeTo(parent);
 		
 		componentPanel = new JPanel();
 		componentPanel.setLayout(null);
 		componentPanel.setBackground(VocableTrainerPanel.mainBackgroundColor);
-		componentPanel.setBounds(0, 0, parent.getWidth() - 6, parent.getHeight() - 40);
+		componentPanel.setBounds(0, 0, parent.getWidth()/2 - 6, parent.getHeight()/2 - 40);
 	}
 
 	/**

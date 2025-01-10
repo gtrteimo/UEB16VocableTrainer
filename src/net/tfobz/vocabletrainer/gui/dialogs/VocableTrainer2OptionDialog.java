@@ -50,7 +50,7 @@ public class VocableTrainer2OptionDialog extends VocableTrainerInfoDialog {
     public VocableTrainer2OptionDialog(JFrame parent, String title, String text, String option1, String option2) {
         super(parent, title);
 
-        setSize(getWidth() / 3, getHeight() / 3);
+        setSize(getWidth() * 2 / 3, getHeight() * 2 / 3);
         setLocation((parent.getWidth() - 6) / 2 - (parent.getWidth() / 3 - 6) / 2, (parent.getHeight() - 6) / 2 - (parent.getHeight() / 3 - 6) / 2);
         componentPanel.setBounds(0, 0, (parent.getWidth() / 3 - 6), (parent.getHeight() / 3 - 40));
 

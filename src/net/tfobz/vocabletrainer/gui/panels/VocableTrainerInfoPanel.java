@@ -290,6 +290,7 @@ public class VocableTrainerInfoPanel extends VocableTrainerPanel {
             if (dialog.getAnswer()) {
                 VokabeltrainerDB.loeschenLernkartei(selectedSet.getNummer());
                 retrive();
+                repaint();
             }
             dialog.closeDialog();
         }

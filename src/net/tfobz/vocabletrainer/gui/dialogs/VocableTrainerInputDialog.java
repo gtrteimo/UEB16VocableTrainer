@@ -44,7 +44,7 @@ public class VocableTrainerInputDialog extends VocableTrainerInfoDialog {
         super(parent, title);
         
         // Set dialog size to one-third of the parent size
-        setSize(getWidth() / 3, getHeight() / 3);
+        setSize(getWidth()* 2 / 3, getHeight() * 2 / 3);
         
         // Center the dialog relative to the parent frame
         setLocation(
