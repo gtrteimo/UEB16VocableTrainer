@@ -76,7 +76,7 @@ Deutsch:
     start: "Start"
     new: "Neu"
     info: "Info"
-    exit: "Beenden"
+    exit: "Stop"
   new: 
     name: "Neu"
     new_set: "Neues Set"

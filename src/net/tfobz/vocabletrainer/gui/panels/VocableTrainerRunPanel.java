@@ -420,16 +420,16 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         avgTime /= times.length;
         
         stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_TOTAL_TIME + ": "));
-        value.add(new JLabel(String.format("%.2f", time1 / 100.0) + " seconds"));
+        value.add(new JLabel(String.format("%.2f", time1 / 100.0) + " " + VocableTrainerLocalization.DATA_SECONDS));
         
         stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_MAX_CARD_TIME + ": "));
-        value.add(new JLabel(String.format("%.2f", maxTime / 100.0) + " seconds"));
+        value.add(new JLabel(String.format("%.2f", maxTime / 100.0) + " " + VocableTrainerLocalization.DATA_SECONDS));
         
         stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_MIN_CARD_TIME + ": "));
-        value.add(new JLabel(correctCards != 0 ? String.format("%.2f", minTime / 100.0) + " seconds" : "No correct answer"));
+        value.add(new JLabel(correctCards != 0 ? String.format("%.2f", minTime / 100.0) + " " + VocableTrainerLocalization.DATA_SECONDS : "No correct answer"));
         
         stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_AVG_CARD_TIME + ": "));
-        value.add(new JLabel(String.format("%.2f", avgTime / 100) + " seconds"));
+        value.add(new JLabel(String.format("%.2f", avgTime / 100) + " " + VocableTrainerLocalization.DATA_SECONDS));
         
         stat.add(new JLabel(VocableTrainerLocalization.RUN_STATS_TOTAL_CARDS + ": "));
         value.add(new JLabel(Integer.toString(results.length)));

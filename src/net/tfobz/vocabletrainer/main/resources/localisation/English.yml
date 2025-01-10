@@ -49,10 +49,10 @@ English:
     start:
       select_set: "Select a Set to continue"
       select_box: "Select a Box to continue"
-      no_cards_in_box: "There are currently no Cards in the selected Box!\nAdd some or change to a box that has some"
+      no_cards_in_box: "There are currently no Cards in the selected Box! Add some or change to a box that has some"
       too_many_cards: "You have selected { Cards set in the Start settings } Cards in the Start settings but you only have { Amount of Cards in the Box } Cards in your Box"
     new:
-      enter_data: "\"{ Textfield 1}\" and \"{ Textfield 2}\" have to contain Data"
+      enter_data: "'{ Textfield 1}' and '{ Textfield 2}' have to contain Data"
       set_creation_fail: "Failed to create a new Set"
       box_creation_fail: "Failed to create a new Box"
       card_creation_fail: "Failed to create a new Card"
@@ -131,6 +131,8 @@ English:
     next: "Next"
     end: "End"
     answer: "Your answer"
+    correct_answer: "Correct card"
+    no_correct_answer: "No correct cards"
     stats:
       total_time: "Total Time"
       max_card_time: "Max Card Time"

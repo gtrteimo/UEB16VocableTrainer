@@ -328,7 +328,7 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
                 vtf.changePanel(-3);
                 vtf.add(run);
             } catch (IllegalArgumentException e0) {
-                handleRunPanelException(e0, k);
+            	handleRunPanelException(e0, k);
             } catch (Exception e1) {
                 // Exception handling can be enhanced as needed
             }
@@ -394,14 +394,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
     private void handleRunPanelException(IllegalArgumentException e0, List<Karte> k) {
         if (options[3].isSelected()) {
             String t = VocableTrainerLocalization.ERROR_START_TOO_MANY_CARDS;
-            String t2 = t.substring(t.indexOf('}')+1);
             new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, 
                 t.substring(0, t.indexOf('{')) + 
                 ((Integer)(optionSpinners[2].getValue())).intValue() + 
-                t.substring(t.indexOf('}') + 1, t2.indexOf('{')) + 
-                k.size() + 
-                t.substring(t2.indexOf('}') + 1)
-            );
+                t.substring(t.indexOf('}') + 1, t.lastIndexOf('{')) + 
+                (k!=null? "" + k.size():"0") +
+                t.substring(t.lastIndexOf('}') + 1)
+            ).setVisible(true);
         } else {
             new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, VocableTrainerLocalization.ERROR_START_NO_CARDS_IN_BOX).setVisible(true);
         }
@@ -414,14 +413,13 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
      */
     private void displayTooManyCardsError(List<Karte> k) {
         String t = VocableTrainerLocalization.ERROR_START_TOO_MANY_CARDS;
-        String t2 = t.substring(t.indexOf('}')+1);
         new VocableTrainerInfoDialog(vtf, VocableTrainerLocalization.ERROR, 
             t.substring(0, t.indexOf('{')) + 
             ((Integer)(optionSpinners[2].getValue())).intValue() + 
-            t.substring(t.indexOf('}') + 1, t2.indexOf('{')) + 
-            k.size() + 
-            t.substring(t2.indexOf('}') + 1)
-        );
+            t.substring(t.indexOf('}') + 1, t.lastIndexOf('{')) + 
+            (k!=null? "" + k.size():"0") +
+            t.substring(t.lastIndexOf('}') + 1)
+        ).setVisible(true);
     }
     
     /**
