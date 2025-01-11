@@ -3,8 +3,12 @@ package net.tfobz.vocabletrainer.gui;
 import java.awt.CardLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 import net.tfobz.vocabletrainer.data.VocableTrainerLocalization;
@@ -19,6 +23,9 @@ import net.tfobz.vocabletrainer.gui.panels.*;
 @SuppressWarnings("serial")
 public class VocableTrainerFrame extends JFrame {
 
+    private static final String ICON_PATH = "/net/tfobz/vocabletrainer/main/resources/icons/icon.png";
+
+    private Image icon;
     private Container contentPane;
     private ArrayList<Integer> history = new ArrayList<>();
     private VocableTrainerPanel[] panels = new VocableTrainerPanel[8];
@@ -51,6 +58,8 @@ public class VocableTrainerFrame extends JFrame {
         setMinimumSize(new Dimension(720, 480));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(25, 25, width, height);
+        loadImage();
+        setIconImage(icon);
 
         // Load settings and apply them to the application
         VocableTrainerSettingsIO.loadSettings();
@@ -118,6 +127,22 @@ public class VocableTrainerFrame extends JFrame {
             contentPane.remove(panels[0]);
         } else if (panelIndex == -3) {
             contentPane.remove(panels[history.get(history.size() - 1)]);
+        }
+    }
+    /**
+     * Loads the bar image from the specified resource path.
+     * This method ensures that the image is loaded only once to optimize performance.
+     */
+    protected void loadImage() {
+        if (icon == null) {
+            try (InputStream imgStream = getClass().getResourceAsStream(ICON_PATH)) {
+                if (imgStream != null) {
+                	icon = ImageIO.read(imgStream);
+                }
+                // If the image is not found, the barsImage remains null
+            } catch (IOException e) {
+                // Exception handling can be implemented here if needed
+            }
         }
     }
 
