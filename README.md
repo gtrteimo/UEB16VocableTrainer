@@ -30,4 +30,6 @@ Then you should see the Project in your Package Explorer. From there go into src
 From there you can open the VocableTrainerMain.java and press on the green "Run" button in the menu bar at the top.
 
 ## License
-This software is licensed under the GNU Lesser General Public License version 3. This software is free, you may run the software freely, create modified versions, distribute this software and distribute modified versions, as long as the modified software too has a free software license (with an exception for linking to this software, as stated by the "Lesser" part of the LGPL, where this may not be required). The full license can be found in the LICENSE and LICENSE.LESSER files. In honor of Stallman.
+You can use this program but this isn't all ours. Do not copy or use the files in the model directory within the program.
+The rest of the program can be freely used, copied, distributed and modified, but the original source of the program must be mentioned where used.
+The modified copies can also be distributed with the same restrictions.
