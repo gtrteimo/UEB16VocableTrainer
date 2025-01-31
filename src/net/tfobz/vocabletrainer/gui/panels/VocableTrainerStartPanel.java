@@ -370,6 +370,8 @@ public class VocableTrainerStartPanel extends VocableTrainerPanel {
             settings.setCardLimit(((Integer)(optionSpinners[2].getValue())).intValue());
         }
         
+        settings.setCaseSensitiv(options[2].isSelected());
+        
         settings.setParcticeRun(options[4].isSelected());
         
         switch (directionComboBox.getSelectedIndex()) {

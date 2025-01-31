@@ -58,6 +58,7 @@ public class VocableTrainerFrame extends JFrame {
         setMinimumSize(new Dimension(720, 480));
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(25, 25, width, height);
+        //setLocationRelativeTo(null);
         loadImage();
         setIconImage(icon);
 

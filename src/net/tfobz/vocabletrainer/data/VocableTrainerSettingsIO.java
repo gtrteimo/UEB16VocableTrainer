@@ -97,7 +97,7 @@ public class VocableTrainerSettingsIO {
      * Saves the current settings to a file.
      */
     public static void saveSettings() {
-        File settingsFile = new File("src/net/tfobz/vocabletrainer/main/settings.txt");
+        File settingsFile = new File("settings.txt");
         try (FileWriter writer = new FileWriter(settingsFile)) {
             // Save localisation setting
             writer.write(localisation.name() + "\n");

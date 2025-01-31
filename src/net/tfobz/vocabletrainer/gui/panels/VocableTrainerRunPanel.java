@@ -515,6 +515,8 @@ public class VocableTrainerRunPanel extends VocableTrainerPanel {
         results[cardNum] = correct ? 1 : -1;
         input.setBackground(correct ? Color.GREEN : Color.RED);
         
+        
+        
         if (!settings.isParcticeRun()) {
             updateDatabaseWithResult(correct);
         }
